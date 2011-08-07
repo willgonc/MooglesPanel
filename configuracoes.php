@@ -6,7 +6,7 @@ $resultado = mysql_query("SELECT * FROM configuracoes");
 
 if ($resultado) {
     if (mysql_num_rows($resultado) == 1) {
-        $email_comentarios = mysql_result($resultado, 0, "email_comentarios");
+        $email_notificacao = mysql_result($resultado, 0, "email_notificacao");
     } else {
         print "Nenhuma configura&ccedil;&atilde;o foi encontrada.";
         exit;
@@ -39,8 +39,8 @@ mysql_close($conexao);
                 <table>
                     <tbody>
                         <tr>
-                            <td>E-mail para notifica&ccedil;&otilde;es de coment&aacute;rios</td>
-                            <td><input type="text" name="email_comentarios" value="<?php print $email_comentarios; ?>" /></td>
+                            <td>E-mail para notifica&ccedil;&otilde;es</td>
+                            <td><input type="text" name="email_notificacao" value="<?php print $email_notificacao; ?>" /></td>
                         </tr>
                         <tr>
                             <td></td>

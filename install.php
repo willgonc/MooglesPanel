@@ -5,7 +5,7 @@
     try {
         $conf = mysql_query("CREATE TABLE configuracoes (
             id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            email_comentarios TEXT NOT NULL
+            email_notificacao TEXT NOT NULL
         )");
 
         if ($conf)
