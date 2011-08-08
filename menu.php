@@ -1,6 +1,6 @@
 <?php 
     print '
-        <div class="menu">
+        <div class="tw-ui-menu-principal">
             <ul>
                 <li><a href="resumo.php">Resumo</a></li>
                 <li><a href="usuarios.php">Usu&aacute;rios</a></li>

@@ -28,7 +28,7 @@ mysql_close($conexao);
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
-        <?php require_once "menu.php"; ?>
+        <?php require_once "tw-ui-menu.php"; ?>
         <div class="tw-ui-bar-page">
             <h2 class="tw-ui-name-page">
                 Configura&ccedil;&otilde;es
