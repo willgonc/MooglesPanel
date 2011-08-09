@@ -7,8 +7,8 @@ $error = true;
 try {
     $conf = mysql_query("CREATE TABLE configuracoes (
         id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        email_notificacao TEXT NOT NULL,
-        nome_site TEXT NOT NULL
+        email_notificacao TEXT,
+        nome_site TEXT
     )");
 
     if ($conf) {
@@ -38,6 +38,31 @@ try {
     $error = false;
 }
 
+// CRIA TABELA DE USUARIOS
+try {
+    $conf = mysql_query("CREATE TABLE usuarios (
+        id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        nome TEXT NOT NULL,
+        email TEXT NOT NULL,
+        senha TEXT NOT NULL,
+        tipo TEXT NOT NULL,
+        status TEXT NOT NULL
+    )");
+
+    if ($conf) {
+        print "A tabela usuarios foi criada!<br />";
+    } else {
+        print "Erro ao criar a tabela usuarios Erro: ".mysql_error()."<br />";
+        $error = false;
+    }
+} catch ( Exception $e ){
+    print "Erro ao criar a tabela usuarios Erro: ".$e."<br />";
+    $error = false;
+}
+
+for ($i = 0; $i < 100; $i++){
+    mysql_query("insert into usuarios (nome, email, senha, tipo, status) values ('teste".$i."','teste@gmail".$i.".com','098000980','1','2')");
+}
 
 
 if ($error)
