@@ -26,6 +26,8 @@ mysql_close($conexao);
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <link rel="stylesheet" type="text/css" href="css/tw-style.css" />
     </head>
     <body>
         <?php require_once "menu.php"; ?>
@@ -36,19 +38,19 @@ mysql_close($conexao);
         </div>
         <div class="tw-ui-content">
             <form action="insert_configuracoes.php" method="post">
-                <table>
+                <table class="tw-ui-formulario">
                     <tbody>
                         <tr>
                             <td>Nome do site</td>
-                            <td><input type="text" name="nome_site" value="<?php print $nome_site; ?>" /></td>
+                            <td><input type="text" class="input-text" name="nome_site" size="30" value="<?php print $nome_site; ?>" /></td>
                         </tr>
                         <tr>
                             <td>E-mail para notifica&ccedil;&otilde;es</td>
-                            <td><input type="text" name="email_notificacao" value="<?php print $email_notificacao; ?>" /></td>
+                            <td><input type="text" class="input-text" name="email_notificacao" size="30" value="<?php print $email_notificacao; ?>" /></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><input type="submit" value="Salvar" /></td>
+                            <td><input type="submit" class="input-submit" value="Salvar" /></td>
                         </tr>
                     </tbody>
                 </table>

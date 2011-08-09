@@ -1,0 +1,189 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    outline: none;
+}
+.geral {
+    min-width: 1000px;
+}
+
+.tw-ui-menu-principal {
+    height: 30px;
+    background: #002255;
+}
+.tw-ui-menu-principal ul {
+    list-style: none;
+    margin-left: 10px;
+}
+.tw-ui-menu-principal ul li {
+    float: left;
+    margin-top: 4px;
+}
+.tw-ui-menu-principal ul li a {
+    color: #fff;
+    font-family: arial;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 8px 15px;
+}
+
+.tw-ui-menu-principal ul li a:hover ,
+.tw-ui-menu-principal ul li a:focus {
+    background: rgb(230,230,230);
+    color: #000;
+}
+
+/*.tw-ui-menu-principal ul li a.action {
+    background: rgb(230,230,230);
+    color: #000;
+}
+*/
+.tw-ui-bar-page {
+    background: rgb(230,230,230);
+    height: 50px;
+}
+
+.tw-ui-name-page {
+    padding: 10px 15px;
+    font-family: arial;
+    width: 300px;
+    float: left;
+}
+
+.tw-ui-menu-modulo {
+    float: left;
+    height: 48px;
+}
+
+.tw-ui-menu-modulo ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.tw-ui-menu-modulo ul li {
+    float: left;
+    margin-left: 10px;
+}
+
+.tw-ui-menu-modulo ul li a {
+    font-size: 14px;
+    font-family: arial;
+    padding: 5px 10px;
+    background: rgb(255,255,255);
+    border: 1px solid rgb(190,190,190);
+    text-decoration: none;
+    color: rgb(70,70,70);
+}
+
+.tw-ui-menu-modulo ul li a:hover,
+.tw-ui-menu-modulo ul li a:focus {
+    background: #2a7fff;
+    border: 1px solid #0055d4;
+    color: rgb(255,255,255);
+}
+
+
+.tw-ui-busca {
+    float: right;
+    height: 48px;
+    margin-right: 30px;
+}
+
+.tw-ui-busca form {
+    margin-top: 10px;
+}
+
+
+.input-buttom, .input-submit {
+    background: #2a7fff;
+    border: 1px solid #0055d4;
+    font-size: 14px;
+    padding: 4px 7px;
+    color: #fff;
+    cursor: pointer;
+}
+.input-buttom:hover, .input-submit:hover,
+.input-buttom:focus, .input-submit:focus {
+    background: #0066ff;
+}
+
+/* Campo de texto e senha*/
+.input-text,
+.input-pass {
+    border: 1px solid rgb(190,190,190);
+    font-size: 14px;
+    padding: 5px;
+    background: #fff;
+}
+
+
+.tw-ui-content {
+    padding: 10px;
+}
+
+.tw-ui-content .tw-ui-formulario {
+    font-size: 14px;
+    font-family: arial;
+}
+
+.tw-ui-content .tw-ui-formulario tr td {
+    padding: 5px;
+}
+
+.tw-ui-listagem {
+    border-collapse: collapse;
+    font-family: arial;
+    font-size: 13px;
+}
+
+.tw-ui-listagem tbody tr {
+    border-left: 1px solid rgb(220,220,220);
+    border-top: 1px solid rgb(220,220,220);
+    border-right: 1px solid rgb(220,220,220);
+}
+
+.tw-ui-listagem thead tr,
+.tw-ui-listagem tfoot tr {
+    border: 1px solid #aaccff;
+}
+
+.tw-ui-listagem thead tr th,
+.tw-ui-listagem tfoot tr td {
+    font-size: 14px;
+    background: #d5e5ff;
+    color: #002255;
+    text-align: left;
+}
+
+.tw-ui-listagem tr th,
+.tw-ui-listagem tr td {
+    padding: 7px 10px;
+} 
+
+
+
+
+/* Paginação */
+
+.paginacao {
+    height: 30px;
+    margin: 10px 0px;
+    text-align: center;
+}
+
+.paginacao a {
+    padding: 5px 10px;
+    background: #2a7fff;
+    border: 1px solid #0055d4;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 5px;
+    font-family: arial;
+    color: #fff;
+}
+
+a.atual {
+    background: #fff;
+    color: #2a7fff;
+    cursor: default;
+}
