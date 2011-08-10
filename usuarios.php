@@ -10,6 +10,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
         <link rel="stylesheet" type="text/css" href="css/tw-style.css" />
+        <link rel="stylesheet" type="text/css" href="css/tw-modal.css" />
+
+        <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" language="javascript" src="js/tw-ui-lib.js"></script>
+        <script type="text/javascript" language="javascript">
+            $(document).ready(function (){
+                $('.open-conf-user').click(function (){
+                    criaModal({
+                        conteudo: '<form action="remove_usuario.php" method="post">'+
+                                 '<input type="hidden" value="' + 
+                                 $(this).attr('href').replace(/#/g, '') + 
+                                 '" name="id" /><input type="submit" class="input-submit" value="Remover usu&aacute;rio" />',
+                        width: 450,
+                        height: 250
+                    });
+                });
+            });
+        </script> 
     </head>
     <body>
         <div class="geral">
@@ -20,9 +38,8 @@
                 </h2>
                 <div class="tw-ui-menu-modulo">
                     <ul>
-                        <li><a href="usuarios.php">Mostrar todos</a></li>
                         <li><a href="adicionar_usuario.php">Adicionar novo</a></li>
-                        <li><a href="#">Seu perfil</a></li>
+                        <li><a href="perfil.php">Seu perfil</a></li>
                     </ul>
                 </div>
                 <div class="tw-ui-busca">
@@ -56,13 +73,19 @@
 
                         if (mysql_num_rows($busca)>0) {
                             $table = '<table width="100%" class="tw-ui-listagem">';
-                            $table .= '<thead><tr><th>Nome</th><th>E-mail</th><th>Tipo</th><th>Status</th></tr></thead><tbody>';
+                            $table .= '<thead><tr><th>Nome</th><th>E-mail</th><th>Tipo</th><th colspan="2">Status</th></tr></thead><tbody>';
                             while ($texto = mysql_fetch_array($busca)) {
                                 extract($texto);
                                 
-                                $table .= '<tr><td>'.$nome.'</td><td>'.$email.'</td><td>'.$tipo.'</td><td>'.$status.'</td></tr>';
+                                $table .= '<tr>
+                                                <td width="40%">'.$nome.'</td>
+                                                <td width="40%">'.$email.'</td>
+                                                <td width="10%">'.$tipo.'</td>
+                                                <td width="10%">'.$status.'</td>
+                                                <td width="32" class="conf-usuario"><a href="#'.$id.'" class="open-conf-user"><img src="imagens/config.png" /></a></td>
+                                            </tr>';
                             }
-                            $table .= '</tbody><tfoot><tr><td>Nome</td><td>E-mail</td><td>Tipo</td><td>Status</td></tr></tfoot></table>';
+                            $table .= '</tbody><tfoot><tr><td>Nome</td><td>E-mail</td><td>Tipo</td><td colspan="2">Status</td></tr></tfoot></table>';
 
                             $prox = $pag + 1;
                             $ant = $pag - 1;

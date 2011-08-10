@@ -16,7 +16,7 @@
             <div class="tw-ui-menu-modulo">
                 <ul>
                     <li><a href="usuarios.php">Mostrar todos</a></li>
-                    <li><a href="perfil.php">Seu perfil</a></li>
+                    <li><a href="adicionar_usuario.php">Adicionar novo</a></li>
                 </ul>
             </div>
         </div>
@@ -50,4 +50,5 @@
         </div>
     </body>
 </html>
+
 

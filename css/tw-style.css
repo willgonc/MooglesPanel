@@ -160,6 +160,9 @@
     padding: 7px 10px;
 } 
 
+.tw-ui-listagem .conf-usuario {
+    border-left: 1px solid rgb(220,220,220);
+}
 
 
 

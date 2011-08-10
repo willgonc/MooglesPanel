@@ -45,7 +45,6 @@ try {
         nome TEXT NOT NULL,
         email TEXT NOT NULL,
         senha TEXT NOT NULL,
-        tipo TEXT NOT NULL,
         status TEXT NOT NULL
     )");
 
