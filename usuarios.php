@@ -15,15 +15,37 @@
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="js/tw-ui-lib.js"></script>
         <script type="text/javascript" language="javascript">
+            eval('var pagina = <?php echo (isset($_GET['pag'])?$_GET['pag']:1); ?>');
             $(document).ready(function (){
                 $('.open-conf-user').click(function (){
+
+                    var elem = $(this);
+
                     criaModal({
-                        conteudo: '<form action="remove_usuario.php" method="post">'+
-                                 '<input type="hidden" value="' + 
-                                 $(this).attr('href').replace(/#/g, '') + 
-                                 '" name="id" /><input type="submit" class="input-submit" value="Remover usu&aacute;rio" />',
+                        conteudo:'<p>Alterar status do usu&aacute;rio</p>'+
+                                 '<form action="muda_status_usuario.php" name="formStatusUser" method="post">'+
+                                 '<input type="hidden" value="' + $(this).attr('href').replace(/#/g, '') + '" name="id" />'+
+                                 '<input type="hidden" value="'+pagina+'" name="page" />'+
+                                 '<select name="status" class="combo-box confirm-muda-status">'+
+                                 '<option value="1">Ativo</option>'+
+                                 '<option value="0">Bloqueado</option>'+
+                                 '</select></form><br />'+
+                                 '<p>Remover este usu&aacute;rio</p>'+
+                                 '<form action="remove_usuario.php" name="formRemoveUser" method="post">'+
+                                 '<input type="hidden" value="' + $(this).attr('href').replace(/#/g, '') + '" name="id" />'+
+                                 '<input type="hidden" value="'+pagina+'" name="page" /></form>'+
+                                 '<input type="button" class="input-button confirm-remover-usuario" value="Remover usu&aacute;rio" />',
                         width: 450,
-                        height: 250
+                        height: 200
+                    }, function (){
+                        $('.confirm-remover-usuario').click(function (){
+                            if (confirm("Deseja remover este usu\u00e1rio?"))
+                                document.formRemoveUser.submit();
+                        });
+
+                        $('.confirm-muda-status').val(elem.attr('id').replace(/status/g, '')).change(function (){
+                            document.formStatusUser.submit();
+                        });
                     });
                 });
             });
@@ -38,13 +60,14 @@
                 </h2>
                 <div class="tw-ui-menu-modulo">
                     <ul>
+                        <li><a href="usuarios.php">Mostrar todos</a></li>
                         <li><a href="adicionar_usuario.php">Adicionar novo</a></li>
                         <li><a href="perfil.php">Seu perfil</a></li>
                     </ul>
                 </div>
                 <div class="tw-ui-busca">
-                    <form action="buscar_usuarios">
-                        <input type="text" class="input-text" size="30" name="str_busca" />
+                    <form action="usuarios.php" method="get">
+                        <input type="text" class="input-text" size="20" name="busca" />
                         <input type="submit" class="input-submit" value="Buscar" />
                     </form>
                 </div>
@@ -65,27 +88,40 @@
                             $inicio = ($pag - 1) * $limite;
                         } 
 
-                        $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios");
-                        $total = mysql_fetch_array($busca_total);
-                        $total = $total['total'];
+                        if (isset($_GET['busca'])){
+                            $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios WHERE 
+                                nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%'");
+                            echo mysql_error();
+                            $total = mysql_fetch_array($busca_total);
+                            $total = $total['total'];
+                            //$busca = mysql_query("SELECT * FROM usuarios LIMIT $inicio, $limite");
+                            //$total
+                            $busca = mysql_query("SELECT * FROM usuarios WHERE 
+                                nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%' or status like '%".$_GET['busca']."%'
+                                LIMIT $inicio, $limite ");
+                        } else {
+                            $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios");
+                            $total = mysql_fetch_array($busca_total);
+                            $total = $total['total'];
+                            $busca = mysql_query("SELECT * FROM usuarios LIMIT $inicio, $limite");
+                        }
 
-                        $busca = mysql_query("SELECT * FROM usuarios LIMIT $inicio, $limite");
-
-                        if (mysql_num_rows($busca)>0) {
+                        $linhasResult = mysql_num_rows($busca);
+                        if ($linhasResult>0) {
                             $table = '<table width="100%" class="tw-ui-listagem">';
-                            $table .= '<thead><tr><th>Nome</th><th>E-mail</th><th>Tipo</th><th colspan="2">Status</th></tr></thead><tbody>';
+                            $table .= '<thead><tr><th>Nome</th><th>E-mail</th><th colspan="2">Status</th></tr></thead><tbody>';
                             while ($texto = mysql_fetch_array($busca)) {
                                 extract($texto);
-                                
                                 $table .= '<tr>
-                                                <td width="40%">'.$nome.'</td>
-                                                <td width="40%">'.$email.'</td>
-                                                <td width="10%">'.$tipo.'</td>
-                                                <td width="10%">'.$status.'</td>
-                                                <td width="32" class="conf-usuario"><a href="#'.$id.'" class="open-conf-user"><img src="imagens/config.png" /></a></td>
+                                                <td width="45%">'.$nome.'</td>
+                                                <td width="45%">'.$email.'</td>
+                                                <td width="10%">'.($status==0?'Bloqueado':'Ativo').'</td>
+                                                <td width="32" class="conf-usuario"><a href="#'.$id.'" id="status'.$status.'" class="open-conf-user">
+                                                    <img src="imagens/config.png" /></a>
+                                                </td>
                                             </tr>';
                             }
-                            $table .= '</tbody><tfoot><tr><td>Nome</td><td>E-mail</td><td>Tipo</td><td colspan="2">Status</td></tr></tfoot></table>';
+                            $table .= '</tbody><tfoot><tr><td>Nome</td><td>E-mail</td><td colspan="2">Status</td></tr></tfoot></table>';
 
                             $prox = $pag + 1;
                             $ant = $pag - 1;
@@ -149,11 +185,11 @@
                                 }
                             }
                             if ($prox <= $ultima_pag && $ultima_pag > 2) {
-                                    $paginacao .= '<a href="'.$pagina.'?pag='.$prox.'">Pr&oacute;ximo &raquo;</a>';
+                                $paginacao .= '<a href="'.$pagina.'?pag='.$prox.'">Pr&oacute;ximo &raquo;</a>';
                             }
-                            echo '<div class="paginacao">'.$paginacao.'</div>';
+                            echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'<b>'.$paginacao.'</div>';
                             echo $table;
-                            echo '<div class="paginacao">'.$paginacao.'</div>';
+                            echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'<b>'.$paginacao.'</div>';
                         } else {
                             echo "Nenhum resultado foi encontrado!";
                         }

@@ -3,6 +3,12 @@
     padding: 0px;
     outline: none;
 }
+
+p {
+    padding: 2px 0px;
+    font-family: arial;
+}
+
 .geral {
     min-width: 1000px;
 }
@@ -41,6 +47,7 @@
 .tw-ui-bar-page {
     background: rgb(230,230,230);
     height: 50px;
+    border-bottom: 1px solid rgb(200,200,200);
 }
 
 .tw-ui-name-page {
@@ -94,7 +101,7 @@
 }
 
 
-.input-buttom, .input-submit {
+.input-button, .input-submit {
     background: #2a7fff;
     border: 1px solid #0055d4;
     font-size: 14px;
@@ -102,8 +109,8 @@
     color: #fff;
     cursor: pointer;
 }
-.input-buttom:hover, .input-submit:hover,
-.input-buttom:focus, .input-submit:focus {
+.input-button:hover, .input-submit:hover,
+.input-button:focus, .input-submit:focus {
     background: #0066ff;
 }
 
@@ -114,6 +121,11 @@
     font-size: 14px;
     padding: 5px;
     background: #fff;
+}
+
+.combo-box {
+    padding: 5px;
+    font-size: 13px;
 }
 
 
@@ -134,6 +146,7 @@
     border-collapse: collapse;
     font-family: arial;
     font-size: 13px;
+    margin-bottom: 10px;
 }
 
 .tw-ui-listagem tbody tr {
@@ -160,6 +173,10 @@
     padding: 7px 10px;
 } 
 
+.tw-ui-listagem tbody tr td {
+    vertical-align: top;
+}
+
 .tw-ui-listagem .conf-usuario {
     border-left: 1px solid rgb(220,220,220);
 }
@@ -170,18 +187,18 @@
 
 .paginacao {
     height: 30px;
-    margin: 10px 0px;
-    text-align: center;
+    padding: 5px 0px;
+    text-align: right;
+    font-family: arial;
 }
 
 .paginacao a {
-    padding: 5px 10px;
+    padding: 3px 7px;
     background: #2a7fff;
     border: 1px solid #0055d4;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     margin-left: 5px;
-    font-family: arial;
     color: #fff;
 }
 

@@ -1,4 +1,4 @@
-function criaModal(param){
+function criaModal(param, call){
     $('.tw-modal').remove();
     $('body').append('<div class="tw-modal">'+
             '   <div class="tw-conteiner-modal">'+
@@ -22,4 +22,7 @@ function criaModal(param){
     $('.tw-btn-close').click(function(){
         $('.tw-modal').remove();
     });
+
+    if (call)
+        call();
 }

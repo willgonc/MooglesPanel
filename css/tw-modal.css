@@ -20,5 +20,7 @@
 }
 
 .tw-content-modal {
-    margin: 35px 10px 10px;
+    margin: 37px 0px 0px 0px;
+    padding: 10px;
+    border-top: 1px solid rgb(220,220,220);
 }

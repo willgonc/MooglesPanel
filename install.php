@@ -60,7 +60,7 @@ try {
 }
 
 for ($i = 0; $i < 100; $i++){
-    mysql_query("insert into usuarios (nome, email, senha, tipo, status) values ('teste".$i."','teste@gmail".$i.".com','098000980','1','2')");
+    mysql_query("insert into usuarios (nome, email, senha, status) values ('teste".$i."','teste@gmail".$i.".com','098000980','1')");
 }
 
 
