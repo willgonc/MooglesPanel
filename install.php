@@ -45,7 +45,7 @@ try {
         nome TEXT NOT NULL,
         email TEXT NOT NULL,
         senha TEXT NOT NULL,
-        status TEXT NOT NULL
+        status TINYINT NOT NULL
     )");
 
     if ($conf) {
@@ -60,7 +60,7 @@ try {
 }
 
 for ($i = 0; $i < 100; $i++){
-    mysql_query("insert into usuarios (nome, email, senha, status) values ('teste".$i."','teste@gmail".$i.".com','098000980','1')");
+    mysql_query("insert into usuarios (nome, email, senha, status) values ('teste".$i."','teste@gmail".$i.".com','098000980',1)");
 }
 
 

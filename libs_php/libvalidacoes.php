@@ -14,4 +14,25 @@ function validaEmail ($email)
         return false;
 }
 
+/*
+    Função: strRequire
+    Descrição: Esta função verifica se uma string que está sendo
+        requerida tem algum caracter fora os espaços em branco
+    Parâmentro: String
+    Retorno: true ou false
+*/
+function strRequire($str)
+{
+    // removendo espaços em branco
+    $str = trim($str);
+    if (strlen($str) == 0 || empty($str))
+    {
+        return false;
+    }
+    else 
+    {
+        return true;
+    }
+}
+
 ?>

@@ -139,6 +139,7 @@ p {
 .tw-ui-content .tw-ui-formulario {
     font-size: 14px;
     font-family: arial;
+    clear: both;
 }
 
 .tw-ui-content .tw-ui-formulario tr td {

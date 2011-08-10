@@ -20,11 +20,9 @@ if (!empty($email_notificacao)){
     }
 }
 
-
-// TRATANDO OS DADOS PARA A INSERCAO
-$nome_site = htmlentities($nome_site, ENT_QUOTES, "UTF-8");
-
 if ($fragErro) {
+    // TRATANDO OS DADOS PARA A INSERCAO
+    $nome_site = htmlentities($nome_site, ENT_QUOTES, "UTF-8");
     try {
         // FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE
         $update = mysql_query("UPDATE configuracoes SET 
