@@ -58,21 +58,21 @@
                 <h2 class="tw-ui-name-page">
                     Usu&aacute;rios
                 </h2>
-                <div class="tw-ui-menu-modulo">
-                    <ul>
-                        <li><a href="usuarios.php">Mostrar todos</a></li>
-                        <li><a href="adicionar_usuario.php">Adicionar novo</a></li>
-                        <li><a href="perfil.php">Seu perfil</a></li>
-                    </ul>
-                </div>
-                <div class="tw-ui-busca">
-                    <form action="usuarios.php" method="get">
-                        <input type="text" class="input-text" size="20" name="busca" />
-                        <input type="submit" class="input-submit" value="Buscar" />
-                    </form>
-                </div>
             </div>
             <div class="tw-ui-content">
+                    <div class="tw-ui-menu-modulo">
+                        <ul>
+                            <li><a href="usuarios.php">Mostrar todos</a></li>
+                            <li><a href="adicionar_usuario.php">Adicionar novo</a></li>
+                            <li><a href="perfil.php">Seu perfil</a></li>
+                        </ul>
+                    </div>
+                    <div class="tw-ui-busca">
+                        <form action="usuarios.php" method="get">
+                            <input type="text" class="input-text" size="20" name="busca" />
+                            <input type="submit" class="input-submit" value="Buscar" />
+                        </form>
+                    </div>
                 <div class="tw-ui-conteiner-usuarios">
                     <?php
                         $pag = (isset($_GET['pag'])?$_GET['pag']:1); // Numero da pagina que esta sendo exibida
@@ -187,9 +187,9 @@
                             if ($prox <= $ultima_pag && $ultima_pag > 2) {
                                 $paginacao .= '<a href="'.$pagina.'?pag='.$prox.'">Pr&oacute;ximo &raquo;</a>';
                             }
-                            echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'<b>'.$paginacao.'</div>';
+                            echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
                             echo $table;
-                            echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'<b>'.$paginacao.'</div>';
+                            echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
                         } else {
                             echo "Nenhum resultado foi encontrado!";
                         }

@@ -59,24 +59,26 @@ p {
 
 .tw-ui-menu-modulo {
     float: left;
-    height: 48px;
+    height: 30px;
+    margin-bottom: 10px;
 }
 
 .tw-ui-menu-modulo ul {
     list-style: none;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .tw-ui-menu-modulo ul li {
     float: left;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .tw-ui-menu-modulo ul li a {
     font-size: 14px;
     font-family: arial;
     padding: 5px 10px;
-    background: rgb(255,255,255);
+    /*background: rgb(255,255,255);*/
+    background: rgb(230,230,230);
     border: 1px solid rgb(190,190,190);
     text-decoration: none;
     color: rgb(70,70,70);
@@ -92,12 +94,13 @@ p {
 
 .tw-ui-busca {
     float: right;
-    height: 48px;
-    margin-right: 30px;
+    height: 30px;
+    margin-right: 0px;
+    margin-bottom: 10px;
 }
 
 .tw-ui-busca form {
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 
@@ -105,7 +108,7 @@ p {
     background: #2a7fff;
     border: 1px solid #0055d4;
     font-size: 14px;
-    padding: 4px 7px;
+    padding: 5px 7px;
     color: #fff;
     cursor: pointer;
 }
@@ -187,19 +190,22 @@ p {
 
 .paginacao {
     height: 30px;
-    padding: 5px 0px;
+    padding: 0px;
     text-align: right;
     font-family: arial;
+    clear: both;
 }
 
 .paginacao a {
     padding: 3px 7px;
-    background: #2a7fff;
-    border: 1px solid #0055d4;
+    /*background: #2a7fff;
+    border: 1px solid #0055d4;*/
     text-decoration: none;
     font-size: 14px;
     margin-left: 5px;
-    color: #fff;
+    color: rgb(50,50,50);
+    background: rgb(230,230,230);
+    border: 1px solid rgb(200,200,200);
 }
 
 a.atual {
