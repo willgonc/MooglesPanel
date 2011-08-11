@@ -6,13 +6,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
         <link rel="stylesheet" type="text/css" href="css/tw-style.css" />
+        
+        <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" language="javascript">
+            $(document).ready(function (){
+                $('#item-menu-usuarios').addClass('tw-ui-atual');
+            });
+        </script>
     </head>
     <body>
         <div class="geral">
             <?php require_once "menu.php"; ?>
             <div class="tw-ui-bar-page">
                 <h2 class="tw-ui-name-page">
-                    Usu&aacute;rios
+                    Adicionar novo usu&aacute;rio
                 </h2>
             </div>
             <div class="tw-ui-content">

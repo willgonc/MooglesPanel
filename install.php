@@ -59,9 +59,9 @@ try {
     $error = false;
 }
 
-for ($i = 0; $i < 100; $i++){
+/*for ($i = 0; $i < 100; $i++){
     mysql_query("insert into usuarios (nome, email, senha, status) values ('teste".$i."','teste@gmail".$i.".com','098000980',1)");
-}
+}*/
 
 
 if ($error)

@@ -9,6 +9,10 @@ p {
     font-family: arial;
 }
 
+.tw-ui-img {
+    border: 0px;
+}
+
 .geral {
     min-width: 1000px;
 }
@@ -35,9 +39,16 @@ p {
 
 .tw-ui-menu-principal ul li a:hover ,
 .tw-ui-menu-principal ul li a:focus {
+    background: rgb(190,190,190);
+    color: #000;
+}
+
+.tw-ui-menu-principal ul li a.tw-ui-atual,
+.tw-ui-menu-principal ul li a.tw-ui-atual:hover {
     background: rgb(230,230,230);
     color: #000;
 }
+
 
 /*.tw-ui-menu-principal ul li a.action {
     background: rgb(230,230,230);

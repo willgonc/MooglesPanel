@@ -26,7 +26,7 @@ if (!validaEmail($email)){
     $mensagem = "O e-mail n&atilde;o &eacute; v&aacute;lido!";
 }
 
-if ($senha < 6){
+if (strlen($senha) < 6){
     $fragErro = false;
     $mensagem = "A senha deve ter no m&iacute;nimo 6 caracteres!";
 }
@@ -50,7 +50,7 @@ if ($fragErro) {
         print "erro: ".$e;
     }
 } else {
-    print "Erro de validacao";
+    print $mensagem;
 }
 mysql_close($conexao);
 

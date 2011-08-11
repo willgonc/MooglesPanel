@@ -1,124 +1,125 @@
-<?
-include "connect_db.php";
+<?php
 
-/*******************************************************************************
-* Classe de Paginação
-*
-* Autor: Leandro  Correa dos Santos (nukelinux) <leandro.admo@gmail.com>
-*
-*
-* exemplo de uso:
-* instanciar a classe
-* $pg = new pagina();
-* recebe parâmetros get para paginação
-* $pg->pg = $_GET['pg'];
-* $pg->page = $_GET['page'];
-* indica quantos registros devem ser mostrados em cada página
-* $pg->fim = 5;
-* esse select é utlizado para contar o número de registros desejados, por isso
-* ele busca apenas o id da tabela. Pode-se adaptar para utilização da função
-* count(), o que acredito deixar o script mais rápido...
-* $pg->sql = "select id from tabela ";
-* O método parte1 realizará o cálculo necessário para o funcionamento correto
-* do paginador, atribuindo valores às variáveis $this->inicio e $this->fim,
-* necessárias para a busca dos dados
-* $pg->parte1();
-* aqui vc deve realizar a busca dos dados que serão exibidos, aproveitando o
-* resultado dos cálculos do paginador
-* $res = mysql_query("select * from tabela limit $this->inicio,$this->fim");
-*  a forma de mostar os resultados fica a seu critério :)
-* O método parte2 exibe os números das páginas (ex : 1 2 3 próxima >> ).
-* Está bem simples, sem estilos ou efeitos para facilitar a customização
-* $pg->parte2();
-*******************************************************************************/
+function montaPaginacao($pagina, $quantExibicao, $tabela){
+    //$pagina = 'usuarios.php'; // pagina que sera chamada
+    
+    $inicio = 0; // inicio do intervalo da busca
+    $limite = ($quantExibicao?$quantExibicao:10); // Quantidade de resultado exibidos na tela, seu valor padrão é 10
+    $pag = 1; // Numero da pagina que esta sendo exibida
+    $paginacao = ''; // Paginacao
 
-class pagina
-{
-	var $pg, $page, $sql, $total, $url, $tp, $numreg, $inicio, $fim;
+    if (isset($_GET['pag']))
+        $pag = $_GET['pag'];
+    
+    // Valida o numero passado como parametro
+    $pag = filter_var($pag, FILTER_VALIDATE_INT); 
 
-	function parte1()
-	{
-		if(!$this->pg){
-			$this->pg = 1;
-		}
-		if(!$this->page){
-			$this->page = 1;
-		}
-		try{
-			$this->total = mysql_query($this->sql);
-			$this->numreg = mysql_num_rows($this->total);
-		}catch(Exception $e){
-			echo 'exceção: ', $e->getMessage(), "\n";
-		}
-		if($this->numreg >= 1)
-		{
-			try{
-				$this->tp = ceil($this->numreg/$this->fim);
-				$this->inicio = $this->page - 1;
-				$this->inicio = $this->inicio * $this->fim;
-			}catch(Exception $E){
-				echo 'exceção: ', $E->getMessage(), "\n";
-			}
-		}
-	}
+    // pega o valor inicial de acordo com o numero da pagina
+    $inicio = ($pag - 1) * $limite;
 
-	function parte2()
-	{
-		//se a url do paginador não for definida, o padrão é a própria página
-		if(!$this->url)
-		{
-			$this->url = $PHP_SELF;
-		}
-		for($x = 1;$x <= $this->tp;$x++)
-		{
-			if($this->page == $x)
-			{
-				echo " <a href='#'>$x</a> ";
-			}
-			else
-			{
-				echo " <a href='$this->url?page=$x'>$x</a> ";
-			}
-		}
-	}
-}
+    if (isset($_GET['busca'])){
+        $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios WHERE 
+            nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%'");
 
+        $total = mysql_fetch_array($busca_total);
+        $total = $total['total'];
+        
+        $busca = mysql_query("SELECT * FROM usuarios WHERE  
+            nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%' or status like '%".$_GET['busca']."%'
+            ORDER BY nome LIMIT $inicio, $limite ");
+    } else {
+        $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios");
+        $total = mysql_fetch_array($busca_total);
+        $total = $total['total'];
+        $busca = mysql_query("SELECT * FROM usuarios ORDER BY nome LIMIT $inicio, $limite");
+    }
 
+    $linhasResult = mysql_num_rows($busca);
+    if ($linhasResult>0) {
+        $table = '<table width="100%" class="tw-ui-listagem">';
+        $table .= '<thead><tr><th>Nome</th><th>E-mail</th><th colspan="2">Status</th></tr></thead><tbody>';
+        while ($texto = mysql_fetch_array($busca)) {
+            extract($texto);
+            $table .= '<tr>
+                            <td width="45%">'.$nome.'</td>
+                            <td width="45%">'.$email.'</td>
+                            <td width="10%">'.($status==0?'Bloqueado':'Ativo').'</td>
+                            <td width="32" class="conf-usuario"><a href="#'.$id.'" id="status'.$status.'" class="open-conf-user">
+                                <img src="imagens/config.png" class="tw-ui-img" /></a>
+                            </td>
+                        </tr>';
+        }
+        $table .= '</tbody><tfoot><tr><td>Nome</td><td>E-mail</td><td colspan="2">Status</td></tr></tfoot></table>';
 
-$pg = new pagina();
+        $prox = $pag + 1;
+        $ant = $pag - 1;
+        $ultima_pag = ceil($total / $limite);
+        $penultima = $ultima_pag - 1;	
+        $adjacentes = 2;
+        
+        
+        if ($pag>1) {
+            $paginacao = '<a href="'.$pagina.'?pag='.$ant.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">&laquo; Anterior</a>';
+        }
+            
+            
+        if ($ultima_pag <= 5) {
+            for ($i=1; $i< $ultima_pag+1; $i++) {
+                if ($i == $pag) {
+                    $paginacao .= '<a class="atual" href="#">'.$i.'</a>';				
+                } else {
+                    $paginacao .= '<a href="'.$pagina.'?pag='.$i.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$i.'</a>';	
+                }
+            }
+        } 
 
-//recebe parâmetros get para paginação
-$pg->pg = (isset($_GET['pg'])?$_GET['pg']:0);
-$pg->page = (isset($_GET['page'])?$_GET['page']:0);
-
-//indica quantos registros devem ser mostrados em cada página
-$pg->fim = 10;
-
-/*esse select é utlizado para contar o número de registros desejados, por isso
-  ele busca apenas o id da tabela. Pode-se adaptar para utilização da função
-  count(), o que acredito deixar o script mais rápido...*/
-$pg->sql = "select id from usuarios ";
-
-/*O método parte1 realizará o cálculo necessário para o funcionamento correto
-do paginador, atribuindo valores às variáveis $this->inicio e $this->fim,
-necessárias para a busca dos dados*/
-
-$pg->parte1();
-
-/*aqui vc deve realizar a busca dos dados que serão exibidos, aproveitando o
-resultado dos cálculos do paginador*/
-$res = mysql_query("select * from usuarios limit $this->inicio,$this->fim");
-
-/*a forma de mostar os resultados fica a seu critério :)
-O método parte2 exibe os números das páginas (ex : 1 2 3 próxima >> ).
-Está bem simples, sem estilos ou efeitos para facilitar a customização*/
-$pg->parte2();
-
-mysql_close($conexao);
-
+        if ($ultima_pag > 5) {
+            if ($pag < 1 + (2 * $adjacentes)) {
+                for ($i=1; $i< 2 + (2 * $adjacentes); $i++) {
+                    if ($i == $pag) {
+                        $paginacao .= '<a class="atual" href="#">'.$i.'</a>';				
+                    } else {
+                        $paginacao .= '<a href="'.$pagina.'?pag='.$i.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$i.'</a>';	
+                    }
+                }
+                $paginacao .= '...';
+                $paginacao .= '<a href="'.$pagina.'?pag='.$penultima.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$penultima.'</a>';
+                $paginacao .= '<a href="'.$pagina.'?pag='.$ultima_pag.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$ultima_pag.'</a>';
+            } elseif($pag > (2 * $adjacentes) && $pag < $ultima_pag - 3) {
+                $paginacao .= '<a href="'.$pagina.'?pag=1'.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">1</a>';				
+                $paginacao .= '<a href="'.$pagina.'?pag=1'.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">2</a> ... ';	
+                for ($i = $pag-$adjacentes; $i<= $pag + $adjacentes; $i++)
+                {
+                    if ($i == $pag)
+                    {
+                        $paginacao .= '<a class="atual" href="#">'.$i.'</a>';				
+                    } else {
+                        $paginacao .= '<a href="'.$pagina.'?pag='.$i.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$i.'</a>';	
+                    }
+                }
+                $paginacao .= '...';
+                $paginacao .= '<a href="'.$pagina.'?pag='.$penultima.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$penultima.'</a>';
+                $paginacao .= '<a href="'.$pagina.'?pag='.$ultima_pag.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$ultima_pag.'</a>';
+            } else {
+                $paginacao .= '<a href="'.$pagina.'?pag=1'.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">1</a>';				
+                $paginacao .= '<a href="'.$pagina.'?pag=1'.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">2</a> ... ';	
+                for ($i = $ultima_pag - (4 + (2 * $adjacentes)); $i <= $ultima_pag; $i++) {
+                    if ($i == $pag) {
+                        $paginacao .= '<a class="atual" href="#">'.$i.'</a>';				
+                    } else {
+                        $paginacao .= '<a href="'.$pagina.'?pag='.$i.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$i.'</a>';	
+                    }
+                }
+            }
+        }
+        if ($prox <= $ultima_pag && $ultima_pag > 2) {
+            $paginacao .= '<a href="'.$pagina.'?pag='.$prox.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">Pr&oacute;ximo &raquo;</a>';
+        }
+        echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
+        echo $table;
+        echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
+    } else {
+        echo "Nenhum resultado foi encontrado!";
+    }
+}        
 ?>
-
-
-
-
-
