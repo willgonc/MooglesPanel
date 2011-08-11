@@ -136,12 +136,22 @@ p {
     padding: 10px;
 }
 
+.tw-ui-content .tw-ui-formulario-login {
+    width: 350px;
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    margin-left: -185px;
+    font-family: arial;
+}
+
 .tw-ui-content .tw-ui-formulario {
     font-size: 14px;
     font-family: arial;
     clear: both;
 }
 
+.tw-ui-content .tw-ui-formulario-login tr td,
 .tw-ui-content .tw-ui-formulario tr td {
     padding: 5px;
 }
