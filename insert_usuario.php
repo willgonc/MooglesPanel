@@ -34,6 +34,29 @@ if (strlen($senha) < 6){
         $mensagem = "A senha deve ter no m&iacute;nimo 6 caracteres!";
 }
 
+
+try {
+    // FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE
+    $result = mysql_query("SELECT * FROM usuarios WHERE email='$email'");
+    
+    if ($result) {
+        if (mysql_num_rows($result) >= 1){
+            $fragErro = false;
+            if (strlen($mensagem) == 0)
+                $mensagem = "Este e-mail j&aacute; est&aacute; cadastrado!";
+        }
+    } else {
+        $fragErro = false;
+        if (strlen($mensagem) == 0)
+            $mensagem = "Erro ao cadastrar usuário!";
+    }
+} catch ( Exception $e ){
+    $fragErro = false;
+    if (strlen($mensagem) == 0)
+        $mensagem = "Erro ao cadastrar usuário!";
+}
+
+
 if ($fragErro) {
     //$senha = addslashes($senha); // colocando barra invertida em determinados caracteres
     $senha = sha1($senha);
