@@ -11,24 +11,27 @@ $confirm_senha  = $_POST['confirm_senha'];
 $fragErro = true; // FRAG DE ERRO
 $mensagem = ""; // ARMAZENA A MENSAGEM
 
-if (!strRequire($nome) || !strRequire($email) || !strRequire($senha) || !strRequire($confirm_senha)){
+if (strRequire($nome) == false || !strRequire($email) || !strRequire($senha) || !strRequire($confirm_senha)){
     $fragErro = false;
     $mensagem = "Preencha todos os campos do formul&aacute;rio!";
 }
 
-if ($senha != $confirm_senha){
-    $fragErro = false;
-    $mensagem = "Confirme a senha corretamente!";
-}
-
 if (!validaEmail($email)){
     $fragErro = false;
-    $mensagem = "O e-mail n&atilde;o &eacute; v&aacute;lido!";
+    if (strlen($mensagem) == 0)
+        $mensagem = "O e-mail n&atilde;o &eacute; v&aacute;lido!";
+}
+
+if ($senha != $confirm_senha){
+    $fragErro = false;
+    if (strlen($mensagem) == 0)
+       $mensagem = "Confirme a senha corretamente!";
 }
 
 if (strlen($senha) < 6){
     $fragErro = false;
-    $mensagem = "A senha deve ter no m&iacute;nimo 6 caracteres!";
+    if (strlen($mensagem) == 0)
+        $mensagem = "A senha deve ter no m&iacute;nimo 6 caracteres!";
 }
 
 if ($fragErro) {
@@ -42,15 +45,15 @@ if ($fragErro) {
                     VALUES ('".$nome."','".$email."', '".$senha."', 0)");
         
         if ($insert) {
-            header("Location: adicionar_usuario.php");
+            header('Location: adicionar_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="okMsg">O usu&aacute;rio foi adicionado!</p>'));
         } else {
-            print "erro: ".mysql_error();
+            header('Location: adicionar_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">Erro ao adicionar o usu&aacute;rio!</p>'));
         }
     } catch ( Exception $e ){
-        print "erro: ".$e;
+        header('Location: adicionar_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">Erro ao adicionar o usu&aacute;rio!</p>'));
     }
 } else {
-    print $mensagem;
+    header('Location: adicionar_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">'.$mensagem.'</p>'));
 }
 mysql_close($conexao);
 

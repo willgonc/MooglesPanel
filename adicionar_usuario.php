@@ -30,6 +30,7 @@
                         <li><a href="perfil.php">Seu perfil</a></li>
                     </ul>
                 </div>
+                <div class="tw-ui-mensagem"><?php print (isset($_GET['msg'])?$_GET['msg']:'');?></div>
                 <form action="insert_usuario.php" method="post">
                     <table class="tw-ui-formulario">
                         <tbody>

@@ -13,6 +13,26 @@ p {
     border: 0px;
 }
 
+.tw-ui-mensagem {
+    clear: both;
+}
+
+.errorMsg {
+    color: #d40000;
+    background: #ffaaaa;
+    border: 1px solid #ff5555;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.okMsg {
+    color: #225500;
+    background: #ccffaa;
+    border: 1px solid #88ff55;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
 .geral {
     min-width: 1000px;
 }

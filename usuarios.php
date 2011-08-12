@@ -20,6 +20,8 @@
             <?php 
                 if (isset($_GET['busca'])){
                     print "eval('var busca = \"".$_GET['busca']."\"');";
+                } else {
+                    print "eval('var busca = \"\"');";
                 }
             ?>
             $(document).ready(function (){
@@ -84,6 +86,7 @@
                         <input type="submit" class="input-submit" value="Buscar" />
                     </form>
                 </div>
+                <div class="tw-ui-mensagem"><?php print (isset($_GET['msg'])?$_GET['msg']:'');?></div>
                 <div class="tw-ui-conteiner-usuarios">
                     <?php 
                         $pag = (isset($_GET['pag'])?$_GET['pag']:1); // Numero da pagina que esta sendo exibida
@@ -108,12 +111,12 @@
                             //$total
                             $busca = mysql_query("SELECT * FROM usuarios WHERE 
                                 nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%' or status like '%".$_GET['busca']."%'
-                                LIMIT $inicio, $limite ");
+                                ORDER BY nome LIMIT $inicio, $limite ");
                         } else {
                             $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios");
                             $total = mysql_fetch_array($busca_total);
                             $total = $total['total'];
-                            $busca = mysql_query("SELECT * FROM usuarios LIMIT $inicio, $limite");
+                            $busca = mysql_query("SELECT * FROM usuarios ORDER BY nome LIMIT $inicio, $limite");
                         }
 
                         $linhasResult = mysql_num_rows($busca);
