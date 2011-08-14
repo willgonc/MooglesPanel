@@ -1,6 +1,7 @@
 <?php
 
 require_once "connect_db.php";
+require_once "valida_usuario_logado.php";
 
 $id = $_POST['id'];
 $page = $_POST['page'];
