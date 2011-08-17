@@ -56,7 +56,8 @@ doEmail(this.txtEmail.value, this.selEmail.value);
 function initLogin (){
     var email = $('input[name=email]');
     var senha = $('input[name=senha]');
-    $('#btn-submit-login').click(function (){
+
+    $('#btn-submit-login').bind('click', function (){
         if (requerido(email.val()) && requerido(senha.val())){
             exibeMsgFormElem(email, '', 'erro');
             exibeMsgFormElem(senha, '', 'erro');

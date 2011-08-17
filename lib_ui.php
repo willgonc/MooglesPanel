@@ -1,29 +1,31 @@
 <?php
+
 /* 
-
 funcao: printMenu
-parametro: Array
-exemplo: 
-
 */
-
-
-function printMenu($list){
-    $str = '<ul class="tw-ui-menu">';
-    if (count($list) > 0){
-        for ($i = 0; $i < count($list); $i++){
-            $str .= '<li><a href="'.$list[$i]['link'].'">'.$list[$i]['name'].'</li>';
-        }
-        print $str;
-    } else {
-        return false;
-    }
+function printMenu(){
+        print '<div class="tw-ui-menu-principal">
+            <!--ul>
+                <li><a href="resumo.php">Resumo</a></li>
+                <li><a href="usuarios.php">Usu&aacute;rios</a></li>
+                <li><a href="configuracoes.php">Configura&ccedil;&otilde;es</a></li>
+            </ul-->
+                <a href="resumo.php"><div>Resumo</div></a>
+                <a href="posts.php"><div>Posts</div></a>
+                <a href="usuarios.php"><div>Usu&aacute;rios</div></a>
+                <a href="configuracoes.php"><div>Configura&ccedil;&otilde;es</div></a>
+        </div>';
 }
 
-printMenu(Array(
-                Array('name' => 'teste', 'link' => 'http://markus.com'), 
-                Array('name' => 'teste1', 'link' => 'http://markus2.com'), 
-                Array('name' => 'teste2', 'link' => 'http://markus1.com'), 
-        ));
-
+/* 
+funcao: printMenu
+*/
+function printCabecalho($title){
+    print '<div class="tw-ui-cabecalho">
+            <img src="imagens/tw.png" />
+          '.$title.'
+          <a class="tw-ui-user-logged" href="logout.php">Sair</a>
+          <span class="tw-ui-user-logged">'.$_SESSION['data']['email'].'</span>
+          </div>';
+}
 ?>

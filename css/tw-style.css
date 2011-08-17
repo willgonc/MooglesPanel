@@ -9,6 +9,40 @@ p {
     font-family: arial;
 }
 
+.tw-ui-cabecalho {
+    background: rgb(230,230,230);
+    padding: 5px 5px 5px 15px;
+    font-family: arial;
+    font-size: 22px;
+    border-bottom: 1px solid rgb(200,200,200);
+}
+
+.tw-ui-cabecalho img {
+    border: 0px;
+    margin-right: 15px;
+    vertical-align: middle; 
+}
+
+.tw-ui-user-logged {
+    font-size: 14px;
+    float: right;
+    margin-top: 45px;
+}
+span.tw-ui-user-logged {
+    margin-right: 10px;
+}
+a.tw-ui-user-logged {
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    margin-right: 15px;
+}
+a.tw-ui-user-logged:hover {
+    text-decoration: underline;
+}
+
+
+
 .tw-ui-img {
     border: 0px;
 }
@@ -41,29 +75,50 @@ p {
 }
 
 .tw-ui-menu-principal {
-    height: 30px;
-    background: #002255;
+    height: auto;
+    width: 200px;
+    margin: 30px 20px;
+    float: left;
 }
-.tw-ui-menu-principal ul {
+.tw-ui-menu-principal a {
+    text-decoration: none;
+}
+.tw-ui-menu-principal a div {
+    margin: 5px 0px;
+    padding: 5px 15px;
+    color: #000;
+    font-family: arial;
+    font-size: 14px;
+    padding: 8px 15px;
+}
+.tw-ui-menu-principal a div:hover {
+    background: rgb(210,210,210);
+    color: #000;
+}
+/*-------*/
+/*.tw-ui-menu-principal ul {
     list-style: none;
-    margin-left: 10px;
 }
 .tw-ui-menu-principal ul li {
-    float: left;
-    margin-top: 4px;
+    margin: 5px 0px;
+    padding: 5px;
+}
+.tw-ui-menu-principal ul li:hover {
+    background: rgb(210,210,210);
+    color: #000;
 }
 .tw-ui-menu-principal ul li a {
-    color: #fff;
+    color: #000;
     font-family: arial;
-    font-size: 13px;
+    font-size: 14px;
     text-decoration: none;
     padding: 8px 15px;
 }
 
 .tw-ui-menu-principal ul li a:hover ,
 .tw-ui-menu-principal ul li a:focus {
-    background: rgb(190,190,190);
-    color: #000;
+/\*    background: rgb(190,190,190);
+    color: #000;*\/
 }
 
 .tw-ui-menu-principal ul li a.tw-ui-atual,
@@ -71,7 +126,7 @@ p {
     background: rgb(230,230,230);
     color: #000;
 }
-
+*/
 
 /*.tw-ui-menu-principal ul li a.action {
     background: rgb(230,230,230);
