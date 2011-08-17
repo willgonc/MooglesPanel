@@ -17,12 +17,10 @@ p {
     clear: both;
 }
 
-.errorMsg {
+.tw-msg-erro {
     color: #d40000;
-    background: #ffaaaa;
-    border: 1px solid #ff5555;
-    padding: 5px;
-    margin-bottom: 10px;
+    padding: 0px;
+    font-size: 12px;
 }
 
 .okMsg {
@@ -31,6 +29,11 @@ p {
     border: 1px solid #88ff55;
     padding: 5px;
     margin-bottom: 10px;
+}
+
+.load {
+    display: none;
+    vertical-align: middle;
 }
 
 .geral {
@@ -155,6 +158,7 @@ p {
     font-size: 14px;
     padding: 5px;
     background: #fff;
+    margin-bottom: 5px; 
 }
 
 .combo-box {
@@ -168,23 +172,26 @@ p {
 }
 
 .tw-ui-content .tw-ui-formulario-login {
-    width: 350px;
+    width: 300px;
+    height: 140px;
     position: absolute;
-    top: 250px;
+    top: 50%;
     left: 50%;
-    margin-left: -185px;
+    margin-left: -150px;
+    margin-top: -70px;
     font-family: arial;
 }
 
 .tw-ui-content .tw-ui-formulario {
-    font-size: 14px;
+    font-size: 13px;
     font-family: arial;
     clear: both;
 }
 
 .tw-ui-content .tw-ui-formulario-login tr td,
 .tw-ui-content .tw-ui-formulario tr td {
-    padding: 5px;
+    font-size: 13px;
+    padding: 0px;
 }
 
 .tw-ui-listagem {
