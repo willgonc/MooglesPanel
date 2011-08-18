@@ -64,7 +64,7 @@ function initLogin (){
             if (validaEmail(email.val())){
                 $('.load').show();
                 $.post(
-                    'logar.php',
+                    'logging.php',
                     {'email': email.val(), 'senha': senha.val()},
                     function (d){
                         if (d){

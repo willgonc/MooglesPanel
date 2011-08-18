@@ -1,6 +1,8 @@
 <?php
-    require_once "connect_db.php";
-    require_once "pagination.php";
+require_once "connect_db.php";
+require_once "logged.php";
+require_once "lib_ui.php"; 
+require_once "pagination.php";
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
@@ -61,25 +63,18 @@
                     });
                 });
                 $('#item-menu-usuarios').addClass('tw-ui-atual');
+                $('.tw-ui-menu-principal .3').addClass('active-menu');
             });
         </script> 
     </head>
     <body>
-        <div class="geral">
-            <?php require_once "menu.php"; ?>
-            <div class="tw-ui-bar-page">
-                <h2 class="tw-ui-name-page">
-                    Consulta de usu&aacute;rios
-                </h2>
-            </div>
-            <div class="tw-ui-content">
-                <div class="tw-ui-menu-modulo">
-                    <ul>
-                        <li><a href="usuarios.php">Mostrar todos</a></li>
-                        <li><a href="adicionar_usuario.php">Adicionar novo</a></li>
-                        <li><a href="perfil.php">Seu perfil</a></li>
-                    </ul>
-                </div>
+        <?php 
+        printCabecalho('Consulta de usuários');
+        printMenu();
+        ?>
+        <div class="tw-ui-content">
+            <?php mountMenuModUsuarios(); ?>
+            <div class="tw-ui-content-mod">
                 <div class="tw-ui-busca">
                     <form action="usuarios.php" method="get">
                         <input type="text" class="input-text" size="20" name="busca" />

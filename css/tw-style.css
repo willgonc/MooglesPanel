@@ -41,8 +41,6 @@ a.tw-ui-user-logged:hover {
     text-decoration: underline;
 }
 
-
-
 .tw-ui-img {
     border: 0px;
 }
@@ -75,7 +73,6 @@ a.tw-ui-user-logged:hover {
 }
 
 .tw-ui-menu-principal {
-    height: auto;
     width: 200px;
     margin: 30px 20px;
     float: left;
@@ -90,11 +87,18 @@ a.tw-ui-user-logged:hover {
     font-family: arial;
     font-size: 14px;
     padding: 8px 15px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 .tw-ui-menu-principal a div:hover {
     background: rgb(210,210,210);
     color: #000;
 }
+.tw-ui-menu-principal .active-menu div {
+    color: red;
+}
+
 /*-------*/
 /*.tw-ui-menu-principal ul {
     list-style: none;
@@ -146,23 +150,24 @@ a.tw-ui-user-logged:hover {
     float: left;
 }
 
-.tw-ui-menu-modulo {
+/*.tw-ui-menu-mod {
     float: left;
     height: 30px;
     margin-bottom: 10px;
-}
+}*/
 
-.tw-ui-menu-modulo ul {
+.tw-ui-menu-mod {
     list-style: none;
-    margin-top: 5px;
+    margin: 20px 0px 10px 0px;
+    height: 23px;
 }
 
-.tw-ui-menu-modulo ul li {
+.tw-ui-menu-mod li {
     float: left;
     margin-right: 10px;
 }
 
-.tw-ui-menu-modulo ul li a {
+.tw-ui-menu-mod li a {
     font-size: 14px;
     font-family: arial;
     padding: 5px 10px;
@@ -171,10 +176,13 @@ a.tw-ui-user-logged:hover {
     border: 1px solid rgb(190,190,190);
     text-decoration: none;
     color: rgb(70,70,70);
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
 }
 
-.tw-ui-menu-modulo ul li a:hover,
-.tw-ui-menu-modulo ul li a:focus {
+.tw-ui-menu-mod li a:hover,
+.tw-ui-menu-mod li a:focus {
     background: #2a7fff;
     border: 1px solid #0055d4;
     color: rgb(255,255,255);
@@ -223,10 +231,23 @@ a.tw-ui-user-logged:hover {
 
 
 .tw-ui-content {
-    padding: 10px;
+    position: absolute;
+    top: 75px;
+    left: 240px;
+    right: 0px;
 }
 
-.tw-ui-content .tw-ui-formulario-login {
+.tw-ui-content-mod {
+    height: 100px;
+    clear: both;
+    margin-top: 15px;
+    margin-right: 10px;
+    border: 1px solid rgb(210,210,210);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.tw-ui-formulario-login {
     width: 300px;
     height: 140px;
     position: absolute;
@@ -243,7 +264,7 @@ a.tw-ui-user-logged:hover {
     clear: both;
 }
 
-.tw-ui-content .tw-ui-formulario-login tr td,
+.tw-ui-formulario-login tr td,
 .tw-ui-content .tw-ui-formulario tr td {
     font-size: 13px;
     padding: 0px;

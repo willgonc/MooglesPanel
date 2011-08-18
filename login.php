@@ -21,35 +21,33 @@ require_once "logged.php";
     </head>
     <body>
         <div class="geral">
-            <div class="tw-ui-content">
-                <form action="logar.php" method="post">
-                    <table class="tw-ui-formulario-login">
-                        <tbody>
-                            <tr>
-                                <td id="msgRespota"></td>
-                            </tr>
-                            <tr>
-                                <td>E-mail</td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" class="input-text" size="30" name="email" /></td>
-                            </tr>
-                            <tr>
-                                <td>Senha</td>
-                            </tr>
-                            <tr>
-                                <td><input type="password" class="input-text" size="30" name="senha" /></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="button" id="btn-submit-login" class="input-button" value="Entrar" />
-                                    <img src="./imagens/load.gif" class="load" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </div>
+            <form action="logging.php" method="post">
+                <table class="tw-ui-formulario-login">
+                    <tbody>
+                        <tr>
+                            <td id="msgRespota"></td>
+                        </tr>
+                        <tr>
+                            <td>E-mail</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="input-text" size="30" name="email" /></td>
+                        </tr>
+                        <tr>
+                            <td>Senha</td>
+                        </tr>
+                        <tr>
+                            <td><input type="password" class="input-text" size="30" name="senha" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" id="btn-submit-login" class="input-button" value="Entrar" />
+                                <img src="./imagens/load.gif" class="load" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>
     </body>
 </html>
