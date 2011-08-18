@@ -2,7 +2,6 @@
 require_once "connect_db.php";
 require_once "logged.php";
 require_once "lib_ui.php"; 
-require_once "pagination.php";
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
@@ -75,12 +74,6 @@ require_once "pagination.php";
         <div class="tw-ui-content">
             <?php mountMenuModUsuarios(); ?>
             <div class="tw-ui-content-mod">
-                <div class="tw-ui-busca">
-                    <form action="usuarios.php" method="get">
-                        <input type="text" class="input-text" size="20" name="busca" />
-                        <input type="submit" class="input-submit" value="Buscar" />
-                    </form>
-                </div>
                 <div class="tw-ui-mensagem"><?php print (isset($_GET['msg'])?$_GET['msg']:'');?></div>
                 <div class="tw-ui-conteiner-usuarios">
                     <?php 
@@ -138,63 +131,16 @@ require_once "pagination.php";
                             $adjacentes = 2;
                             
                             
-                            if ($pag>1) {
-                                $paginacao = '<a href="'.$pagina.'?pag='.$ant.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">&laquo; Anterior</a>';
-                            }
+                            if ($pag>1)
+                                $paginacao = '<a href="'.$pagina.'?pag='.$ant.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">&laquo;</a>';
+                            else
+                                $paginacao = '<a href="#" disabled >&laquo;</a>';
                                 
-                                
-                            if ($ultima_pag <= 5) {
-                                for ($i=1; $i< $ultima_pag+1; $i++) {
-                                    if ($i == $pag) {
-                                        $paginacao .= '<a class="atual" href="#">'.$i.'</a>';				
-                                    } else {
-                                        $paginacao .= '<a href="'.$pagina.'?pag='.$i.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$i.'</a>';	
-                                    }
-                                }
-                            } 
+                            if ($prox <= $ultima_pag && $ultima_pag > 2) 
+                                $paginacao .= '<a href="'.$pagina.'?pag='.$prox.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">&raquo;</a>';
+                            else
+                                $paginacao .= '<a href="#" disabled>&raquo;</a>';
 
-                            if ($ultima_pag > 5) {
-                                if ($pag < 1 + (2 * $adjacentes)) {
-                                    for ($i=1; $i< 2 + (2 * $adjacentes); $i++) {
-                                        if ($i == $pag) {
-                                            $paginacao .= '<a class="atual" href="#">'.$i.'</a>';				
-                                        } else {
-                                            $paginacao .= '<a href="'.$pagina.'?pag='.$i.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$i.'</a>';	
-                                        }
-                                    }
-                                    $paginacao .= '...';
-                                    $paginacao .= '<a href="'.$pagina.'?pag='.$penultima.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$penultima.'</a>';
-                                    $paginacao .= '<a href="'.$pagina.'?pag='.$ultima_pag.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$ultima_pag.'</a>';
-                                } elseif($pag > (2 * $adjacentes) && $pag < $ultima_pag - 3) {
-                                    $paginacao .= '<a href="'.$pagina.'?pag=1'.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">1</a>';				
-                                    $paginacao .= '<a href="'.$pagina.'?pag=1'.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">2</a> ... ';	
-                                    for ($i = $pag-$adjacentes; $i<= $pag + $adjacentes; $i++)
-                                    {
-                                        if ($i == $pag)
-                                        {
-                                            $paginacao .= '<a class="atual" href="#">'.$i.'</a>';				
-                                        } else {
-                                            $paginacao .= '<a href="'.$pagina.'?pag='.$i.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$i.'</a>';	
-                                        }
-                                    }
-                                    $paginacao .= '...';
-                                    $paginacao .= '<a href="'.$pagina.'?pag='.$penultima.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$penultima.'</a>';
-                                    $paginacao .= '<a href="'.$pagina.'?pag='.$ultima_pag.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$ultima_pag.'</a>';
-                                } else {
-                                    $paginacao .= '<a href="'.$pagina.'?pag=1'.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">1</a>';				
-                                    $paginacao .= '<a href="'.$pagina.'?pag=1'.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">2</a> ... ';	
-                                    for ($i = $ultima_pag - (4 + (2 * $adjacentes)); $i <= $ultima_pag; $i++) {
-                                        if ($i == $pag) {
-                                            $paginacao .= '<a class="atual" href="#">'.$i.'</a>';				
-                                        } else {
-                                            $paginacao .= '<a href="'.$pagina.'?pag='.$i.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">'.$i.'</a>';	
-                                        }
-                                    }
-                                }
-                            }
-                            if ($prox <= $ultima_pag && $ultima_pag > 2) {
-                                $paginacao .= '<a href="'.$pagina.'?pag='.$prox.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">Pr&oacute;ximo &raquo;</a>';
-                            }
                             echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
                             echo $table;
                             echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';

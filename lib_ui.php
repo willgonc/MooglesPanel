@@ -27,22 +27,22 @@ function printCabecalho($title){
 
 function printMenuMod($list){
     $str = '<ul class="tw-ui-menu-mod">';
-        if (count($list) > 0){
-            for ($i = 0; $i < count($list); $i++){
-                $str .= '<li><a href="'.$list[$i]['link'].'">'.htmlentities($list[$i]['name'], ENT_QUOTES, "UTF-8").'</a></li>';
-            }
-            print $str.'</ul>';
-        } else {
-            return false;
-        }
+    for ($i = 0; $i < count($list); $i++){
+        if ($list[$i]['link'] != 'null')
+            $str .= '<li><a href="'.$list[$i]['link'].'">'.$list[$i]['name'].'</a></li>';
+        else
+            $str .= '<li>'.$list[$i]['name'].'</li>';
+    }
+
+    print $str.'</li></ul>';
 }
 
 
 function mountMenuModResumo(){
     $list = Array(
-        Array('name' => 'Usuários', 'link' => 'link1.php'),
+        Array('name' => 'Usu&aacute;rios', 'link' => 'link1.php'),
         Array('name' => 'Posts', 'link' => 'link2.php'),
-        Array('name' => 'Comentários', 'link' => 'link3.php')
+        Array('name' => 'Coment&aacute;ios', 'link' => 'link3.php')
     );
 
     printMenuMod($list);
@@ -52,10 +52,27 @@ function mountMenuModUsuarios(){
     $list = Array(
         Array('name' => 'Mostrar todos', 'link' => 'usuarios.php'),
         Array('name' => 'Adicionar novo', 'link' => 'novo_usuario.php'),
-        Array('name' => 'Seu perfil', 'link' => 'perfil.php')
+        Array('name' => 'Seu perfil', 'link' => 'perfil.php'),
+        Array('name' => returnFormSearch('usuarios.php', 'get', '', 30), 'link' => 'null')
     );
 
     printMenuMod($list);
 }
+
+
+function returnFormSearch($action, $method, $name, $size){
+    $action = (isset($action)?'action="'.$action.'"':'');
+    $method = (isset($method)?'method="'.$method.'"':'');
+    $name = (isset($name)?'name="'.$name.'"':'');
+    $size = (isset($size)?'size="'.$size.'"':'size="20"');
+
+    return '<div class="tw-ui-busca">
+               <form '.$action.' '.$method.' '.$name.'>
+                   <input type="text" class="input-text" '.$size.' name="busca" />
+                   <input type="submit" class="input-submit" value="Buscar" />
+               </form>
+           </div>';
+}
+
 
 ?>

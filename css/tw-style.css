@@ -73,7 +73,7 @@ a.tw-ui-user-logged:hover {
 }
 
 .tw-ui-menu-principal {
-    width: 200px;
+    width: 160px;
     margin: 30px 20px;
     float: left;
 }
@@ -179,6 +179,7 @@ a.tw-ui-user-logged:hover {
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
+    cursor: default;
 }
 
 .tw-ui-menu-mod li a:hover,
@@ -190,10 +191,8 @@ a.tw-ui-user-logged:hover {
 
 
 .tw-ui-busca {
-    float: right;
-    height: 30px;
-    margin-right: 0px;
-    margin-bottom: 10px;
+    margin-left: 30px;
+    margin-top: -5px;
 }
 
 .tw-ui-busca form {
@@ -207,7 +206,9 @@ a.tw-ui-user-logged:hover {
     font-size: 14px;
     padding: 5px 7px;
     color: #fff;
-    cursor: pointer;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
 }
 .input-button:hover, .input-submit:hover,
 .input-button:focus, .input-submit:focus {
@@ -222,6 +223,9 @@ a.tw-ui-user-logged:hover {
     padding: 5px;
     background: #fff;
     margin-bottom: 5px; 
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
 }
 
 .combo-box {
@@ -233,19 +237,13 @@ a.tw-ui-user-logged:hover {
 .tw-ui-content {
     position: absolute;
     top: 75px;
-    left: 240px;
+    left: 200px;
     right: 0px;
 }
 
 .tw-ui-content-mod {
-    height: 100px;
-    clear: both;
     margin-top: 15px;
     margin-right: 10px;
-    border: 1px solid rgb(210,210,210);
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 .tw-ui-formulario-login {
     width: 300px;
@@ -315,22 +313,29 @@ a.tw-ui-user-logged:hover {
 
 .paginacao {
     height: 30px;
-    padding: 0px;
-    text-align: right;
+    padding: 0px 10px;
     font-family: arial;
-    clear: both;
+    text-align: right;
 }
 
 .paginacao a {
-    padding: 3px 7px;
-    /*background: #2a7fff;
-    border: 1px solid #0055d4;*/
+    padding: 7px 14px;
     text-decoration: none;
     font-size: 14px;
     margin-left: 5px;
     color: rgb(50,50,50);
     background: rgb(230,230,230);
     border: 1px solid rgb(200,200,200);
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    cursor: default;
+}
+
+.paginacao a[disabled] {
+    color: rgb(150,150,150);
+    background: rgb(245,245,245);
+    border: 1px solid rgb(230,230,230);
 }
 
 a.atual {

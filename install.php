@@ -62,6 +62,19 @@ try {
 /*for ($i = 0; $i < 100; $i++){
     mysql_query("insert into usuarios (nome, email, senha, status) values ('teste".$i."','teste@gmail".$i.".com','098000980',1)");
 }*/
+try {
+    $ins = mysql_query("insert into usuarios (nome, email, senha, status) values ('Administrador','admin@painel.com','".sha1(123456)."',1)");
+
+    if ($ins) {
+        print "O usu&aacute;rio admin foi criado!<br />";
+    } else {
+        print "Erro ao criar usu&aacute;rio Erro: ".mysql_error()."<br />";
+        $error = false;
+    }
+} catch ( Exception $e ){
+    print "Erro ao criar usu&aacute;rio Erro: ".$e."<br />";
+    $error = false;
+}
 
 
 if ($error)

@@ -25,13 +25,9 @@ function strRequire($str)
     // removendo espaços em branco
     $str = trim($str);
     if (strlen($str) == 0 || empty($str))
-    {
         return false;
-    }
     else 
-    {
         return true;
-    }
 }
 
 ?>
