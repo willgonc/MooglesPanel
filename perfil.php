@@ -1,3 +1,14 @@
+<?php
+require_once "connect_db.php";
+require_once "logged.php";
+require_once "lib_ui.php"; 
+require_once "lib_db.php"; 
+
+$data = getUsuarioLogado();
+
+if (!$data)
+    print "teste";
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
@@ -10,33 +21,26 @@
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
-                $('#item-menu-usuarios').addClass('tw-ui-atual');
+                $('.tw-ui-menu-principal .3').addClass('active-menu');
             });
         </script>
     </head>
     <body>
-        <div class="geral">
-            <?php require_once "menu.php"; ?>
-            <div class="tw-ui-bar-page">
-                <h2 class="tw-ui-name-page">
-                    Seu perfil
-                </h2>
-            </div>
-            <div class="tw-ui-content">
-                <div class="tw-ui-menu-modulo">
-                    <ul>
-                        <li><a href="usuarios.php">Mostrar todos</a></li>
-                        <li><a href="adicionar_usuario.php">Adicionar novo</a></li>
-                        <li><a href="perfil.php">Seu perfil</a></li>
-                    </ul>
-                </div>
+        <?php 
+            printCabecalho('Seu perfil');
+        print '<div class="tw-ui-mensagem">'.(isset($_GET['msg'])?$_GET['msg']:'').'</div>';
+        ?>
+        <div class="tw-ui-content">
+            <?php printMenu(); ?>
+            <div class="tw-ui-content-mod">
+                <?php mountMenuModUsuarios(); ?>
                 <form action="insert_usuario.php" method="post">
                     <table class="tw-ui-formulario">
                         <tbody>
                             <tr>
                                 <td>Nome *</td>
                                 <td>
-                                    <input type="text" class="input-text" size="30" name="nome" value="<?php print ''; ?>" />
+                                    <input type="text" class="input-text" size="30" name="nome" value="<?php print $data['nome']; ?>" />
                                     <input type="hidden" name="id" value="<?php print ''; ?>" />
                                 </td>
                             </tr>

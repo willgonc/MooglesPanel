@@ -69,12 +69,12 @@ require_once "lib_ui.php";
     <body>
         <?php 
         printCabecalho('Consulta de usuários');
-        printMenu();
+        print '<div class="tw-ui-mensagem">'.(isset($_GET['msg'])?$_GET['msg']:'').'</div>';
         ?>
         <div class="tw-ui-content">
-            <?php mountMenuModUsuarios(); ?>
+            <?php printMenu(); ?>
             <div class="tw-ui-content-mod">
-                <div class="tw-ui-mensagem"><?php print (isset($_GET['msg'])?$_GET['msg']:'');?></div>
+                <?php mountMenuModUsuarios(); ?>
                 <div class="tw-ui-conteiner-usuarios">
                     <?php 
                         $pag = (isset($_GET['pag'])?$_GET['pag']:1); // Numero da pagina que esta sendo exibida

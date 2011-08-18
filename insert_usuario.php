@@ -68,15 +68,15 @@ if ($fragErro) {
                     VALUES ('".$nome."','".$email."', '".$senha."', 0)");
         
         if ($insert) {
-            header('Location: adicionar_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="okMsg">O usu&aacute;rio foi adicionado!</p>'));
+            header('Location: novo_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="okMsg">O usu&aacute;rio foi adicionado!</p>'));
         } else {
-            header('Location: adicionar_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">Erro ao adicionar o usu&aacute;rio!</p>'));
+            header('Location: novo_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">Erro ao adicionar o usu&aacute;rio!</p>'));
         }
     } catch ( Exception $e ){
-        header('Location: adicionar_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">Erro ao adicionar o usu&aacute;rio!</p>'));
+        header('Location: novo_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">Erro ao adicionar o usu&aacute;rio!</p>'));
     }
 } else {
-    header('Location: adicionar_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">'.$mensagem.'</p>'));
+    header('Location: novo_usuario.php?pag='.$page.'&busca='.$busca.'&msg='.urlencode('<p class="errorMsg">'.$mensagem.'</p>'));
 }
 mysql_close($conexao);
 
