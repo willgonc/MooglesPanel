@@ -263,6 +263,11 @@ a.tw-ui-user-logged:hover {
     color: rgb(70,70,70);
 } 
 
+.tw-ui-listagem tr td img {
+    vertical-align: middle;
+    margin-right: 10px;
+
+}
 .tw-ui-listagem tbody tr td {
 /*    vertical-align: top;*/
 }

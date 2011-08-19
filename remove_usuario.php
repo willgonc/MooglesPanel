@@ -19,8 +19,15 @@ for ($i = 0; $i < count($usuarios); $i++){
     if ($flag == 0)
         break;
 }
+if ($flag == 1){
+    $erro = true;
+    $msg = '<p class="okMsg">Todos os usu&aacute;rios foram removidos!</p>';
+} else {
+    $erro = false;
+    $msg = '<p class="errorMsg">Erro ao remover o usu&aacute;rio!</p>'; 
+}
 
-echo ($flag == 1?'Todos os usu&aacute;rios foram removidos!': 'Erro ao remover o usu&aacute;rio!'); 
+echo "{erro: ".$erro.", msg: '$msg'}";
 
 mysql_close($conexao);
 

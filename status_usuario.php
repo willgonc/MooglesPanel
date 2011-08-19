@@ -27,7 +27,15 @@ for ($i = 0; $i < count($usuarios); $i++){
         break;
 }
 
-echo ($flag == 1?'Todos os usuarios foram alterados!'.$status: 'Erro ao alterar o usu&aacute;rio!'); 
+if ($flag == 1){
+    $erro = true;
+    $msg = '<p class="okMsg">Todos os usuarios foram alterados!</p>';
+} else {
+    $erro = false;
+    $msg = '<p class="errorMsg">Erro ao alterar o usu&aacute;rio!</p>'; 
+}
+
+echo "{erro: ".$erro.", msg: '$msg'}";
 
 mysql_close($conexao);
 ?>

@@ -13,6 +13,16 @@ function validaEmail(email){
         return false;
 }
 
+function getQueryVariable(variable)
+{
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+    }
+    return(false);
+}
 
 function requerido(str){
     if (str == '' || str == undefined || str == null || str.length == 0)
@@ -25,33 +35,6 @@ function exibeMsgFormElem(elem, msg, estado){
     elem.parent().children('.tw-msg-' + estado).remove();
     elem.parent().append('<div class="tw-msg-' + estado + '">' + msg + '</div>');
 }
-
-
-
-
-/*var reEmail1 = /^[\w!#$%&'*+\/=?^`{|}~-]+(\.[\w!#$%&'*+\/=?^`{|}~-]+)*@(([\w-]+\.)+[A-Za-z]{2,6}|\[\d{1,3}(\.\d{1,3}){3}\])$/;
-var reEmail2 = /^[\w-]+(\.[\w-]+)*@(([\w-]{2,63}\.)+[A-Za-z]{2,6}|\[\d{1,3}(\.\d{1,3}){3}\])$/;
-var reEmail3 = /^[\w-]+(\.[\w-]+)*@(([A-Za-z\d][A-Za-z\d-]{0,61}[A-Za-z\d]\.)+[A-Za-z]{2,6}|\[\d{1,3}(\.\d{1,3}){3}\])$/;
-var reEmail = reEmail3;
-
-function doEmail(pStr, pFmt)
-{
-    eval("reEmail = reEmail" + pFmt);
-    if (reEmail.test(pStr)) {
-        alert(pStr + " é um endereço de e-mail válido.");
-    } else if (pStr != null && pStr != "") {
-        alert(pStr + " NÃO é um endereço de e-mail válido.");
-    }
-} // doEmail
-
-
-
-doEmail(this.txtEmail.value, this.selEmail.value); 
-*/
-
-
-
-
 
 function initLogin (){
     var email = $('input[name=email]');
@@ -86,4 +69,149 @@ function initLogin (){
                 exibeMsgFormElem(senha, 'Preencha este campo!', 'erro');
         }
     });
+}
+
+
+function initListUsuarios(){
+    $('#okAcoesListagem').click(function (){
+        var valor = $('#acoesListagem').val();
+        var check = $('.checkboxListagem:checked');
+        var arrData = [];
+
+        for (var i = 0; i < check.length; i++)
+            arrData[i] = check.eq(i).val();
+
+        if (valor == 'del'){
+            $.post(
+                'remove_usuario.php',
+                {usuarios: arrData},
+                function (d){
+                    eval('var d = '+ d);
+                    var url = window.location.href;
+                    if (d.erro == 1){
+                        if (getQueryVariable('msg')){
+
+                            var query = window.location.search.substring(1);
+                            var vars = query.split("&");
+                            var newUrl = '';
+                            for (var i = 0; i < vars.length; i++) {
+                                if(vars[i].indexOf('msg') == -1){
+                                    newUrl += vars[i]; 
+                                }
+                            }
+                            window.location = url + '&msg=' + escape(d.msg);
+                        } else {
+                            if (window.location.href.indexOf("?") == -1)
+                                window.location = url + '?msg=' + escape(d.msg);
+                            else
+                                window.location = url + '&msg=' + escape(d.msg);
+                        }
+                    } else {
+                        if (getQueryVariable()){
+
+                        } else {
+                            window.location = window.location.href + '&msg=' + d[1];
+                        }
+                    }  
+                }
+            );
+        } else if (valor == 0) {
+            $.post(
+                'status_usuario.php',
+                {usuarios: arrData, estado: 0},
+                function (d){
+                    eval('var d = '+ d);
+                    var url = window.location.href;
+                    if (d.erro == 1){
+                        if (getQueryVariable('msg')){
+
+                            var query = window.location.search.substring(1);
+                            var vars = query.split("&");
+                            var newUrl = '';
+                            for (var i = 0; i < vars.length; i++) {
+                                if(vars[i].indexOf('msg') == -1){
+                                    newUrl += vars[i]; 
+                                }
+                            }
+                            window.location = url + '&msg=' + escape(d.msg);
+                        } else {
+                            if (window.location.href.indexOf("?") == -1)
+                                window.location = url + '?msg=' + escape(d.msg);
+                            else
+                                window.location = url + '&msg=' + escape(d.msg);
+                        }
+                    } else {
+                        if (getQueryVariable()){
+
+                        } else {
+                            window.location = window.location.href + '&msg=' + d[1];
+                        }
+                    }  
+                }
+            );
+        } else if (valor == 1){
+            $.post(
+                'status_usuario.php',
+                {usuarios: arrData, estado: 1},
+                function (d){
+                    eval('var d = '+ d);
+                    var url = window.location.href;
+                    if (d.erro == 1){
+                        if (getQueryVariable('msg')){
+
+                            var query = window.location.search.substring(1);
+                            var vars = query.split("&");
+                            var newUrl = '';
+                            for (var i = 0; i < vars.length; i++) {
+                                if(vars[i].indexOf('msg') == -1){
+                                    newUrl += vars[i]; 
+                                }
+                            }
+                            window.location = url + '&msg=' + escape(d.msg);
+                        } else {
+                            if (window.location.href.indexOf("?") == -1)
+                                window.location = url + '?msg=' + escape(d.msg);
+                            else
+                                window.location = url + '&msg=' + escape(d.msg);
+                        }
+                    } else {
+                        if (getQueryVariable()){
+
+                        } else {
+                            window.location = window.location.href + '&msg=' + d[1];
+                        }
+                    }  
+                }
+            );
+        }
+    });
+
+    $('#checkAll').click(function (){
+        if(this.checked == true){
+            $(".checkboxListagem").each(function() { 
+                this.checked = true; 
+            }).parent().parent().css({
+                'background':'rgb(230,230,230)'    
+            });
+        } else {
+            $(".checkboxListagem").each(function() { 
+                this.checked = false; 
+            }).parent().parent().css({
+                'background':'rgb(255,255,255)'    
+            });
+        }
+    });
+
+    $(".checkboxListagem").click(function() { 
+        if(this.checked == true){
+            $(this).parent().parent().css({
+                'background':'rgb(230,230,230)'    
+            });
+        } else {
+            $(this).parent().parent().css({
+                'background':'rgb(255,255,255)'    
+            });
+        }
+    });
+
 }

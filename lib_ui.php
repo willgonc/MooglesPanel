@@ -68,7 +68,7 @@ function returnFormSearch($action, $method, $name, $size){
 
     return '<div class="tw-ui-busca">
                <form '.$action.' '.$method.' '.$name.'>
-                   <input type="text" class="input-text" '.$size.' name="busca" />
+                   <input type="text" class="input-text" '.$size.' name="busca" value="'.(isset($_GET['busca'])?$_GET['busca']:'').'" />
                    <input type="submit" class="input-submit" value="Buscar" />
                </form>
            </div>';
