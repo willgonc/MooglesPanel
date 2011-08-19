@@ -2,7 +2,6 @@
 require_once "connect_db.php";
 require_once "logged.php";
 require_once "lib_ui.php"; 
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -35,6 +34,14 @@ require_once "lib_ui.php";
                             <tr>
                                 <td>Nome *</td>
                                 <td><input type="text" class="input-text" size="30" name="nome" /></td>
+                                <td rowspan="5" valign="top">
+                                    <div class="tw-ui-dicas">
+                                        <p>( * ) Esses campos s&atilde;o obrigat&oacute;rios.</p>
+                                        <p><b>E-mail:</b> deve ser utilizado um e-mail válido.</p>
+                                        <p><b>Senha:</b> a senha deve ter no m&iacute;nimo 6 caracteres.</p>
+                                        <p><b>Escolha uma senha forte, coloque caracteres mai&uacute;sculos, min&uacute;sculos, espaços e outros caracteres como * + - # $ @ e outros.</b></p>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>E-mail *</td>
@@ -47,10 +54,6 @@ require_once "lib_ui.php";
                             <tr>
                                 <td>Confirmar senha *</td>
                                 <td><input type="password" class="input-text" size="30" name="confirm_senha" /></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>( * ) Esses campos s&atilde;o obrigat&oacute;rios</td>
                             </tr>
                             <tr>
                                 <td></td>

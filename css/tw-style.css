@@ -45,16 +45,30 @@ a.tw-ui-user-logged:hover {
     border: 0px;
 }
 
+.tw-ui-dicas {
+    background: #ffeeaa;
+    width: 300px;
+    border: 1px solid #ffdd55;
+    font-size: 13px;
+    margin-left: 10px;
+    padding: 10px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
 .tw-ui-mensagem {
     margin: 0px;
     text-align: center;
     font-size: 13px;
 }
 
-.tw-msg-erro {
+.errorMsg {
     color: #d40000;
-    padding: 0px;
-    font-size: 12px;
+    background: #ffd5d5;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ffaaaa;
 }
 
 .okMsg {
