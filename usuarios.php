@@ -26,42 +26,78 @@ require_once "lib_ui.php";
                 }
             ?>
             $(document).ready(function (){
-                $('.open-conf-user').click(function (){
-                    var elem = $(this);
-                    var text =  '<p>Alterar status do usu&aacute;rio</p>'+
-                                '<form action="muda_status_usuario.php" name="formStatusUser" method="post">'+
-                                '   <input type="hidden" value="' + $(this).attr('href').replace(/#/g, '') + '" name="id" />'+
-                                '   <input type="hidden" value="'+pagina+'" name="page" />'+
-                                '   <input type="hidden" value="'+busca+'" name="busca" />'+
-                                '   <select name="status" class="combo-box confirm-muda-status">'+
-                                '       <option value="1">Ativo</option>'+
-                                '       <option value="0">Bloqueado</option>'+
-                                '   </select>'+
-                                '</form><br />'+
-                                '<p>Remover este usu&aacute;rio</p>'+
-                                '<form action="remove_usuario.php" name="formRemoveUser" method="post">'+
-                                '   <input type="hidden" value="' + $(this).attr('href').replace(/#/g, '') + '" name="id" />'+
-                                '   <input type="hidden" value="'+pagina+'" name="page" />'+
-                                '   <input type="hidden" value="'+busca+'" name="busca" />'+
-                                '</form>'+
-                                '<input type="button" class="input-button confirm-remover-usuario" value="Remover usu&aacute;rio" />';
+                $('#okAcoesListagem').click(function (){
+                    var valor = $('#acoesListagem').val();
+                    var check = $('.checkboxListagem:checked');
+                    var arrData = [];
 
-                    criaModal({
-                        conteudo: text,
-                        width: 350,
-                        height: 200
-                    }, function (){
-                        $('.confirm-remover-usuario').click(function (){
-                            if (confirm("Deseja remover este usu\u00e1rio?"))
-                                document.formRemoveUser.submit();
-                        });
+                    for (var i = 0; i < check.length; i++)
+                        arrData[i] = check.eq(i).val();
 
-                        $('.confirm-muda-status').val(elem.attr('id').replace(/status/g, '')).change(function (){
-                            document.formStatusUser.submit();
-                        });
-                    });
+                    if (valor == 'del'){
+                        $.post(
+                            'remove_usuario.php',
+                            {usuarios: arrData},
+                            function (d){
+                                if (d)
+                                    window.location = 'usuarios.php?msg=<p class="okMsg">'+d+'</p>';
+                                else
+                                    alert('erro');
+                            }
+                        );
+                    } else if (valor == 0) {
+                        $.post(
+                            'status_usuario.php',
+                            {usuarios: arrData, estado: 0},
+                            function (d){
+                                if (d)
+                                    window.location = 'usuarios.php?msg=<p class="okMsg">'+d+'</p>';
+                                else
+                                    alert('erro');
+                            }
+                        );
+                    } else if (valor == 1){
+                        $.post(
+                            'status_usuario.php',
+                            {usuarios: arrData, estado: 1},
+                            function (d){
+                                if (d)
+                                    window.location = 'usuarios.php?msg=<p class="okMsg">'+d+'</p>';
+                                else
+                                    alert('erro');
+                            }
+                        );
+                    }
                 });
-                $('#item-menu-usuarios').addClass('tw-ui-atual');
+
+                $('#checkAll').click(function (){
+                    if(this.checked == true){
+                        $(".checkboxListagem").each(function() { 
+                            this.checked = true; 
+                        }).parent().parent().css({
+                            'background':'rgb(230,230,230)'    
+                        });
+                    } else {
+                        $(".checkboxListagem").each(function() { 
+                            this.checked = false; 
+                        }).parent().parent().css({
+                            'background':'rgb(255,255,255)'    
+                        });
+                    }
+                });
+                
+                $(".checkboxListagem").click(function() { 
+                    if(this.checked == true){
+                        $(this).parent().parent().css({
+                            'background':'rgb(230,230,230)'    
+                        });
+                    } else {
+                        $(this).parent().parent().css({
+                            'background':'rgb(255,255,255)'    
+                        });
+                    }
+                });
+
                 $('.tw-ui-menu-principal .3').addClass('active-menu');
             });
         </script> 
@@ -77,14 +113,24 @@ require_once "lib_ui.php";
                 <?php mountMenuModUsuarios(); ?>
                 <div class="tw-ui-conteiner-usuarios">
                     <?php 
-                        $pag = (isset($_GET['pag'])?$_GET['pag']:1); // Numero da pagina que esta sendo exibida
-                        $pag = filter_var($pag, FILTER_VALIDATE_INT); // Valida o numero passado como parametro
+                    
+                        // Numero da pagina que esta sendo exibida
+                        if (isset($_GET['pag']))
+                            $pag = $_GET['pag'];
+                        else 
+                            $pag = 1; 
+
+                        // Valida o numero passado como parametro
+                        $pag = filter_var($pag, FILTER_VALIDATE_INT); 
 
                         $pagina = 'usuarios.php'; // pagina que sera chamada
                         $paginacao = ''; // Paginacao
 
                         $inicio = 0; // inicio do intervalo da busca
-                        $limite = 10; // quantidade que sera exibida na tela
+                       
+                        // quantidade que sera exibida na tela
+                        $limite = 25;
+
 
                         if ($pag!='') {
                             $inicio = ($pag - 1) * $limite;
@@ -95,8 +141,6 @@ require_once "lib_ui.php";
                                 nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%'");
                             $total = mysql_fetch_array($busca_total);
                             $total = $total['total'];
-                            //$busca = mysql_query("SELECT * FROM usuarios LIMIT $inicio, $limite");
-                            //$total
                             $busca = mysql_query("SELECT * FROM usuarios WHERE 
                                 nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%' or status like '%".$_GET['busca']."%'
                                 ORDER BY nome LIMIT $inicio, $limite ");
@@ -110,20 +154,20 @@ require_once "lib_ui.php";
                         $linhasResult = mysql_num_rows($busca);
                         if ($linhasResult>0) {
                             $table = '<table width="100%" class="tw-ui-listagem"><tbody>';
-//                            $table .= '<thead><tr><th>Nome</th><th>E-mail</th><th colspan="2">Status</th></tr></thead><tbody>';
+                            $table .= '<thead><tr><th><input type="checkbox" id="checkAll"></th><th>Nome</th><th>E-mail</th><th colspan="2">Status</th></tr></thead><tbody>';
                             while ($texto = mysql_fetch_array($busca)) {
                                 extract($texto);
                                 $table .= '<tr>
+                                                <td width="25px"><input type="checkbox" class="checkboxListagem" value="'.$id.'"></td>
                                                 <td width="40%">'.$nome.'</td>
                                                 <td width="50%">'.$email.'</td>
-                                                <td width="10%">'.($status==0?'Bloqueado':'Ativo').'</td>
-                                                <td width="32" class="conf-usuario"><a href="#'.$id.'" id="status'.$status.'" class="open-conf-user">
+                                                <td width="10%">'.($status==0?'<span style="color: red">Bloqueado</span>':'<span style="color: green">Ativo</span>').'</td>
+                                                <!--td width="32" class="conf-usuario"><a href="#'.$id.'" id="status'.$status.'" class="open-conf-user">
                                                     <img src="imagens/config.png" class="tw-ui-img" /></a>
-                                                </td>
+                                                </td-->
                                             </tr>';
                             }
-//                            $table .= '</tbody><tfoot><tr><td>Nome</td><td>E-mail</td><td colspan="2">Status</td></tr></tfoot></table>';
-                            $table .= '</tbody></table>';
+                            $table .= '</tbody><tfoot><tr><td></td><td>Nome</td><td>E-mail</td><td colspan="2">Status</td></tr></tfoot></table>';
 
                             $prox = $pag + 1;
                             $ant = $pag - 1;
@@ -131,18 +175,28 @@ require_once "lib_ui.php";
                             $penultima = $ultima_pag - 1;	
                             $adjacentes = 2;
                             
-                            
+                           
                             if ($pag>1)
-                                $paginacao = '<a href="'.$pagina.'?pag='.$ant.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">&#9666;</a>';
+                                $paginacao = '<a href="'.$pagina.'?pag='.$ant.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').(isset($_GET['limit'])?'&limit='.$_GET['limit']:'').'"><img src="imagens/arrowleft.png" /></a>';
                             else
-                                $paginacao = '<a href="#" disabled >&#9666;</a>';
+                                $paginacao = '<a href="#" disabled ><img src="imagens/arrowleftdisabled.png" /></a>';
                                 
-                            if ($prox <= $ultima_pag && $ultima_pag > 2) 
-                                $paginacao .= '<a href="'.$pagina.'?pag='.$prox.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').'">&#9656;</a>';
+                            if ($prox <= $ultima_pag && $ultima_pag >= 2) 
+                                $paginacao .= '<a href="'.$pagina.'?pag='.$prox.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').(isset($_GET['limit'])?'&limit='.$_GET['limit']:'').'"><img src="imagens/arrowright.png" /></a>';
                             else
-                                $paginacao .= '<a href="#" disabled>&#9656;</a>';
+                                $paginacao .= '<a href="#" disabled><img src="imagens/arrowrightdisabled.png" /></a>';
 
-                            echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
+                            echo '<div class="paginacao">
+                                    <span>A&ccedil;&otilde;es 
+                                    <select id="acoesListagem" class="combo-box">
+                                        <option> ---- </option>
+                                        <option value="1">Ativar</option>
+                                        <option value="0">Bloquear</option>
+                                        <option value="del">Deletar</option>
+                                    </select>
+                                    <input type="button" id="okAcoesListagem" class="input-button" value="Executar" />
+                                    </span>
+                            <b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
                             echo $table;
                             echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
                         } else {

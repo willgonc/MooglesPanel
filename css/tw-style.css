@@ -114,44 +114,6 @@ a.tw-ui-user-logged:hover {
     color: red;
 }
 
-/*-------*/
-/*.tw-ui-menu-principal ul {
-    list-style: none;
-}
-.tw-ui-menu-principal ul li {
-    margin: 5px 0px;
-    padding: 5px;
-}
-.tw-ui-menu-principal ul li:hover {
-    background: rgb(210,210,210);
-    color: #000;
-}
-.tw-ui-menu-principal ul li a {
-    color: #000;
-    font-family: arial;
-    font-size: 14px;
-    text-decoration: none;
-    padding: 8px 15px;
-}
-
-.tw-ui-menu-principal ul li a:hover ,
-.tw-ui-menu-principal ul li a:focus {
-/\*    background: rgb(190,190,190);
-    color: #000;*\/
-}
-
-.tw-ui-menu-principal ul li a.tw-ui-atual,
-.tw-ui-menu-principal ul li a.tw-ui-atual:hover {
-    background: rgb(230,230,230);
-    color: #000;
-}
-*/
-
-/*.tw-ui-menu-principal ul li a.action {
-    background: rgb(230,230,230);
-    color: #000;
-}
-*/
 .tw-ui-bar-page {
     background: rgb(230,230,230);
     height: 50px;
@@ -164,12 +126,6 @@ a.tw-ui-user-logged:hover {
     width: 300px;
     float: left;
 }
-
-/*.tw-ui-menu-mod {
-    float: left;
-    height: 30px;
-    margin-bottom: 10px;
-}*/
 
 .tw-ui-menu-mod {
     list-style: none;
@@ -186,7 +142,6 @@ a.tw-ui-user-logged:hover {
     font-size: 14px;
     font-family: arial;
     padding: 5px 10px;
-    /*background: rgb(255,255,255);*/
     background: rgb(230,230,230);
     border: 1px solid rgb(190,190,190);
     text-decoration: none;
@@ -203,7 +158,6 @@ a.tw-ui-user-logged:hover {
     border: 1px solid #0055d4;
     color: rgb(255,255,255);
 }
-
 
 .tw-ui-busca {
     margin-left: 30px;
@@ -244,12 +198,8 @@ a.tw-ui-user-logged:hover {
 }
 
 .combo-box {
-    padding: 5px;
+    padding: 4px;
     font-size: 13px;
-}
-
-
-.tw-ui-content {
 }
 
 .tw-ui-content-mod {
@@ -283,33 +233,34 @@ a.tw-ui-user-logged:hover {
     font-family: arial;
     font-size: 13px;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .tw-ui-listagem tbody tr {
-/*    border-left: 1px solid rgb(220,220,220);
-    border-top: 1px solid rgb(220,220,220);
-    border-right: 1px solid rgb(220,220,220);*/
     border-top: 1px solid rgb(210,210,210);
     border-bottom: 1px solid rgb(210,210,210);
-    background: rgb(240,240,240);
+    background: rgb(255,255,255);
 }
 
 .tw-ui-listagem thead tr,
 .tw-ui-listagem tfoot tr {
-    border: 1px solid #aaccff;
+    border-top: 1px solid #aaccff;
+    border-bottom: 1px solid #aaccff;
 }
 
 .tw-ui-listagem thead tr th,
 .tw-ui-listagem tfoot tr td {
-    font-size: 14px;
-    background: #d5e5ff;
+    font-size: 13px;
+    background: #d7eef4;
     color: #002255;
     text-align: left;
+    font-weight: normal;
 }
 
 .tw-ui-listagem tr th,
 .tw-ui-listagem tr td {
-    padding: 3px 7px;
+    padding: 10px;
+    color: rgb(70,70,70);
 } 
 
 .tw-ui-listagem tbody tr td {
@@ -326,14 +277,18 @@ a.tw-ui-user-logged:hover {
 
 .paginacao {
     height: 30px;
+    margin-top: 15px;
     padding: 0px 10px;
     font-family: arial;
     text-align: right;
     font-size: 12px;
 }
 
+.paginacao span {
+    float: left;
+}
 .paginacao a {
-    padding: 5px 12px 7px;
+    padding: 7px 12px;
     text-decoration: none;
     font-size: 14px;
     margin-left: 5px;
