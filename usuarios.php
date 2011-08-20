@@ -103,7 +103,7 @@ require_once "lib_ui.php";
                                     <td width="25px">
                                         '.($email == $_SESSION['data']['email']?'':'<input type="checkbox" class="checkboxListagem" value="'.$id.'">').'
                                     </td>
-                                    <td width="40%"><img src="imagens/cadeado-'.($status==0?'closed':'open').'.png" />'.$nome.'</td>
+                                    <td width="40%">'.$nome.'</td>
                                     <td width="50%">'.$email.'</td>
                                     <td width="10%">'.($status==0?'<span style="color: red">Bloqueado':'<span style="color: green">Ativo').'</span></td>
                                     <!--td width="32" class="conf-usuario"><a href="#'.$id.'" id="status'.$status.'" class="open-conf-user">
@@ -149,9 +149,11 @@ require_once "lib_ui.php";
                                     </select>
                                     <input type="button" id="okAcoesListagem" class="input-button" value="Executar" />
                                     </span>
-                            <b>'.($inicio+1).'</b> a <b>'.($inicio+$total).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
+                            <b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
                             echo $table;
-                            echo '<div class="paginacao"><b>'.($inicio+1).'</b> a <b>'.($inicio+$total).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
+                            echo '<div class="paginacao">
+                            
+                            <b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
                         } else {
                             echo "Nenhum resultado foi encontrado!";
                         }

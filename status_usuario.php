@@ -29,10 +29,16 @@ for ($i = 0; $i < count($usuarios); $i++){
 
 if ($flag == 1){
     $erro = true;
-    $msg = '<p class="okMsg">Todos os usuarios foram alterados!</p>';
+    if (count($usuarios) == 1)
+        $msg = '<p class="okMsg">O usuario foi alterado!</p>';
+    else
+        $msg = '<p class="okMsg">Todos os usuarios foram alterados!</p>';
 } else {
     $erro = false;
-    $msg = '<p class="errorMsg">Erro ao alterar o usu&aacute;rio!</p>'; 
+    if (count($usuarios) == 1)
+        $msg = '<p class="errorMsg">Erro ao alterar o usu&aacute;rio!</p>'; 
+    else
+        $msg = '<p class="errorMsg">Erro ao alterar os usu&aacute;rios!</p>'; 
 }
 
 echo "{erro: ".$erro.", msg: '$msg'}";

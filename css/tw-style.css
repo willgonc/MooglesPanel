@@ -323,3 +323,26 @@ a.atual {
     color: #2a7fff;
     cursor: default;
 }
+
+
+
+
+#texto_wrap {
+    border-collapse: collapse;
+    border: 1px solid rgb(180,180,180) !important;
+}
+
+.texto_tb {
+    background: rgb(240,240,240);
+    border-bottom: 1px solid rgb(180,180,180) !important;
+    padding: 5px !important;
+}
+
+.texto_tb img {
+    height: auto !important;
+    margin: 0px !important;
+}
+.texto_tb select {
+    border: 1px solid rgb(180,180,180) !important;
+    padding: 7px;
+}

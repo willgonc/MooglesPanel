@@ -59,6 +59,16 @@ function mountMenuModUsuarios(){
     printMenuMod($list);
 }
 
+function mountMenuModPosts(){
+    $list = Array(
+        Array('name' => 'Mostrar todos', 'link' => 'posts.php'),
+        Array('name' => 'Adicionar novo', 'link' => 'novo_post.php'),
+        Array('name' => returnFormSearch('posts.php', 'get', '', 30), 'link' => 'null')
+    );
+
+    printMenuMod($list);
+}
+
 
 function returnFormSearch($action, $method, $name, $size){
     $action = (isset($action)?'action="'.$action.'"':'');
