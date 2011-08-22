@@ -14,7 +14,7 @@ require_once "lib_ui.php";
         
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="js/tw-ui-lib.js"></script>
-        <script type="text/javascript" language="javascript" src="js/htmlbox/htmlbox.min.js"></script>
+        <script type="text/javascript" language="javascript" src="js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
                 carregaRichText();
@@ -41,8 +41,8 @@ require_once "lib_ui.php";
                                 <td><input type="text" class="input-text" size="100" name="titulo" /></td>
                             </tr>
                             <tr>
-                                <td><textarea id="texto"></textarea></td>
-                            </tr>
+                                <td><textarea id="texto" name="texto"></textarea></td>
+                            </tr> 
                             <tr>
                                 <td><input type="submit" class="input-submit" value="Salvar" /></td>
                             </tr>

@@ -12,7 +12,6 @@ require_once "lib_ui.php";
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
         <link rel="stylesheet" type="text/css" href="css/tw-style.css" />
-        <link rel="stylesheet" type="text/css" href="css/tw-modal.css" />
 
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="js/tw-lib.js"></script>
@@ -25,7 +24,7 @@ require_once "lib_ui.php";
     </head>
     <body>
         <?php 
-        printCabecalho('Consulta de usuários');
+        printCabecalho('Usuários');
         print '<div class="tw-ui-mensagem">'.(isset($_GET['msg'])?$_GET['msg']:'').'</div>';
         ?>
         <div class="tw-ui-content">
