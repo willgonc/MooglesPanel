@@ -12,12 +12,11 @@ require_once "lib_ui.php";
         
         <link rel="stylesheet" type="text/css" href="css/tw-style.css" />
         
-        <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" language="javascript" src="ckeditor/ckeditor.js"></script>
         <script type="text/javascript" language="javascript" src="js/tw-ui-lib.js"></script>
-        <script type="text/javascript" language="javascript" src="js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
-                carregaRichText();
+                //carregaRichText();
                 $('.tw-ui-menu-principal .2').addClass('active-menu');
             });
         </script>
@@ -48,6 +47,23 @@ require_once "lib_ui.php";
                             </tr>
                         </tbody>
                     </table>
+                    <script type="text/javascript">
+                    //<![CDATA[
+
+                        CKEDITOR.replace( 'texto',
+                            {
+                                    fullPage : true,
+                                extraPlugins : 'docprops',
+                                filebrowserBrowseUrl : '/browser/browse/type/all',
+                                filebrowserUploadUrl : '/browser/upload/type/all',
+                                filebrowserImageBrowseUrl : '/browser/browse/type/image',
+                                filebrowserImageUploadUrl : '/browser/upload/type/image',
+                                filebrowserWindowWidth  : 800,
+                                filebrowserWindowHeight : 500
+                            });
+
+                    //]]>
+                    </script>
                 </form>
             </div>
         </div>
