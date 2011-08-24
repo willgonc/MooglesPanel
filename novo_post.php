@@ -12,7 +12,9 @@ require_once "lib_ui.php";
         
         <link rel="stylesheet" type="text/css" href="css/tw-style.css" />
         
+        <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" language="javascript" src="ckfinder/ckfinder.js"></script>
         <script type="text/javascript" language="javascript" src="js/tw-ui-lib.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
@@ -50,16 +52,13 @@ require_once "lib_ui.php";
                     <script type="text/javascript">
                     //<![CDATA[
 
-                        CKEDITOR.replace( 'texto',
-                            {
-                                    fullPage : true,
-                                extraPlugins : 'docprops',
-                                filebrowserBrowseUrl : '/browser/browse/type/all',
-                                filebrowserUploadUrl : '/browser/upload/type/all',
-                                filebrowserImageBrowseUrl : '/browser/browse/type/image',
-                                filebrowserImageUploadUrl : '/browser/upload/type/image',
-                                filebrowserWindowWidth  : 800,
-                                filebrowserWindowHeight : 500
+                        CKEDITOR.replace( 'texto', {
+                                filebrowserBrowseUrl : 'ckfinder/ckfinder.html', 
+                                filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images', 
+                                filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash', 
+                                filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files', 
+                                filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images', 
+                                filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash' 
                             });
 
                     //]]>
