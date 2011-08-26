@@ -1,6 +1,7 @@
 <?php
 
 require_once "connect_db.php";
+require_once "logged.php";
 require_once "lib.php";
 
 $nome           = $_POST['nome'];

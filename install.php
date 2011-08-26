@@ -2,6 +2,31 @@
 require_once "connect_db.php";
 $error = true;
 
+// CRIA TABELA DE POSTS 
+try {
+    $posts = mysql_query("CREATE TABLE posts (
+        id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        titulo MEDIUMTEXT NOT NULL,
+        texto LONGTEXT,
+        resumo LONGTEXT,
+        data DATE NOT NULL,
+        status INT NOT NULL,
+        categoria BIGINT NOT NULL,
+        tags TEXT,
+        url TEXT NOT NULL,
+        autor BIGINT NOT NULL
+    )");
+
+    if ($posts) {
+        print "A tabela posts foi criada!<br />";
+    } else {
+        print "Erro ao criar a tabela posts Erro: ".mysql_error()."<br />";
+        $error = false;
+    }
+} catch ( Exception $e ){
+    print "Erro ao criar a tabela posts Erro: ".$e."<br />";
+    $error = false;
+}
 
 // CRIA TABELA DE CONFIGURAÇÕES
 try {

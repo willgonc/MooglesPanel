@@ -43,7 +43,7 @@ if (!$data)
                                     <input type="text" class="input-text" size="30" name="nome" value="<?php print $data['nome']; ?>" />
                                     <input type="hidden" name="id" value="<?php print $data['id']; ?>" />
                                 </td>
-                                <td rowspan="5" valign="top">
+                                <td rowspan="6" valign="top">
                                     <div class="tw-ui-dicas">
                                         <p>( * ) Esses campos s&atilde;o obrigat&oacute;rios.</p>
                                         <p><b>E-mail:</b> deve ser utilizado um e-mail válido.</p>

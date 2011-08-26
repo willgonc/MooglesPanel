@@ -63,6 +63,7 @@ function mountMenuModPosts(){
     $list = Array(
         Array('name' => 'Mostrar todos', 'link' => 'posts.php'),
         Array('name' => 'Adicionar novo', 'link' => 'novo_post.php'),
+        Array('name' => 'Categorias', 'link' => 'categorias.php'),
         Array('name' => returnFormSearch('posts.php', 'get', '', 30), 'link' => 'null')
     );
 
