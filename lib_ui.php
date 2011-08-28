@@ -53,7 +53,7 @@ function mountMenuModUsuarios(){
         Array('name' => 'Mostrar todos', 'link' => 'usuarios.php'),
         Array('name' => 'Adicionar novo', 'link' => 'novo_usuario.php'),
         Array('name' => 'Seu perfil', 'link' => 'perfil.php'),
-        Array('name' => returnFormSearch('usuarios.php', 'get', '', 30), 'link' => 'null')
+        Array('name' => returnFormSearch('usuarios.php', 'get', '', 20), 'link' => 'null')
     );
 
     printMenuMod($list);
@@ -64,7 +64,7 @@ function mountMenuModPosts(){
         Array('name' => 'Mostrar todos', 'link' => 'posts.php'),
         Array('name' => 'Adicionar novo', 'link' => 'novo_post.php'),
         Array('name' => 'Categorias', 'link' => 'categorias.php'),
-        Array('name' => returnFormSearch('posts.php', 'get', '', 30), 'link' => 'null')
+        Array('name' => returnFormSearch('posts.php', 'get', '', 20), 'link' => 'null')
     );
 
     printMenuMod($list);
@@ -84,6 +84,5 @@ function returnFormSearch($action, $method, $name, $size){
                </form>
            </div>';
 }
-
 
 ?>

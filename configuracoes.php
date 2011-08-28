@@ -1,6 +1,7 @@
 <?php
-
 require_once "connect_db.php";
+require_once "logged.php";
+require_once "lib_ui.php"; 
 
 $resultado = mysql_query("SELECT * FROM configuracoes");
 
@@ -32,36 +33,37 @@ mysql_close($conexao);
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
-                $('#item-menu-configuracoes').addClass('tw-ui-atual');
+                $('.tw-ui-menu-principal .4').addClass('active-menu');
             });
         </script>
     </head>
     <body>
-        <?php require_once "menu.php"; ?>
-        <div class="tw-ui-bar-page">
-            <h2 class="tw-ui-name-page">
-                Configura&ccedil;&otilde;es gerais
-            </h2>
-        </div>
+        <?php 
+            printCabecalho('Configurações');
+        print '<div class="tw-ui-mensagem">'.(isset($_GET['msg'])?$_GET['msg']:'').'</div>';
+        ?>
         <div class="tw-ui-content">
-            <form action="insert_configuracoes.php" method="post">
-                <table class="tw-ui-formulario">
-                    <tbody>
-                        <tr>
-                            <td>Nome do site</td>
-                            <td><input type="text" class="input-text" name="nome_site" size="30" value="<?php print $nome_site; ?>" /></td>
-                        </tr>
-                        <tr>
-                            <td>E-mail para notifica&ccedil;&otilde;es</td>
-                            <td><input type="text" class="input-text" name="email_notificacao" size="30" value="<?php print $email_notificacao; ?>" /></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><input type="submit" class="input-submit" value="Salvar" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+            <?php printMenu(); ?>
+            <div class="tw-ui-content-mod">
+                <form action="insert_configuracoes.php" method="post">
+                    <table class="tw-ui-formulario">
+                        <tbody>
+                            <tr>
+                                <td>Nome do site</td>
+                                <td><input type="text" class="input-text" name="nome_site" size="30" value="<?php print $nome_site; ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>E-mail para notifica&ccedil;&otilde;es</td>
+                                <td><input type="text" class="input-text" name="email_notificacao" size="30" value="<?php print $email_notificacao; ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" class="input-submit" value="Salvar" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
         </div>
     </body>
 </html>
