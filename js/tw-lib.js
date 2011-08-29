@@ -37,10 +37,7 @@ function exibeMsgFormElem(elem, msg, estado){
 }
 
 function initLogin (){
-    var email = $('input[name=email]');
-    var senha = $('input[name=senha]');
-
-    $('#btn-submit-login').bind('click', function (){
+    function _logar (){
         if (requerido(email.val()) && requerido(senha.val())){
             exibeMsgFormElem(email, '', 'erro');
             exibeMsgFormElem(senha, '', 'erro');
@@ -68,6 +65,15 @@ function initLogin (){
             if (!requerido(senha.val()))
                 exibeMsgFormElem(senha, 'Preencha este campo!', 'erro');
         }
+    }
+    var email = $('input[name=email]');
+    var senha = $('input[name=senha]');
+    $('input[name=email], input[name=senha]').keypress(function (e){
+        if (e.keyCode == 13)
+            _logar();
+    });
+    $('#btn-submit-login').bind('click', function (){
+        _logar();
     });
 }
 
