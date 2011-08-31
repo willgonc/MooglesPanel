@@ -25,12 +25,14 @@ require_once "lib_ui.php";
     <body>
         <?php 
         printCabecalho('Usuários');
-        print '<div class="tw-ui-mensagem">'.(isset($_GET['msg'])?$_GET['msg']:'').'</div>';
         ?>
         <div class="tw-ui-content">
             <?php printMenu(); ?>
             <div class="tw-ui-content-mod">
-                <?php mountMenuModUsuarios(); ?>
+                <?php 
+                print '<div class="tw-ui-mensagem">'.(isset($_GET['msg'])?$_GET['msg']:'').'</div>';
+                mountMenuModUsuarios(); 
+                ?>
                 <div class="tw-ui-conteiner-usuarios">
                     <?php 
                     

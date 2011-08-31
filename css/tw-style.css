@@ -68,15 +68,23 @@ a.tw-ui-user-logged:hover {
     background: #ffd5d5;
     padding: 5px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #ffaaaa;
+    border: 1px solid #ffaaaa;
+    margin-top: 10px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .okMsg {
     color: #225500;
     background: #ccffaa;
-    border-bottom: 1px solid #88ff55;
+    border: 1px solid #88ff55;
     padding: 5px;
     margin-bottom: 10px;
+    margin-top: 10px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .load {
@@ -108,10 +116,11 @@ a.tw-ui-user-logged:hover {
     border-radius: 3px;
 }
 .tw-ui-menu-principal a div:hover {
-    background: rgb(240,240,240);
+    background: rgb(230,230,230);
 }
 .tw-ui-menu-principal .active-menu div {
     color: red;
+    background: rgb(230,230,230);
 }
 
 .tw-ui-bar-page {
@@ -129,33 +138,49 @@ a.tw-ui-user-logged:hover {
 
 .tw-ui-menu-mod {
     list-style: none;
-    margin: 20px 0px 10px 0px;
+    margin: 15px 0px 10px 0px;
     height: 23px;
 }
 
 .tw-ui-menu-mod li {
     float: left;
-    margin-right: 10px;
+    margin: 0px;
 }
 
+.tw-ui-menu-mod li a.first-item {
+    border-left: 1px solid rgb(190,190,190);
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.tw-ui-menu-mod li a.last-item {
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 .tw-ui-menu-mod li a {
     font-size: 14px;
     font-family: arial;
     padding: 5px 10px;
     background: rgb(230,230,230);
-    border: 1px solid rgb(190,190,190);
+    border-top: 1px solid rgb(190,190,190);
+    border-bottom: 1px solid rgb(190,190,190);
+    border-right: 1px solid rgb(190,190,190);
     text-decoration: none;
     color: rgb(70,70,70);
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    border-radius:3px;
     cursor: default;
 }
 
 .tw-ui-menu-mod li a:hover,
 .tw-ui-menu-mod li a:focus {
     background: #2a7fff;
-    border: 1px solid #0055d4;
     color: rgb(255,255,255);
 }
 
@@ -203,7 +228,17 @@ a.tw-ui-user-logged:hover {
 }
 
 .tw-ui-content-mod {
-    margin: 15px 20px 0px 200px;
+    position: absolute;
+    top: 75px;
+    left: 200px;
+    right: 0px;
+    bottom: 0px;
+    overflow: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    border-left: 1px solid rgb(220,220,220);
+    /*margin: 15px 20px 0px 200px;*/
 }
 .tw-ui-formulario-login {
     width: 300px;
@@ -228,12 +263,15 @@ a.tw-ui-user-logged:hover {
     padding: 0px;
 }
 
+.tw-ui-content .tw-ui-formulario tr td:first-child {
+    padding-right: 25px;
+    font-weight: bold;
+}
 .tw-ui-listagem {
     border-collapse: collapse;
     font-family: arial;
     font-size: 13px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: 10px 0px 10px 0px;
 }
 
 .tw-ui-listagem tbody tr {

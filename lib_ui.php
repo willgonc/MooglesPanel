@@ -27,11 +27,16 @@ function printCabecalho($title){
 
 function printMenuMod($list){
     $str = '<ul class="tw-ui-menu-mod">';
+    $class = '';
     for ($i = 0; $i < count($list); $i++){
-        if ($list[$i]['link'] != 'null')
-            $str .= '<li><a href="'.$list[$i]['link'].'">'.$list[$i]['name'].'</a></li>';
+        if ($i == 0)
+            $class = 'first-item';
+        elseif ($i == (count($list)-1))
+            $class = 'last-item';
         else
-            $str .= '<li>'.$list[$i]['name'].'</li>';
+            $class = '';
+
+        $str .= '<li><a href="'.$list[$i]['link'].'" class="'.$class.'">'.$list[$i]['name'].'</a></li>';
     }
 
     print $str.'</li></ul>';
@@ -52,8 +57,8 @@ function mountMenuModUsuarios(){
     $list = Array(
         Array('name' => 'Mostrar todos', 'link' => 'usuarios.php'),
         Array('name' => 'Adicionar novo', 'link' => 'novo_usuario.php'),
-        Array('name' => 'Seu perfil', 'link' => 'perfil.php'),
-        Array('name' => returnFormSearch('usuarios.php', 'get', '', 20), 'link' => 'null')
+        Array('name' => 'Seu perfil', 'link' => 'perfil.php')
+        //Array('name' => returnFormSearch('usuarios.php', 'get', '', 20), 'link' => 'null')
     );
 
     printMenuMod($list);
@@ -63,8 +68,8 @@ function mountMenuModPosts(){
     $list = Array(
         Array('name' => 'Mostrar todos', 'link' => 'posts.php'),
         Array('name' => 'Adicionar novo', 'link' => 'novo_post.php'),
-        Array('name' => 'Categorias', 'link' => 'categorias.php'),
-        Array('name' => returnFormSearch('posts.php', 'get', '', 20), 'link' => 'null')
+        Array('name' => 'Categorias', 'link' => 'categorias.php')
+        //Array('name' => returnFormSearch('posts.php', 'get', '', 20), 'link' => 'null')
     );
 
     printMenuMod($list);
