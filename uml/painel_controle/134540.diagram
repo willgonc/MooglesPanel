@@ -1,0 +1,51 @@
+format 74
+
+classcanvas 128012 class_ref 128012 // Usuário
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 114 39 2000
+end
+usecasecanvas 128140 usecase_ref 134796 // Adicionar usuário
+  xyzwh 45 167 3005 64 32 label_xy 29 199
+end
+usecasecanvas 128268 usecase_ref 134924 // Remover usuário
+  xyzwh 544 14 3005 64 32 label_xy 529 46
+end
+usecasecanvas 128396 usecase_ref 135052 // Listar usuários
+  xyzwh 307 56 3005 64 32 label_xy 298 37
+end
+usecasecanvas 128908 usecase_ref 135180 // Editar perfil
+  xyzwh 176 167 3005 64 32 label_xy 177 199
+end
+usecasecanvas 129292 usecase_ref 135308 // Busca de usuários
+  xyzwh 562 82 3005 64 32 label_xy 544 114
+end
+usecasecanvas 129548 usecase_ref 135436 // Ativar/bloquear usuários
+  xyzwh 559 157 3005 64 32 label_xy 525 189
+end
+usecasecanvas 130060 usecase_ref 135564 // Alterar permissões
+  xyzwh 533 229 3005 64 32 label_xy 512 259
+end
+line 128524 --->
+  from ref 128012 z 3006 to ref 128396
+simplerelationcanvas 128652 simplerelation_ref 134540
+  decenter_begin 281
+  from ref 128396 z 3006 to ref 128268
+end
+line 128780 --->
+  from ref 128012 z 3006 to ref 128140
+line 129164 ---> decenter_end 343
+  from ref 128012 z 3006 to ref 128908
+simplerelationcanvas 129420 simplerelation_ref 134668
+  decenter_begin 562
+  from ref 128396 z 3006 to ref 129292
+end
+simplerelationcanvas 129804 simplerelation_ref 134796
+  from ref 128396 z 3006 to ref 129548
+end
+simplerelationcanvas 130444 simplerelation_ref 135052
+  from ref 128396 z 3006 to ref 130060
+end
+simplerelationcanvas 130572 simplerelation_ref 134924
+  from ref 128396 z 3006 to ref 130060
+end
+end

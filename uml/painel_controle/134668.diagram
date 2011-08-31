@@ -1,0 +1,97 @@
+format 74
+
+classcanvas 128012 class_ref 128012 // Usuário
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 41 112 2000
+end
+usecasecanvas 128140 usecase_ref 135692 // Adicionar post
+  xyzwh 369 164 3005 64 32 label_xy 442 173
+end
+usecasecanvas 128268 usecase_ref 135820 // Editar post
+  xyzwh 508 274 3005 64 32 label_xy 576 281
+end
+usecasecanvas 128780 usecase_ref 135948 // Listar posts
+  xyzwh 614 461 3005 64 32 label_xy 681 469
+end
+usecasecanvas 128908 usecase_ref 136076 // Mandar para lixeira
+  xyzwh 714 299 3005 64 32 label_xy 693 282
+end
+usecasecanvas 129036 usecase_ref 136204 // Categorias
+  xyzwh 34 384 3005 64 32 label_xy 101 394
+end
+usecasecanvas 129164 usecase_ref 136332 // Buscar posts
+  xyzwh 613 53 3005 64 32 label_xy 610 36
+end
+usecasecanvas 131468 usecase_ref 136460 // Adicionar categoria
+  xyzwh 249 351 3005 64 32 label_xy 228 383
+end
+usecasecanvas 131596 usecase_ref 136588 // Remover categoria
+  xyzwh 253 451 3010 64 32 label_xy 233 483
+end
+usecasecanvas 131724 usecase_ref 136716 // Editar categoria
+  xyzwh 252 550 3005 64 32 label_xy 241 582
+end
+line 128524 --->
+  from ref 128012 z 3006 to ref 128140
+simplerelationcanvas 129676 simplerelation_ref 135564
+  from ref 128140 z 3006 to ref 128268
+end
+line 129932 --->
+  from ref 128012 z 3006 to ref 128780
+line 130060 --->
+  from ref 128012 z 3006 to ref 129164
+simplerelationcanvas 130188 simplerelation_ref 135692
+  from ref 129164 z 3006 to ref 128780
+end
+simplerelationcanvas 130444 simplerelation_ref 135820
+  from ref 128780 z 3006 to ref 128268
+end
+simplerelationcanvas 130700 simplerelation_ref 136076
+  from ref 128780 z 3006 to ref 128908
+end
+line 131340 --->
+  from ref 128012 z 3006 to ref 129036
+simplerelationcanvas 131852 simplerelation_ref 136204
+  from ref 129036 z 3006 to ref 131468
+end
+simplerelationcanvas 131980 simplerelation_ref 136332
+  from ref 129036 z 3011 to ref 131596
+end
+simplerelationcanvas 132108 simplerelation_ref 136460
+  from ref 129036 z 3006 to ref 131724
+end
+simplerelationcanvas 132236 simplerelation_ref 136588
+  from ref 128140 z 3006 to ref 131468
+end
+simplerelationcanvas 132364 simplerelation_ref 136716
+  decenter_end 375
+  from ref 128140 z 3011 to point 336 404
+  line 133132 z 3011 to ref 131596
+end
+simplerelationcanvas 132492 simplerelation_ref 136844
+  from ref 128140 z 3006 to point 373 485
+  line 133004 z 3006 to ref 131724
+end
+simplerelationcanvas 132620 simplerelation_ref 136972
+  decenter_end 859
+  from ref 128780 z 3006 to ref 131724
+end
+simplerelationcanvas 132748 simplerelation_ref 137100
+  from ref 128780 z 3011 to ref 131596
+end
+simplerelationcanvas 132876 simplerelation_ref 137228
+  from ref 128780 z 3006 to ref 131468
+end
+simplerelationcanvas 133644 simplerelation_ref 143884
+  from ref 128268 z 3006 to point 395 349
+  line 134540 z 3006 to ref 131468
+end
+simplerelationcanvas 133772 simplerelation_ref 144012
+  from ref 128268 z 3011 to point 418 390
+  line 134412 z 3011 to ref 131596
+end
+simplerelationcanvas 134156 simplerelation_ref 144140
+  from ref 128268 z 3006 to point 418 503
+  line 134284 z 3006 to ref 131724
+end
+end
