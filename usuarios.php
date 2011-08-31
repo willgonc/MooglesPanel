@@ -32,6 +32,7 @@ require_once "lib_ui.php";
                 <?php 
                 print '<div class="tw-ui-mensagem">'.(isset($_GET['msg'])?$_GET['msg']:'').'</div>';
                 mountMenuModUsuarios(); 
+                print returnFormSearch('usuarios.php', 'get', '', 20);
                 ?>
                 <div class="tw-ui-conteiner-usuarios">
                     <?php 

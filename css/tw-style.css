@@ -26,7 +26,7 @@ p {
 .tw-ui-user-logged {
     font-size: 14px;
     float: right;
-    margin-top: 45px;
+    margin-top: 8px;
 }
 span.tw-ui-user-logged {
     margin-right: 10px;
@@ -97,8 +97,8 @@ a.tw-ui-user-logged:hover {
 }
 
 .tw-ui-menu-principal {
-    width: 160px;
-    margin: 30px 20px;
+    width: 180px;
+    margin: 30px 10px;
     float: left;
 }
 .tw-ui-menu-principal a {
@@ -140,6 +140,7 @@ a.tw-ui-user-logged:hover {
     list-style: none;
     margin: 15px 0px 10px 0px;
     height: 23px;
+    float: left;
 }
 
 .tw-ui-menu-mod li {
@@ -166,9 +167,9 @@ a.tw-ui-user-logged:hover {
     border-bottom-right-radius: 5px;
 }
 .tw-ui-menu-mod li a {
-    font-size: 14px;
+    font-size: 13px;
     font-family: arial;
-    padding: 5px 10px;
+    padding: 5px 15px;
     background: rgb(230,230,230);
     border-top: 1px solid rgb(190,190,190);
     border-bottom: 1px solid rgb(190,190,190);
@@ -185,8 +186,11 @@ a.tw-ui-user-logged:hover {
 }
 
 .tw-ui-busca {
-    margin-left: 30px;
-    margin-top: -5px;
+    margin-top: 11px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    width: 300px;
+    float: left;
 }
 
 .tw-ui-busca form {
@@ -213,7 +217,7 @@ a.tw-ui-user-logged:hover {
 .input-text,
 .input-pass {
     border: 1px solid rgb(190,190,190);
-    font-size: 14px;
+    font-size: 13px;
     padding: 5px;
     background: #fff;
     margin-bottom: 5px; 
@@ -229,7 +233,7 @@ a.tw-ui-user-logged:hover {
 
 .tw-ui-content-mod {
     position: absolute;
-    top: 75px;
+    top: 43px;
     left: 200px;
     right: 0px;
     bottom: 0px;
@@ -319,9 +323,9 @@ a.tw-ui-user-logged:hover {
 /* Paginação */
 
 .paginacao {
-    height: 30px;
-    margin-top: 15px;
-    padding: 0px 10px;
+    clear: both;
+    height: 26px;
+    padding: 5px 10px 0px;
     font-family: arial;
     text-align: right;
     font-size: 12px;
@@ -329,12 +333,14 @@ a.tw-ui-user-logged:hover {
 
 .paginacao span {
     float: left;
+    margin-top: -5px;
 }
 .paginacao a {
-    padding: 7px 12px;
+    padding: 5px 12px;
     text-decoration: none;
     font-size: 14px;
     margin-left: 5px;
+    margin-top: 5px;
     color: rgb(50,50,50);
     background: rgb(240,240,240);
     border: 1px solid rgb(210,210,210);
@@ -379,6 +385,7 @@ a.atual {
 .texto_tb img {
     height: auto !important;
     margin: 0px !important;
+    border: 0px;
 }
 .texto_tb select {
     border: 1px solid rgb(180,180,180) !important;
