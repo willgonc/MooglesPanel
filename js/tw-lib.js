@@ -68,6 +68,7 @@ function initLogin (){
     }
     var email = $('input[name=email]');
     var senha = $('input[name=senha]');
+    email.focus();
     $('input[name=email], input[name=senha]').keypress(function (e){
         if (e.keyCode == 13)
             _logar();
