@@ -8,7 +8,7 @@ function printMenu(){
                 <a href="resumo.php" class="1"><div>Resumo</div></a>
                 <a href="posts.php" class="2"><div>Posts</div></a>
                 <a href="usuarios.php" class="3"><div>Usu&aacute;rios</div></a>
-                <a href="configuracoes.php" class="4"><div>Configura&ccedil;&otilde;es</div></a>
+                <a href="config.php" class="4"><div>Configura&ccedil;&otilde;es</div></a>
         </div>';
 }
 

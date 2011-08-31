@@ -4,14 +4,14 @@ require_once "connect_db.php";
 require_once "logged.php";
 require_once "lib.php";
 
-$titulo =       $_POST['titulo'];
-$status =       $_POST['status'];
-$resumo =       $_POST['resumo'];
-$categoria =    $_POST['categoria'];
-$texto =        $_POST['texto'];
-$data =         $_POST['data'];
-$tags =         $_POST['tags'];
-$autor =        $_SESSION['data']['usuario'];
+$titulo         = $_POST['titulo'];
+$status         = $_POST['status'];
+$resumo         = $_POST['resumo'];
+$categoria      = $_POST['categoria'];
+$texto          = $_POST['texto'];
+$data           = $_POST['data'];
+$tags           = $_POST['tags'];
+$autor          = $_SESSION['data']['usuario'];
 
 /* 
  *  iniciando flag de erro

@@ -5,16 +5,16 @@ $error = true;
 // CRIA TABELA DE POSTS 
 try {
     $posts = mysql_query("CREATE TABLE posts (
-        id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        titulo MEDIUMTEXT NOT NULL,
-        texto LONGTEXT,
-        resumo LONGTEXT,
-        data DATE NOT NULL,
-        status INT NOT NULL,
-        categoria BIGINT NOT NULL,
-        tags TEXT,
-        url TEXT NOT NULL,
-        autor BIGINT NOT NULL
+        id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        titulo      MEDIUMTEXT NOT NULL,
+        texto       LONGTEXT,
+        resumo      LONGTEXT,
+        data        DATE NOT NULL,
+        status      INT NOT NULL,
+        categoria   BIGINT NOT NULL,
+        tags        TEXT,
+        url         TEXT NOT NULL,
+        autor       BIGINT NOT NULL
     )");
 
     if ($posts) {
@@ -30,27 +30,28 @@ try {
 
 // CRIA TABELA DE CONFIGURAÇÕES
 try {
-    $conf = mysql_query("CREATE TABLE configuracoes (
-        id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        email_notificacao TEXT,
-        nome_site TEXT
+    $conf = mysql_query("CREATE TABLE config (
+        id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        email       TEXT,
+        descricao   TEXT,
+        titulo      TEXT
     )");
 
     if ($conf) {
-        print "A tabela configuracoes foi criada!<br />";
+        print "A tabela config foi criada!<br />";
     } else {
-        print "Erro ao criar a tabela configuracoes Erro: ".mysql_error()."<br />";
+        print "Erro ao criar a tabela config Erro: ".mysql_error()."<br />";
         $error = false;
     }
 } catch ( Exception $e ){
-    print "Erro ao criar a tabela configuracoes Erro: ".$e."<br />";
+    print "Erro ao criar a tabela config Erro: ".$e."<br />";
     $error = false;
 }
 
 
 // CONFIGURAÇÕES PADRÃO
 try {
-    $conf = mysql_query("INSERT INTO configuracoes (email_notificacao, nome_site) VALUES ('','')");
+    $conf = mysql_query("INSERT INTO config (email, titulo) VALUES ('','')");
 
     if ($conf) {
         print "A configuracoes padr&atilde;o foram inseridas!<br />";

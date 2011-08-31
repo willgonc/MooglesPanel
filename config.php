@@ -3,14 +3,16 @@ require_once "connect_db.php";
 require_once "logged.php";
 require_once "lib_ui.php"; 
 
-$resultado = mysql_query("SELECT * FROM configuracoes");
+$resultado = mysql_query("SELECT * FROM config");
 
 if ($resultado) {
     if (mysql_num_rows($resultado) == 1) {
-        $email_notificacao = mysql_result($resultado, 0, "email_notificacao");
-        $nome_site = mysql_result($resultado, 0, "nome_site");
+        $email      = mysql_result($resultado, 0, "email");
+        $descricao  = mysql_result($resultado, 0, "descricao");
+        $titulo     = mysql_result($resultado, 0, "titulo");
     } else {
         $email_notificacao = '';
+        $titulo = '';
     }
 } else {
     print "Erro ao pegar as configura&ccedil;&otilde;es;es Erro: ".mysql_error();
@@ -45,16 +47,20 @@ mysql_close($conexao);
         <div class="tw-ui-content">
             <?php printMenu(); ?>
             <div class="tw-ui-content-mod">
-                <form action="insert_configuracoes.php" method="post">
+                <form action="save_config.php" method="post">
                     <table class="tw-ui-formulario">
                         <tbody>
                             <tr>
-                                <td>Nome do site</td>
-                                <td><input type="text" class="input-text" name="nome_site" size="30" value="<?php print $nome_site; ?>" /></td>
+                                <td>T&iacute;tulo do site</td>
+                                <td><input type="text" class="input-text" name="titulo" size="40" value="<?php print $titulo; ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Descri&ccedil;&atilde;o sobre o site</td>
+                                <td><input type="text" class="input-text" name="descricao" size="40" value="<?php print $descricao; ?>" /></td>
                             </tr>
                             <tr>
                                 <td>E-mail para notifica&ccedil;&otilde;es</td>
-                                <td><input type="text" class="input-text" name="email_notificacao" size="30" value="<?php print $email_notificacao; ?>" /></td>
+                                <td><input type="text" class="input-text" name="email" size="40" value="<?php print $email; ?>" /></td>
                             </tr>
                             <tr>
                                 <td></td>
