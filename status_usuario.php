@@ -3,16 +3,18 @@ require_once "connect_db.php";
 require_once "logged.php";
 require_once "lib.php";
 
-$usuarios = $_POST['usuarios'];
-$status = $_POST['estado'];
+$usuarios   = $_POST['usuarios'];
+$stat     = $_POST['estado'];
+$pag        = $_POST['pag'];
+$busca      = $_POST['busca'];
+
 $flag = 1;
 
-
 for ($i = 0; $i < count($usuarios); $i++){
-    if($status == 1 || $status == 0)
+    if($stat == 1 || $stat == 0)
     {
         try{
-            $update = mysql_query("UPDATE usuarios SET status=".$status." WHERE id=".$usuarios[$i]);
+            $update = mysql_query("UPDATE usuarios SET status=".$stat." WHERE id=".$usuarios[$i]);
             if (!$update){
                 $flag = 0;
             }
@@ -29,19 +31,25 @@ for ($i = 0; $i < count($usuarios); $i++){
 
 if ($flag == 1){
     $erro = true;
-    if (count($usuarios) == 1)
-        $msg = '<p class="okMsg">O usuario foi alterado!</p>';
-    else
-        $msg = '<p class="okMsg">Todos os usuarios foram alterados!</p>';
+    if (count($usuarios) == 1){
+        $msg = 'O usuario foi alterado!';
+        $status = 1;
+    } else {
+        $msg = 'Todos os usuarios foram alterados!';
+        $status = 1;
+    }
 } else {
     $erro = false;
-    if (count($usuarios) == 1)
-        $msg = '<p class="errorMsg">Erro ao alterar o usu&aacute;rio!</p>'; 
-    else
-        $msg = '<p class="errorMsg">Erro ao alterar os usu&aacute;rios!</p>'; 
+    if (count($usuarios) == 1){
+        $msg = 'Erro ao alterar o usu&aacute;rio!'; 
+        $status = 0;
+    } else {
+        $msg = 'Erro ao alterar os usu&aacute;rios!'; 
+        $status = 0;
+    }
 }
 
-echo "{erro: ".$erro.", msg: '$msg'}";
+echo 'users.php?pag='.$pag.'&busca='.$busca.'&msg='.urlencode($msg).'&status='.$status;
 
 mysql_close($conexao);
 ?>

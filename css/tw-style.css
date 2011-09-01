@@ -11,7 +11,7 @@ p {
 
 .tw-ui-cabecalho {
     background: #fff;
-    padding: 10px 5px 10px 20px;
+    padding: 15px 5px 15px 20px;
     font-family: arial;
     font-size: 22px;
     color: #ff6600;
@@ -23,16 +23,8 @@ p {
     vertical-align: middle; 
 }
 
-.tw-ui-user-logged {
-    font-size: 13px;
-    float: right;
-    margin-top: 12px;
-    font-family: Arial;
-    color: #fff;
-    margin-right: 20px;
-}
 
-.tw-ui-img {
+.tw-ui-img, img {
     border: 0px;
 }
 
@@ -58,22 +50,18 @@ p {
     color: #d40000;
     background: #ffd5d5;
     padding: 5px;
-    margin: 0px 20px;
-    border: 1px solid #ffaaaa;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    margin-bottom: 5px;
+    border-top: 1px solid #ffaaaa;
+    border-bottom: 1px solid #ffaaaa;
 }
 
 .okMsg {
     color: #225500;
     background: #ccffaa;
-    border: 1px solid #88ff55;
-    margin: 0px 20px;
+    margin-bottom: 5px;
     padding: 5px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    border-top: 1px solid #88ff55;
+    border-bottom: 1px solid #88ff55;
 }
 
 .load {
@@ -97,17 +85,62 @@ p {
     margin: 4px 10px 2px 20px;
 }
 
+.tw-ui-menu-principal div {
+    float: left;
+    margin: 0px;
+    padding: 10px 15px;
+}
 .tw-ui-menu-principal a {
     text-decoration: none;
     color: #fff;
     font-family: arial;
     font-size: 13px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    float: left;
-    margin: 12px 10px 0px 10px;
 }
+.tw-ui-menu-principal a:hover {
+    text-decoration: underline;
+}
+.tw-ui-submenu {
+    display: none;
+    position: absolute;
+    margin: 0px 0px 0px -15px;
+    min-width: 100px;
+    padding: 0px;
+    background: #fff;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.submenu-right {
+    display: none;
+    position: absolute;
+    right: 10px;
+    margin: 0px;
+    min-width: 100px;
+    padding: 0px;
+    background: #fff;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+.submenu p {
+    padding: 5px 0px;
+}
+.submenu p a {
+    color: #000;
+}
+
+
+div.tw-ui-user-logged {
+    font-size: 13px;
+    float: right;
+    font-family: arial;
+    color: #fff;
+    margin-right: 20px;
+}
+
 .tw-ui-bar-page {
     background: rgb(230,230,230);
     height: 50px;
@@ -123,17 +156,10 @@ p {
 
 .tw-ui-menu-mod {
     list-style: none;
-    margin: 15px 0px 10px 0px;
-    height: 23px;
-    float: left;
+    height: 32px;
 }
 
-.tw-ui-menu-mod li {
-    float: left;
-    margin: 0px;
-}
-
-.tw-ui-menu-mod li a.first-item {
+.tw-ui-menu-mod a.first-item {
     border-left: 1px solid rgb(190,190,190);
 
     -webkit-border-top-left-radius: 5px;
@@ -143,7 +169,7 @@ p {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
-.tw-ui-menu-mod li a.last-item {
+.tw-ui-menu-mod a.last-item {
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     -moz-border-radius-topright: 5px;
@@ -151,30 +177,28 @@ p {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-.tw-ui-menu-mod li a {
+.tw-ui-menu-mod a {
+    float: left;
+    margin: 0px;
     font-size: 13px;
     font-family: arial;
-    padding: 5px 15px;
-    background: rgb(230,230,230);
+    padding: 7px 15px;
+    background: url(images/bg_menu_mod.png) repeat-x top left;
     border-top: 1px solid rgb(190,190,190);
     border-bottom: 1px solid rgb(190,190,190);
     border-right: 1px solid rgb(190,190,190);
     text-decoration: none;
-    color: rgb(70,70,70);
+    color: #ff6600;
     cursor: default;
 }
 
-.tw-ui-menu-mod li a:hover,
-.tw-ui-menu-mod li a:focus {
-    background: #2a7fff;
-    color: rgb(255,255,255);
+.tw-ui-menu-mod a:hover,
+.tw-ui-menu-mod a:focus {
+    background: #fff;
 }
 
 .tw-ui-busca {
-    margin-top: 11px;
-    margin-left: 15px;
-    margin-bottom: 5px;
-    width: 300px;
+    margin-left: 20px;
     float: left;
 }
 
@@ -182,20 +206,34 @@ p {
     margin-top: 0px;
 }
 
-
-.input-button, .input-submit {
-    background: #2a7fff;
-    border: 1px solid #0055d4;
+.input-image {
+    border: 1px solid rgb(190,190,190);
     font-size: 14px;
-    padding: 5px 7px;
-    color: #fff;
+    padding: 3px 15px;
+    margin: 0px;
+    vertical-align: top;
+    color: #ff6600;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
+    background: url(images/bg_menu_mod.png) repeat-x top left;
+    cursor: default;
+}
+
+.input-button, .input-submit {
+    border: 1px solid rgb(190,190,190);
+    font-size: 14px;
+    padding: 7px 14px;
+    color: #ff6600;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    background: url(images/bg_menu_mod.png) repeat-x top left;
 }
 .input-button:hover, .input-submit:hover,
-.input-button:focus, .input-submit:focus {
-    background: #0066ff;
+.input-button:focus, .input-submit:focus,
+.input-image:hover, .input-image:focus {
+    background: #fff;
 }
 
 /* Campo de texto e senha*/
@@ -203,7 +241,7 @@ p {
 .input-pass {
     border: 1px solid rgb(190,190,190);
     font-size: 13px;
-    padding: 5px;
+    padding: 7px;
     background: #fff;
     margin-bottom: 5px; 
     -moz-border-radius:3px;
@@ -217,7 +255,7 @@ p {
 }
 
 .tw-ui-content-mod {
-    padding: 10px;
+    padding: 0px 10px;
 }
 .tw-ui-formulario-login {
     width: 300px;
@@ -260,15 +298,13 @@ p {
 
 .tw-ui-listagem thead tr,
 .tw-ui-listagem tfoot tr {
-    border-top: 1px solid #aaccff;
-    border-bottom: 1px solid #aaccff;
 }
 
 .tw-ui-listagem thead tr th,
 .tw-ui-listagem tfoot tr td {
     font-size: 13px;
-    background: #d7eef4;
-    color: #002255;
+    background: url(images/bg_menu_principal.png) repeat-x top left;
+    color: #fff;
     text-align: left;
     font-weight: normal;
 }
@@ -297,12 +333,13 @@ p {
 /* Paginação */
 
 .paginacao {
-    clear: both;
     height: 26px;
-    padding: 5px 10px 0px;
     font-family: arial;
     text-align: right;
     font-size: 12px;
+    width: 200px;
+    float: right;
+    margin-top: 8px;
 }
 
 .paginacao span {
@@ -310,30 +347,45 @@ p {
     margin-top: -5px;
 }
 .paginacao a {
-    padding: 5px 12px;
-    text-decoration: none;
-    font-size: 14px;
-    margin-left: 5px;
-    margin-top: 5px;
+    background: url(images/bg_menu_mod.png) repeat-x top left;
+    float: none;
+    padding: 7px 14px;
     color: rgb(50,50,50);
-    background: rgb(240,240,240);
-    border: 1px solid rgb(210,210,210);
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    border-radius:3px;
     cursor: default;
+    border: 1px solid rgb(150,150,150);
 }
-
+.paginacao a.prev-paginacao {
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 10px;
+}
+.paginacao a.next-paginacao {
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 .paginacao a:hover {
     color: rgb(50,50,50);
     background: rgb(235,235,235);
-    border: 1px solid rgb(150,150,150);
 }
 
-.paginacao a[disabled] {
+.paginacao a[disabled].prev-paginacao {
     color: rgb(150,150,150);
     background: rgb(245,245,245);
-    border: 1px solid rgb(230,230,230);
+    border: 1px solid rgb(225,225,225);
+}
+
+.paginacao a[disabled].next-paginacao {
+    color: rgb(150,150,150);
+    background: rgb(245,245,245);
+    border: 1px solid rgb(225,225,225);
 }
 
 a.atual {

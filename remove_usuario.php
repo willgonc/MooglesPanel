@@ -1,10 +1,12 @@
 <?php
 
 require_once "connect_db.php";
-require_once "logged.php";
 require_once "lib.php";
 
-$usuarios = $_POST['usuarios'];
+$usuarios   = $_POST['usuarios'];
+$pag        = $_POST['pag'];
+$busca      = $_POST['busca'];
+
 $flag = 1;
 
 for ($i = 0; $i < count($usuarios); $i++){
@@ -21,19 +23,25 @@ for ($i = 0; $i < count($usuarios); $i++){
 }
 if ($flag == 1){
     $erro = true;
-    if (count($usuarios) == 1)
-        $msg = '<p class="okMsg">O usu&aacute;rio foi removido!</p>';
-    else
-        $msg = '<p class="okMsg">Todos os usu&aacute;rios foram removidos!</p>';
+    if (count($usuarios) == 1){
+        $msg    = 'O usu&aacute;rio foi removido!';
+        $status = 1;
+    } else {
+        $msg    = 'Todos os usu&aacute;rios foram removidos!';
+        $status = 1;
+    }
 } else {
     $erro = false;
-    if (count($usuarios) == 1)
-        $msg = '<p class="errorMsg">Erro ao remover o usu&aacute;rio!</p>'; 
-    else
-        $msg = '<p class="errorMsg">Erro ao remover os usu&aacute;rios!</p>'; 
+    if (count($usuarios) == 1){
+        $msg    = 'Erro ao remover o usu&aacute;rio!'; 
+        $status = 0;
+    } else {
+        $msg    = 'Erro ao remover os usu&aacute;rios!'; 
+        $status = 0;
+    }
 }
 
-echo "{erro: ".$erro.", msg: '$msg'}";
+echo 'users.php?pag='.$pag.'&busca='.$busca.'&msg='.urlencode($msg).'&status='.$status;
 
 mysql_close($conexao);
 

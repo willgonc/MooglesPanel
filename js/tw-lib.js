@@ -80,114 +80,66 @@ function initLogin (){
 
 
 function initListUsuarios(){
-    $('#okAcoesListagem').click(function (){
-        var valor = $('#acoesListagem').val();
-        var check = $('.checkboxListagem:checked');
-        var arrData = [];
+    $('#deletar').click(function (){
+        var check = $('.checkboxListagem:checked?');
+        if (confirm(check.length == 1?"Você deseja deletar este usuário":"Você deseja deletar estes usuários")){
+            var arrData = [];
 
-        for (var i = 0; i < check.length; i++)
-            arrData[i] = check.eq(i).val();
-
-        if (valor == 'del'){
+            for (var i = 0; i < check.length; i++)
+                arrData[i] = check.eq(i).val();
+            
             $.post(
                 'remove_usuario.php',
-                {usuarios: arrData},
-                function (d){
-                    eval('var d = '+ d);
-                    var url = window.location.href;
-                    if (d.erro == 1){
-                        if (getQueryVariable('msg')){
-
-                            var query = window.location.search.substring(1);
-                            var vars = query.split("&");
-                            var newUrl = '';
-                            for (var i = 0; i < vars.length; i++) {
-                                if(vars[i].indexOf('msg') == -1){
-                                    newUrl += vars[i]; 
-                                }
-                            }
-                            window.location = url + '&msg=' + escape(d.msg);
-                        } else {
-                            if (window.location.href.indexOf("?") == -1)
-                                window.location = url + '?msg=' + escape(d.msg);
-                            else
-                                window.location = url + '&msg=' + escape(d.msg);
-                        }
-                    } else {
-                        if (getQueryVariable()){
-
-                        } else {
-                            window.location = window.location.href + '&msg=' + d[1];
-                        }
-                    }  
+                {
+                    usuarios: arrData, 
+                    pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
+                    busca: getQueryVariable('busca')?getQueryVariable('busca'):''
+                }, function (d){
+                    window.location = d;
                 }
             );
-        } else if (valor == 0) {
+        }
+    });
+
+    $('#ativar').click(function (){
+        var check = $('.checkboxListagem:checked?');
+        if (confirm(check.length == 1?"Você deseja ativar este usuário":"Você deseja ativar estes usuários")){
+            var arrData = [];
+
+            for (var i = 0; i < check.length; i++)
+                arrData[i] = check.eq(i).val();
+            
             $.post(
                 'status_usuario.php',
-                {usuarios: arrData, estado: 0},
-                function (d){
-                    eval('var d = '+ d);
-                    var url = window.location.href;
-                    if (d.erro == 1){
-                        if (getQueryVariable('msg')){
-
-                            var query = window.location.search.substring(1);
-                            var vars = query.split("&");
-                            var newUrl = '';
-                            for (var i = 0; i < vars.length; i++) {
-                                if(vars[i].indexOf('msg') == -1){
-                                    newUrl += vars[i]; 
-                                }
-                            }
-                            window.location = url + '&msg=' + escape(d.msg);
-                        } else {
-                            if (window.location.href.indexOf("?") == -1)
-                                window.location = url + '?msg=' + escape(d.msg);
-                            else
-                                window.location = url + '&msg=' + escape(d.msg);
-                        }
-                    } else {
-                        if (getQueryVariable()){
-
-                        } else {
-                            window.location = window.location.href + '&msg=' + d[1];
-                        }
-                    }  
+                {
+                    usuarios: arrData, 
+                    pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
+                    busca: getQueryVariable('busca')?getQueryVariable('busca'):'',
+                    estado: 1
+                }, function (d){
+                    window.location = d;
                 }
             );
-        } else if (valor == 1){
+        }
+    });
+
+    $('#bloquear').click(function (){
+        var check = $('.checkboxListagem:checked?');
+        if (confirm(check.length == 1?"Você deseja bloquear este usuário":"Você deseja bloquear estes usuários")){
+            var arrData = [];
+
+            for (var i = 0; i < check.length; i++)
+                arrData[i] = check.eq(i).val();
+            
             $.post(
                 'status_usuario.php',
-                {usuarios: arrData, estado: 1},
-                function (d){
-                    eval('var d = '+ d);
-                    var url = window.location.href;
-                    if (d.erro == 1){
-                        if (getQueryVariable('msg')){
-
-                            var query = window.location.search.substring(1);
-                            var vars = query.split("&");
-                            var newUrl = '';
-                            for (var i = 0; i < vars.length; i++) {
-                                if(vars[i].indexOf('msg') == -1){
-                                    newUrl += vars[i]; 
-                                }
-                            }
-                            window.location = url + '&msg=' + escape(d.msg);
-                        } else {
-                            if (window.location.href.indexOf("?") == -1)
-                                window.location = url + '?msg=' + escape(d.msg);
-                            else
-                                window.location = url + '&msg=' + escape(d.msg);
-                        }
-                    } else {
-                        if (getQueryVariable()){
-
-                        } else {
-                            window.location = window.location.href + '&msg=' + d[1];
-                        }
-                    }  
+                {
+                    usuarios: arrData, 
+                    pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
+                    busca: getQueryVariable('busca')?getQueryVariable('busca'):'',
+                    estado: 0
+                }, function (d){
+                    window.location = d;
                 }
             );
         }
@@ -221,4 +173,14 @@ function initListUsuarios(){
         }
     });
 
+}
+
+
+
+function initMenu(){
+    $('.item-menu').mouseover(function (){
+        $(this).children('.submenu').show();
+    }).mouseout(function (){
+        $(this).children('.submenu').hide();
+    });
 }

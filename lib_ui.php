@@ -5,12 +5,31 @@ funcao: printMenu
 */
 function printMenuPrincipal(){
         print '<div class="tw-ui-menu-principal">
-                <div><img src="imagens/tw.png" /></div>
-                <div><a href="resumo.php">Resumo</a></div>
-                <div><a href="posts.php">Posts</a></div>
-                <div><a href="usuarios.php">Usu&aacute;rios</a></div>
-                <div><a href="config.php">Configura&ccedil;&otilde;es</a></div>
-                <div class="tw-ui-user-logged">'.$_SESSION['data']['nome'].'</div>
+                <img src="imagens/tw.png" />
+                <div class="item-menu"><a href="resumo.php">Resumo</a></div>
+                <div class="item-menu"><a href="posts.php">Posts</a></div>
+                <div class="item-menu">
+                    <a href="#">Usu&aacute;rios</a>
+                    <div class="submenu tw-ui-submenu">
+                        <p><a href="users.php">Todos os usu&aacute;rios</a></p>
+                        <p><a href="novo_usuario.php">Cadastrar novo</a></p>
+                    </div>
+                </div>
+                <div class="item-menu"><a href="config.php">Configura&ccedil;&otilde;es</a></div>
+                <div class="item-menu">
+                    <a href="#">Ajuda</a>
+                    <div class="submenu tw-ui-submenu">
+                        <p><a href="#">Ajuda</a></p>
+                        <p><a href="#">Sobre</a></p>
+                    </div>
+                </div>
+                <div class="tw-ui-user-logged item-menu">
+                    <a href="#">'.$_SESSION['data']['nome'].'</a>
+                    <div class="submenu-right submenu">
+                        <p><a href="#">Configurações</a></p>
+                        <p><a href="#">Sair</a></p>
+                    </div>
+                </div>
         </div>';
 }
 
@@ -84,13 +103,16 @@ function returnFormSearch($action, $method, $name, $size){
     return '<div class="tw-ui-busca">
                <form '.$action.' '.$method.' '.$name.'>
                    <input type="text" class="input-text" '.$size.' name="busca" value="'.(isset($_GET['busca'])?$_GET['busca']:'').'" />
-                   <input type="submit" class="input-submit" value="Buscar" />
+                   <input type="image" class="input-image" src="imagens/search.png" />
                </form>
            </div>';
 }
 
-function printMsg($status, $msg){
-    if (isset($msg) && isset($status)){
+function printMsg(){
+    $status = isset($_GET['status'])?$_GET['status']:'';
+    $msg    = isset($_GET['msg'])?$_GET['msg']:'';
+
+    if ($msg != '' && $status != ''){
         if ($status == 0)
             print '<div class="tw-ui-mensagem"><p class="errorMsg">'.$msg.'</p></div>';
         elseif ($status == 1) 
