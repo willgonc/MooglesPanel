@@ -15,7 +15,7 @@ if ($resultado) {
         $titulo = '';
     }
 } else {
-    print "Erro ao pegar as configura&ccedil;&otilde;es;es Erro: ".mysql_error();
+    print "Erro ao carregar as configura&ccedil;&otilde;es;es <br /> Erro: ".mysql_error();
     exit;
 }
 
@@ -41,11 +41,10 @@ mysql_close($conexao);
     </head>
     <body>
         <div class="tw-ui-geral">
-            <?php printMenuPrincipal();?>
-
             <?php 
+                printMenuPrincipal();
                 printCabecalho('Configurações'); 
-                print '<div class="tw-ui-mensagem">'.(isset($_GET['msg'])?$_GET['msg']:'').'</div>';
+                printMsg($_GET['status'], $_GET['msg']);
             ?>
                 <div class="tw-ui-content">
                     <div class="tw-ui-content-mod">

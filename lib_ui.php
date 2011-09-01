@@ -89,4 +89,13 @@ function returnFormSearch($action, $method, $name, $size){
            </div>';
 }
 
+function printMsg($status, $msg){
+    if (isset($msg) && isset($status)){
+        if ($status == 0)
+            print '<div class="tw-ui-mensagem"><p class="errorMsg">'.$msg.'</p></div>';
+        elseif ($status == 1) 
+            print '<div class="tw-ui-mensagem"><p class="okMsg">'.$msg.'</p></div>';
+    }
+}
+
 ?>

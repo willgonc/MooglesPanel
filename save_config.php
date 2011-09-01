@@ -52,9 +52,9 @@ if ($fragErro) {
 } 
 
 if ($flagErro == false)
-    header("Location: config.php?msg=".urlencode('<p class="errorMsg">'.$msg.'</p>'));
+    header("Location: config.php?status=0&msg=".urlencode($msg));
 else
-    header("Location: config.php?msg=".urlencode('<p class="okMsg">'.$msg.'</p>'));
+    header("Location: config.php?status=1&msg=".urlencode($msg));
 
 mysql_close($conexao);
     

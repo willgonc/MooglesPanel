@@ -58,9 +58,8 @@ p {
     color: #d40000;
     background: #ffd5d5;
     padding: 5px;
-    margin-bottom: 10px;
+    margin: 0px 20px;
     border: 1px solid #ffaaaa;
-    margin-top: 10px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -70,9 +69,8 @@ p {
     color: #225500;
     background: #ccffaa;
     border: 1px solid #88ff55;
+    margin: 0px 20px;
     padding: 5px;
-    margin-bottom: 10px;
-    margin-top: 10px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
