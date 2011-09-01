@@ -10,11 +10,11 @@ p {
 }
 
 .tw-ui-cabecalho {
-    background: rgb(230,230,230);
-    padding: 5px 5px 5px 15px;
+    background: #fff;
+    padding: 10px 5px 10px 20px;
     font-family: arial;
     font-size: 22px;
-    border-bottom: 1px solid rgb(200,200,200);
+    color: #ff6600;
 }
 
 .tw-ui-cabecalho img {
@@ -24,21 +24,12 @@ p {
 }
 
 .tw-ui-user-logged {
-    font-size: 14px;
+    font-size: 13px;
     float: right;
-    margin-top: 8px;
-}
-span.tw-ui-user-logged {
-    margin-right: 10px;
-}
-a.tw-ui-user-logged {
-    font-weight: bold;
-    text-decoration: none;
-    color: #000;
-    margin-right: 15px;
-}
-a.tw-ui-user-logged:hover {
-    text-decoration: underline;
+    margin-top: 12px;
+    font-family: Arial;
+    color: #fff;
+    margin-right: 20px;
 }
 
 .tw-ui-img {
@@ -97,32 +88,28 @@ a.tw-ui-user-logged:hover {
 }
 
 .tw-ui-menu-principal {
-    width: 180px;
-    margin: 30px 10px;
-    float: left;
+    margin: 0px;
+    background: url(images/bg_menu_principal.png) repeat-x top left;
+    width: 100%;
+    height: 40px;
 }
+
+.tw-ui-menu-principal img {
+    float: left;
+    margin: 4px 10px 2px 20px;
+}
+
 .tw-ui-menu-principal a {
     text-decoration: none;
-}
-.tw-ui-menu-principal a div {
-    margin: 5px 0px;
-    padding: 5px 15px;
-    color: #000;
+    color: #fff;
     font-family: arial;
-    font-size: 14px;
-    padding: 8px 15px;
+    font-size: 13px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+    float: left;
+    margin: 12px 10px 0px 10px;
 }
-.tw-ui-menu-principal a div:hover {
-    background: rgb(230,230,230);
-}
-.tw-ui-menu-principal .active-menu div {
-    color: red;
-    background: rgb(230,230,230);
-}
-
 .tw-ui-bar-page {
     background: rgb(230,230,230);
     height: 50px;
@@ -232,17 +219,7 @@ a.tw-ui-user-logged:hover {
 }
 
 .tw-ui-content-mod {
-    position: absolute;
-    top: 43px;
-    left: 200px;
-    right: 0px;
-    bottom: 0px;
-    overflow: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    border-left: 1px solid rgb(220,220,220);
-    /*margin: 15px 20px 0px 200px;*/
+    padding: 10px;
 }
 .tw-ui-formulario-login {
     width: 300px;
@@ -258,7 +235,6 @@ a.tw-ui-user-logged:hover {
 .tw-ui-content .tw-ui-formulario {
     font-size: 13px;
     font-family: arial;
-    margin-top: 40px;
 }
 
 .tw-ui-formulario-login tr td,

@@ -18,10 +18,12 @@ if (!strRequire($email) || !strRequire($senha)) {
         $result = mysql_query('SELECT * FROM usuarios WHERE email="'.$email.'" and senha="'.sha1($senha).'" and status=1' );
         
         if ($result) {
-            if ( mysql_num_rows($result) == 1 )
+            if ( mysql_num_rows($result) == 1 ){
+                $nome = mysql_result($result, 0, 'nome');
                 $flag = true;
-            else
+            } else {
                 $flag = false;
+            }
         } else {
             $flag = false;
         }
@@ -30,7 +32,11 @@ if (!strRequire($email) || !strRequire($senha)) {
     }
 }
 if ($flag) {
-    $_SESSION['data'] = Array('email' => $email, 'senha' => sha1($senha));
+    $_SESSION['data'] = Array(
+        'nome' => $nome, 
+        'email' => $email, 
+        'senha' => sha1($senha)
+    );
     echo true;
 } else {
     session_destroy();

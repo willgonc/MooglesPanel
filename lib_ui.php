@@ -3,12 +3,14 @@
 /* 
 funcao: printMenu
 */
-function printMenu(){
+function printMenuPrincipal(){
         print '<div class="tw-ui-menu-principal">
-                <a href="resumo.php" class="1"><div>Resumo</div></a>
-                <a href="posts.php" class="2"><div>Posts</div></a>
-                <a href="usuarios.php" class="3"><div>Usu&aacute;rios</div></a>
-                <a href="config.php" class="4"><div>Configura&ccedil;&otilde;es</div></a>
+                <div><img src="imagens/tw.png" /></div>
+                <div><a href="resumo.php">Resumo</a></div>
+                <div><a href="posts.php">Posts</a></div>
+                <div><a href="usuarios.php">Usu&aacute;rios</a></div>
+                <div><a href="config.php">Configura&ccedil;&otilde;es</a></div>
+                <div class="tw-ui-user-logged">'.$_SESSION['data']['nome'].'</div>
         </div>';
 }
 
@@ -17,10 +19,7 @@ funcao: printMenu
 */
 function printCabecalho($title){
     print '<div class="tw-ui-cabecalho">
-            <img src="imagens/tw.png" />
           '.(isset($title)?$title:'').'
-          <a class="tw-ui-user-logged" href="logout.php">Sair</a>
-          <span class="tw-ui-user-logged">'.$_SESSION['data']['email'].'</span>
           </div>';
 }
 
