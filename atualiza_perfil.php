@@ -61,16 +61,26 @@ if ($fragErro) {
             } else {
                 $_SESSION['data']['email'] = $email;
             }
-            header('Location: perfil.php?msg='.urlencode('<p class="okMsg">Seu perfil foi atualizado!</p>'));
+            
+            if (strlen($mensagem) == 0)
+                $mensagem = "Seu perfil foi atualizado!";
         } else {
-            header('Location: perfil.php?msg='.urlencode('<p class="errorMsg">Erro ao atualizar o perfil!</p>'));
+            $fragErro = false;
+            if (strlen($mensagem) == 0)
+                $mensagem = "Erro ao atualizar o perfil!";
         }
     } catch ( Exception $e ){
-        header('Location: perfil.php?msg='.urlencode('<p class="errorMsg">Erro ao atualizar o perfil!</p>'));
+        $fragErro = false;
+        if (strlen($mensagem) == 0)
+            $mensagem = "Erro ao atualizar o perfil!";
     }
-} else {
-    header('Location: perfil.php?msg='.urlencode('<p class="errorMsg">'.$mensagem.'</p>'));
 }
+
+if ($flagErro == false)
+    header("Location: perfil.php?status=0&msg=".urlencode($msg));
+else
+    header("Location: perfil.php?status=1&msg=".urlencode($msg));
+
 mysql_close($conexao);
 
 ?>

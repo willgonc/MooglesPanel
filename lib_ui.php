@@ -19,15 +19,15 @@ function printMenuPrincipal(){
                 <div class="item-menu">
                     <a href="#">Ajuda</a>
                     <div class="submenu tw-ui-submenu">
-                        <p><a href="#">Ajuda</a></p>
-                        <p><a href="#">Sobre</a></p>
+                        <p><a href="manual.php">Manual</a></p>
+                        <p><a href="sobre.php">Sobre</a></p>
                     </div>
                 </div>
                 <div class="tw-ui-user-logged item-menu">
                     <a href="#">'.$_SESSION['data']['nome'].'</a>
                     <div class="submenu-right submenu">
-                        <p><a href="#">Configurações</a></p>
-                        <p><a href="#">Sair</a></p>
+                        <p><a href="perfil.php">Perfil</a></p>
+                        <p><a href="logout.php">Sair</a></p>
                     </div>
                 </div>
         </div>';

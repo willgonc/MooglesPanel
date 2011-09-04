@@ -9,6 +9,11 @@ p {
     font-family: arial;
 }
 
+input[type=checkbox], x:default {
+    padding: 0px;
+    margin: -4px;
+}
+
 .tw-ui-cabecalho {
     background: #fff;
     padding: 15px 5px 15px 20px;
@@ -287,7 +292,8 @@ div.tw-ui-user-logged {
     border-collapse: collapse;
     font-family: arial;
     font-size: 13px;
-    margin: 10px 0px 10px 0px;
+    margin: 0px;
+    clear: both;
 }
 
 .tw-ui-listagem tbody tr {
