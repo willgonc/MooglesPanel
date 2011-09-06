@@ -53,12 +53,15 @@ if ($flagErro) {
         $update = mysql_query($sql);
         
         if ($update) {
+            $ant_senha = $_SESSION['data']['senha'];
+
+            session_destroy();
+            session_start();
+
             if (strRequire($senha) || strRequire($confirm_senha)){
-                session_destroy();
-                session_start();
-                $_SESSION['data'] = Array('email' => $email, 'senha' => $senha);
+                $_SESSION['data'] = Array('email' => $email, 'senha' => $senha, 'nome' => $nome);
             } else {
-                $_SESSION['data']['email'] = $email;
+                $_SESSION['data'] = Array('email' => $email, 'senha' => $ant_senha, 'nome' => $nome);
             }
 
             $flagErro = 1;
