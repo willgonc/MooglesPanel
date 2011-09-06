@@ -35,7 +35,7 @@ if (!$data)
             ?>
             <div class="tw-ui-content">
                 <div class="tw-ui-content-mod">
-                    <form action="atualiza_perfil.php" method="post">
+                    <form action="save_perfil.php" method="post">
                         <table class="tw-ui-formulario">
                             <tbody>
                                 <tr>

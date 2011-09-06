@@ -1,8 +1,7 @@
 <?php
 require_once "connect_db.php";
+require_once "logged.php";
 require_once "lib.php";
-session_start();
-
 
 $id             = $_POST['id'];
 $nome           = $_POST['nome'];
@@ -10,44 +9,44 @@ $email          = $_POST['email'];
 $senha          = $_POST['senha'];
 $confirm_senha  = $_POST['confirm_senha'];
 
-$fragErro = true; // FRAG DE ERRO
-$mensagem = ""; // ARMAZENA A MENSAGEM
+$flagErro = 1; // FRAG DE ERRO
+$msg = ""; // ARMAZENA A MENSAGEM
 
 if (!strRequire($nome) || !strRequire($email)){
-    $fragErro = false;
-    $mensagem = "Preencha todos os campos obrigat&oacute;rios!";
+    $flagErro = 0;
+    $msg = "Preencha todos os campos obrigat&oacute;rios!";
 }
 
 if (!validaEmail($email)){
-    $fragErro = false;
-    if (strlen($mensagem) == 0)
-        $mensagem = "O e-mail n&atilde;o &eacute; v&aacute;lido!";
+    $flagErro = 0;
+    if ($msg == '')
+        $msg = "O e-mail n&atilde;o &eacute; v&aacute;lido!";
 }
 
 $nome = htmlentities($nome, ENT_QUOTES, "UTF-8");
 
 if (strRequire($senha) || strRequire($confirm_senha)){
     if ($senha != $confirm_senha){
-        $fragErro = false;
-        if (strlen($mensagem) == 0)
-            $mensagem = "Confirme a senha corretamente!";
+        $flagErro = 0;
+        if ($msg == '')
+            $msg = "Confirme a senha corretamente!";
     }
 
     if (strlen($senha) < 6){
-        $fragErro = false;
-        if (strlen($mensagem) == 0)
-            $mensagem = "A senha deve ter no m&iacute;nimo 6 caracteres!";
+        $flagErro = 0;
+        if ($msg == '')
+            $msg = "A senha deve ter no m&iacute;nimo 6 caracteres!";
     }
     $senha = sha1($senha);
     
-    if ($fragErro)
+    if ($flagErro)
         $sql = "UPDATE usuarios SET nome='".$nome."', email='".$email."', senha='".$senha."' WHERE id=".$id;
 } else {
-    if ($fragErro)
+    if ($flagErro)
         $sql = "UPDATE usuarios SET nome='".$nome."', email='".$email."' WHERE id=".$id;
 }
 
-if ($fragErro) {
+if ($flagErro) {
     //$senha = addslashes($senha); // colocando barra invertida em determinados caracteres
     try {
         // FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE
@@ -61,24 +60,25 @@ if ($fragErro) {
             } else {
                 $_SESSION['data']['email'] = $email;
             }
-            
-            if (strlen($mensagem) == 0)
-                $mensagem = "Seu perfil foi atualizado!";
+
+            $flagErro = 1;
+            if ($msg == '')
+                $msg = "Seu perfil foi atualizado!";
         } else {
-            $fragErro = false;
-            if (strlen($mensagem) == 0)
-                $mensagem = "Erro ao atualizar o perfil!";
+            $flagErro = 0;
+            if ($msg == '')
+                $msg = "Erro ao atualizar o perfil!";
         }
     } catch ( Exception $e ){
-        $fragErro = false;
-        if (strlen($mensagem) == 0)
-            $mensagem = "Erro ao atualizar o perfil!";
+        $flagErro = 0;
+        if ($msg == '')
+            $msg = "Erro ao atualizar o perfil!";
     }
 }
 
-if ($flagErro == false)
+if ($flagErro == 0)
     header("Location: perfil.php?status=0&msg=".urlencode($msg));
-else
+elseif ($flagErro == 1)
     header("Location: perfil.php?status=1&msg=".urlencode($msg));
 
 mysql_close($conexao);
