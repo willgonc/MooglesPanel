@@ -30,7 +30,7 @@ mysql_close($conexao);
             ?>
             <div class="tw-ui-content">
                 <div class="tw-ui-content-mod">
-                    <form action="save_usuario.php" method="post">
+                    <form action="save_new_user.php" method="post">
                         <table class="tw-ui-formulario">
                             <tbody>
                                 <tr>
