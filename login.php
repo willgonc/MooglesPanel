@@ -26,9 +26,6 @@ mysql_close($conexao);
             <table class="tw-ui-formulario-login">
                 <tbody>
                     <tr>
-                        <td id="msgRespota"></td>
-                    </tr>
-                    <tr>
                         <td>E-mail</td>
                     </tr>
                     <tr>
@@ -39,6 +36,9 @@ mysql_close($conexao);
                     </tr>
                     <tr>
                         <td><input type="password" class="input-text" size="30" name="senha" /></td>
+                    </tr>
+                    <tr>
+                        <td id="msgRespota"></td>
                     </tr>
                     <tr>
                         <td>

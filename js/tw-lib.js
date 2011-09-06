@@ -32,8 +32,8 @@ function requerido(str){
 }
 
 function exibeMsgFormElem(elem, msg, estado){
-    elem.parent().children('.tw-msg-' + estado).remove();
-    elem.parent().append('<div class="tw-msg-' + estado + '">' + msg + '</div>');
+    $('.msg-login').remove();
+    elem.parent().append('<div class="msg-login" style="color: red">' + msg + '</div>');
 }
 
 function initLogin (){
@@ -51,7 +51,7 @@ function initLogin (){
                             window.location = 'resumo.php';
                             $('.load').hide();
                         }else{
-                            $('#msgRespota').html('Usu&aacute;rio ou senha incorretos!');
+                            $('#msgRespota').html('<div class="msg-login" style="color: red">Usu&aacute;rio ou senha incorretos!</span>');
                             $('.load').hide();
                         }
                     }
