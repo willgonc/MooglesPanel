@@ -48,7 +48,7 @@ function initLogin (){
                     {'email': email.val(), 'senha': senha.val()},
                     function (d){
                         if (d){
-                            window.location = 'resumo.php';
+                            window.location = 'summary.php';
                             $('.load').hide();
                         }else{
                             $('#msgRespota').html('<div class="msg-login" style="color: red">Usu&aacute;rio ou senha incorretos!</span>');

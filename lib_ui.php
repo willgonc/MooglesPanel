@@ -11,14 +11,15 @@ function printMenuPrincipal(){
                     <a href="posts.php">Posts</a>
                     <div class="submenu tw-ui-submenu">
                         <p><a href="posts.php">Todos os posts</a></p>
-                        <p><a href="new_post.php">Adicionar novo post</a></p>
+                        <p><a href="new_post.php">Adicionar post</a></p>
+                        <p><a href="categories.php">Categorias</a></p>
                     </div>
                 </div>
                 <div class="item-menu">
                     <a href="#">Usu&aacute;rios</a>
                     <div class="submenu tw-ui-submenu">
                         <p><a href="users.php">Todos os usu&aacute;rios</a></p>
-                        <p><a href="new_user.php">Adicionar novo usu&aacute;rio</a></p>
+                        <p><a href="new_user.php">Adicionar usu&aacute;rio</a></p>
                     </div>
                 </div>
                 <div class="item-menu"><a href="config.php">Configura&ccedil;&otilde;es</a></div>
