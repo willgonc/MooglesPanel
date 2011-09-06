@@ -51,5 +51,3 @@ mysql_close($conexao);
         </div>
     </body>
 </html>
-
-<?php mysql_close($conexao); ?>
