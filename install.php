@@ -104,7 +104,7 @@ try {
 
 
 if ($error)
-    echo '<meta http-equiv="refresh" content="3; url=resumo.php">';
+    echo '<meta http-equiv="refresh" content="3; url=summary.php">';
 
 mysql_close($conexao);
 ?>
