@@ -3,6 +3,14 @@ require_once "connect_db.php";
 require_once "logged.php";
 require_once "lib_ui.php"; 
 
+// pegando a pagina corrente            
+$arr = explode('/', $_SERVER['SCRIPT_NAME']);
+$pagina = $arr[count($arr)-1];
+
+$paginacao = ''; // Paginacao
+$inicio = 0; // inicio do intervalo da busca
+$limite = 25;// quantidade que sera exibida na tela
+
 // Numero da pagina que esta sendo exibida
 if (isset($_GET['pag']))
     $pag = $_GET['pag'];
@@ -12,18 +20,8 @@ else
 // Valida o numero passado como parametro
 $pag = filter_var($pag, FILTER_VALIDATE_INT); 
 
-$pagina = 'users.php'; // pagina que sera chamada
-$paginacao = ''; // Paginacao
-
-$inicio = 0; // inicio do intervalo da busca
-
-// quantidade que sera exibida na tela
-$limite = 25;
-
-
-if ($pag!='') {
+if ($pag!='')
     $inicio = ($pag - 1) * $limite;
-} 
 
 if (isset($_GET['busca'])){
     $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios WHERE 
@@ -36,18 +34,10 @@ if (isset($_GET['busca'])){
         email like '%".$_GET['busca']."%' or 
         status like '%".$_GET['busca']."%'
         ORDER BY nome LIMIT $inicio, $limite ");
-    
-    //$total = mysql_num_rows($busca);
-
-
-    //$busca = mysql_query("SELECT * FROM usuarios WHERE 
-    //    nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%' or status like '%".$_GET['busca']."%'
-    //    ORDER BY nome LIMIT $inicio, $limite ");
 } else {
     $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios");
     $total = mysql_fetch_array($busca_total);
     $total = $total['total'];
-    //$busca = mysql_query("SELECT * FROM usuarios ORDER BY nome LIMIT $inicio, $limite");
     $busca = mysql_query("SELECT * FROM usuarios ORDER BY nome LIMIT $inicio, $limite");
 }
 
@@ -131,12 +121,13 @@ if ($linhasResult > 0) {
         </tfoot>
     </table>';
 }
+mysql_close($conexao);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         

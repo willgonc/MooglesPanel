@@ -20,7 +20,7 @@ function printMenuPrincipal(){
                     <a href="#">Ajuda</a>
                     <div class="submenu tw-ui-submenu">
                         <p><a href="manual.php">Manual</a></p>
-                        <p><a href="sobre.php">Sobre</a></p>
+                        <p><a href="about.php">Sobre</a></p>
                     </div>
                 </div>
                 <div class="tw-ui-user-logged item-menu">

@@ -89,7 +89,7 @@ function initListUsuarios(){
                 arrData[i] = check.eq(i).val();
             
             $.post(
-                'remove_usuario.php',
+                'remove_users.php',
                 {
                     usuarios: arrData, 
                     pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
@@ -110,7 +110,7 @@ function initListUsuarios(){
                 arrData[i] = check.eq(i).val();
             
             $.post(
-                'status_usuario.php',
+                'status_users.php',
                 {
                     usuarios: arrData, 
                     pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
@@ -132,7 +132,7 @@ function initListUsuarios(){
                 arrData[i] = check.eq(i).val();
             
             $.post(
-                'status_usuario.php',
+                'status_users.php',
                 {
                     usuarios: arrData, 
                     pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
