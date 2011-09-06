@@ -6,8 +6,14 @@ funcao: printMenu
 function printMenuPrincipal(){
         print '<div class="tw-ui-menu-principal">
                 <img src="imagens/tw.png" />
-                <div class="item-menu"><a href="resumo.php">Resumo</a></div>
-                <div class="item-menu"><a href="posts.php">Posts</a></div>
+                <div class="item-menu"><a href="summary.php">Resumo</a></div>
+                <div class="item-menu">
+                    <a href="posts.php">Posts</a>
+                    <div class="submenu tw-ui-submenu">
+                        <p><a href="posts.php">Todos os posts</a></p>
+                        <p><a href="new_post.php">Adicionar novo post</a></p>
+                    </div>
+                </div>
                 <div class="item-menu">
                     <a href="#">Usu&aacute;rios</a>
                     <div class="submenu tw-ui-submenu">

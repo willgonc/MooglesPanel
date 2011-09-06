@@ -131,6 +131,7 @@ mysql_close($conexao);
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
+        <link rel="shortcut icon" href="imagens/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/tw-style.css" />
 
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
@@ -162,7 +163,6 @@ mysql_close($conexao);
                     <div class="tw-ui-conteiner-usuarios">
                         <?php
                             echo $table;
-                            echo '<div class="paginacao"> <b>'.($inicio+1).'</b> a <b>'.($inicio+$linhasResult).'</b> de <b>'.$total.'</b>'.$paginacao.'</div>';
                         ?>
                     </div>
                 </div>
