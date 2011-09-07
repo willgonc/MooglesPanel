@@ -82,66 +82,78 @@ function initLogin (){
 function initListUsuarios(){
     $('#deletar').click(function (){
         var check = $('.checkboxListagem:checked?');
-        if (confirm(check.length == 1?"Você deseja deletar este usuário":"Você deseja deletar estes usuários")){
-            var arrData = [];
+        if (check.length >= 1){
+            if (confirm(check.length == 1?"Você deseja deletar este usuário":"Você deseja deletar estes usuários")){
+                var arrData = [];
 
-            for (var i = 0; i < check.length; i++)
-                arrData[i] = check.eq(i).val();
-            
-            $.post(
-                'remove_users.php',
-                {
-                    usuarios: arrData, 
-                    pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
-                    busca: getQueryVariable('busca')?getQueryVariable('busca'):''
-                }, function (d){
-                    window.location = d;
-                }
-            );
+                for (var i = 0; i < check.length; i++)
+                    arrData[i] = check.eq(i).val();
+                
+                $.post(
+                    'remove_users.php',
+                    {
+                        usuarios: arrData, 
+                        pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
+                        busca: getQueryVariable('busca')?getQueryVariable('busca'):''
+                    }, function (d){
+                        window.location = d;
+                    }
+                );
+            }
+        } else if (check.length == 0){
+            alert('Nenhum usuário foi selecionado!');
         }
     });
 
     $('#ativar').click(function (){
         var check = $('.checkboxListagem:checked?');
-        if (confirm(check.length == 1?"Você deseja ativar este usuário":"Você deseja ativar estes usuários")){
-            var arrData = [];
+        if (check.length >= 1){
+            if (confirm(check.length == 1?"Você deseja ativar este usuário":"Você deseja ativar estes usuários")){
+                var arrData = [];
 
-            for (var i = 0; i < check.length; i++)
-                arrData[i] = check.eq(i).val();
-            
-            $.post(
-                'status_users.php',
-                {
-                    usuarios: arrData, 
-                    pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
-                    busca: getQueryVariable('busca')?getQueryVariable('busca'):'',
-                    estado: 1
-                }, function (d){
-                    window.location = d;
-                }
-            );
+                for (var i = 0; i < check.length; i++)
+                    arrData[i] = check.eq(i).val();
+                
+                $.post(
+                    'status_users.php',
+                    {
+                        usuarios: arrData, 
+                        pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
+                        busca: getQueryVariable('busca')?getQueryVariable('busca'):'',
+                        estado: 1
+                    }, function (d){
+                        window.location = d;
+                    }
+                );
+            }
+        } else if (check.length == 0){
+            alert('Nenhum usuário foi selecionado!');
         }
     });
 
     $('#bloquear').click(function (){
         var check = $('.checkboxListagem:checked?');
-        if (confirm(check.length == 1?"Você deseja bloquear este usuário":"Você deseja bloquear estes usuários")){
-            var arrData = [];
+        if (check.length >= 1){
+            if (confirm(check.length == 1?"Você deseja bloquear este usuário":"Você deseja bloquear estes usuários")){
+                var arrData = [];
 
-            for (var i = 0; i < check.length; i++)
-                arrData[i] = check.eq(i).val();
-            
-            $.post(
-                'status_users.php',
-                {
-                    usuarios: arrData, 
-                    pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
-                    busca: getQueryVariable('busca')?getQueryVariable('busca'):'',
-                    estado: 0
-                }, function (d){
-                    window.location = d;
-                }
-            );
+                for (var i = 0; i < check.length; i++)
+                    arrData[i] = check.eq(i).val();
+                
+                $.post(
+                    'status_users.php',
+                    {
+                        usuarios: arrData, 
+                        pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
+                        busca: getQueryVariable('busca')?getQueryVariable('busca'):'',
+                        estado: 0
+                    }, function (d){
+                        window.location = d;
+                    }
+                );
+            }
+        } else if (check.length == 0){
+            alert('Nenhum usuário foi selecionado!');
         }
     });
 
