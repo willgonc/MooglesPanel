@@ -35,4 +35,4 @@ if (isset($_SESSION['data'])) {
 if (!$flag && $pagina != "login.php")
     header('Location: login.php');
 else if ($flag && $pagina == "login.php")
-    header('Location: resumo.php');
+    header('Location: summary.php');
