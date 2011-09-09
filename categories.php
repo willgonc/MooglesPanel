@@ -20,6 +20,7 @@ mysql_close($conexao);
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
                 initMenu();
+                initCategories();
             });
         </script>
     </head>

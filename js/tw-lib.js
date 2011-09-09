@@ -187,7 +187,19 @@ function initListUsuarios(){
 
 }
 
-
+function initCategories(){
+    $('#adicionar').click(function (){
+        var nomeCategoria = prompt("Nome da categoria");
+        $.post(
+            'save_category.php',
+            {
+                nome: nomeCategoria
+            }, function (d){
+                window.location = d;
+            }
+        );
+    });
+}
 
 function initMenu(){
     $('.item-menu').mouseover(function (){

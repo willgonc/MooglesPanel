@@ -9,19 +9,19 @@ $titulo     = $_POST['titulo'];
 $descricao  = $_POST['descricao'];    
 
 
-$fragErro = true; // FRAG DE ERRO
+$flagErro = true; // FRAG DE ERRO
 $msg = ""; // ARMAZENA A MENSAGEM
 
 
 // VALIDACOES
 if (!empty($email)){
     if (!validaEmail($email)){
-        $fragErro = false;
+        $flagErro = false;
         $msg = "O e-mail n&atilde;o &eacute; v&aacute;lido!";
     }
 }
 
-if ($fragErro) {
+if ($flagErro) {
     // TRATANDO OS DADOS PARA O UPDATE 
     $titulo = htmlentities($titulo, ENT_QUOTES, "UTF-8");
     $descricao = htmlentities($descricao, ENT_QUOTES, "UTF-8");

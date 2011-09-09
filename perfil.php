@@ -1,8 +1,15 @@
 <?php
 require_once "connect_db.php";
 require_once "logged.php";
-require_once "lib_ui.php"; 
-require_once "lib_db.php"; 
+require_once "lib_ui.php";
+try {
+    $result = mysql_query("SELECT * FROM usuarios WHERE email='".$_SESSION['data']['email']."'");
+    if ($result){
+        $id_user = mysql_result($result, 0, 'id');
+    }
+} catch (Exception $e) {
+
+}
 mysql_close($conexao);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
@@ -39,7 +46,7 @@ mysql_close($conexao);
                                     <td>Nome *</td>
                                     <td>
                                         <input type="text" class="input-text" size="30" name="nome" value="<?php print $data['nome']; ?>" />
-                                        <input type="hidden" name="id" value="<?php print $data['id']; ?>" />
+                                        <input type="hidden" name="id" value="<?php print $id_user; ?>" />
                                     </td>
                                     <td rowspan="6" valign="top">
                                         <div class="tw-ui-dicas">
