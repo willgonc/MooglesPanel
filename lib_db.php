@@ -1,28 +1,28 @@
 <?php
 
-function getUsuarioLogado(){
-    $email = $_SESSION['data']['email'];
-    try {
-        // FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE
-        $result = mysql_query("SELECT * FROM usuarios WHERE email='$email'");
-        
-        if ($result) {
-            if (mysql_num_rows($result) == 1){
-                return Array(
-                    'id' => mysql_result($result, 0, 'id'),
-                    'nome' => mysql_result($result, 0, 'nome'),
-                    'email' => mysql_result($result, 0, 'email')
-                );
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    } catch ( Exception $e ){
-        return false;
-    }
+/**
+ *	Biblioteca de funções de manipulação da base de dados
+ *	
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
+ */
 
+
+/*
+ *	Abre a conexão com o SGBD e seleciona a base de dados
+ *	
+ *	Retorna o link da conexão
+ *	@return link
+ */
+function openConnectDB(){
+	/**	Armazena o link da conexao */
+	$link = mysql_connect(HOST, USER, PASS);
+
+	/** Seleciona a base de dados */
+	mysql_select_db(DATA_BASE);
+
+	/** Retornando a conexão*/
+	return $link;
 }
 
 ?>
