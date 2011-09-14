@@ -31,6 +31,7 @@ if (!strRequire($email) || !strRequire($senha)) {
         $flag = false;
     }
 }
+
 if ($flag) {
     $_SESSION['data'] = Array(
         'nome' => $nome, 

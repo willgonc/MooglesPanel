@@ -189,7 +189,13 @@ function initListUsuarios(){
 
 function initCategories(){
     $('#adicionar').click(function (){
-        var nomeCategoria = prompt("Nome da categoria");
+        //var nomeCategoria = prompt("Nome da categoria");
+        criaModal({
+            width: 300, 
+            height: 250, 
+            conteudo: 'Nome da categoria: <imput type="nome" size="30" />'+
+                ''
+        });/*
         $.post(
             'save_category.php',
             {
@@ -197,7 +203,7 @@ function initCategories(){
             }, function (d){
                 window.location = d;
             }
-        );
+        );*/
     });
 }
 

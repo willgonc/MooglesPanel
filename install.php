@@ -28,6 +28,44 @@ try {
     $error = false;
 }
 
+// CRIA A TABELA categorias
+try {
+    $categorias = mysql_query("CREATE TABLE categorias (
+        id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        nome        TEXT NOT NULL,
+        nome_html   TEXT NOT NULL,
+        filhos      TEXT,
+        categ_pai   INT NOT NULL
+    )");
+
+    if ($categorias) {
+        print "A tabela categorias foi criada!<br />";
+    } else {
+        print "Erro ao criar a tabela categorias Erro: ".mysql_error()."<br />";
+        $error = false;
+    }
+} catch ( Exception $e ){
+    print "Erro ao criar a tabela categorias Erro: ".$e."<br />";
+    $error = false;
+}
+
+// CATEGORIA PADRÃO
+try {
+    $categ = mysql_query("INSERT INTO categorias (nome, nome_html, filhos, categ_pai) 
+                                VALUES ('Default','default', null, 1)");
+
+    if ($categ) {
+        print "A categoria padr&atilde;o foram inseridas!<br />";
+    } else {
+        print "Erro ao inserir categoria padr&atilde; Erro: ".mysql_error()."<br />";
+        $error = false;
+    }
+} catch ( Exception $e ){
+    print "Erro ao inserir categorias padr&atilde; Erro: ".$e."<br />";
+    $error = false;
+}
+
+
 // CRIA TABELA DE CONFIGURAÇÕES
 try {
     $conf = mysql_query("CREATE TABLE config (

@@ -33,6 +33,6 @@ define("HOST","localhost");
  *
  *	@name DATA_BASE
  */
-define("DATA_BASE","database");
+define("DATA_BASE","tudosobreweb");
 
 ?>

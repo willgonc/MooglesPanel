@@ -2,6 +2,7 @@
 require_once "connect_db.php";
 require_once "logged.php";
 require_once "lib_ui.php";
+
 mysql_close($conexao);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
