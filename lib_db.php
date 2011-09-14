@@ -46,20 +46,15 @@ function closeConnect($link){
  *	@param string $sql string em formato sql
  *	@param string $link identificador da conexão com o SGBD
  *
- *  @return resource|bool resultado da query, error ou exceção
+ *  @return resource|bool resultado da query ou exceção
  */
 function executeQuery($sql){
     try {
         /** Executa uma sql */
         $result = mysql_query($sql);
 
-        /** Testa se o resultado da query */
-        if ($result)
-            /** Retorna o resultado */
-            return $result;
-        else
-            /** Retorna o erro de sql */
-            return mysql_error();
+		/** Retorna o resultado */
+		return $result;
     } catch (Exception $e){
         /** Retorna uma exceção caso ocorra */
         return $e;
