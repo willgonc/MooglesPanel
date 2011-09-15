@@ -10,17 +10,18 @@
  *	variáveis globais usadas pelo layout para receber as informações 
  *	da página que será exibida
  *
- *	@param array $array_files_js Array com o nome dos arquivos javascripts
+ *	@global array $array_files_js Array com o nome dos arquivos javascripts
  *		que serão carregados e que devem estar no diretório js
- *	@param string $load_fn_js Nome de uma função javascript que será 
+ *	@global string $load_fn_js Nome de uma função javascript que será 
  *		executada no onLoad 
- *	@param string $content Nome do arquivo de template da pagina, este
+ *	@global string $content Nome do arquivo de template da pagina, este
  *		arquivo será o conteudo da página
  */
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
     <head>

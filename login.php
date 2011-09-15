@@ -15,5 +15,4 @@ $content			= "template_login.php";
 require_once "layout.php";
 
 closeConnect($link);
-
 ?>

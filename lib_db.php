@@ -44,7 +44,6 @@ function closeConnect($link){
  *  retorna um sql ou a exceção
  *	
  *	@param string $sql string em formato sql
- *	@param string $link identificador da conexão com o SGBD
  *
  *  @return resource|bool resultado da query ou exceção
  */
