@@ -2,7 +2,9 @@
 require_once "connect_db.php";
 $error = true;
 
-// CRIA TABELA DE POSTS 
+/* 
+    CRIA TABELA DE POSTS 
+*/
 try {
     $posts = mysql_query("CREATE TABLE posts (
         id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
