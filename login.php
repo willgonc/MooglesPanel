@@ -12,7 +12,7 @@ $array_files_js 	= Array("jquery.js","tw-lib.js");
 $load_fn_js 		= "initLogin()";
 $content			= "template_login.php";
 
-require_once "layout.php";
+require_once "layout_login.php";
 
 closeConnect($link);
 ?>

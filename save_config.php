@@ -40,6 +40,7 @@ if ($flagErro) {
         } else {
             $flagErro = false;
             if ($msg == '')
+require_once "logged.php";
                 $msg='N&atilde;o foi poss&iacute;vel atualizar as configura&ccedil;&otilde;es!';
         }
 
@@ -51,9 +52,9 @@ if ($flagErro) {
 } 
 
 if ($flagErro == false)
-    header("Location: config.php?status=0&msg=".urlencode($msg));
+    header("Location: configuration.php?status=0&msg=".urlencode($msg));
 else
-    header("Location: config.php?status=1&msg=".urlencode($msg));
+        header("Location: configuration.php?status=1&msg=".urlencode($msg));
 
 mysql_close($conexao);
     

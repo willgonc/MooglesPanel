@@ -6,7 +6,6 @@ $id_user = $arr['id'];
 $data = $_SESSION['data'];
 
 require_once "lib_ui.php"; 
-printMenuPrincipal();
 printCabecalho('Seu perfil');
 printMsg();
 

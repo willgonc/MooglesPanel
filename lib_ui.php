@@ -22,7 +22,7 @@ function printMenuPrincipal(){
                         <p><a href="new_user.php">Adicionar usu&aacute;rio</a></p>
                     </div>
                 </div>
-                <div class="item-menu"><a href="config.php">Configura&ccedil;&otilde;es</a></div>
+                <div class="item-menu"><a href="configuration.php">Configura&ccedil;&otilde;es</a></div>
                 <div class="item-menu">
                     <a href="#">Ajuda</a>
                     <div class="submenu tw-ui-submenu">

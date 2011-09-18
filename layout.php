@@ -36,6 +36,40 @@
     </head>
     <body onLoad="<?php echo $load_fn_js; ?>">
         <div class="geral">
+            <div class="tw-ui-menu-principal">
+                <img src="imagens/tw.png" />
+                <div class="item-menu"><a href="summary.php">Resumo</a></div>
+                <div class="item-menu">
+                    <a href="posts.php">Posts</a>
+                    <div class="submenu tw-ui-submenu">
+                        <p><a href="posts.php">Todos os posts</a></p>
+                        <p><a href="new_post.php">Adicionar post</a></p>
+                        <p><a href="categories.php">Categorias</a></p>
+                    </div>
+                </div>
+                <div class="item-menu">
+                    <a href="#">Usu&aacute;rios</a>
+                    <div class="submenu tw-ui-submenu">
+                        <p><a href="users.php">Todos os usu&aacute;rios</a></p>
+                        <p><a href="new_user.php">Adicionar usu&aacute;rio</a></p>
+                    </div>
+                </div>
+                <div class="item-menu"><a href="configuration.php">Configura&ccedil;&otilde;es</a></div>
+                <div class="item-menu">
+                    <a href="#">Ajuda</a>
+                    <div class="submenu tw-ui-submenu">
+                        <p><a href="manual.php">Manual</a></p>
+                        <p><a href="about.php">Sobre</a></p>
+                    </div>
+                </div>
+                <div class="tw-ui-user-logged item-menu">
+                    <a href="#"><?php echo $_SESSION['data']['nome']; ?></a>
+                    <div class="submenu-right submenu">
+                        <p><a href="perfil.php">Perfil</a></p>
+                        <p><a href="logout.php">Sair</a></p>
+                    </div>
+                </div>
+            </div>
             <?php include $content; ?>
         </div>
     </body>
