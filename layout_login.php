@@ -27,17 +27,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
-            </div>
         <link rel="shortcut icon" href="imagens/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 		<?php
-			for ($i = 0; $i < count($array_files_js); $i++)
-				print '<script type="text/javascript" language="javascript" src="js/'.$array_files_js[$i].'"></script>';
+			for ($i = 0; $i < count($this->array_files_js); $i++)
+				print '<script type="text/javascript" language="javascript" src="js/'.$this->array_files_js[$i].'"></script>';
 		?>
     </head>
-    <body onLoad="<?php echo $load_fn_js; ?>">
+    <body onLoad="<?php echo $this->load_fn_js; ?>">
         <div class="geral">
-            <?php include $content; ?>
+            <?php include $this->content; ?>
         </div>
     </body>
 </html>
