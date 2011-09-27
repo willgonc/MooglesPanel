@@ -1,17 +1,15 @@
 <?php
 
-require_once "model/DataBase.php";
-
-Class Logged extends DataBase 
+Class Logged
 {
-
     private $flag = 0;
     private $sql;
     private $result;
-//    private $pagina = end(explode("/", $_SERVER['PHP_SELF']));
+    private $pagina; 
 
-    public function validateUser() {
+    public function validateUser($objDb) {
         session_start();
+        $this->pagina = end(explode("/", $_SERVER['PHP_SELF']));
 
         if (isset($_SESSION['data'])) { 
             $data = $_SESSION['data'];
@@ -21,25 +19,27 @@ Class Logged extends DataBase
                             and senha="'.$data['senha'].'" and status=1';
                 
                 // consulta na base os dados
-                $result = mysql_query($sql);
+                $result = $objDb->executeQuery($sql);
 
                 if ($result) {
-                    if (mysql_num_rows($result) == 1)
-                        $flag = true;
+                    if (getRows($result) == 1)
+                        $flag = 1;
                     else
-                        $flag = false;
+                        $flag = 0;
                 } else { 
-                    $flag = false;
+                    $flag = 0;
                 }
             } catch (Exception $e){
-                $flag = false;
+                $flag = 0;
             }
         } else {
-            $flag = false;
+            $flag = 0;
         }
-        if (!$flag && $pagina != "login.php")
+
+        if ($flag == 0 && $pagina != "login.php")
             header('Location: login.php');
-        else if ($flag && $pagina == "login.php")
+        else if ($flag == 1 && $pagina == "login.php")
             header('Location: summary.php');
     }
+}
 ?>
