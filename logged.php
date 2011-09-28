@@ -2,7 +2,7 @@
 
 Class Logged
 {
-    private $flag = 0;
+    private $flag;
     private $sql;
     private $result;
     private $pagina; 
@@ -23,22 +23,22 @@ Class Logged
 
                 if ($result) {
                     if (getRows($result) == 1)
-                        $flag = 1;
+                        $this->flag = 1;
                     else
-                        $flag = 0;
+                        $this->flag = 0;
                 } else { 
-                    $flag = 0;
+                    $this->flag = 0;
                 }
             } catch (Exception $e){
-                $flag = 0;
+                $this->flag = 0;
             }
         } else {
-            $flag = 0;
+            $this->flag = 0;
         }
 
-        if ($flag == 0 && $pagina != "login.php")
+        if ($this->flag == 0 && $this->pagina != "login.php")
             header('Location: login.php');
-        else if ($flag == 1 && $pagina == "login.php")
+        else if ($this->flag == 1 && $this->pagina == "login.php")
             header('Location: summary.php');
     }
 }

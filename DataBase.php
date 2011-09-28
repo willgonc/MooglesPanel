@@ -1,13 +1,13 @@
 <?php
 
+require_once "Config.php";
+
 /**
- *	Biblioteca de funções de manipulação da base de dados
+ *	Classe de manipulação da base de dados
  *	
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
  *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
-
-
 Class DataBase extends Config
 {
     // guarda o link com conexão
@@ -15,13 +15,9 @@ Class DataBase extends Config
 
     public function __construct()
     {
-        echo $this->getUser();
-        echo $this->getHost();
-        echo $this->getPass();
-        echo $this->getHost();
-        //$this->openConnect();
-        //$this->selectDataBase();
-
+        parent::__construct();
+        $this->openConnect();
+        $this->selectDataBase();
     }
     
     private function setLink($link)
@@ -41,16 +37,16 @@ Class DataBase extends Config
      *	@return string|false retorna um identificador de conexao ou 
      *      false em caso de falha
      */
-    public function openConnect()
+    private function openConnect()
     {
         /**	Armazena o link da conexao */
-        $this->setLink(mysql_connect($this->getHost(), $this->getUser(), $this->getPass()));
+        $this->setLink(mysql_connect(parent::getHost(), parent::getUser(), parent::getPass()));
     }
 
-    public function selectDataBase()
+    private function selectDataBase()
     {
         /** Seleciona a base de dados */
-        mysql_select_db($this->getDataBase());
+        mysql_select_db(parent::getDataBase());
     }
 
     /**
@@ -106,7 +102,5 @@ Class DataBase extends Config
         return mysql_num_rows($result);
     }
 }
-
-
 
 ?>

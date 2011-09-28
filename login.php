@@ -1,18 +1,14 @@
 <?php
 
-require_once "Config.php";
 require_once "DataBase.php";
-
-
 $dataBase = new DataBase();
-echo $dataBase->getUser();
-/*require_once "logged.php";
 
+require_once "logged.php";
 $logged = new Logged();
-//$logged->validateUser($dataBase->getLink());
 
-closeConnect($dataBase->getLink());
-*/
+$logged->validateUser($dataBase);
+
+$dataBase->closeConnect();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
