@@ -7,7 +7,8 @@ Class Logged
     private $result;
     private $pagina; 
 
-    public function validateUser($objDb) {
+    public function validateUser($objDb) 
+    {
         session_start();
         $this->pagina = end(explode("/", $_SERVER['PHP_SELF']));
 
