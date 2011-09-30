@@ -1,12 +1,10 @@
 <?php
 
 require_once "DataBase.php";
+require_once "Logged.php";
+
 $dataBase = new DataBase();
-
-require_once "logged.php";
-$logged = new Logged();
-
-$logged->validateUser($dataBase);
+$logged = new Logged($dataBase);
 
 $dataBase->closeConnect();
 ?>

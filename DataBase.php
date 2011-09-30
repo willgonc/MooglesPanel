@@ -1,13 +1,14 @@
 <?php
 
-require_once "Config.php";
-
 /**
  *	Classe de manipulação da base de dados
  *	
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
  *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
+
+require_once "Config.php";
+
 Class DataBase extends Config
 {
     // guarda o link com conexão
