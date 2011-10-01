@@ -32,5 +32,13 @@ Class Validation
         else 
             return true;
     }
+
+    public function antiInjection($val) {
+        $sql = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "", $sql);
+        $sql = trim($sql); 
+        $sql = strip_tags($sql);
+        $sql = addslashes($sql);
+        return $sql;
+    }
 }
 ?>
