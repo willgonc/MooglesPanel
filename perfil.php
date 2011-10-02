@@ -1,19 +1,14 @@
 <?php
 
-require_once "lib_db.php";
-require_once "lib.php";
+require_once "DataBase.php";
+require_once "Logged.php";
 
-$link = openConnect();
+$dataBase = new DataBase();
+$logged = new Logged($dataBase);
 
-loggedUser("login.php", "summary.php");
+$dataBase->closeConnect();
 
-/** Definindo variáveis do layout */
-$array_files_js 	= Array("jquery.js","tw-lib.js");
-$load_fn_js 		= "initMenu()";
-$content			= "template_perfil.php";
+require_once "view_perfil.php";
 
-require_once "layout.php";
-
-closeConnect($link);
 ?>
 

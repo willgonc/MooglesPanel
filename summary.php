@@ -7,4 +7,7 @@ $dataBase = new DataBase();
 $logged = new Logged($dataBase);
 
 $dataBase->closeConnect();
+
+require_once "view_summary.php";
+
 ?>

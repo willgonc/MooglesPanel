@@ -70,22 +70,23 @@ Class Logging extends Validation
                         while ($row = $this->dataBase->fetchResults($this->result))
                         {
                             $this->arrData['nome'] = $row['nome'];
+                            $this->arrData['id'] = $row['id'];
                         }
                         $this->arrData['email'] = $this->email;
                         $this->arrData['senha'] = $this->senha;
 
                         return $this->arrData;
                     } else {
-                        return false;
+                        return 0;
                     }
                 } else {
-                    return false;
+                    return 0;
                 }
             } catch (Exception $e){
-                return false;
+                return 0;
             }
         } else {
-            return false;
+            return 0;
         }
     }
 }

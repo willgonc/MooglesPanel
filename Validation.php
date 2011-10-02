@@ -11,9 +11,9 @@ Class Validation
     public function validaEmail ($email)
     {
         if(filter_var($email, FILTER_VALIDATE_EMAIL))
-            return true;
+            return 1;
         else
-            return false;
+            return 0;
     }
 
     /*
@@ -27,10 +27,10 @@ Class Validation
     {
         // removendo espaços em branco
         $str = trim($str);
-        if (strlen($str) == 0 || empty($str))
-            return false;
+        if (strlen($str) == 0 || empty($str) || $str == '')
+            return 0;
         else 
-            return true;
+            return 1;
     }
 
     public function antiInjection($val) {
