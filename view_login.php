@@ -1,3 +1,10 @@
+<?php 
+
+require_once "LibInterface.php";
+$libInterface = new LibIterface();
+
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -13,6 +20,9 @@
                     <tbody>
                         <tr>
                             <td><h2>Login</h2></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $libInterface->getMessage(); ?></td>
                         </tr>
                         <tr>
                             <td>E-mail</td>

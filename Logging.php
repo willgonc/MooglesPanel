@@ -28,7 +28,7 @@ Class Logging extends Validation
         else
         {
             $this->destroySession();
-            header("Location: login.php");
+            header("Location: login.php?status=0&msg=".urlencode('Usu&aacute;rio ou senha incorretos'));
         }
 
         $this->dataBase->closeConnect();

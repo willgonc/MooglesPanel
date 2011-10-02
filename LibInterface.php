@@ -41,7 +41,8 @@ Class LibIterface
          </div>';
     }
 
-    public function getHtmlCabecalho($title){
+    public function getHtmlCabecalho($title)
+    {
         return '<div class="tw-ui-cabecalho">'.(isset($title)?htmlentities($title, ENT_QUOTES, 'UTF-8'):'').'</div>';
     }
 
@@ -50,15 +51,17 @@ Class LibIterface
         return isset($_SESSION['data'])?$_SESSION['data']:null;
     }
 
-    public function getMessage(){
+    public function getMessage()
+    {
         $status = isset($_GET['status'])?$_GET['status']:'';
         $msg = isset($_GET['msg'])?$_GET['msg']:'';
 
-        if ($msg != '' && $status != ''){
+        if ($msg != '' && $status != '')
+        {
             if ($status == 0)
-                return '<div class="tw-ui-mensagem"><p class="errorMsg">'.$msg.'</p></div>';
+                return '<div class="tw-ui-mensagem"><p class="errorMsg">'.urldecode($msg).'</p></div>';
             elseif ($status == 1) 
-                return '<div class="tw-ui-mensagem"><p class="okMsg">'.$msg.'</p></div>';
+                return '<div class="tw-ui-mensagem"><p class="okMsg">'.urldecode($msg).'</p></div>';
         }
     }
 }

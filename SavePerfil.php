@@ -26,6 +26,8 @@ Class SavePerfil extends Validation
         else
            $this->redirect($r); 
 
+        $this->dataBase->closeConnect();
+
     }
 
     private function getData()

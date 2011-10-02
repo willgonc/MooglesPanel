@@ -1,21 +1,21 @@
 <?php
 
-require_once "lib_db.php";
-require_once "lib.php";
+require_once "DataBase.php";
+require_once "Logged.php";
 
-$link = openConnect();
+$dataBase = new DataBase();
+$logged = new Logged($dataBase);
 
-loggedUser("login.php", "summary.php");
+$result = $dataBase->executeQuery("SELECT * FROM config");
 
-/** Definindo variáveis do layout */
-$array_files_js 	= Array("jquery.js","tw-lib.js");
-$load_fn_js 		= "initMenu()";
-$content			= "template_configuration.php";
+while ($row = $dataBase->fetchResults($result)){
+    $email = $row["email"];
+    $descricao = $row["descricao"];
+    $titulo = $row["titulo"];
+}
 
-require_once "layout.php";
+$dataBase->closeConnect();
 
-closeConnect($link);
+require_once "view_configuration.php";
+
 ?>
-
-
-
