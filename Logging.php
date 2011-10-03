@@ -1,4 +1,10 @@
 <?php
+/**
+ *	Classe que valida os dados do formulário de login e cria a sessão
+ *	
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
+ */
 
 require_once "DataBase.php";
 require_once "Validation.php";
@@ -61,11 +67,11 @@ Class Logging extends Validation
     private function getData()
     {
         $this->email = $_POST['email'];
-        $this->senha = sha1($_POST['senha']);
+        $this->senha = $_POST['senha'];
     }
     
     /**
-     *  Método que cria a sessão e armazena dos dados da mesma
+     *  Método que cria a sessão e armazena dos dados do usuário
 	 *	@param array $data
      *  @access private
      *  @name createSession()
@@ -99,8 +105,8 @@ Class Logging extends Validation
 			{
                 $result = $this->dataBase->executeQuery('SELECT * FROM usuarios WHERE 
                     email="'.$this->email.'" and 
-                    senha="'.$this->senha.'" 
-                    and status=1' );
+                    senha="'.sha1($this->senha).'" and 
+                    status=1');
             
                 if ($result) 
 				{
@@ -113,21 +119,29 @@ Class Logging extends Validation
                             $arrData['id'] = $row['id'];
                         }
                         $arrData['email'] = $this->email;
-                        $arrData['senha'] = $this->senha;
+                        $arrData['senha'] = sha1($this->senha);
 
-                        return $this->arrData;
+                        return $arrData;
                     } 
 					else 
+                    {
                         return 0;
+                    }
                 } 
 				else 
+                {
                     return 0;
+                }
             } 
 			catch (Exception $e)
+            {
                 return 0;
+            }
         } 
 		else 
+        {
             return 0;
+        }
     }
 }
 

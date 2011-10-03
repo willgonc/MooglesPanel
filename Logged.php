@@ -1,11 +1,30 @@
 <?php
 
+/**
+ *	Classe responsável por validar a sessão aberta do usuário
+ *	
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
+ */
 Class Logged
 {
+    
+    /**
+     *  Atributo que guarda a instância do objeto DataBase
+     *  @access private
+     *  @name $dataBase
+     */
     private $dataBase;
-    public function __construct($objDb) 
+
+    /**
+     *  Método construtor da classe
+     *  @param object
+     *  @access public
+     *  @name __construct()
+     */
+    public function __construct($objDataBase) 
     {
-        $this->dataBase = $objDb;
+        $this->dataBase = $objDataBase;
         $pagina = end(explode("/", $_SERVER['PHP_SELF']));
         $session = $this->getSession();
         
@@ -20,6 +39,13 @@ Class Logged
             header('Location: summary.php');
     }
 
+    /**
+     *  Método que valida os dados da sessão aberta do usuário
+     *  @param array
+     *  @access private
+     *  @name validationUser()
+     *  @return bool
+     */
     private function validationUser($data)
     {
         try{
@@ -44,10 +70,16 @@ Class Logged
         }
     }
 
+    /**
+     *  Método para retornar a sessão aberta caso tenha uma
+     *  @access private
+     *  @name getSession()
+     *  @return array|null
+     */
     private function getSession()
     {
         session_start();
-        return isset($_SESSION['data']) ? $_SESSION['data'] : 0;
+        return isset($_SESSION['data']) ? $_SESSION['data'] : null;
     }
 }
 ?>

@@ -1,7 +1,19 @@
 <?php
 
+/**
+ *	Classe para manipulação de dados de interface
+ *	
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
+ */
 Class LibIterface
 {
+    /**
+     *  Método que retorna o html do menu principal
+     *  @access private
+     *  @name $getHtmlMenuPrincipal()
+     *  @return string
+     */
     public function getHtmlMenuPrincipal()
     {
         $data = $this->getSession();
@@ -41,16 +53,35 @@ Class LibIterface
          </div>';
     }
 
+    /**
+     *  Método que retorna o html do título do conteúdo da página
+     *  @param $string
+     *  @access private
+     *  @name $getHtmlCabecalho()
+     *  @return string
+     */
     public function getHtmlCabecalho($title)
     {
         return '<div class="tw-ui-cabecalho">'.(isset($title)?htmlentities($title, ENT_QUOTES, 'UTF-8'):'').'</div>';
     }
 
+    /**
+     *  Método que retorna os dados da sessão aberta do usuário
+     *  @access private
+     *  @name $getSession()
+     *  @return array|null
+     */
     public function getSession()
     {
         return isset($_SESSION['data'])?$_SESSION['data']:null;
     }
 
+    /**
+     *  Método que retorna o html para exibição da mensagem
+     *  @access private
+     *  @name $getMessage()
+     *  @return string
+     */
     public function getMessage()
     {
         $status = isset($_GET['status'])?$_GET['status']:'';
@@ -62,6 +93,10 @@ Class LibIterface
                 return '<div class="tw-ui-mensagem"><p class="errorMsg">'.urldecode($msg).'</p></div>';
             elseif ($status == 1) 
                 return '<div class="tw-ui-mensagem"><p class="okMsg">'.urldecode($msg).'</p></div>';
+        }
+        else
+        {
+            return '';
         }
     }
 }

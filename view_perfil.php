@@ -12,7 +12,11 @@ $data = $libInterface->getSession();
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
     <head>
         <title>Perfil - Painel controle</title>
+		
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+        
         <link rel="stylesheet" type="text/css" href="css/style.css" />
+        
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="js/dropdown.js"></script>
         <script type="text/javascript" language="javascript">
