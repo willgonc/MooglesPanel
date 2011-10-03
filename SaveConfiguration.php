@@ -19,7 +19,7 @@ Class SaveConfiguration extends Validation
         if ($this->validateData())
         {
             $data = $this->insertData();
-            //$this->redirect($data[0], $data[1]);
+            $this->redirect($data[0], $data[1]);
         }
         else
             $this->redirect(0, "O e-mail n&atilde;o &eacute; v&aacute;lido!");
@@ -52,8 +52,8 @@ Class SaveConfiguration extends Validation
         $flagErro = 1;
         $msg = '';
 
-        $this->titulo = htmlentities($this->titulo, ENT_QUOTES, "UTF-8");
-        $this->descricao = htmlentities($this->descricao, ENT_QUOTES, "UTF-8");
+        $this->titulo = htmlentities($this->titulo, ENT_QUOTES, 'UTF-8');
+        $this->descricao = htmlentities($this->descricao, ENT_QUOTES, 'UTF-8');
 
         try {
             // FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE

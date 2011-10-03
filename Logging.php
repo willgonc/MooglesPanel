@@ -3,24 +3,43 @@
 require_once "DataBase.php";
 require_once "Validation.php";
 
-
 Class Logging extends Validation
 {
+    /**
+     *  Atributo que guarda o email
+     *  @access private
+     *  @name $email
+     */
     private $email;
+
+    /**
+     *  Atributo que guarda a senha
+     *  @access private
+     *  @name $senha
+     */
     private $senha;
-    private $msg;
-    private $result;
-    private $arrData = Array();
+
+    /**
+     *  Atributo que armazena a instancia da Classe DataBase
+     *  @access private
+     *  @name $dataBase
+     */
     private $dataBase;
-    
+   
+    /**
+     *  Método construtor da classe
+     *  @access public
+     *  @name __construct()
+     */
     public function __construct()
     {
         $this->dataBase = new DataBase();
+        
+        session_start();
 
-        $this->email = $this->getEmailPost();
-        $this->senha = $this->getSenhaPost();
-
-        if ($data = $this->validateData())
+		$this->getData();
+		$data = $this->validateData();
+        if ($data)
         {
             $this->createSession($data);
             header("Location: summary.php");
@@ -30,64 +49,85 @@ Class Logging extends Validation
             $this->destroySession();
             header("Location: login.php?status=0&msg=".urlencode('Usu&aacute;rio ou senha incorretos'));
         }
-
+		echo $data;
         $this->dataBase->closeConnect();
     }
 
-    private function getEmailPost()
+    /**
+     *  Método que armazena nos atributos os dados recebidos por post
+     *  @access private
+     *  @name getData()
+     */
+    private function getData()
     {
-        return $_POST['email'];
-    }
-
-    private function getSenhaPost()
-    {
-        return sha1($_POST['senha']);
+        $this->email = $_POST['email'];
+        $this->senha = sha1($_POST['senha']);
     }
     
+    /**
+     *  Método que cria a sessão e armazena dos dados da mesma
+	 *	@param array $data
+     *  @access private
+     *  @name createSession()
+     */
     private function createSession($data)
     {
-        session_start();
         $_SESSION['data'] = $data;
     }
 
+    /**
+     *  Método que encerra a sessão
+     *  @access private
+     *  @name destroySession()
+     */
     private function destroySession()
     {
         session_destroy();
     }
 
+    /**
+     *  Método que valida os dados recebidos pelo formulário
+     *  @access private
+     *  @name validateData()
+	 *	@return bool
+     */
     private function validateData()
     {
-        if (parent::strRequire($this->email) || parent::strRequire($this->senha)) {
-            try{
-                $this->result = $this->dataBase->executeQuery('SELECT * FROM usuarios WHERE 
+        if (parent::strRequire($this->email) || parent::strRequire($this->senha)) 
+		{
+            try
+			{
+                $result = $this->dataBase->executeQuery('SELECT * FROM usuarios WHERE 
                     email="'.$this->email.'" and 
                     senha="'.$this->senha.'" 
                     and status=1' );
             
-                if ($this->result) {
-                    if ($this->dataBase->getRows($this->result) == 1){
-                        $row = Array();
-                        while ($row = $this->dataBase->fetchResults($this->result))
+                if ($result) 
+				{
+                    if ($this->dataBase->getRows($result) == 1)
+					{
+						$arrData = Array();
+                        while ($row = $this->dataBase->fetchResults($result))
                         {
-                            $this->arrData['nome'] = $row['nome'];
-                            $this->arrData['id'] = $row['id'];
+                            $arrData['nome'] = $row['nome'];
+                            $arrData['id'] = $row['id'];
                         }
-                        $this->arrData['email'] = $this->email;
-                        $this->arrData['senha'] = $this->senha;
+                        $arrData['email'] = $this->email;
+                        $arrData['senha'] = $this->senha;
 
                         return $this->arrData;
-                    } else {
+                    } 
+					else 
                         return 0;
-                    }
-                } else {
+                } 
+				else 
                     return 0;
-                }
-            } catch (Exception $e){
+            } 
+			catch (Exception $e)
                 return 0;
-            }
-        } else {
+        } 
+		else 
             return 0;
-        }
     }
 }
 

@@ -1,14 +1,21 @@
 <?php
 
+/**
+ *	Classe responsável pelas funçoes de manipulação do banco de dados
+ *	
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
+ */
 Class Validation
 {
     /**
-     *  Função: validaEmail
-     *  Descrição: Esta função valida um email 
-     *  Parâmentro: String
-     *  Retorno: true ou false
+     *  Método que valida um email
+	 *	@param string $email
+     *  @access publico
+     *  @name validaEmail()
+     *  @return bool
      */
-    public function validaEmail ($email)
+    public function validaEmail($email)
     {
         if(filter_var($email, FILTER_VALIDATE_EMAIL))
             return 1;
@@ -16,12 +23,12 @@ Class Validation
             return 0;
     }
 
-    /*
-     *  Função: strRequire
-     *  Descrição: Esta função verifica se uma string que está sendo
-     *  requerida tem algum caracter fora os espaços em branco
-     *  Parâmentro: String
-     *  Retorno: true ou false
+    /**
+     *  Método que valida uma string, se ela é vazia ou não
+	 *	@param string $str
+     *  @access publico
+     *  @name strRequire()
+     *  @return bool
      */
     public function strRequire($str)
     {
@@ -32,13 +39,6 @@ Class Validation
         else 
             return 1;
     }
-
-    public function antiInjection($val) {
-        $sql = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "", $sql);
-        $sql = trim($sql); 
-        $sql = strip_tags($sql);
-        $sql = addslashes($sql);
-        return $sql;
-    }
 }
+
 ?>

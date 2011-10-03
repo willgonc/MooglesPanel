@@ -1,60 +1,81 @@
 <?php
 
 /**
- *	Classe de manipulação da base de dados
+ *	Classe responsável pelas funçoes de manipulação do banco de dados
  *	
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
  *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
-
 require_once "Config.php";
 
 Class DataBase extends Config
 {
-    // guarda o link com conexão
+    /**
+     *  Atributo que guarda o id da conexão com o banco de dados
+     *  @access private
+     *  @name $link
+     */
     private $link;
-
+	
+    /**
+     *  Método construtor da classe
+     *  @access public
+     *  @name __construct()
+     */
     public function __construct()
     {
+		/** Chamando o construtor da Classe herdada*/
         parent::__construct();
         $this->openConnect();
         $this->selectDataBase();
     }
     
+    /**
+     *  Método que atribui o id da conexão ao atributo $link
+	 *	@param string $link
+     *  @access private
+     *  @name setLink()
+     */
     private function setLink($link)
     {
         $this->link = $link;
     }
 
+    /**
+     *  Método que retorna o atributo $link
+     *  @access public
+     *  @name setLink()
+	 *	@return string
+     */
     public function getLink()
     {
         return $this->link;
     }
 
     /**
-     *	Abre a conexão com o SGBD e seleciona a base de dados
-     *	
-     *	Retorna o link da conexão
-     *	@return string|false retorna um identificador de conexao ou 
-     *      false em caso de falha
+     *	Abre a conexão com o SGBD e armazena no atributo $link
+	 *	@access private
+	 *	@name openConnect()
      */
     private function openConnect()
     {
-        /**	Armazena o link da conexao */
         $this->setLink(mysql_connect(parent::getHost(), parent::getUser(), parent::getPass()));
     }
 
+    /**
+     *	Seleciona a base de dados
+	 *	@access private
+	 *	@name selectDataBase()
+     */
     private function selectDataBase()
     {
-        /** Seleciona a base de dados */
         mysql_select_db(parent::getDataBase());
     }
 
     /**
-     *	Fecha uma conexão com o SGBD
-     *	
-     *	@param string $link identificador da conexão com o SGBD
-     *
+     *	Fecha a conexão com a base de dados
+	 *	@access public
+	 *	@name closeConnect()
      */
     public function closeConnect()
     {
@@ -62,42 +83,44 @@ Class DataBase extends Config
     }
 
     /**
-     *	Executa uma sql e retorna o resultado ou no caso de error ou exceção
-     *  retorna um sql ou a exceção
-     *	
-     *	@param string $sql string em formato sql
-     *
-     *  @return resource|bool resultado da query ou exceção
+     *	Executa uma sql e retorna o resultado
+     *	@param string $sql
+	 *	@access public
+	 *	@name executeQuery()
+     *  @return resource|bool
      */
     public function executeQuery($sql)
     {
         try 
         {
-            /** Executa uma sql */
             $result = mysql_query($sql);
-
-            /** Retorna o resultado */
             return $result;
         } 
         catch (Exception $e)
         {
-            /** Retorna uma exceção caso ocorra */
             return $e;
         }
     }
 
     /**
-     *  Retorna um array associativo do resultado da query
-     *	
-     *	@param string $result resultado de uma query
-     *
-     *  @return array Retorna um array associativo ou numerico correspondente a linha
+     *  Retorna um array associativo ou indexado do resultado da query
+     *	@param result $result 
+	 *	@access public
+	 *	@name fetchResults()
+     *  @return array
      */
     public function fetchResults($result)
     {
         return mysql_fetch_array($result, MYSQL_BOTH);
     }
 
+    /**
+     *  Retorna a quantidade de linhas de uma consulta
+     *	@param result $result 
+	 *	@access public
+	 *	@name getRows()
+     *  @return int
+     */
     public function getRows($result)
     {
         return mysql_num_rows($result);

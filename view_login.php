@@ -11,7 +11,10 @@ $libInterface = new LibIterface();
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
     <head>
         <title>Login - Painel controle</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+        
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body>
         <div class="geral">
@@ -51,4 +54,3 @@ $libInterface = new LibIterface();
         </div>
     </body>
 </html>
-

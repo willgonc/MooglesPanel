@@ -42,7 +42,7 @@ Class Config
      */
     public function __construct()
     {
-        // setando os valores das configurações
+        /** setando os valores das configurações */
         $this->setUser("root");
         $this->setPass("123456");
         $this->setHost("localhost");
