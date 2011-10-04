@@ -1,16 +1,46 @@
 <?php
+/**
+ *	Classe responsável por salvar os dados das configurações do painel
+ *	
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
+ */
 
 require_once "DataBase.php";
 require_once "Validation.php";
 
 Class SaveConfiguration extends Validation
 {
-
+    /**
+     *  Atributo que armazena o email
+     *  @access private
+     *  @name $email
+     */
     private $email;
+    /**
+     *  Atributo que armazena o título
+     *  @access private
+     *  @name $titulo
+     */
     private $titulo;    
+    /**
+     *  Atributo que armazena a descricao
+     *  @access private
+     *  @name $descricao
+     */
     private $descricao;
+    /**
+     *  Atributo que armazena a instância do objeto DataBase
+     *  @access private
+     *  @name $dataBase
+     */
     private $dataBase;
 
+    /**
+     *  Método construtor da classe
+     *  @access public
+     *  @name __construct()
+     */
     public function __construct()
     {
         $this->dataBase = new DataBase();
@@ -18,7 +48,7 @@ Class SaveConfiguration extends Validation
 
         if ($this->validateData())
         {
-            $data = $this->insertData();
+            $data = $this->updateData();
             $this->redirect($data[0], $data[1]);
         }
         else
@@ -27,6 +57,11 @@ Class SaveConfiguration extends Validation
         $this->dataBase->closeConnect();
     }
 
+    /**
+     *  Método que recebe os dados do formulário e armazena nos métodos
+     *  @access private
+     *  @name getData()
+     */
     private function getData()
     {
         $this->email = $_POST['email'];
@@ -34,12 +69,18 @@ Class SaveConfiguration extends Validation
         $this->descricao = $_POST['descricao'];    
     }
 
+    /**
+     *  Método que valida os dados para persitência
+     *  @access private
+     *  @name validateData()
+     *  @return bool
+     */
     private function validateData()
     {
         if (parent::strRequire($this->email))
         {
             if (parent::validaEmail($this->email))
-                return 1;
+                    return 1;
             else
                 return 0;
         }
@@ -47,7 +88,13 @@ Class SaveConfiguration extends Validation
             return 1;
     }
 
-    public function insertData()
+    /**
+     *  Método que faz a persistência dos dados na base
+     *  @access private
+     *  @name updateData()
+     *  @return array
+     */
+    public function updateData()
     {
         $flagErro = 1;
         $msg = '';
@@ -85,6 +132,13 @@ Class SaveConfiguration extends Validation
         return Array($flagErro, $msg);
     }
 
+    /**
+     *  Método que redireciona para a página de configurações
+     *  @param bool $flagErro
+     *  @param string $msg
+     *  @access private
+     *  @name redirect()
+     */
     public function redirect($flagErro, $msg)
     {
         if ($flagErro)
