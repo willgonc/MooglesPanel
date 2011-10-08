@@ -53,6 +53,7 @@ Class Config
      *  Método que retorna o atributo nome do usuário
      *  @access public
      *  @name getUser()
+     *  @return string
      */
     public function getUser()
     {
@@ -63,6 +64,7 @@ Class Config
      *  Método que retorna o atributo senha do usuário
      *  @access public
      *  @name getPass()
+     *  @return string
      */
     public function getPass()
     {
@@ -73,6 +75,7 @@ Class Config
      *  Método que retorna o atributo host do banco de dados
      *  @access public
      *  @name getHost()
+     *  @return string
      */
     public function getHost()
     {
