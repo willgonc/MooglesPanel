@@ -1,133 +1,120 @@
 <?php
 
 require_once "DataBase.php";
-new DataBase();
 
-// pegando a pagina corrente            
-$arr = explode('/', $_SERVER['SCRIPT_NAME']);
-$pagina = $arr[count($arr)-1];
+Class Pagination extends DataBase
+{
+	private $colsSearch;
+	private $table;
+	private $colOrder;
+	private $initInterval;
+	private $quantExibition;
+	private $totalSearch;
+	private $consulta;
 
-$paginacao = ''; // Paginacao
-$inicio = 0; // inicio do intervalo da busca
-$limite = 25;// quantidade que sera exibida na tela
+	public function __construct()
+	{
+		parent::__construct();
 
-// Numero da pagina que esta sendo exibida
-if (isset($_GET['pag']))
-    $pag = $_GET['pag'];
-else 
-    $pag = 1; 
+		$this->setColsSearch(Array('nome', 'email'));
+		$this->setTable('usuarios');
+		$this->setColOrder('nome');
+		$this->setInitInterval();
+		$this->getQuantExibition();
+		$this->searchData();
+		$this->getHtml();
+	}
+	
+	public function setColOrder($col)
+	{
+		$this->colOrder = $col;
+	}
+	
+	/* configura quais as colunas que a busca vai usar */
+	public function setColsSearch($arr)
+	{
+		$this->colsSearch = $arr;
+	}
+	/* armazena o nome da coluna que será utilizada*/
+	public function setTable($table)
+	{
+		$this->table = $table;
+	}
+	
+	/* Calcula o inicio do intervalo da consulta*/
+	private function setInitInterval()
+	{
+		// Numero da pagina que esta sendo exibida
+		$pag = isset($_GET['pag']) ?  $_GET['pag'] : 1; 
 
-// Valida o numero passado como parametro
-$pag = filter_var($pag, FILTER_VALIDATE_INT); 
+		// Valida o numero passado como parametro
+		$pag = filter_var($pag, FILTER_VALIDATE_INT); 
 
-if ($pag!='')
-    $inicio = ($pag - 1) * $limite;
+		if (empty($pag))
+			$this->initInterval = ($pag - 1) * $limite;
+		else
+			$this->initInterval = 0;
+	}
+	
 
+	/* faz a consulta */
+	private function searchData()
+	{
+		$sqlQuant = "SELECT COUNT(*) as total FROM " . $this->table;
+		$sqlBusca = "SELECT * FROM " . $this->table;
+		
 
+		$search = $this->getSearch();
+		if ($search && count($this->colsSearch) > 0)
+		{
+			$sqlQuant .= " WHERE ";
+			$sqlBusca .= " WHERE ";
+			
+			for ($i = 0; $i < count($this->colsSearch); $i++)
+			{
+				$sqlQuant .= "" . $this->colsSearch[$i] . " LIKE '%$search%' ";
+				$sqlBusca .= "" . $this->colsSearch[$i] . " LIKE '%$search%' ";
+				if (($i + 1) < count($this->colsSearch))
+				{
+					$sqlQuant .= " OR ";
+					$sqlBusca .= " OR ";
+				}
+			}
+			$sqlBusca .= " ORDER BY $this->colOrder LIMIT $this->initInterval, $this->quantExibition ";
+		}
+		
+		echo $sqlQuant.'<br />';
+		echo $sqlBusca.'<br />';
 
+		$buscaTotal = parent::executeQuery($sqlQuant);
+		$this->consulta = parent::executeQuery($sqlBusca);
 
-if (isset($_GET['busca'])){
-    $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios WHERE 
-        nome like '%".$_GET['busca']."%' or email like '%".$_GET['busca']."%'");
-    $total = mysql_fetch_array($busca_total);
-    $total = $total['total'];
-    
-    $busca = mysql_query("SELECT * FROM usuarios WHERE 
-        nome like '%".$_GET['busca']."%' or 
-        email like '%".$_GET['busca']."%' or 
-        status like '%".$_GET['busca']."%'
-        ORDER BY nome LIMIT $inicio, $limite ");
-} else {
-    $busca_total = mysql_query("SELECT COUNT(*) as total FROM usuarios");
-    $total = mysql_fetch_array($busca_total);
-    $total = $total['total'];
-    $busca = mysql_query("SELECT * FROM usuarios ORDER BY nome LIMIT $inicio, $limite");
+		$total = parent::fetchResults($buscaTotal);
+		$this->totalSearch = $total['total'];
+	}
+
+	private function getHtml()
+	{
+		while ($texto = parent::fetchResults($this->consulta)) {
+			//extract($texto);
+
+			echo '<table><tr>
+				<td width="40%">'.$texto['nome'].'</td>
+				<td width="50%">'.$texto['email'].'</td>
+			</tr></table>';
+		}
+	}
+
+	private function getSearch()
+	{
+		return isset($_GET['busca']) ? $_GET['busca'] : null;
+	}
+
+	private function getQuantExibition()
+	{
+		$this->quantExibition = isset($_GET['quant']) ? $_GET['quant'] : 2;
+	}
 }
 
-
-
-
-
-
-$linhasResult = mysql_num_rows($busca);
-if ($linhasResult > 0) {
-    
-    $table = '<table width="100%" class="tw-ui-listagem">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th colspan="2">Status</th>
-                </tr>
-            </thead>
-        <tbody>';
-    while ($texto = mysql_fetch_array($busca)) {
-        extract($texto);
-
-        $table .= '<tr>
-            <td width="25px">
-                '.($email == $_SESSION['data']['email']?'':'<input type="checkbox" class="checkboxListagem" value="'.$id.'">').'
-            </td>
-            <td width="40%">'.$nome.'</td>
-            <td width="50%">'.$email.'</td>
-            <td width="10%">'.($status==0?'<span style="color: red">Bloqueado':'<span style="color: green">Ativo').'</span></td>
-        </tr>';
-    }
-    $table .= '</tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td>Nome</td>
-                <td>E-mail</td>
-                <td colspan="2">Status</td>
-            </tr>
-        </tfoot>
-    </table>';
-
-    $prox = $pag + 1;
-    $ant = $pag - 1;
-    $ultima_pag = ceil($total / $limite);
-    $penultima = $ultima_pag - 1;	
-    $adjacentes = 2;
-    
-   
-    if ($pag>1)
-        $paginacao = '<a class="prev-paginacao" href="'.$pagina.'?pag='.$ant.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').(isset($_GET['limit'])?'&limit='.$_GET['limit']:'').'"><img src="imagens/arrowleft.png" /></a>';
-    else
-        $paginacao = '<a href="#" disabled class="prev-paginacao" ><img src="imagens/arrowleftdisabled.png" /></a>';
-        
-    if ($prox <= $ultima_pag && $ultima_pag >= 2) 
-        $paginacao .= '<a class="next-paginacao" href="'.$pagina.'?pag='.$prox.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').(isset($_GET['limit'])?'&limit='.$_GET['limit']:'').'"><img src="imagens/arrowright.png" /></a>';
-    else
-        $paginacao .= '<a href="#" disabled class="next-paginacao"><img src="imagens/arrowrightdisabled.png" /></a>';
-} else {
-    $paginacao = '<a href="#" disabled class="prev-paginacao" ><img src="imagens/arrowleftdisabled.png" /></a><a href="#" disabled class="next-paginacao"><img src="imagens/arrowrightdisabled.png" /></a>';
-    $table = '<table width="100%" class="tw-ui-listagem">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th colspan="2">Status</th>
-                </tr>
-            </thead>
-        <tbody>
-            <tr>
-                <td width="25px" align="center" colspan="4">
-                    Nenhum resultado foi encontrado!
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td>Nome</td>
-                <td>E-mail</td>
-                <td colspan="2">Status</td>
-            </tr>
-        </tfoot>
-    </table>';
-}
-                            echo $table;
+new Pagination();
 ?>
