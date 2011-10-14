@@ -1,120 +1,137 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
 <?php
 
 require_once "DataBase.php";
 
+
 Class Pagination extends DataBase
 {
-	private $colsSearch;
-	private $table;
-	private $colOrder;
-	private $initInterval;
-	private $quantExibition;
-	private $totalSearch;
-	private $consulta;
+    /** Array */
+    private $configuration;
 
-	public function __construct()
-	{
-		parent::__construct();
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-		$this->setColsSearch(Array('nome', 'email'));
-		$this->setTable('usuarios');
-		$this->setColOrder('nome');
-		$this->setInitInterval();
-		$this->getQuantExibition();
-		$this->searchData();
-		$this->getHtml();
-	}
-	
-	public function setColOrder($col)
-	{
-		$this->colOrder = $col;
-	}
-	
-	/* configura quais as colunas que a busca vai usar */
-	public function setColsSearch($arr)
-	{
-		$this->colsSearch = $arr;
-	}
-	/* armazena o nome da coluna que será utilizada*/
-	public function setTable($table)
-	{
-		$this->table = $table;
-	}
-	
-	/* Calcula o inicio do intervalo da consulta*/
-	private function setInitInterval()
-	{
-		// Numero da pagina que esta sendo exibida
-		$pag = isset($_GET['pag']) ?  $_GET['pag'] : 1; 
-
-		// Valida o numero passado como parametro
+    public function configure($param)
+    {
+        $this->configuration['tabela'] = $param['tabela'];
+        $this->configuration['quant'] = $param['quant'];
+        $this->configuration['inicio'] = 0;
+        $this->configuration['colunas'] = $param['colunas'];
+        $this->configuration['tituloColunas'] = $param['tituloColunas'];
+        $this->configuration['checkbox'] = $param['checkbox'];
+        $this->configuration['busca'] = isset($_GET['busca']) ? $_GET['busca'] : null;
+        $this->configuration['colunasBusca'] = $param['colunasBusca'];
+        
+        $pag = isset($_GET['pag']) ?  $_GET['pag'] : 1; 
 		$pag = filter_var($pag, FILTER_VALIDATE_INT); 
-
-		if (empty($pag))
-			$this->initInterval = ($pag - 1) * $limite;
+		
+        if (empty($pag))
+			$this->configuration['inicio'] = ($pag - 1) * $this->configuration['quant'];
 		else
-			$this->initInterval = 0;
-	}
-	
+			$this->configuration['inicio'] = 0;
+    }
 
-	/* faz a consulta */
-	private function searchData()
-	{
-		$sqlQuant = "SELECT COUNT(*) as total FROM " . $this->table;
-		$sqlBusca = "SELECT * FROM " . $this->table;
-		
-
-		$search = $this->getSearch();
-		if ($search && count($this->colsSearch) > 0)
-		{
-			$sqlQuant .= " WHERE ";
-			$sqlBusca .= " WHERE ";
-			
-			for ($i = 0; $i < count($this->colsSearch); $i++)
+    /** retorna a quantidade de linhas da consulta inteira sem limite */
+    private function getQuantResult()
+    {
+		$sqlQuant = "SELECT COUNT(*) as total FROM " . $this->configuration['tabela'];
+        if ($this->configuration['busca'])
+        {
+            $sqlQuant .= " WHERE ";
+			for ($i = 0; $i < count($this->configuration['colunasBusca']); $i++)
 			{
-				$sqlQuant .= "" . $this->colsSearch[$i] . " LIKE '%$search%' ";
-				$sqlBusca .= "" . $this->colsSearch[$i] . " LIKE '%$search%' ";
-				if (($i + 1) < count($this->colsSearch))
-				{
+				$sqlQuant .= "" . $this->configuration['colunasBusca'][$i] . " 
+                    LIKE '%" . $this->configuration['busca'] . "%' ";
+				if (($i + 1) < count($this->configuration['colunasBusca']))
 					$sqlQuant .= " OR ";
-					$sqlBusca .= " OR ";
-				}
 			}
-			$sqlBusca .= " ORDER BY $this->colOrder LIMIT $this->initInterval, $this->quantExibition ";
-		}
-		
-		echo $sqlQuant.'<br />';
-		echo $sqlBusca.'<br />';
+        }
+        //echo $sqlQuant;
+		$quant = parent::executeQuery($sqlQuant);
 
-		$buscaTotal = parent::executeQuery($sqlQuant);
-		$this->consulta = parent::executeQuery($sqlBusca);
+		$total = parent::fetchResults($quant);
 
-		$total = parent::fetchResults($buscaTotal);
-		$this->totalSearch = $total['total'];
-	}
+        return $total['total'];
+    }
 
-	private function getHtml()
-	{
-		while ($texto = parent::fetchResults($this->consulta)) {
-			//extract($texto);
+    /** retorna a consulta que será exibida */
+    private function getDataResult()
+    {
+        echo $this->getQuantResult();
+		$busca = "SELECT * FROM " . $this->configuration['tabela']; 
 
-			echo '<table><tr>
-				<td width="40%">'.$texto['nome'].'</td>
-				<td width="50%">'.$texto['email'].'</td>
-			</tr></table>';
-		}
-	}
+        if ($this->configuration['busca'])
+        {
+            $busca .= " WHERE ";
+			for ($i = 0; $i < count($this->configuration['colunasBusca']); $i++)
+			{
+				$busca .= "" . $this->configuration['colunasBusca'][$i] . " 
+                    LIKE '%" . $this->configuration['busca'] . "%' ";
+				if (($i + 1) < count($this->configuration['colunasBusca']))
+					$busca .= " OR ";
+			}
+        }
+        echo $busca .= " LIMIT " . $this->configuration['inicio'] . ", " . $this->configuration['quant'];
+        $result = parent::executeQuery($busca);
+        return $result;
+    }
 
-	private function getSearch()
-	{
-		return isset($_GET['busca']) ? $_GET['busca'] : null;
-	}
+    public function getHtmlTable()
+    {
+        $result = $this->getDataResult();
+        $table = "<table width='100%' class='tw-ui-listagem'>";
+        
+        /* cabecalho */
+        $table .= "<thead><tr>";
 
-	private function getQuantExibition()
-	{
-		$this->quantExibition = isset($_GET['quant']) ? $_GET['quant'] : 2;
-	}
+
+        if ($this->configuration['checkbox'])
+            $table .= "<th width='5' align='center'></th>";
+
+        for ($i = 0; $i < count($this->configuration['tituloColunas']); $i++)
+        {
+            $table .= "<th>" . $this->configuration['tituloColunas'][$i] . "</th>";
+        }
+        $table .= "</tr></thead><tbody>";
+
+        /* corpo */
+        while ($row = parent::fetchResults($result))
+        {
+            $table .= "<tr>";
+            if ($this->configuration['checkbox'])
+                $table .= "<td><input type='checkbox' value='".$row['id']."' /></td>";
+
+            for ($j = 0; $j < count($this->configuration['colunas']); $j++)
+            {
+                $table .= "<td>" . $row[$this->configuration['colunas'][$j]] . "</td>";
+            }
+            $table .= "</tr>";
+        }
+        $table .= "</tbody></table>";
+        return $table;
+    }
 }
 
-new Pagination();
+$pagination = new Pagination();
+$pagination->configure(
+    Array(
+        'tabela' => 'usuarios',
+        'quant' => 10,
+        'colunas' => Array('nome', 'email', 'status'),
+        'tituloColunas' => Array('Nome', 'E-mail', 'Status'),
+        'checkbox' => true,
+        'colunasBusca' => Array('nome')
+        )
+    );
+echo $pagination->getHtmlTable();
+
 ?>
+</body>
+</head>
