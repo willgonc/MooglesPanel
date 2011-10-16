@@ -11,7 +11,7 @@ function initListUsuarios(){
                 $.post(
                     'RemoveUsers.php',
                     {
-                        usuarios: arrData, 
+                        usuarios: arrData,
                         pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
                         busca: getQueryVariable('busca')?getQueryVariable('busca'):''
                     }, function (d){
@@ -34,7 +34,7 @@ function initListUsuarios(){
                     arrData[i] = check.eq(i).val();
                 
                 $.post(
-                    'status_users.php',
+                    'StatusUsers.php',
                     {
                         usuarios: arrData, 
                         pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 
@@ -60,7 +60,7 @@ function initListUsuarios(){
                     arrData[i] = check.eq(i).val();
                 
                 $.post(
-                    'status_users.php',
+                    'StatusUsers.php',
                     {
                         usuarios: arrData, 
                         pag: getQueryVariable('pag')?getQueryVariable('pag'):'', 

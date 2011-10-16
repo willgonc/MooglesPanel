@@ -12,9 +12,10 @@ $pagination->configure(
         'quant' => 10,
         'colunas' => Array('nome', 'email', 'status'),
         'tituloColunas' => Array('Nome', 'E-mail', 'Status'),
-        'colSize' => Array('40%', '40%', '20%'),
+        'colSize' => Array('45%', '45%', '10%'),
         'checkbox' => true,
-        'colunasBusca' => Array('nome', 'email')
+        'colunasBusca' => Array('nome', 'email'),
+        'colOrder' => 'nome'
         )
     );
 ?>

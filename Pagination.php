@@ -23,6 +23,7 @@ Class Pagination extends DataBase
      */
     private $rowsSearch;
 
+    private $result;
     /**
      *  Método construtor da classe
      *  @access public
@@ -47,6 +48,7 @@ Class Pagination extends DataBase
         $this->configuration['tituloColunas'] = $param['tituloColunas'];
         $this->configuration['colSize'] = $param['colSize'];
         $this->configuration['checkbox'] = $param['checkbox'];
+        $this->configuration['colOrder'] = $param['colOrder'];
         $this->configuration['busca'] = isset($_GET['busca']) ? $_GET['busca'] : null;
         $this->configuration['colunasBusca'] = $param['colunasBusca'];
         
@@ -57,6 +59,9 @@ Class Pagination extends DataBase
 			$this->configuration['inicio'] = ($this->configuration['pag'] - 1) * $this->configuration['quant'];
 		else
 			$this->configuration['inicio'] = 0;
+        
+        $this->result = $this->getDataResult();
+        $this->rowsSearch = parent::getRows($this->result);
     }
 
     /**
@@ -107,9 +112,13 @@ Class Pagination extends DataBase
 					$busca .= " OR ";
 			}
         }
+        if (!empty($this->configuration['colOrder']))
+            $busca .= ' ORDER BY ' . $this->configuration['colOrder'];
+
         $busca .= " LIMIT " . $this->configuration['inicio'] . ", " . $this->configuration['quant'];
-        $result = parent::executeQuery($busca);
-        return $result;
+
+
+        return parent::executeQuery($busca);
     }
 
     /**
@@ -120,8 +129,7 @@ Class Pagination extends DataBase
      */
     public function getHtmlTable()
     {
-        $result = $this->getDataResult();
-        $this->rowsSearch = parent::getRows($result);
+        $result = $this->result;
         $table = "<table width='100%' class='tw-ui-listagem'>";
         
         /* cabecalho */
@@ -136,14 +144,16 @@ Class Pagination extends DataBase
             $table .= "<th width='" . $this->configuration['colSize'][$i] . "'>" . $this->configuration['tituloColunas'][$i] . "</th>";
         }
         $table .= "</tr></thead><tbody>";
-
+        
         /* corpo */
         while ($row = parent::fetchResults($result))
         {
             $table .= "<tr>";
-            if ($this->configuration['checkbox'])
+            if ($this->configuration['checkbox'] && $row['email'] != $_SESSION['data']['email'])
                 $table .= "<td><input type='checkbox' class='checkboxListagem' value='".$row['id']."' /></td>";
-
+            else if ($this->configuration['checkbox'] && $row['email'] == $_SESSION['data']['email'])
+                $table .= "<td></td>";
+            
             for ($j = 0; $j < count($this->configuration['colunas']); $j++)
             {
                 $table .= "<td>" . $row[$this->configuration['colunas'][$j]] . "</td>";
@@ -180,7 +190,6 @@ Class Pagination extends DataBase
         $ant = $this->configuration['pag'] - 1;
         $ultima_pag = ceil($this->getQuantResult() / $this->configuration['quant']);
         $penultima = $ultima_pag - 1;       
-        $adjacentes = 2;
 
         if ($this->configuration['pag'] > 1)
             $paginacao = '<a class="prev-paginacao" href="'.$pagina.'?pag='.$ant.(isset($_GET['busca'])?'&busca='.$_GET['busca']:'').(isset($_GET['limit'])?'&limit='.$_GET['limit']:'').'"><img src="imagens/arrowleft.png" /></a>';

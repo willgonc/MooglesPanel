@@ -1,61 +1,67 @@
 <?php
-
 require_once "DataBase.php";
 
-Class RemoveUsers extends DataBase
+Class StatusUsers extends DataBase
 {
-
     private $usuarios;
+    private $stat;
     private $pag;
     private $busca;
 
     public function __construct()
     {
         parent::__construct();
-
+        
         $this->usuarios = $_POST['usuarios'];
+        $this->stat = $_POST['estado'];
         $this->pag = $_POST['pag'];
         $this->busca = $_POST['busca'];
         
-        $r = $this->deleteUsers();
+        $r = $this->alterUser();
+
         $this->redirect($r);
+
         parent::closeConnect();
     }
 
-    private function deleteUsers()
+    private function alterUser()
     {
         $flag = 1;
+
         for ($i = 0; $i < count($this->usuarios); $i++)
         {
-            try
+            if($this->stat == 1 || $this->stat == 0)
             {
-                $r = parent::executeQuery('DELETE FROM usuarios WHERE id='.$this->usuarios[$i]);
-                if (!$r)
+                try
+                {
+                    $update = parent::executeQuery("UPDATE usuarios SET status=".$this->stat." WHERE id=".$this->usuarios[$i]);
+                    if (!$update)
+                        $flag = 0;
+                } 
+                catch( Exception $e )
+                {
                     $flag = 0;
+                }
             } 
-            catch (Exception $e)
-            {
+            else
                 $flag = 0;
-            }
         }
         return $flag;
     }
 
     private function redirect($flag)
     {
-        $msg = '';
-        $status = 1;
         if ($flag == 1)
         {
             $erro = true;
             if (count($this->usuarios) == 1)
             {
-                $msg    = 'O usu&aacute;rio foi removido!';
+                $msg = 'O usuario foi alterado!';
                 $status = 1;
             } 
             else 
             {
-                $msg    = 'Todos os usu&aacute;rios foram removidos!';
+                $msg = 'Todos os usuarios foram alterados!';
                 $status = 1;
             }
         } 
@@ -64,21 +70,21 @@ Class RemoveUsers extends DataBase
             $erro = false;
             if (count($this->usuarios) == 1)
             {
-                $msg    = 'Erro ao remover o usu&aacute;rio!'; 
+                $msg = 'Erro ao alterar o usu&aacute;rio!'; 
                 $status = 0;
             } 
             else 
             {
-                $msg    = 'Erro ao remover os usu&aacute;rios!'; 
+                $msg = 'Erro ao alterar os usu&aacute;rios!'; 
                 $status = 0;
             }
         }
+
         echo 'users.php?pag='.$this->pag.'&busca='.$this->busca.'&msg='.urlencode($msg).'&status='.$status;
     }
 }
 
-new RemoveUsers();
-
-
+new StatusUsers();
 ?>
+
 
