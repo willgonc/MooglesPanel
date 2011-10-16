@@ -27,6 +27,7 @@ Class DataBase extends Config
 		/** Chamando o construtor da Classe herdada*/
         parent::__construct();
         $this->openConnect();
+        $this->createDataBase();
         $this->selectDataBase();
     }
     
@@ -60,6 +61,16 @@ Class DataBase extends Config
     private function openConnect()
     {
         $this->setLink(mysql_connect(parent::getHost(), parent::getUser(), parent::getPass()));
+    }
+
+    /**
+     *	Cria a base de dados caso ela não exista
+	 *	@access private
+	 *	@name createDataBase()
+     */
+    private function createDataBase()
+    {
+        $this->executeQuery("CREATE DATABASE IF NOT EXISTS ".parent::getDataBase());
     }
 
     /**

@@ -1,12 +1,13 @@
 <?php
-require_once "connect_db.php";
+require_once "DataBase.php";
+$dataBase = new DataBase();
 $error = true;
 
 /* 
     CRIA TABELA DE POSTS 
 */
 try {
-    $posts = mysql_query("CREATE TABLE posts (
+    $posts = $dataBase->executeQuery("CREATE TABLE posts (
         id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         titulo      MEDIUMTEXT NOT NULL,
         texto       LONGTEXT,
@@ -146,5 +147,5 @@ try {
 if ($error)
     echo '<meta http-equiv="refresh" content="3; url=summary.php">';
 
-mysql_close($conexao);
+//mysql_close($conexao);
 ?>

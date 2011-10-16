@@ -1,6 +1,7 @@
 <?php
 
-include "connect_db.php";
+include "DataBase.php";
+new DataBase();
 mysql_query("INSERT INTO usuarios (nome,email,senha,status) VALUES ('Gavin David','nisi.Aenean@infelisNulla.com','ZHX09RWZ1AKPG23AKW5QDZB33HTL0YXBG80FNY1R','1')");
 mysql_query("INSERT INTO usuarios (nome,email,senha,status) VALUES ('Kennedy Ellison','et@nondui.edu','MUW67YZD2TPHR53XJL1WJHO38VMS4SZXM85GUN4Z','0')");
 mysql_query("INSERT INTO usuarios (nome,email,senha,status) VALUES ('Abbot Fletcher','penatibus.et.magnis@acturpis.ca','CZT42IUD1GWPZ85MRB7LODL81STR3PNMO29VPS9T','1')");

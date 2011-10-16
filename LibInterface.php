@@ -99,6 +99,31 @@ Class LibIterface
             return '';
         }
     }
+
+    /**
+     *  Método que retorna o html do formulário de busca das listagens
+     *  @access private
+     *  @param $action Nome do arquivo que trata os dados
+     *  @param $method Método de envio dos dados
+     *  @param $name Nome do formulário
+     *  @param $size Tamanho do campo de busca
+     *
+     *  @name $getHtmlFormSearch()
+     *  @return string
+     */
+    public function getHtmlFormSearch($action, $method, $name, $size){
+        $action = (isset($action)?'action="'.$action.'"':'');
+        $method = (isset($method)?'method="'.$method.'"':'');
+        $name = (isset($name)?'name="'.$name.'"':'');
+        $size = (isset($size)?'size="'.$size.'"':'size="20"');
+
+        return '<div class="tw-ui-busca">
+                   <form '.$action.' '.$method.' '.$name.'>
+                       <input type="text" class="input-text" '.$size.' name="busca" value="'.(isset($_GET['busca'])?$_GET['busca']:'').'" />
+                       <input type="image" class="input-image" src="imagens/search.png" />
+                   </form>
+               </div>';
+    }
 }
 
 ?>
