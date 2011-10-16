@@ -142,7 +142,7 @@ Class Pagination extends DataBase
         {
             $table .= "<tr>";
             if ($this->configuration['checkbox'])
-                $table .= "<td><input type='checkbox' value='".$row['id']."' /></td>";
+                $table .= "<td><input type='checkbox' class='checkboxListagem' value='".$row['id']."' /></td>";
 
             for ($j = 0; $j < count($this->configuration['colunas']); $j++)
             {

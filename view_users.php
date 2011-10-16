@@ -31,10 +31,13 @@ $pagination->configure(
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" language="javascript" src="js/lib.js"></script>
+        <script type="text/javascript" language="javascript" src="js/users.js"></script>
         <script type="text/javascript" language="javascript" src="js/dropdown.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
                 dropdown();
+                initListUsuarios();
             });
         </script>
     </head>
