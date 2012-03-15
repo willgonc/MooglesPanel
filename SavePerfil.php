@@ -75,7 +75,7 @@ Class SavePerfil extends Validation
             $this->redirect($u[0], $u[1]); 
         }
         else
-           $this->redirect($r); 
+           $this->redirect($r[0], $r[1]); 
 
         $this->dataBase->closeConnect();
 

@@ -17,10 +17,9 @@ $libInterface = new LibIterface();
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" language="javascript" src="js/dropdown.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
-                dropdown();
+					 $('#configurationMenu').addClass('activeMenu');
             });
         </script>
     </head>

@@ -17,40 +17,34 @@ Class LibIterface
     public function getHtmlMenuPrincipal()
     {
         $data = $this->getSession();
-        return '<div class="tw-ui-menu-principal">
-                 <img src="imagens/tw.png" />
-                 <div class="item-menu"><a href="summary.php">Resumo</a></div>
-                 <div class="item-menu">
-                     <a href="posts.php">Posts</a>
-                     <div class="submenu tw-ui-submenu">
-                         <p><a href="posts.php">Todos os posts</a></p>
-                         <p><a href="new_post.php">Adicionar post</a></p>
-                         <p><a href="categories.php">Categorias</a></p>
-                     </div>
-                 </div>
-                 <div class="item-menu">
-                     <a href="#">Usu&aacute;rios</a>
-                     <div class="submenu tw-ui-submenu">
-                         <p><a href="users.php">Todos os usu&aacute;rios</a></p>
-                         <p><a href="new_user.php">Adicionar usu&aacute;rio</a></p>
-                     </div>
-                 </div>
-                 <div class="item-menu"><a href="configuration.php">Configura&ccedil;&otilde;es</a></div>
-                 <div class="item-menu">
-                     <a href="#">Ajuda</a>
-                     <div class="submenu tw-ui-submenu">
-                         <p><a href="manual.php">Manual</a></p>
-                         <p><a href="about.php">Sobre</a></p>
-                     </div>
-                 </div>
-                 <div class="tw-ui-user-logged item-menu">
-                     <a href="#">'.$data['nome'].'</a>
-                     <div class="submenu-right submenu">
-                         <p><a href="perfil.php">Perfil</a></p>
-                         <p><a href="Logout.php">Sair</a></p>
-                     </div>
-                 </div>
-         </div>';
+        return '
+		  		<div class="tw-ui-menu-principal">
+		  			<ul>
+                 	<li id="sumaryMenu" title="Resumo"><a href="summary.php">Resumo</a></li>
+                 	<li id="postsMenu" title="Visualize e modifique seus posts"><a href="posts.php">Posts</a></li>
+                 	<li id="usersMenu" title="Visualize e edite usu&aacute;rios"><a href="users">Usu&aacute;rios</a></li>
+                 	<li id="configurationMenu" title="Configura&ccedil;&otilde;es do site">
+							<a href="configuration.php">Configura&ccedil;&otilde;es</a>
+						</li>
+                 	<li class="rightMenu" title="Sair do painel" ><a href="Logout.php">Sair</a> </li>
+                 	<li id="perfilMenu" title="Exibir seu perfil" class="rightMenu">
+							<a href="perfil.php">Ol&aacute;, <b>'.$data['nome'].'</b></a> 
+						</li>
+				  </ul>
+         	</div>
+			   <link rel="stylesheet" type="text/css" href="css/jquery.qtip.min.css" />
+			   <script type="text/javascript" language="javascript" src="js/jquery.qtip.min.js"></script>
+				<script type="text/javascript">
+					$(".tw-ui-menu-principal ul li").qtip({
+						position: {
+							my: "top center",
+							at: "bottom center"
+						},
+						style: {
+							classes: "ui-tooltip-shadow ui-tooltip-tipsy"
+						}
+					});
+				</script>';
     }
 
     /**

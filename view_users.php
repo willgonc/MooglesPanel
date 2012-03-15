@@ -37,15 +37,15 @@ $pagination->configure(
         <script type="text/javascript" language="javascript" src="js/dropdown.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
-                dropdown();
                 initListUsuarios();
+					 $('#usersMenu').addClass('activeMenu');
             });
         </script>
     </head>
     <body>
         <div class="geral">
             <?php echo $libInterface->getHtmlMenuPrincipal(); ?>
-            <?php echo $libInterface->getHtmlCabecalho('Perfil'); ?>
+            <?php echo $libInterface->getHtmlCabecalho('Usuários'); ?>
             <?php echo $libInterface->getMessage(); ?>
             <div class="tw-ui-content">
                 <div class="tw-ui-content-mod">

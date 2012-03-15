@@ -20,7 +20,7 @@ $libInterface = new LibIterface();
         <script type="text/javascript" language="javascript" src="js/dropdown.js"></script>
         <script type="text/javascript" language="javascript">
             $(document).ready(function (){
-                dropdown();
+					$('#sumaryMenu').addClass('activeMenu');
             });
         </script>
     </head>

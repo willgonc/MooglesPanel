@@ -2,11 +2,11 @@
     margin: 0px;
     padding: 0px;
     outline: none;
+    font-family: arial;
 }
 
 p {
     padding: 2px 0px;
-    font-family: arial;
 }
 
 input[type=checkbox], x:default {
@@ -16,8 +16,8 @@ input[type=checkbox], x:default {
 
 .tw-ui-cabecalho {
     background: #fff;
-    padding: 15px 5px 15px 20px;
-    font-family: arial;
+    padding: 11px 30px 12px;
+	 border-bottom: 1px solid rgb(220,220,220);
     font-size: 22px;
     color: #ff6600;
 }
@@ -49,6 +49,11 @@ input[type=checkbox], x:default {
     margin: 0px;
     text-align: center;
     font-size: 13px;
+	 position: absolute;
+	 top: 25px;
+	 width: 400px;
+	 margin-left: -200px;
+	 left: 50%;
 }
 
 .errorMsg {
@@ -56,8 +61,7 @@ input[type=checkbox], x:default {
     background: #ffd5d5;
     padding: 5px;
     margin-bottom: 5px;
-    border-top: 1px solid #ffaaaa;
-    border-bottom: 1px solid #ffaaaa;
+    border: 1px solid #ffaaaa;
 }
 
 .okMsg {
@@ -65,8 +69,7 @@ input[type=checkbox], x:default {
     background: #ccffaa;
     margin-bottom: 5px;
     padding: 5px;
-    border-top: 1px solid #88ff55;
-    border-bottom: 1px solid #88ff55;
+    border: 1px solid #88ff55;
 }
 
 .load {
@@ -80,30 +83,47 @@ input[type=checkbox], x:default {
 
 .tw-ui-menu-principal {
     margin: 0px;
-    background: url(images/bg_menu_principal.png) repeat-x top left;
-    width: 100%;
-    height: 40px;
+    height: 38px;
+	 border-bottom: 1px solid gray;
+	 border-top: 1px solid gray;
+	 background: rgb(230,230,230);
 }
 
-.tw-ui-menu-principal img {
-    float: left;
-    margin: 4px 10px 2px 20px;
+.tw-ui-menu-principal ul {
+	list-style: none;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 
-.tw-ui-menu-principal div {
+.tw-ui-menu-principal ul li {
     float: left;
     margin: 0px;
-    padding: 10px 15px;
+	 padding: 10px 15px 9px;
 }
-.tw-ui-menu-principal a {
+
+.activeMenu {
+	background: rgb(255,255,255);
+	padding: 10px 14px 9px !important;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	border-bottom: 1px solid white;
+}
+
+.rightMenu {
+	float: right !important;
+}
+
+.tw-ui-menu-principal ul li a {
     text-decoration: none;
-    color: #fff;
+    color: rgb(80,80,80);
     font-family: arial;
     font-size: 13px;
 }
+
 .tw-ui-menu-principal a:hover {
     text-decoration: underline;
 }
+
 .tw-ui-submenu {
     display: none;
     position: absolute;
@@ -238,15 +258,12 @@ div.tw-ui-user-logged {
     font-size: 14px;
     padding: 7px 14px;
     color: #ff6600;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    border-radius:3px;
-    background: url(images/bg_menu_mod.png) repeat-x top left;
+    background: rgb(240,240,240);
 }
 .input-button:hover, .input-submit:hover,
 .input-button:focus, .input-submit:focus,
 .input-image:hover, .input-image:focus {
-    background: #fff;
+    border: 1px solid rgb(100,100,100);
 }
 
 /* Campo de texto e senha*/
@@ -257,18 +274,23 @@ div.tw-ui-user-logged {
     padding: 7px;
     background: #fff;
     margin-bottom: 5px; 
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    border-radius:3px;
 }
 
 .combo-box {
     padding: 4px;
     font-size: 13px;
 }
+.tw-ui-content {
+	position: absolute;
+	top: 90px;
+	left: 20px;
+	right: 20px;
+	bottom: 0px;
+	overflow: auto;
+}
 
 .tw-ui-content-mod {
-    padding: 0px 10px 20px;
+    padding: 10px;
 }
 .tw-ui-formulario-login {
     width: 300px;
