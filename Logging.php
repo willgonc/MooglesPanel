@@ -44,7 +44,9 @@ Class Logging extends Validation
         session_start();
 
 		$this->getData();
-		$data = $this->validateData();
+            header("Location: summary.php");
+		//echo $this->email;
+		/*$data = $this->validateData();
         if ($data)
         {
             $this->createSession($data);
@@ -54,8 +56,7 @@ Class Logging extends Validation
         {
             $this->destroySession();
             header("Location: login.php?status=0&msg=".urlencode('Usu&aacute;rio ou senha incorretos'));
-        }
-		echo $data;
+        }*/
         $this->dataBase->closeConnect();
     }
 

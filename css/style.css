@@ -303,9 +303,8 @@ div.tw-ui-user-logged {
     color: #000;
     background: #fff;
     padding: 15px;
-    border: 1px solid rgb(100,100,100);
 }
-.tw-ui-formulario-login h2 {
+.tw-ui-formulario-login h1 {
     padding-bottom: 20px;
 }
 

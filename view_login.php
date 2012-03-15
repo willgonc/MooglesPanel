@@ -18,39 +18,43 @@ $libInterface = new LibIterface();
     </head>
     <body>
         <div class="geral">
-            <form action="Logging.php" method="post">
-                <table class="tw-ui-formulario-login">
-                    <tbody>
-                        <tr>
-                            <td><h2>Login</h2></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $libInterface->getMessage(); ?></td>
-                        </tr>
-                        <tr>
-                            <td>E-mail</td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" class="input-text" size="30" name="email" /></td>
-                        </tr>
-                        <tr>
-                            <td>Senha</td>
-                        </tr>
-                        <tr>
-                            <td><input type="password" class="input-text" size="30" name="senha" /></td>
-                        </tr>
-                        <tr>
-                            <td id="msgRespota"></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="submit" id="btn-submit-login" class="input-button" value="Entrar" />
-                                <img src="./imagens/load.gif" class="load" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+			<table class="tw-ui-formulario-login">
+				<tbody>
+					<tr>
+						<td><h1>Login</h1></td>
+					</tr>
+					<tr>
+						<td><?php echo $libInterface->getMessage(); ?></td>
+					</tr>
+					<tr>
+						<td>E-mail</td>
+					</tr>
+					<tr>
+						<td><input type="text" class="input-text" size="30" name="email" /></td>
+					</tr>
+					<tr>
+						<td>Senha</td>
+					</tr>
+					<tr>
+						<td><input type="password" class="input-text" size="30" name="senha" /></td>
+					</tr>
+					<tr>
+						<td id="msgRespota"></td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" id="btn-submit-login" class="input-button" value="Entrar" />
+							<img src="./imagens/load.gif" class="load" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
         </div>
+		<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" language="javascript">
+			$('#btn-submit-login').click(function (){
+				$.post("Logging.php", { email: $(':input[name=email]').val(), senha: $(':input[name=senha]').val() } );
+			});
+		</script>
     </body>
 </html>
