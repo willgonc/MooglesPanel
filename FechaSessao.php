@@ -5,7 +5,7 @@
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
  *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
-Class Logout
+Class FechaSessao
 {
     /**
      *  Método construtor da classe
@@ -16,10 +16,11 @@ Class Logout
     {
         session_start();
         session_destroy();
-        header('Location: login.php');
+        header('Location: index.php');
     }
 }
 
-new Logout();
+new FechaSessao();
 
 ?>
+

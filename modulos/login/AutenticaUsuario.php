@@ -1,4 +1,5 @@
 <?php
+
 /**
  *	Classe que valida os dados do formulário de login e cria a sessão
  *	
@@ -6,8 +7,8 @@
  *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
 
-require_once "DataBase.php";
-require_once "Validation.php";
+require_once "../../DataBase.php";
+require_once "../../Validation.php";
 
 Class Logging extends Validation
 {
@@ -43,32 +44,32 @@ Class Logging extends Validation
         
         session_start();
 
-		$this->getData();
-            header("Location: summary.php");
-		//echo $this->email;
-		/*$data = $this->validateData();
+		$this->pegaDados();
+
+		$data = $this->validateData();
+
         if ($data)
         {
             $this->createSession($data);
-            header("Location: summary.php");
+            echo json_encode(Array("resposta" => True));
         }
         else
         {
             $this->destroySession();
-            header("Location: login.php?status=0&msg=".urlencode('Usu&aacute;rio ou senha incorretos'));
-        }*/
-        $this->dataBase->closeConnect();
+            echo json_encode(Array("resposta" => False));
+        }
+		$this->dataBase->closeConnect();
     }
 
     /**
      *  Método que armazena nos atributos os dados recebidos por post
      *  @access private
-     *  @name getData()
+     *  @name pegaDados()
      */
-    private function getData()
+    private function pegaDados()
     {
-        $this->email = $_POST['email'];
-        $this->senha = $_POST['senha'];
+        $this->email = $_GET['email'];
+        $this->senha = $_GET['senha'];
     }
     
     /**
@@ -126,22 +127,22 @@ Class Logging extends Validation
                     } 
 					else 
                     {
-                        return 0;
+                        return False;
                     }
                 } 
 				else 
                 {
-                    return 0;
+                    return False;
                 }
             } 
 			catch (Exception $e)
             {
-                return 0;
+                return False;
             }
         } 
 		else 
         {
-            return 0;
+            return False;
         }
     }
 }
@@ -149,3 +150,4 @@ Class Logging extends Validation
 new Logging();
 
 ?>
+
