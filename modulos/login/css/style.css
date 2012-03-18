@@ -1,0 +1,28 @@
+.formularioLogin {
+	background: rgb(230,230,230);
+	padding: 30px;
+	font-size: 13px;
+	margin: 10px;
+	border: 1px solid rgb(190,190,190);
+	width: 400px;
+	height: 250px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -200px;
+		margin-top: -125px;
+}
+
+.formularioLogin h2 {
+	margin: 0px 0px 10px;
+}
+
+.formularioLogin input[type=text],
+.formularioLogin input[type=password] {
+	width: 318px;
+}
+
+.formularioLogin #load {
+	margin: 0px 0px 0px 10px;
+	float: left;
+}

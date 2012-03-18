@@ -239,7 +239,7 @@ div.tw-ui-user-logged {
     margin-top: 0px;
 }
 
-.input-image {
+.inputImage {
     border: 1px solid rgb(190,190,190);
     font-size: 14px;
     padding: 3px 15px;
@@ -253,27 +253,32 @@ div.tw-ui-user-logged {
     cursor: default;
 }
 
-.input-button, .input-submit {
+.inputButton, .inputSubmit {
     border: 1px solid rgb(190,190,190);
     font-size: 14px;
     padding: 7px 14px;
     color: #ff6600;
     background: rgb(240,240,240);
 }
-.input-button:hover, .input-submit:hover,
-.input-button:focus, .input-submit:focus,
-.input-image:hover, .input-image:focus {
-    border: 1px solid rgb(100,100,100);
+.inputButton:hover, .inputButton:focus,
+.inputSubmit:hover, .inputSubmit:focus,
+.inputImage:hover, .inputImage:focus {
+	border: 1px solid #ff6600;
 }
 
 /* Campo de texto e senha*/
-.input-text,
-.input-pass {
+.inputText,
+.inputPass {
     border: 1px solid rgb(190,190,190);
     font-size: 13px;
     padding: 7px;
     background: #fff;
     margin-bottom: 5px; 
+}
+
+.inputText:focus,
+.inputPass:focus {
+	border: 1px solid #ff6600;
 }
 
 .combo-box {

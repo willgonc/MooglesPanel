@@ -2,19 +2,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
 	<head>
 		<title>Autentica&ccedil;&atilde;o</title>
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+
 		<script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="../../js/autenticacao.js"></script>
 		<script type="text/javascript" language="javascript" src="js/lib.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/autenticacao.js"></script>
 
 		<script type="text/javascript" language="javascript">
 			$(document).ready(function (){
-				verificaAutenticacao(true);
+				init();
 			});
 		</script> 
 	</head>
 	<body>
-		Email: <input type="text" id="email" size="40" /><br />
-		Senha: <input type="password" id="senha" size="40" /><br />
-		<input type="button" id="botaoEntrar" value="Entrar" />
+		<table class="formularioLogin">
+			<tbody>
+				<tr>
+					<td colspan="2"><h2>Autentica&ccedil;&atilde;o</h2></td>
+				</tr>
+				<tr>
+					<td colspan="2">E-mail</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="text" id="email" class="inputText" size="40" /></td>
+				</tr>
+				<tr>
+					<td colspan="2">Senha</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="password" id="senha" class="inputPass" size="40" /></td>
+				</tr>
+				<tr>
+					<td width="70">
+						<input type="button" id="botaoEntrar" class="inputButton"value="Entrar" />
+					</td>
+					<td>
+						<img src="imagens/load.gif" id="load" border="0" />
+					</td>
+				</tr>
+				<tr>
+					<td id="msg"></td>
+				</tr>
+			</tbody>
+		</table>
 	</body>
 </html> 
