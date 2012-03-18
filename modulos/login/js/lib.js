@@ -4,8 +4,8 @@ function init(){
 
 	$('#email, #senha').keypress(function (){
 		if (event.keyCode == 13){
-			autenticaUsuario($('#email').val(), $('#senha').val());
 			$('#load').show();
+			autenticaUsuario($('#email').val(), $('#senha').val());
 		}
 	});
 	$('#botaoEntrar').click(function (){
@@ -15,13 +15,20 @@ function init(){
 }
 
 function autenticaUsuario(email, senha){
-	$.getJSON("AutenticaUsuario.php",{ "email": email, "senha": senha }, function (data){
-		setTimeout("$('#load').hide()",2000);
-		
-		if (data.resposta)
-			window.location = "../../index.php";
-		else
-			$('#msg').html('Usuario ou senha incorretos!');
-		
-	});
+	if (email.length > 0 && senha.length > 0){
+		$.getJSON("AutenticaUsuario.php",{ "email": email, "senha": senha }, function (data){
+			
+			if (data.resposta) {
+				window.location = "../../index.php";
+			} else {
+				$('#load').hide();
+				$('#msg').html('Usuario ou senha incorretos!');
+				$('#email').focus();
+			}
+		});
+	} else {
+		$('#load').hide();
+		$('#msg').html('Preencha os campos corretamente!');
+		$('#email').focus();
+	}
 }

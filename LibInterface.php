@@ -8,44 +8,6 @@
  */
 Class LibIterface
 {
-    /**
-     *  Método que retorna o html do menu principal
-     *  @access private
-     *  @name $getHtmlMenuPrincipal()
-     *  @return string
-     */
-    public function getHtmlMenuPrincipal()
-    {
-        $data = $this->getSession();
-        return '
-		  		<div class="tw-ui-menu-principal">
-		  			<ul>
-                 	<li id="sumaryMenu" title="Resumo"><a href="summary.php">Resumo</a></li>
-                 	<li id="postsMenu" title="Visualize e modifique seus posts"><a href="posts.php">Posts</a></li>
-                 	<li id="usersMenu" title="Visualize e edite usu&aacute;rios"><a href="users">Usu&aacute;rios</a></li>
-                 	<li id="configurationMenu" title="Configura&ccedil;&otilde;es do site">
-							<a href="configuration.php">Configura&ccedil;&otilde;es</a>
-						</li>
-                 	<li class="rightMenu" title="Sair do painel" ><a href="Logout.php">Sair</a> </li>
-                 	<li id="perfilMenu" title="Exibir seu perfil" class="rightMenu">
-							<a href="perfil.php">Ol&aacute;, <b>'.$data['nome'].'</b></a> 
-						</li>
-				  </ul>
-         	</div>
-			   <link rel="stylesheet" type="text/css" href="css/jquery.qtip.min.css" />
-			   <script type="text/javascript" language="javascript" src="js/jquery.qtip.min.js"></script>
-				<script type="text/javascript">
-					$(".tw-ui-menu-principal ul li").qtip({
-						position: {
-							my: "top center",
-							at: "bottom center"
-						},
-						style: {
-							classes: "ui-tooltip-shadow ui-tooltip-tipsy"
-						}
-					});
-				</script>';
-    }
 
     /**
      *  Método que retorna o html do título do conteúdo da página
