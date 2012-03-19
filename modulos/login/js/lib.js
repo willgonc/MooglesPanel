@@ -1,3 +1,9 @@
+/**
+ *	@description Função de inicialização do módulo
+ *	
+ *	@function
+ *	@name init
+ */
 function init(){
 	$('#load').hide();
 	$('#email').focus();
@@ -14,6 +20,15 @@ function init(){
 	});
 }
 
+/**
+ *	@description Função que chama o controle de autenticação
+ *		e trata o resultado.
+ *	
+ *	@function
+ *	@name autenticaUsuario
+ *	@param {string} email Email do usuário
+ *	@param {string} senha Senha do usuário
+ */
 function autenticaUsuario(email, senha){
 	if (email.length > 0 && senha.length > 0){
 		$.getJSON("AutenticaUsuario.php",{ "email": email, "senha": senha }, function (data){

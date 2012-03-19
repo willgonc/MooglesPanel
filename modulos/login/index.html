@@ -1,13 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 		<title>Autentica&ccedil;&atilde;o</title>
+
 		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 
 		<script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/lib.js"></script>
 		<script type="text/javascript" language="javascript" src="js/lib.js"></script>
-		<script type="text/javascript" language="javascript" src="../../js/autenticacao.js"></script>
 
 		<script type="text/javascript" language="javascript">
 			$(document).ready(function (){
@@ -16,6 +19,7 @@
 		</script> 
 	</head>
 	<body>
+		<div id="mensagem"></div>
 		<table class="formularioLogin">
 			<tbody>
 				<tr>
@@ -40,9 +44,6 @@
 					<td>
 						<img src="imagens/load.gif" id="load" border="0" />
 					</td>
-				</tr>
-				<tr>
-					<td colspan="2" id="msg"></td>
 				</tr>
 			</tbody>
 		</table>

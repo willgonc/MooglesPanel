@@ -1,3 +1,100 @@
+/**
+ *	@description Função que verifica a sessão do usuário
+ *
+ *	@function
+ *	@name verificaAutenticacao
+ */
+function verificaAutenticacao(){
+	$.ajax({
+	    type: 'GET',
+		url: pegaPath() + "VerificaAutenticacao.php",
+		dataType: 'json',
+		success: function(data) {
+			var arrURL = window.location.pathname.split('/');
+			var mod = arrURL[arrURL.length - 2];
+			if (data.resposta) {
+				if (mod == 'login')
+					window.location = "../../";
+
+			} else {
+				if (mod != 'login')
+					window.location = "../../modulos/login/";
+
+			}
+		},
+		data: {},
+		async: false
+	});
+}
+
+verificaAutenticacao();
+
+/**
+ *	@description Pega o nome do host
+ *
+ *	@function
+ *	@name pegaNomeHost
+ *	@return {string}
+ */
+function pegaNomeHost(){
+	if (window.location.hostname)
+		return window.location.hostname;
+	else if (window.location.host)
+		return window.location.host;
+	else
+		return window.location.href.split('/')[2];
+}
+
+/**
+ *	@description Pega o protocolo usado
+ *
+ *	@function
+ *	@name pegaNomeProtocolo
+ *	@return {string}
+ */
+function pegaNomeProtocolo(){
+	if (window.location.protocol)
+		return window.location.protocol;
+	else
+		return 'http:'
+}
+
+function pegaDiretorioHost(){
+	var arr = [];
+	var str = '';
+	if (window.location.pathname){
+		arr = window.location.pathname.split('/');
+		for (var i = 0; arr[i] != 'modulos'; i++)
+			if (arr[i] != '')
+				str += '/' + arr[i];
+	}
+
+	return str;
+}
+
+function pegaPath(){
+	return pegaNomeProtocolo() + '//' + pegaNomeHost() + pegaDiretorioHost() + '/';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  *  Valida email
  */
