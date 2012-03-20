@@ -59,6 +59,13 @@ function pegaNomeProtocolo(){
 		return 'http:'
 }
 
+/**
+ *	@description Retorna o diretório aonde se encontra o painel
+ *
+ *	@function
+ *	@name pegaDiretorioHost
+ *	@return {string}
+ */
 function pegaDiretorioHost(){
 	var arr = [];
 	var str = '';
@@ -72,31 +79,23 @@ function pegaDiretorioHost(){
 	return str;
 }
 
+/**
+ *	@description Retorna o link raiz completo do painel
+ *
+ *	@function
+ *	@name pegaPath
+ *	@return {string}
+ */
 function pegaPath(){
 	return pegaNomeProtocolo() + '//' + pegaNomeHost() + pegaDiretorioHost() + '/';
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- *  Valida email
+/**
+ *  @description Valida um email
+ *
+ *	@function
+ *	@param {string} email E-mail a ser validado
+ *	@return {bool} True caso esteje no formato correto
  */
 
 function validaEmail(email){
@@ -108,6 +107,25 @@ function validaEmail(email){
     else
         return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function getQueryVariable(variable)
 {

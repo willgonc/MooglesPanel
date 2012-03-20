@@ -1,5 +1,5 @@
 /**
- *	@description Função de inicialização do módulo
+ *	@description Função de inicialização do módulo login
  *	
  *	@function
  *	@name init
@@ -8,7 +8,7 @@ function init(){
 	$('#load').hide();
 	$('#email').focus();
 
-	$('#email, #senha').keypress(function (){
+	$('#email, #senha').keypress(function (event){
 		if (event.keyCode == 13){
 			$('#load').show();
 			autenticaUsuario($('#email').val(), $('#senha').val());
@@ -22,7 +22,8 @@ function init(){
 
 /**
  *	@description Função que chama o controle de autenticação
- *		e trata o resultado.
+ *		e trata o resultado exibindo as mensagens ou redirecionando
+ *		para a página principal.
  *	
  *	@function
  *	@name autenticaUsuario
@@ -30,20 +31,26 @@ function init(){
  *	@param {string} senha Senha do usuário
  */
 function autenticaUsuario(email, senha){
-	if (email.length > 0 && senha.length > 0){
+	if (email.length == 0){
+		escreveMensagemLogin('Preencha o campo <b>E-mail</b> corretamente!');
+	} else if (senha.length == 0){
+		escreveMensagemLogin('Preencha o campo <b>Senha</b> corretamente!');
+	} else if (validaEmail(email)){
 		$.getJSON("AutenticaUsuario.php",{ "email": email, "senha": senha }, function (data){
 			
 			if (data.resposta) {
 				window.location = "../../index.php";
 			} else {
-				$('#load').hide();
-				$('#msg').html('Usuario ou senha incorretos!');
-				$('#email').focus();
+				escreveMensagemLogin('Usuario ou senha incorretos!');
 			}
 		});
 	} else {
-		$('#load').hide();
-		$('#msg').html('Preencha os campos corretamente!');
-		$('#email').focus();
+		escreveMensagemLogin('Este endere&ccedil;o de <b>e-mail</b> n&atilde;o &eacute; v&aacute;lido!');
 	}
+}
+
+function escreveMensagemLogin(msg){
+	$('#load').hide();
+	$('#mensagem').html(msg);
+	$('#email').focus();
 }

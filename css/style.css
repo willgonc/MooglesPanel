@@ -5,6 +5,10 @@
     font-family: arial;
 }
 
+body {
+	background: #fff;
+}
+
 p {
     padding: 2px 0px;
 }
@@ -56,7 +60,14 @@ input[type=checkbox], x:default {
 	 left: 50%;
 }
 
-.errorMsg {
+.mensagemLogin {
+    margin: 10px 0px 0px;
+    text-align: center;
+    font-size: 13px;
+	color: red;
+}
+
+.error {
     color: #d40000;
     background: #ffd5d5;
     padding: 5px;
@@ -64,7 +75,7 @@ input[type=checkbox], x:default {
     border: 1px solid #ffaaaa;
 }
 
-.okMsg {
+.ok {
     color: #225500;
     background: #ccffaa;
     margin-bottom: 5px;
