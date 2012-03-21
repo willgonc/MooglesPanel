@@ -1,14 +1,14 @@
 <?php
 
 /**
- *	Classe responsável pelas funçoes de manipulação do banco de dados
+ *	Classe responsável pelas funçoes tratamento dos dados
  *	
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
  *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
 require_once "Config.php";
 
-Class DataBase extends Config
+Class Modelo extends Config
 {
     /**
      *  Atributo que guarda o id da conexão com o banco de dados
@@ -22,13 +22,13 @@ Class DataBase extends Config
      *  @access public
      *  @name __construct()
      */
-    public function __construct()
-    {
-		/** Chamando o construtor da Classe herdada*/
-        parent::__construct();
-        $this->openConnect();
-        $this->createDataBase();
-        $this->selectDataBase();
+    public function __construct(){
+		/** 
+		 *	Chamando o construtor da Classe herdada
+		 */
+		parent::__construct();
+		$this->openConnect();
+		$this->selectDataBase();
     }
     
     /**
@@ -61,16 +61,6 @@ Class DataBase extends Config
     private function openConnect()
     {
         $this->setLink(mysql_connect(parent::getHost(), parent::getUser(), parent::getPass()));
-    }
-
-    /**
-     *	Cria a base de dados caso ela não exista
-	 *	@access private
-	 *	@name createDataBase()
-     */
-    private function createDataBase()
-    {
-        $this->executeQuery("CREATE DATABASE IF NOT EXISTS ".parent::getDataBase());
     }
 
     /**
@@ -132,7 +122,7 @@ Class DataBase extends Config
 	 *	@name getRows()
      *  @return int
      */
-    public function getRows($result)
+    public function getNumRows($result)
     {
         return mysql_num_rows($result);
     }
