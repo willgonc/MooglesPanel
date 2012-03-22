@@ -90,6 +90,16 @@ Class ControleAutenticacao extends Modelo {
 			$this->retornaResultado($resultado);
 		}
     }
+	
+	/**
+     *  Método que fecha a sessão aberta pelo usuário
+     *  @access private
+     *  @name fechaSessao()
+     */
+    public function fechaSessao() {
+        session_destroy();
+		$this->retornaResultado(True);
+    }
 }
 
 new ControleAutenticacao();

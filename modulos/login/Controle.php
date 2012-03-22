@@ -7,7 +7,7 @@
  *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
 
-require_once "../../Controle.php";
+require_once "../../ControleGeral.php";
 
 Class Logging extends Controle
 {

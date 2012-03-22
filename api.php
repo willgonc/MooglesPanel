@@ -4,8 +4,8 @@ require_once "Modelo.php";
 
 Class API extends Modelo {
 	public function __construct() {
-		$comando = $_GET['comando'];
-		$this->$comando();
+		$acao = $_GET['acao'];
+		$this->$acao();
 	}
 
 	public function pegaUsuarioAutenticado() {

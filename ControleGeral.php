@@ -86,15 +86,6 @@ Class Controle Extends Modelo {
         return isset($_SESSION['data']) ? $_SESSION['data'] : null;
     }
     
-	/**
-     *  Método que fecha a sessão aberta pelo usuário
-     *  @access private
-     *  @name fechaSessao()
-     */
-    public function fechaSessao() {
-        session_start();
-        session_destroy();
-    }
 }
 
 new Controle();
