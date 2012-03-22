@@ -4,30 +4,62 @@
  *	@function
  *	@name verificaAutenticacao
  */
-function verificaAutenticacao(){
-	$.ajax({
-	    type: 'GET',
-		url: pegaPath() + "VerificaAutenticacao.php",
-		dataType: 'json',
-		success: function(data) {
-			var arrURL = window.location.pathname.split('/');
-			var mod = arrURL[arrURL.length - 2];
-			if (data.resposta) {
-				if (mod == 'login')
-					window.location = "../../";
 
+function verificaAutenticacao(){
+	ajaxSync(pegaDiretorioHost() + "ControleAutenticacao.php", {"acao":"validaUsuario"}, function(data) {
+			var mod = pegaDiretorioModuloAtual();
+			if (data.resultado) {
+				if (mod == 'login')
+					window.location = pegaDiretorioHost();
 			} else {
 				if (mod != 'login')
-					window.location = "../../modulos/login/";
-
+					window.location = pegaDiretorioModulo("login");
 			}
-		},
-		data: {},
+		});
+}
+verificaAutenticacao();
+
+/**
+ *	@description Realiza uma chamada ajax síncrona
+ *
+ *	@function
+ *	@name ajaxSync
+ *	@param {string} url Url da chamada ajax
+ *	@param {array} data Dados a serem passados
+ *	@param {function} call Função de callback que é executada em caso
+ *		de sucesso
+ */
+function ajaxSync(url, data, call){
+	$.ajax({
+	    type: 'GET',
+		url: url,
+		dataType: 'json',
+		success: (call ? call : function (){}),
+		data: (data ? data : {}),
 		async: false
 	});
 }
 
-verificaAutenticacao();
+/**
+ *	@description Realiza uma chamada ajax assíncrona
+ *
+ *	@function
+ *	@name ajax
+ *	@param {string} url Url da chamada ajax
+ *	@param {array} data Dados a serem passados
+ *	@param {function} call Função de callback que é executada em caso
+ *		de sucesso
+ */
+function ajax(url, data, call){
+	$.ajax({
+	    type: 'GET',
+		url: url,
+		dataType: 'json',
+		success: (call ? call : function (){}),
+		data: (data ? data : {}),
+		async: true
+	});
+}
 
 /**
  *	@description Pega o nome do host
@@ -68,15 +100,27 @@ function pegaNomeProtocolo(){
  */
 function pegaDiretorioHost(){
 	var arr = [];
-	var str = '';
+	var host = '';
 	if (window.location.pathname){
 		arr = window.location.pathname.split('/');
 		for (var i = 0; arr[i] != 'modulos'; i++)
 			if (arr[i] != '')
-				str += '/' + arr[i];
+				host += '/' + arr[i];
 	}
 
-	return str;
+	return host + '/';
+}
+
+/**
+ *	@description Retorna a url de um modulo
+ *
+ *	@function
+ *	@name pegaDiretorioHost
+ *	@para {string} Nome do módulo
+ *	@return {string}
+ */
+function pegaDiretorioModulo(modulo){
+	return pegaDiretorioHost() + "modulos/" + modulo + "/";
 }
 
 /**
@@ -91,13 +135,25 @@ function pegaPath(){
 }
 
 /**
+ *	@description Retorna o nome do diretório do módulo atual
+ *
+ *	@function
+ *	@name pegaDiretorioModuloAtual
+ *	@return {string}
+ */
+function pegaDiretorioModuloAtual(){
+	var arrURL = window.location.pathname.split('/');
+	return arrURL[arrURL.length - 2];
+}
+
+/**
  *  @description Valida um email
  *
  *	@function
+ *	@name validaEmail
  *	@param {string} email E-mail a ser validado
  *	@return {bool} True caso esteje no formato correto
  */
-
 function validaEmail(email){
     var reEmail = /^[\w-]+(\.[\w-]+)*@(([A-Za-z\d][A-Za-z\d-]{0,61}[A-Za-z\d]\.)+[A-Za-z]{2,6}|\[\d{1,3}(\.\d{1,3}){3}\])$/;
     if (reEmail.test(email))
@@ -108,7 +164,20 @@ function validaEmail(email){
         return false;
 }
 
-
+/**
+ *  @description Verifica se uma string está vazia ou nao
+ *
+ *	@function
+ *	@name requerido
+ *	@param {string}
+ *	@return {bool}
+ */
+function requerido(str){
+    if (str == '' || str == undefined || str == null || str.length == 0)
+        return false;
+    else
+        return true;
+}
 
 
 
@@ -138,15 +207,4 @@ function getQueryVariable(variable)
     return(false);
 }
 
-function requerido(str){
-    if (str == '' || str == undefined || str == null || str.length == 0)
-        return false;
-    else
-        return true;
-}
-
-function exibeMsgFormElem(elem, msg, estado){
-    $('.msg-login').remove();
-    elem.parent().append('<div class="msg-login" style="color: red">' + msg + '</div>');
-}
 

@@ -1,13 +1,14 @@
 <?php
+/**
+ *	Classe responsável pelas funções de controle geréricas usadas
+ *		pela maioria dos módulos
+ *	
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ */
 
 require_once "Modelo.php";
 
 Class Controle Extends Modelo {
-	/**
-	 *	Atributo para guardar o nome do método a ser executado
-	 *
-	 */
-	private $acao;
 
 	/**
      *  Método construtor da classe
@@ -18,14 +19,6 @@ Class Controle Extends Modelo {
      */
     public function __construct() {
 		parent::__construct();
-        
-		$this->getAcao();
-
-		if ($this->acao == null) {
-			$this->retornaResultado(null);
-		} else {
-			$this->$this->acao();
-		}
     }
 
     /**
@@ -35,11 +28,18 @@ Class Controle Extends Modelo {
      *  @name getAcao()
      *  @return string | null Null caso nenhuma ação for requisitada
      */
-	private function getAcao() {
+	public function getAcao() {
 		return isset($_GET['acao']) ? $_GET['acao'] : null;
 	}
 
-	private function retornaResultado($resultado) {
+    /**
+     *  Retorna um valor e formato json
+	 *
+     *  @access private
+     *  @name retornaResultado()
+     *  @return json
+     */
+	public function retornaResultado($resultado) {
 		echo json_encode(Array('resultado' => $resultado));
 	}
 
@@ -50,8 +50,7 @@ Class Controle Extends Modelo {
      *  @name validaEmail()
      *  @return bool
      */
-    public function validaEmail($email)
-    {
+    public function validaEmail($email) {
         if(filter_var($email, FILTER_VALIDATE_EMAIL))
             return 1;
         else
@@ -65,8 +64,7 @@ Class Controle Extends Modelo {
      *  @name strRequire()
      *  @return bool
      */
-    public function strRequire($str)
-    {
+    public function strRequire($str) {
         // removendo espaços em branco
         $str = trim($str);
         if (strlen($str) == 0 || empty($str) || $str == '')
@@ -77,54 +75,28 @@ Class Controle Extends Modelo {
     
 
     /**
-     *  Método que valida a sessão do usuário
-	 *
-     *  @param array
-     *  @access private
-     *  @name validaUsuario()
-     *  @return bool
-     */
-    private function validaUsuario($data) {
-		$session = $this->pegaSessao();
-		$resultado = False;
-
-		if ($session) {
-			$sql = 'SELECT * FROM usuarios WHERE 
-                email="'.$data['email'].'" and 
-                senha="'.$data['senha'].'" and 
-                status=1';
-            
-            // consulta na base os dados
-            $result = parent::executeQuery($sql);
-
-            if ($result) {
-                if (parent::getNumRows($result) == 1)
-                    $resultado = True;
-                else
-                    $resultado = False;
-            } else { 
-                $resultado = False;
-            }
-
-			$this->retornaResultado($resultado);
-		} else {
-			$this->retornaResultado($resultado);
-		}
-    }
-
-    /**
      *  Método para retornar a sessão aberta caso tenha uma
 	 *
      *  @access private
      *  @name pegaSessao()
      *  @return array|null
      */
-    private function pegaSessao()
-    {
+    public function pegaSessao() {
         session_start();
         return isset($_SESSION['data']) ? $_SESSION['data'] : null;
     }
+    
+	/**
+     *  Método que fecha a sessão aberta pelo usuário
+     *  @access private
+     *  @name fechaSessao()
+     */
+    public function fechaSessao() {
+        session_start();
+        session_destroy();
+    }
 }
 
+new Controle();
 
 ?>

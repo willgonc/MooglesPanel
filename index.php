@@ -1,8 +1,8 @@
 <?php
 
-require_once "Config.php";
+require_once "Modelo.php";
 
-Class Despachante Extends Config
+Class Despachante Extends Modelo
 {
     /**
      *  Método construtor da classe

@@ -1,6 +1,6 @@
 <?php
-require_once "DataBase.php";
-$dataBase = new DataBase();
+require_once "Modelo.php";
+$dataBase = new Modelo();
 $error = true;
 
 /* 

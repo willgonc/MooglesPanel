@@ -1,26 +1,23 @@
 <?php
-/**
- *	Classe responsável por encerrar a sessão do usuário
- *	
- *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
- *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
- */
-Class FechaSessao
-{
-    /**
-     *  Método construtor da classe
-     *  @access public
-     *  @name __construct()
-     */
-    public function __construct()
-    {
-        session_start();
-        session_destroy();
-        header('Location: index.php');
-    }
+
+Class A {
+	public function returnA (){
+		return 'a';
+	}
 }
 
-new FechaSessao();
+Class B extends A {
+	public function returnBA(){
+		return 'ba';
+	}
+}
+
+Class C extends B {
+	public function __construct(){
+		echo parent::returnA();
+	}
+}
+new C();
 
 ?>
 

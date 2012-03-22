@@ -31,15 +31,14 @@ function init(){
  *	@param {string} senha Senha do usuário
  */
 function autenticaUsuario(email, senha){
-	if (email.length == 0){
+	if (requerido(email) == false){
 		escreveMensagemLogin('Preencha o campo <b>E-mail</b> corretamente!');
-	} else if (senha.length == 0){
+	} else if (requerido(senha) == false){
 		escreveMensagemLogin('Preencha o campo <b>Senha</b> corretamente!');
 	} else if (validaEmail(email)){
-		$.getJSON("AutenticaUsuario.php",{ "email": email, "senha": senha }, function (data){
-			
+		ajaxSync("Controle.php",{ "acao": "autenticaUsuario", "email": email, "senha": senha }, function (data){
 			if (data.resposta) {
-				window.location = "../../index.php";
+				window.location = pegaDiretorioHost() + "index.php";
 			} else {
 				escreveMensagemLogin('Usuario ou senha incorretos!');
 			}

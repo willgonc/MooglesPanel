@@ -3,7 +3,6 @@
  *	Classe responsável pelas configurações
  *	
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
- *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
 Class Config 
 {
