@@ -1,8 +1,8 @@
 <?php
 
-require_once "Modelo.php";
+require_once "ControleGeral.php";
 
-Class ControleAutenticacao extends Modelo {
+Class ControleAutenticacao extends ControleGeral {
 	/**
      *  Método construtor da classe
 	 *
@@ -13,59 +13,21 @@ Class ControleAutenticacao extends Modelo {
     public function __construct() {
 		parent::__construct();
         session_start();
-		
-		$acao = $this->getAcao();
-
-		if ($acao == null)
-			$this->retornaResultado(null);
-		else
-			$this->$acao();
+		parent::executaAcao();
     }
     
-    /**
-     *  Método para pegar a acao que o controle irá executar
-	 *
-     *  @access private
-     *  @name getAcao()
-     *  @return string | null Null caso nenhuma ação for requisitada
-     */
-	public function getAcao() {
-		return isset($_GET['acao']) ? $_GET['acao'] : null;
-	}
-
-    /**
-     *  Retorna um valor e formato json
-	 *
-     *  @access private
-     *  @name retornaResultado()
-     *  @return json
-     */
-	public function retornaResultado($resultado) {
-		echo json_encode(Array('resultado' => $resultado));
-	}
     
-	/**
-     *  Método para retornar a sessão aberta caso tenha uma
-	 *
-     *  @access private
-     *  @name pegaSessao()
-     *  @return array|null
-     */
-    public function pegaSessao() {
-        return isset($_SESSION['data']) ? $_SESSION['data'] : null;
-    }
-
     /**
      *  Método que valida a sessão do usuário imprimindo a resposta
 	 *	em formato JSON
 	 *
-     *  @access private
+     *  @access public
      *  @name validaUsuario()
      *  @return JSON
      */
-    private function validaUsuario() {
-		$data = $this->pegaSessao();
-		$resultado = False;
+    public function validaUsuario() {
+		$data = parent::pegaSessao();
+		$resultado = Array(False, 'Nenhuma sess&atilde;o foi encontrada!');
 		if ($data) {
 			$sql = 'SELECT * FROM usuarios WHERE 
                 email="'.$data['email'].'" and 
@@ -78,27 +40,33 @@ Class ControleAutenticacao extends Modelo {
             $result = parent::executeQuery($sql);
 
             if ($result) {
-                if (parent::getNumRows($result) == 1)
-                    $resultado = True;
-                else
-                    $resultado = False;
+                if (parent::getNumRows($result) == 1){
+                    $resultado[0] = True;
+                    $resultado[1] = 'Usu&aacute;rio validado!';
+                } else {
+                    $resultado[0] = False;
+                    $resultado[1] = 'E-mail ou Senha incorretos!';
+				}
             } else { 
-                $resultado = False;
+                $resultado[0] = False;
+				$resultado[1] = 'Erro ao validar o usu&aacute;rio!';
             }
-			$this->retornaResultado($resultado);
+			parent::retornaResultado($resultado);
 		} else {
-			$this->retornaResultado($resultado);
+			parent::retornaResultado($resultado);
 		}
     }
 	
 	/**
      *  Método que fecha a sessão aberta pelo usuário
-     *  @access private
+	 *
+     *  @access public
      *  @name fechaSessao()
+     *  @return JSON
      */
     public function fechaSessao() {
         session_destroy();
-		$this->retornaResultado(True);
+		parent::retornaResultado(Array(True, 'A sess&atilde;o foi fechada com sucesso!'));
     }
 }
 

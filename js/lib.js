@@ -1,5 +1,6 @@
 /**
- *	@description Função que verifica a sessão do usuário
+ *	@description Função que verifica a sessão do usuário e redireciona
+ *		para o modulo correspondente
  *
  *	@function
  *	@name verificaAutenticacao
@@ -7,20 +8,20 @@
 
 function verificaAutenticacao(){
 	ajaxSync(pegaDiretorioHost() + "ControleAutenticacao.php", {"acao":"validaUsuario"}, function(data) {
-			var mod = pegaDiretorioModuloAtual();
-			if (data.resultado) {
-				if (mod == 'login')
-					window.location = pegaDiretorioHost();
-			} else {
-				if (mod != 'login')
-					window.location = pegaDiretorioModulo("login");
-			}
-		});
+		var mod = pegaDiretorioModuloAtual();
+		if (data[0] == true) {
+			if (mod == 'login')
+				window.location = pegaDiretorioHost();
+		} else {
+			if (mod != 'login')
+				window.location = pegaDiretorioModulo("login");
+		}
+	});
 }
 verificaAutenticacao();
 
 /**
- *	@description Realiza uma chamada ajax síncrona
+ *	@description Realiza uma chamada ajax síncrona sem cache
  *
  *	@function
  *	@name ajaxSync
@@ -42,7 +43,7 @@ function ajaxSync(url, data, call){
 }
 
 /**
- *	@description Realiza uma chamada ajax assíncrona
+ *	@description Realiza uma chamada ajax assíncrona sem cache
  *
  *	@function
  *	@name ajax
@@ -64,7 +65,7 @@ function ajax(url, data, call){
 }
 
 /**
- *	@description Pega o nome do host
+ *	@description Pega o nome diretório host da aplicação
  *
  *	@function
  *	@name pegaNomeHost
@@ -126,7 +127,7 @@ function pegaDiretorioModulo(modulo){
 }
 
 /**
- *	@description Retorna o link raiz completo do painel
+ *	@description Retorna o link raiz completo da aplicação
  *
  *	@function
  *	@name pegaPath
@@ -193,7 +194,22 @@ function escreveTitulo(str){
 }
 
 
+/**
+ *  @description Variavel global que armazena o timeout da mensagem
+ *
+ *	@name GLOBALTIMEOUTMSG
+ */
 var GLOBALTIMEOUTMSG;
+
+/**
+ *  @description Cria a div de mensagem se ela não existir, escreve a
+ *		mensagem e mostra a div de mensagem.
+ *
+ *	@function
+ *	@name escreveMensagem
+ *	@param {string} Mensagem
+ *	@param {bool} Define se a mensagem é de erro ou não
+ */
 function escreveMensagem(str, tipo){
 	$('#mensagem').hide();
 
@@ -207,34 +223,13 @@ function escreveMensagem(str, tipo){
 	GLOBALTIMEOUTMSG = setTimeout('removeMensagem()', 10000);
 }
 
+/**
+ *  @description Esconde a div de mensagem e limpa o timeout da mensagem
+ *
+ *	@function
+ *	@name removeMensagem
+ */
 function removeMensagem(){
 	clearTimeout(GLOBALTIMEOUTMSG);
 	$('#mensagem').hide();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function getQueryVariable(variable)
-{
-    var query = window.location.search.substring(1);
-    var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
-        var pair = vars[i].split("=");
-        if(pair[0] == variable){return pair[1];}
-    }
-    return(false);
-}
-
-

@@ -24,12 +24,27 @@ Class ControleGeral extends Modelo {
     /**
      *  Método para pegar a acao que o controle irá executar
 	 *
-     *  @access private
+     *  @access public
      *  @name getAcao()
-     *  @return string | null Null caso nenhuma ação for requisitada
+     *  @return string | False False caso nenhuma ação for requisitada
      */
 	public function getAcao() {
-		return isset($_GET['acao']) ? $_GET['acao'] : null;
+		return isset($_GET['acao']) ? $_GET['acao'] : False;
+	}
+
+    /**
+     *  Método que executa uma ação passada por parâmetro
+	 *
+     *  @access public
+     *  @name executaAcao()
+     */
+	public function executaAcao(){
+		$acao = $this->getAcao();
+
+		if ($acao == null)
+			parent::retornaResultado(Array(False,'A&ccedil;&atilde;o n&atilde;o encontrada'));
+		else
+			$this->$acao();
 	}
 
     /**
@@ -40,7 +55,7 @@ Class ControleGeral extends Modelo {
      *  @return json
      */
 	public function retornaResultado($resultado) {
-		echo json_encode(Array('resultado' => $resultado));
+		echo json_encode($resultado);
 	}
 
     /**
@@ -79,11 +94,10 @@ Class ControleGeral extends Modelo {
 	 *
      *  @access private
      *  @name pegaSessao()
-     *  @return array|null
+     *  @return array|false
      */
     public function pegaSessao() {
-        session_start();
-        return isset($_SESSION['data']) ? $_SESSION['data'] : null;
+        return isset($_SESSION['data']) ? $_SESSION['data'] : False;
     }
     
 }

@@ -31,23 +31,22 @@ function init(){
  *	@param {string} senha Senha do usuário
  */
 function autenticaUsuario(email, senha){
-	if (requerido(email) == false){
-		escreveMensagemLogin('Preencha o campo <b>E-mail</b> corretamente!');
-	} else if (requerido(senha) == false){
-		escreveMensagemLogin('Preencha o campo <b>Senha</b> corretamente!');
-	} else if (validaEmail(email)){
-		ajaxSync("Controle.php",{ "acao": "autenticaUsuario", "email": email, "senha": senha }, function (data){
-			if (data.resultado) {
-				window.location = pegaDiretorioHost() + "index.php";
-			} else {
-				escreveMensagemLogin('Usuario ou senha incorretos!');
-			}
-		});
-	} else {
-		escreveMensagemLogin('Este endere&ccedil;o de <b>e-mail</b> n&atilde;o &eacute; v&aacute;lido!');
-	}
+	ajaxSync("Controle.php",{ "acao": "autenticaUsuario", "email": email, "senha": senha }, function (data){
+		if (data[0]) {
+			window.location = pegaDiretorioHost() + "index.php";
+		} else {
+			escreveMensagemLogin(data[1]);
+		}
+	});
 }
 
+/**
+ *	@description Escreve uma mensagem na tela de login
+ *	
+ *	@function
+ *	@name escreveMensagemLogin
+ *	@param {string} 
+ */
 function escreveMensagemLogin(msg){
 	$('#load').hide();
 	$('#mensagem').html(msg);

@@ -11,6 +11,20 @@ require_once "../../ControleGeral.php";
 
 Class Controle extends ControleGeral {
     /**
+     *  Atributo que guarda o id
+     *  @access private
+     *  @name $id
+     */
+	private $id;
+
+    /**
+     *  Atributo que guarda o nome
+     *  @access private
+     *  @name $nome
+     */
+	private $nome;
+
+    /**
      *  Atributo que guarda o email
      *  @access private
      *  @name $email
@@ -25,50 +39,42 @@ Class Controle extends ControleGeral {
     private $senha;
 
     /**
-     *  Atributo que armazena a instancia da Classe DataBase
-     *  @access private
-     *  @name $dataBase
-     */
-    private $dataBase;
-   
-    /**
      *  Método construtor da classe
+	 *
      *  @access public
      *  @name __construct()
      */
     public function __construct() { 
 		parent::__construct();
-		$acao = parent::getAcao();
-
-		if ($acao == null)
-			parent::retornaResultado(null);
-		else
-			$this->$acao();
+		parent::executaAcao();
 	}
 
-
-
-
-	private function autenticaUsuario(){
+    /**
+     *  Autentica os dados enviado do formulário e cria uma sessão caso 
+	 *		estejam corretos
+	 *
+     *  @access public
+     *  @name autenticaUsuario()
+	 *	@return JSON
+     */
+	public function autenticaUsuario(){
         session_start();
-
 		$this->pegaDados();
+		$data = $this->validaDados();
 
-		$data = $this->validateData();
-
-        if ($data) {
-            $this->createSession($data);
-            echo json_encode(Array("resultado" => True));
+		if ($data[0] == True) {
+            $this->criaSessao();
+            parent::retornaResultado(Array(True,'A sess&atilde;o foi criada!'));
         } else {
-            $this->destroySession();
-            echo json_encode(Array("resultado" => False));
+            $this->destroiSessao();
+            parent::retornaResultado(Array(False, $data[1]));
         }
 		parent::closeConnect();
-
 	}
 
     /**
      *  Método que armazena nos atributos os dados recebidos por post
+	 *
      *  @access private
      *  @name pegaDados()
      */
@@ -80,21 +86,29 @@ Class Controle extends ControleGeral {
     
     /**
      *  Método que cria a sessão e armazena dos dados do usuário
+	 *		na sessão
+	 *
 	 *	@param array $data
      *  @access private
-     *  @name createSession()
+     *  @name criaSessao()
      */
-    private function createSession($data)
+    private function criaSessao()
     {
-        $_SESSION['data'] = $data;
+        $_SESSION['data'] = Array(
+			'id' 	=> $this->id,
+			'nome' 	=> $this->nome,
+			'email' => $this->email,
+			'senha' => $this->senha,
+		);
     }
 
     /**
      *  Método que encerra a sessão
+	 *
      *  @access private
-     *  @name destroySession()
+     *  @name destroiSessao()
      */
-    private function destroySession()
+    private function destroiSessao()
     {
         session_destroy();
     }
@@ -102,10 +116,11 @@ Class Controle extends ControleGeral {
     /**
      *  Método que valida os dados recebidos pelo formulário
      *  @access private
-     *  @name validateData()
-	 *	@return bool
+     *  @name validaDados()
+	 *	@return array
      */
-    private function validateData() {
+    private function validaDados() {
+		$retorno = Array(False, 'Preencha todos os campos!');
         if (parent::strRequire($this->email) || parent::strRequire($this->senha)) {
             try {
                 $result = parent::executeQuery('SELECT * FROM usuarios WHERE 
@@ -117,25 +132,29 @@ Class Controle extends ControleGeral {
                     if (parent::getNumRows($result) == 1) {
 						$arrData = Array();
                         while ($row = parent::fetchResults($result)) {
-                            $arrData['nome'] = $row['nome'];
-                            $arrData['id'] = $row['id'];
+                            $this->nome = $row['nome'];
+                            $this->id = $row['id'];
                         }
-                        $arrData['email'] = $this->email;
-                        $arrData['senha'] = sha1($this->senha);
+                        $this->email = $this->email;
+                        $this->senha = sha1($this->senha);
 
-                        return $arrData;
+						$retorno[0] = True;
+						$retorno[1] = 'Usu&aacute;rio autenticado!';
                     } else {
-                        return False;
+						$retorno[0] = False;
+						$retorno[1] = 'Usu&aacute;rio ou senha incorretos!';
                     }
                 } else {
-                    return False;
+					$retorno[0] = False;
+					$retorno[1] = 'Erro ao validar os dados!';
                 }
             } catch (Exception $e) {
-                return False;
+				$retorno[0] = False;
+				$retorno[1] = 'Erro ao validar os dados!';
             }
-        } else {
-            return False;
         }
+
+		return $retorno;
     }
 }
 
