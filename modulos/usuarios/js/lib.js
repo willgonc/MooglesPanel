@@ -15,9 +15,8 @@ function init(){
 }
 
 
-var TTT;
-
 function adicionaUsuario(){
+	$('#load').show();
 	var nome = $('#nome').val();
 	var email = $('#email').val();
 	var senha = $('#senha').val();
@@ -31,15 +30,14 @@ function adicionaUsuario(){
 			"senha": senha, 
 			"confirmaSenha": confirmaSenha 
 		}, function (data){
-			TTT = data;
-			if (data.resultado.retorno) {
-				window.location = pegaDiretorioHost() + "index.php";
+			if (data[0]) {
+				$('.formulario input:text, .formulario input:password').val('');
+				escreveMensagem(data[0], data[1]);
 			} else {
-				if (data.resultado.mensagem)
-					escreveMensagem(data.resposta.mensagem, data.resposta.retorno);
-				else
-					escreveMensagem('Erro ao adicionar o usu&aacute;rio!', false);
+				$('.formulario input:password').val('');
+				escreveMensagem(data[0], data[1]);
 			}
+			$('#load').hide();
 		}
 	);
 }

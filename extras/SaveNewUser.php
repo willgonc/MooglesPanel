@@ -78,52 +78,6 @@ Class SaveNewUser extends Validation
         $this->dataBase->closeConnect();
     }
 
-    /**
-     *  Método que recebe os dados
-     *  @access private
-     *  @name getData()
-     */
-    private function getData()
-    {
-        $this->nome = $_POST['nome'];
-        $this->email = $_POST['email'];
-        $this->senha = $_POST['senha'];
-        $this->confirm_senha = $_POST['confirm_senha'];
-    }
-
-
-
-    /**
-     *  Método construtor da classe
-     *  @access public
-     *  @name __construct()
-     */
-    private function insertData()
-    {
-        $this->senha = sha1($this->senha);
-
-        $this->nome = htmlentities($this->nome, ENT_QUOTES, "UTF-8");
-        try {
-            // FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE
-            $insert = mysql_query("INSERT INTO usuarios (nome, email, senha, status) 
-                        VALUES ('".$this->nome."','".$this->email."', '".$this->senha."', 0)");
-            
-            if ($insert) {
-                $flagErro = 1; 
-                if ($msg == '')
-                    $msg = "O usu&aacute;rio foi adicionado!";
-            } else {
-                $flagErro = 0;
-                if ($msg == '')
-                    $msg = "Erro ao adicionar o usu&aacute;rio!";
-            }
-        } catch ( Exception $e ){
-            $flagErro = 0;
-            if ($msg == '')
-                $msg = "Erro ao adicionar o usu&aacute;rio!";
-        }
-        return Array($flagErro, $msg);
-    }
 
     /**
      *  Método construtor da classe

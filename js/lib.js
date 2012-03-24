@@ -193,7 +193,6 @@ function escreveTitulo(str){
 	$('#tituloModulo h3').html(str);
 }
 
-
 /**
  *  @description Variavel global que armazena o timeout da mensagem
  *
@@ -210,11 +209,13 @@ var GLOBALTIMEOUTMSG;
  *	@param {string} Mensagem
  *	@param {bool} Define se a mensagem é de erro ou não
  */
-function escreveMensagem(str, tipo){
+function escreveMensagem( tipo, str ){
 	$('#mensagem').hide();
 
 	if ($('#mensagem').length == 1) {
-		$('#mensagem').html(str)
+		$('#mensagem').html(str);
+		$("#mensagem").removeClass('ok error');
+		$("#mensagem").addClass(tipo == true ? 'ok' : 'error');
 	} else {
 		$('body').append('<div id="mensagem" class="mensagem '+(tipo == true ? 'ok' : 'error')+'" style="display: none;">'+str+'</div>');
 	}
