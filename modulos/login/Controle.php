@@ -9,8 +9,7 @@
 
 require_once "../../ControleGeral.php";
 
-Class Logging extends Controle
-{
+Class Controle extends ControleGeral {
     /**
      *  Atributo que guarda o email
      *  @access private
@@ -59,10 +58,10 @@ Class Logging extends Controle
 
         if ($data) {
             $this->createSession($data);
-            echo json_encode(Array("resposta" => True));
+            echo json_encode(Array("resultado" => True));
         } else {
             $this->destroySession();
-            echo json_encode(Array("resposta" => False));
+            echo json_encode(Array("resultado" => False));
         }
 		parent::closeConnect();
 
@@ -140,6 +139,6 @@ Class Logging extends Controle
     }
 }
 
-new Logging();
+new Controle();
 
 ?>

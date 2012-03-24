@@ -36,7 +36,8 @@ function ajaxSync(url, data, call){
 		dataType: 'json',
 		success: (call ? call : function (){}),
 		data: (data ? data : {}),
-		async: false
+		async: false,
+		cache: false
 	});
 }
 
@@ -57,7 +58,8 @@ function ajax(url, data, call){
 		dataType: 'json',
 		success: (call ? call : function (){}),
 		data: (data ? data : {}),
-		async: true
+		async: true,
+		cache: false
 	});
 }
 
@@ -179,8 +181,36 @@ function requerido(str){
         return true;
 }
 
+/**
+ *  @description Escreve um texto na barra de título do modulo
+ *
+ *	@function
+ *	@name escreveTitulo
+ *	@param {string}
+ */
+function escreveTitulo(str){
+	$('#tituloModulo h3').html(str);
+}
 
 
+var GLOBALTIMEOUTMSG;
+function escreveMensagem(str, tipo){
+	$('#mensagem').hide();
+
+	if ($('#mensagem').length == 1) {
+		$('#mensagem').html(str)
+	} else {
+		$('body').append('<div id="mensagem" class="mensagem '+(tipo == true ? 'ok' : 'error')+'" style="display: none;">'+str+'</div>');
+	}
+
+	$('#mensagem').show();
+	GLOBALTIMEOUTMSG = setTimeout('removeMensagem()', 10000);
+}
+
+function removeMensagem(){
+	clearTimeout(GLOBALTIMEOUTMSG);
+	$('#mensagem').hide();
+}
 
 
 

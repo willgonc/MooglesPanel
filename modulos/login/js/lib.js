@@ -37,7 +37,7 @@ function autenticaUsuario(email, senha){
 		escreveMensagemLogin('Preencha o campo <b>Senha</b> corretamente!');
 	} else if (validaEmail(email)){
 		ajaxSync("Controle.php",{ "acao": "autenticaUsuario", "email": email, "senha": senha }, function (data){
-			if (data.resposta) {
+			if (data.resultado) {
 				window.location = pegaDiretorioHost() + "index.php";
 			} else {
 				escreveMensagemLogin('Usuario ou senha incorretos!');

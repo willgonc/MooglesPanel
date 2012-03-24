@@ -2,7 +2,7 @@
     margin: 0px;
     padding: 0px;
     outline: none;
-    font-family: arial;
+    font-family: Arial, Helvetica, Lucida, sans-serif;
 }
 
 body {
@@ -17,6 +17,113 @@ input[type=checkbox], x:default {
     padding: 0px;
     margin: -4px;
 }
+
+.geral {
+	min-width: 1000px;
+}
+
+.load {
+    display: none;
+    vertical-align: middle;
+}
+
+.conteiner {
+	position: absolute;
+	top: 111px;
+	left: 260px;
+	right: 30px;
+	bottom: 0px;
+	overflow: auto;
+	padding: 30px;
+	font-size: 14px;
+}
+
+
+
+
+/**
+ *	Titulo da pagina
+ */
+.tituloModulo {
+	border-bottom: 1px solid rgb(220,220,220);
+	height: 70px;
+	margin-left: 260px;
+}
+
+.tituloModulo h3 {
+	padding: 25px 30px;
+}
+
+
+
+
+
+.menuModulo {
+	position: absolute;
+	top: 40px;
+	bottom: 0px;
+	overflow: auto;
+	padding: 15px 30px;
+	float: left;
+	width: 200px;
+	background: url(../imagens/bg.png) repeat top left;
+	border-right: 1px solid rgb(200,200,200);
+}
+
+.menuModulo ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.menuModulo ul li {
+	margin: 0px;
+	padding: 10px 0px;
+}
+
+.menuModulo ul li a:link,
+.menuModulo ul li a:active,
+.menuModulo ul li a:visited {
+	margin: 0px;
+	font-size: 14px;
+	color: rgb(80,80,80);
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.menuModulo ul li a:hover {
+	color: #008bc8;
+}
+
+.menuModuloAtivo {
+	color: #008bc8 !important;
+	text-decoration: underline !important;
+}
+
+.formulario .info {
+	padding: 0px 0px 20px;
+	font-style: italic;
+	color: rgb(100,100,100);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .tw-ui-cabecalho {
     background: #fff;
@@ -83,21 +190,13 @@ input[type=checkbox], x:default {
     border: 1px solid #88ff55;
 }
 
-.load {
-    display: none;
-    vertical-align: middle;
-}
-
-.geral {
-    min-width: 1000px;
-}
 
 .tw-ui-menu-principal {
     margin: 0px;
     height: 38px;
-	 border-bottom: 1px solid gray;
-	 border-top: 1px solid gray;
-	 background: rgb(230,230,230);
+	border-bottom: 1px solid gray;
+	border-top: 1px solid gray;
+	background: rgb(130,130,130);
 }
 
 .tw-ui-menu-principal ul {
@@ -108,16 +207,15 @@ input[type=checkbox], x:default {
 
 .tw-ui-menu-principal ul li {
     float: left;
-    margin: 0px;
-	 padding: 10px 15px 9px;
+    margin: 5px;
+	padding: 4px 15px 4px;
 }
 
 .activeMenu {
 	background: rgb(255,255,255);
-	padding: 10px 14px 9px !important;
-	border-left: 1px solid gray;
-	border-right: 1px solid gray;
-	border-bottom: 1px solid white;
+}
+.activeMenu a {
+    color: rgb(80,80,80) !important;
 }
 
 .rightMenu {
@@ -126,9 +224,9 @@ input[type=checkbox], x:default {
 
 .tw-ui-menu-principal ul li a {
     text-decoration: none;
-    color: rgb(80,80,80);
-    font-family: arial;
-    font-size: 13px;
+	 color: #fff;
+    font-size: 12px;
+	font-weight: bold;
 }
 
 .tw-ui-menu-principal a:hover {

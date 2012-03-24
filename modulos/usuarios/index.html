@@ -7,7 +7,7 @@
 
 		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
 	    <link rel="stylesheet" type="text/css" href="../../css/jquery.qtip.min.css" />
-		<!--link rel="stylesheet" type="text/css" href="css/style.css" /-->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 
 		<script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/lib.js"></script>
@@ -22,6 +22,57 @@
 		</script> 
 	</head>
 	<body>
+		<div class="geral">
+			<div id="menu" class="menu"></div>
+			<div id="tituloModulo" class="tituloModulo">
+				<h3></h3>
+			</div> 
+			<div id="menuModulo" class="menuModulo">
+				<ul>
+					<li><a class="menuModuloAtivo" show="formularioAddUsuario" href="#">Adicionar usu&aacute;rio</a></li>
+					<li><a show="listagemUsuarios" href="#">Listar usu&aacute;rios</a></li>
+				</ul> 
+			</div>
+			<div class="conteiner">
+				<div id="formularioAddUsuario" class="formulario conteudo">
+					<table class="formulario">
+						<tbody>
+							<tr>
+								<td class="info">* Campo de preenchimento obrigat&oacute;rio</td>
+							</tr>
+							<tr>
+								<td>Nome *</td>
+							</tr>
+							<tr>
+								<td><input type="text" class="inputText" size="30" id="nome" /></td>
+							</tr>
+							<tr>
+								<td>E-mail *</td>
+							</tr>
+							<tr>
+								<td><input type="text" class="inputText" size="30" id="email"  /></td>
+							</tr>
+							<tr>
+								<td>Senha *</td>
+							</tr>
+							<tr>
+								<td><input type="password" class="inputText" size="30" id="senha" /></td>
+							</tr>
+							<tr>
+								<td>Confirmar senha *</td>
+							</tr>
+							<tr>
+								<td><input type="password" class="inputText" size="30" id="confirmaSenha" /></td>
+							</tr>
+							<tr>
+								<td><input type="button" id="botaoSalvar" class="inputSubmit" value="Salvar" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="listagemUsuarios" class="formulario conteudo">listagem</div>
+			</div>
+		</div>
 	</body>
 </html> 
 

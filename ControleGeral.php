@@ -8,7 +8,7 @@
 
 require_once "Modelo.php";
 
-Class Controle Extends Modelo {
+Class ControleGeral extends Modelo {
 
 	/**
      *  Método construtor da classe
@@ -52,9 +52,9 @@ Class Controle Extends Modelo {
      */
     public function validaEmail($email) {
         if(filter_var($email, FILTER_VALIDATE_EMAIL))
-            return 1;
+            return True;
         else
-            return 0;
+            return False;
     }
 
     /**
@@ -68,9 +68,9 @@ Class Controle Extends Modelo {
         // removendo espaços em branco
         $str = trim($str);
         if (strlen($str) == 0 || empty($str) || $str == '')
-            return 0;
+            return False;
         else 
-            return 1;
+            return True;
     }
     
 
@@ -88,6 +88,6 @@ Class Controle Extends Modelo {
     
 }
 
-new Controle();
+new ControleGeral();
 
 ?>

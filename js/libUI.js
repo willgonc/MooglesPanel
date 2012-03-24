@@ -9,10 +9,10 @@ function menuPrincipal(local){
 	$(local).html(
 		'<div class="tw-ui-menu-principal">'	+
 		'	<ul>'+
-        '   	<li id="principalMod" title="Resumo"><a href="../principal/">Principal</a></li>'+
-        '   	<li id="usuariosMod" title="Usuarios"><a href="../usuarios/">Usu&aacute;rios</a></li>'+
-        '      	<li id="logout" class="rightMenu" title="Logout" ><a href="#">Sair</a> </li>'+
-        '      	<li id="perfilMenu" title="Exibir seu perfil" class="rightMenu">'+
+        '   	<li id="principalMod"><a href="../principal/">Principal</a></li>'+
+        '   	<li id="usuariosMod"><a href="../usuarios/">Usu&aacute;rios</a></li>'+
+        '      	<li id="logout" class="rightMenu"><a href="#">Sair</a> </li>'+
+        '      	<li id="perfilMenu" class="rightMenu">'+
 		'			<a href="perfil.php">Ol&aacute;, <b id="nomeUsuario"></b></a> '+
 		'		</li>'+
 		'	</ul>'+
@@ -31,15 +31,28 @@ function menuPrincipal(local){
 		});
 	});
 
-	$(".tw-ui-menu-principal ul li").qtip({
-		position: {
-			my: "top center",
-			at: "bottom center"
-		},
-		style: {
-			classes: "ui-tooltip-shadow ui-tooltip-tipsy"
-		}
-	});
-	
 	$('#'+mod+'Mod').addClass('activeMenu');
+}
+
+/**
+ *	@description Define o funcionamento do menu interno
+ *	
+ *	@function
+ *	@name menuModulo
+ */
+function menuModulo(){
+	$('#menuModulo ul li a').click(function (){
+		$('#menuModulo ul li a').removeClass('menuModuloAtivo');
+		$(this).addClass('menuModuloAtivo');
+
+		var div = $(this).attr('show');
+		$('.conteudo').hide();
+		escreveTitulo($(this).html());
+		$('#' + div).show();
+	});
+
+	var div = $('#menuModulo ul li:first a').attr('show');
+	escreveTitulo($('#menuModulo ul li:first a').html());
+	$('.conteudo').hide();
+	$('#' + div).show();
 }
