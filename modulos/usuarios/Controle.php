@@ -26,6 +26,12 @@ Class Controle extends ControleGeral {
 		parent::executaAcao();
 	}
 
+	/**
+     *  Método para adicionar um usuário
+     *  @access puplic
+     *  @name adicionaUsuario()
+	 *	@return JSON
+     */
 	public function adicionaUsuario(){
 		$this->pegaDados();
         $data = $this->validaDados();
@@ -37,6 +43,11 @@ Class Controle extends ControleGeral {
 		}
 	}
     
+	/**
+     *  Pega os dados recebidos na requisição
+     *  @access puplic
+     *  @name pegaDados()
+     */
 	private function pegaDados(){
 		$this->nome = $_GET['nome'];
 		$this->email = $_GET['email'];
@@ -48,6 +59,7 @@ Class Controle extends ControleGeral {
      *  Método que valida os dados para persitência
      *  @access private
      *  @name validateData()
+	 *	@return array
      */
     private function validaDados() {
         $retorno = Array(True, '');
@@ -74,8 +86,13 @@ Class Controle extends ControleGeral {
         return $retorno;
     }
     
-	
-	public function verificaEmailCadastrado()
+	/**
+     *  Verifaca um endereço de e-mail
+     *  @access private
+     *  @name verificaEmailCadastrado()
+	 *	@return array
+     */
+	private function verificaEmailCadastrado()
     {
         $retorno = Array(True, '');
         try {
@@ -100,10 +117,10 @@ Class Controle extends ControleGeral {
     }
 
     /**
-     *  Faz a insersão dos dados no banco de dados
-	 *
+     *  Faz a insersão dos dados no banco
      *  @access private
      *  @name fazPersistenciaDosDados()
+	 *	@return array
      */
     private function fazPersistenciaDosDados(){
         $retorno = Array(True, '');
@@ -112,7 +129,7 @@ Class Controle extends ControleGeral {
         $this->nome = htmlentities($this->nome, ENT_QUOTES, "UTF-8");
         try {
             // FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE
-            $insert = mysql_query("INSERT INTO usuarios (nome, email, senha, status) 
+            $insert = parent::executeQuery("INSERT INTO usuarios (nome, email, senha, status) 
                         VALUES ('".$this->nome."','".$this->email."', '".$this->senha."', 0)");
             
             if ($insert) {
@@ -128,6 +145,41 @@ Class Controle extends ControleGeral {
         }
         return $retorno;
     }
+
+    /**
+     *  Retorna um array com os dados de todos os usuários
+     *  @access public
+     *  @name pegaTodosUsuarios()
+	 *	@return array
+     */
+	public function pegaTodosUsuarios(){
+        $retorno = Array(True, '');
+		$valores = Array();
+        try {
+			$select = parent::executeQuery("SELECT * FROM usuarios ORDER BY nome");
+            
+            if ($select) {
+				while ($row = parent::fetchResults($select)) {
+					$valores[] = Array(
+						'id' => $row['id'],
+						'nome' => $row['nome'],
+						'email' => $row['email'],
+						'senha' => $row['senha'],
+						'status' => $row['status']
+					);
+				}
+				$retorno[0] = True;
+				$retorno[1] = $valores;
+            } else {
+				$retorno[0] = False;
+				$retorno[1] = "Erro ao buscar usu&aacute;rios!";
+            }
+        } catch ( Exception $e ){
+			$retorno[0] = False;
+			$retorno[1] = "Erro ao buscar usu&aacute;rios!";
+        }
+        parent::retornaResultado($retorno);
+	}
 }
 
 new Controle();

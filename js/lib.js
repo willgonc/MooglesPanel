@@ -234,3 +234,4 @@ function removeMensagem(){
 	clearTimeout(GLOBALTIMEOUTMSG);
 	$('#mensagem').hide();
 }
+

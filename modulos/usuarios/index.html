@@ -14,6 +14,9 @@
 		<script type="text/javascript" language="javascript" src="../../js/libUI.js"></script>
 	    <script type="text/javascript" language="javascript" src="../../js/jquery.qtip.min.js"></script>
 		<script type="text/javascript" language="javascript" src="js/lib.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/jquery.ui.widget.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/jquery.usermode.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/ui.checkbox.js"></script>
 
 		<script type="text/javascript" language="javascript">
 			$(document).ready(function (){
@@ -30,7 +33,7 @@
 			<div id="menuModulo" class="menuModulo">
 				<ul>
 					<li><a class="menuModuloAtivo" show="formularioAddUsuario" href="#">Adicionar usu&aacute;rio</a></li>
-					<li><a show="listagemUsuarios" href="#">Listar usu&aacute;rios</a></li>
+					<li><a call="dataTableUsuarios()" show="listagemUsuarios" href="#">Listar usu&aacute;rios</a></li>
 				</ul> 
 			</div>
 			<div class="conteiner">
