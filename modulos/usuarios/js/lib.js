@@ -54,13 +54,22 @@ function dataTableUsuarios(){
 				];
 				for (var i = 0; i < data[1].length; i++){
 					arr[i] = [
-						'<input type="checkbox" name="linhaTabela" value="'+data[1][i].id+'" /> ' + data[1][i].nome,
+						data[1][i].nome,
 						data[1][i].email,
 						data[1][i].status == 1 ? '<span style="color: green">Ativo</span>' : '<span style="color: red">Bloqueado</span>'
 					];
 				}
-				montaTabelaDados('#listagemUsuarios', arr, arrTitulo, widthTable);
-				$('.tabelaDados input:checkbox').checkBox();
+				$('#listagemUsuarios').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="datatable"></table>' );
+				$('#datatable').dataTable({
+					"aaData": arr,
+					"bJQueryUI": true,
+					"sPaginationType": "full_numbers",
+					"aoColumns": [
+						{ "sTitle": "Nome" },
+						{ "sTitle": "E-mail" },
+						{ "sTitle": "Status" }
+					]
+				});	
 			} else {
 				escreveMensagem(data[0], data[1]);
 			}
