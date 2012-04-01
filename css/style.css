@@ -5,6 +5,11 @@
     font-family: Arial, Helvetica, Lucida, sans-serif;
 }
 
+.botaoAcao {
+	margin: 0px 5px;
+	cursor: pointer;
+}
+
 body {
 	background: #fff;
 }
@@ -34,7 +39,7 @@ input[type=checkbox], x:default {
 	right: 0px;
 	bottom: 0px;
 	overflow: auto;
-	padding: 30px;
+	padding: 15px 30px;
 	font-size: 14px;
 }
 
@@ -110,7 +115,9 @@ input[type=checkbox], x:default {
 
 
 
-
+.barraAcoes {
+	margin-bottom: 15px;
+}
 
 
 
@@ -360,6 +367,18 @@ div.tw-ui-user-logged {
     border-radius:3px;
     background: url(images/bg_menu_mod.png) repeat-x top left;
     cursor: default;
+}
+
+.inputButton[disabled], .inputSubmit[disabled] {
+    border: 1px solid rgb(210,210,210) !important;
+    font-size: 14px !important;
+    padding: 7px 14px !important;
+    color: rgb(150,150,150) !important;
+    background: rgb(240,240,240) !important;
+}
+.inputButton[disabled]:hover, .inputButton[disabled]:focus,
+.inputSubmit[disabled]:hover, .inputSubmit[disabled]:focus {
+    background: rgb(240,240,240) !important;
 }
 
 .inputButton, .inputSubmit {

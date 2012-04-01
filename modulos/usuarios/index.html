@@ -6,7 +6,6 @@
 		<title>Usu&aacute;rios</title>
 
 		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
-	    <link rel="stylesheet" type="text/css" href="../../css/jquery.qtip.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../plugins/jquery-ui/css/jquery-ui.css" />
 		<link rel="stylesheet" type="text/css" href="../../plugins/datatables/css/jquery.dataTables_themeroller.css" />
 
@@ -15,7 +14,6 @@
 		<script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/lib.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/libUI.js"></script>
-	    <script type="text/javascript" language="javascript" src="../../js/jquery.qtip.min.js"></script>
 		<script type="text/javascript" language="javascript" src="js/lib.js"></script>
 		<script type="text/javascript" language="javascript" src="../../plugins/jquery-ui/js/jquery-ui.js"></script>
 		<script type="text/javascript" language="javascript" src="../../plugins/datatables/js/jquery.dataTables.min.js"></script>
@@ -23,7 +21,6 @@
 		<script type="text/javascript" language="javascript">
 			$(document).ready(function (){
 				init();
-			
 			});
 		</script> 
 	</head>
@@ -71,13 +68,16 @@
 								<td colspan="2"><input type="password" class="inputText" size="30" id="confirmaSenha" /></td>
 							</tr>
 							<tr>
-								<td width="70"><input type="button" id="botaoSalvar" class="inputSubmit" value="Salvar" /></td>
+								<td width="70"><input type="button" id="botaoSalvar" class="inputButton" value="Salvar" /></td>
 								<td> <img src="imagens/load.gif" id="load" border="0" /> </td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div id="listagemUsuarios" class="formulario conteudo">listagem</div>
+				<div id="listagemUsuarios" class="conteudo">
+					<div id="datatablesUsuarios">
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

@@ -62,48 +62,42 @@ function menuModulo(){
 }
 
 /**
- *  @description Monta uma tabela de dados com paginação a partir de uma
- *		matriz
+ *  @description Monta uma tabela de dados com o datatables
  *
  *	@function
  *	@name montaTabelaDados
+ *	@param {string} Seletor do conteiner da tabela
+ *	@param {string} Id da tabela
  *	@param {array} Matriz de dados
+ *	@param {array} Matriz com os títulos das colunas
  */
-function montaTabelaDados(conteiner, arrDados, arrTitulo, widthTable, quantExibicao, pag){
-	// valores default
-	quantExibicao = quantExibicao ? quantExibicao : 10;
-	pag = pag ? pag : 1;
-	var linhas = arrDados.length > quantExibicao ? quantExibicao : arrDados.length;
-	var de = pag == 1 ? pag : (pag * quantExibicao) + 1;
 
-
-
-	var paginacao =  de + ' - Total ' + arrDados.length ;
-	//'<div class="paginacaoTabelaDados"><div class="botaoPaginacaoAnterior"></div><div class="botaoPaginacaoProximo"></div></div>';
-
-	var table = '<table class="tabelaDados" width="'+widthTable+'">';
-
-	// cabecalho
-	/*if (arrTitulo){
-		table += '<thead><tr>';
-		for (var i = 0; i < arrTitulo.length; i++){
-			table += '<th align="'+arrTitulo[i].align+'" width="'+arrTitulo[i].width+'">'+arrTitulo[i].nome+'</th>';
-		}
-		table += '</tr></thead>';
-	}*/
-
-	// corpo da tabela
-	table += '<tbody>';
-	for (var i = 0; i < linhas; i++){
-		table += '<tr>';
-		for (var j = 0; j < arrDados[i].length; j++){
-			table += '<td>'+arrDados[i][j]+'</td>';
-		}
-		table += '</tr>';
-	}
-	table += '</tbody>';
-
-	table += '</table>';
-
-	$(conteiner).html(paginacao+table);
+var oTable;
+function montaTabelaDados(conteiner, idTable, arrDados, arrTitulo, callback){
+	callback = typeof callback == 'function' ? callback : function (){return true};
+	$(conteiner).html( '<table cellpadding="0" cellspacing="0" border="0" width="100%" class="display" id="'+idTable+'"></table>' );
+	oTable = $('#' + idTable).dataTable({
+		"aaData": arrDados,
+		"oLanguage": {
+			"sProcessing":   "Processando...",
+			"sLengthMenu":   "Mostrar _MENU_ registros",
+			"sZeroRecords":  "Não foram encontrados resultados",
+			"sInfo":         "Mostrando de _START_ at&eacute; _END_ de _TOTAL_ registros",
+			"sInfoEmpty":    "Mostrando de 0 at&eacute; 0 de 0 registros",
+			"sInfoFiltered": "(filtrado de _MAX_ registros no total)",
+			"sInfoPostFix":  "",
+			"sSearch":       "Buscar",
+			"sUrl":          "",
+			"oPaginate": {
+				"sFirst":    "Primeiro",
+				"sPrevious": "Anterior",
+				"sNext":     "Seguinte",
+				"sLast":     "&Uacute;ltimo"
+			}
+		},
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers",
+		"aoColumns": arrTitulo,
+		"fnInitComplete": callback
+	});	
 }

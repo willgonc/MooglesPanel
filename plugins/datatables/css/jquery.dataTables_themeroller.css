@@ -8,7 +8,7 @@ table.dataTable {
 	clear: both;
 	width: 100%;
 	border-collapse: collapse;
-	border: 1px solid rgb(220,220,220);
+	border: 1px solid rgb(230,230,230) !important;
 }
 
 table.dataTable thead th {
@@ -20,16 +20,13 @@ table.dataTable thead th {
 
 table.dataTable tfoot th {
 	padding: 3px 10px;
+	border: 1px solid rgb(230,230,230) !important;
 }
 
-
-table.dataTable tr:first-child td {
-	border-top: 0px;
-}
 
 table.dataTable td {
 	padding: 8px 10px;
-	border-top: 1px solid rgb(220,220,220);
+	border: 1px solid rgb(230,230,230);
 }
 
 table.dataTable td.center,

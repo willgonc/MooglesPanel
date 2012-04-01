@@ -147,7 +147,7 @@ Class Controle extends ControleGeral {
     }
 
     /**
-     *  Retorna um array com os dados de todos os usuários
+     *  Retorna um array com os dados de todos os usuários cadastrados
      *  @access public
      *  @name pegaTodosUsuarios()
 	 *	@return array
@@ -178,6 +178,34 @@ Class Controle extends ControleGeral {
 			$retorno[0] = False;
 			$retorno[1] = "Erro ao buscar usu&aacute;rios!";
         }
+        parent::retornaResultado($retorno);
+	}
+
+	public function removerUsuario(){
+		$select = parent::executeQuery("DELETE FROM usuarios WHERE id=".$_GET['id']);
+
+		if ($select) {
+			$retorno[0] = True;
+			$retorno[1] = "O usu&aacute;rio foi removido!";
+		} else {
+			$retorno[0] = False;
+			$retorno[1] = "Erro ao remover usu&aacute;rios!";
+		}
+
+        parent::retornaResultado($retorno);
+	}
+	
+	public function editarUsuario(){
+		$select = parent::executeQuery("UPDATE usuarios SET status=".$_GET['status']." WHERE id=".$_GET['id']);
+
+		if ($select) {
+			$retorno[0] = True;
+			$retorno[1] = "O usu&aacute;rio foi editado!";
+		} else {
+			$retorno[0] = False;
+			$retorno[1] = "Erro ao editar usu&aacute;rios!";
+		}
+
         parent::retornaResultado($retorno);
 	}
 }
