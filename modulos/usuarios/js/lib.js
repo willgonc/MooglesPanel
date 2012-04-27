@@ -1,3 +1,5 @@
+var FLAGTELA = 'listagem';
+
 /**
  *	@description Função de inicialização do módulo usuários
  *	
@@ -8,9 +10,36 @@ function init(){
 	menuPrincipal('#menu');
 	menuModulo();	
 	$('#nome').focus();
-
+	
+	// Salva um novo usuário
 	$('#botaoSalvar').click(function (){
 		adicionaUsuario();
+	});
+	
+	// Cancela a edição
+	$('#botaoCacelarEdit').click(function (){
+		$('.conteudo').hide();
+		if (FLAGTELA == listagem)
+			$('#listagemUsuarios').show();
+		else
+			$('#perfilUsuario').show();
+	});
+
+	
+	$('#botaoSalvarEdit').click(function (){
+		editaUsuario();
+	});
+
+	// Botão de excluir um usuário
+	$('#removeUsuario').click(function (){
+		if (confirm('Você deseja excluir este usuário?')){
+			removeUsuario($('#idEdit').val());
+			
+			$('.conteudo').hide();
+			escreveTitulo('Todos os usu&aacute;rios');
+			$('#listagemUsuarios').show();
+			dataTableUsuarios();
+		}
 	});
 }
 
@@ -22,25 +51,22 @@ function init(){
  */
 function adicionaUsuario(){
 	$('#load').show();
-	var nome = $('#nome').val();
-	var email = $('#email').val();
-	var senha = $('#senha').val();
-	var confirmaSenha = $('#confirmaSenha').val();
 	ajaxSync(
-		"Controle.php",
-		{ 
-			"acao": "adicionaUsuario", 
-			"nome": nome, 
-			"email": email, 
-			"senha": senha, 
-			"confirmaSenha": confirmaSenha 
+		"Controle.php", { 
+			"acao": "adicionaUsuario",
+			"nome": $('#nome').val(), 
+			"email": $('#email').val(), 
+			"senha": $('#senha').val(), 
+			"confirmaSenha": $('#confirmaSenha').val() 
 		}, function (data){
 			if (data[0]) {
 				$('.formulario input:text, .formulario input:password').val('');
 				escreveMensagem(data[0], data[1]);
+				$('#nome').focus();
 			} else {
 				$('.formulario input:password').val('');
 				escreveMensagem(data[0], data[1]);
+				$('#nome').focus();
 			}
 			$('#load').hide();
 		}
@@ -65,26 +91,39 @@ function dataTableUsuarios(){
 				var arrTitulo = [
 					{ "sTitle": "Nome" },
 					{ "sTitle": "E-mail" },
-					{ "sTitle": "Status", "sWidth": "100px" },
-					{ "sTitle": "", "sWidth": "100px" , "bSortable": false}
+					{ "sTitle": "Status", "sWidth": "100px" }
 				];
+
 				// montando array de dados
 				for (var i = 0; i < data[1].length; i++){
 					arr[i] = [
-						data[1][i].nome,
+						'<a href="#" title="Editar" idUsuario="'+data[1][i].id+'" class="linkDatatables">'+data[1][i].nome+'</a>',
 						data[1][i].email,
-						data[1][i].status == 1 ? '<span style="color: green">Ativo</span>' : '<span style="color: red">Bloqueado</span>',
-						(nomeUsuarioAutenticado == data[1][i].nome ? '' :
-						'<img src="../../imagens/editar.png" border="0" width="24" height="24" idUsuario="'+data[1][i].id+'" acao="editar" class="botaoAcao" />'+
-						'<img src="../../imagens/remove.png" border="0" width="24" height="24" idUsuario="'+data[1][i].id+'" acao="remover" class="botaoAcao" />')
+						data[1][i].status == 1 ? '<span style="color: green">Ativo</span>' : '<span style="color: red">Bloqueado</span>'
 					];
 				}
+
 				montaTabelaDados('#datatablesUsuarios', 'tabelaUsuarios', arr, arrTitulo, function (){
-					$('.botaoAcao').click(function (){
-						if ($(this).attr('acao') == 'remover')
-							confirm("Deseja remover este usuário?") ? removeUsuario($(this).attr('idUsuario')) : false;
-						else
-							editarUsuario($(this).attr('idUsuario'));
+					$('.linkDatatables').click(function (){
+						escreveTitulo('Editar usu&aacute;rio');
+						$('.conteudo').hide();
+						$('#formularioEditarUsuario').show();
+						$('#nomeEdit').focus();
+						ajaxSync( "Controle.php", { "acao": "pegaDadosUsuario", "id": $(this).attr('idUsuario') }, function (data){
+							if (data[0]){
+								$('#idEdit').val(data[1].id);
+								$('#nomeEdit').val(data[1].nome);
+								$('#emailEdit').val(data[1].email);
+								$('#statusEdit').val(data[1].status);
+								$('#senhaEdit').val('');
+								$('#confirmaSenhaEdit').val('');
+							} else {
+								escreveMensagem(false, 'Erro ao buscar dados do usu&aacute;rio!');
+								escreveTitulo('Todos os usu&aacute;rios');
+								$('.conteudo').hide();
+								$('#listagemUsuarios').show();
+							}
+						});
 					});
 				});
 			} else {
@@ -94,7 +133,13 @@ function dataTableUsuarios(){
 	);
 }
 
-
+/**
+ *	@description Remove um usuário do banco de dados
+ *
+ *	@function
+ *	@name removeUsuario
+ *	@param {integer} Id do usuário a ser removido
+ */
 function removeUsuario(id){
 	ajaxSync( "Controle.php", { "acao": "removerUsuario", "id": id }, function (data){
 		escreveMensagem(data[0], data[1]);
@@ -102,22 +147,25 @@ function removeUsuario(id){
 	});
 }
 
-function editarUsuario(id){
-	$('body').append('<div id="dialogo"><select id="status"><option value="1">Ativo</option> <option value="0">Bloqueado</option></select></div>');
-	$('#dialogo').dialog({
-		title: "Mudar status do usu&aacute;rio",
-		autoOpen: true,
-		resizable: false,
-		draggable: false,
-		modal: true,
-		buttons: {
-			'Salvar' : function (){
-				ajaxSync( "Controle.php", { "acao": "editarUsuario", "id": id, "status": $('#status').val() }, function (data){
-					escreveMensagem(data[0], data[1]);
-					dataTableUsuarios();
-				});
-				$(this).dialog('close');
-			}
-		}
+/**
+ *	@description Edita um usuário na base de dados
+ *
+ *	@function
+ *	@name editaUsuario
+ *	@param {integer} Id do usuário a ser editado
+ */
+function editaUsuario(id){
+	ajaxSync( "Controle.php", { 
+		"acao": "editarUsuario", 
+		"id": $('#idEdit').val(), 
+		"nome": $('#nomeEdit').val(),
+		"email": $('#emailEdit').val(),
+		"senha": $('#senhaEdit').val(),
+		"confirmaSenha": $('#confirmaSenhaEdit').val(),
+		"status": $('#statusEdit').val() 
+	}, function (data){
+		escreveMensagem(data[0], data[1]);
+		$('#senhaEdit, #confirmaSenhaEdit').val('');
 	});
+	$(this).dialog('close');
 }

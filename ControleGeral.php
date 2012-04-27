@@ -75,7 +75,7 @@ Class ControleGeral extends Modelo {
     /**
      *  Método que valida uma string, se ela é vazia ou não
 	 *	@param string $str
-     *  @access publico
+     *  @access public
      *  @name strRequire()
      *  @return bool
      */
@@ -92,7 +92,7 @@ Class ControleGeral extends Modelo {
     /**
      *  Método para retornar a sessão aberta caso tenha uma
 	 *
-     *  @access private
+     *  @access public
      *  @name pegaSessao()
      *  @return array|false
      */

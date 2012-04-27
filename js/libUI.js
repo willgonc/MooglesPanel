@@ -101,3 +101,45 @@ function montaTabelaDados(conteiner, idTable, arrDados, arrTitulo, callback){
 		"fnInitComplete": callback
 	});	
 }
+
+/**
+ *  @description Variavel global que armazena o timeout da mensagem
+ *
+ *	@name GLOBALTIMEOUTMSG
+ */
+var GLOBALTIMEOUTMSG;
+
+/**
+ *  @description Cria a div de mensagem se ela não existir, escreve a
+ *		mensagem e mostra a div de mensagem.
+ *
+ *	@function
+ *	@name escreveMensagem
+ *	@param {bool} Define se a mensagem é de erro ou não
+ *	@param {string} Mensagem
+ */
+function escreveMensagem( tipo, str ){
+	$('#mensagem').hide();
+
+	if ($('#mensagem').length == 1) {
+		$('#mensagem').html(str);
+		$("#mensagem").removeClass('ok error');
+		$("#mensagem").addClass(tipo == true ? 'ok' : 'error');
+	} else {
+		$('body').append('<div id="mensagem" class="mensagem '+(tipo == true ? 'ok' : 'error')+'" style="display: none;">'+str+'</div>');
+	}
+
+	$('#mensagem').show();
+	GLOBALTIMEOUTMSG = setTimeout('removeMensagem()', 10000);
+}
+
+/**
+ *  @description Esconde a div de mensagem e limpa o timeout da mensagem
+ *
+ *	@function
+ *	@name removeMensagem
+ */
+function removeMensagem(){
+	clearTimeout(GLOBALTIMEOUTMSG);
+	$('#mensagem').hide();
+}

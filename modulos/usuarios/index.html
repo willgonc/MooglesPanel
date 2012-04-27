@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -32,8 +33,9 @@
 			</div> 
 			<div id="menuModulo" class="menuModulo">
 				<ul>
-					<li><a class="menuModuloAtivo" show="formularioAddUsuario" href="#">Adicionar usu&aacute;rio</a></li>
-					<li><a call="dataTableUsuarios()" show="listagemUsuarios" href="#">Listar usu&aacute;rios</a></li>
+					<li><a class="menuModuloAtivo" call="dataTableUsuarios()" show="listagemUsuarios" href="#">Todos os usu&aacute;rios</a></li>
+					<li><a show="formularioAddUsuario" call="$('#nome').focus()" href="#">Adicionar usu&aacute;rio</a></li>
+					<li><a show="perfilUsuario" call="perfilUsuario()" href="#">Seu perfil</a></li>
 				</ul> 
 			</div>
 			<div class="conteiner">
@@ -77,6 +79,59 @@
 				<div id="listagemUsuarios" class="conteudo">
 					<div id="datatablesUsuarios">
 					</div>
+				</div>
+				<div id="formularioEditarUsuario" class="formulario conteudo">
+					<input type="hidden" id="idEdit" />
+					<table class="formulario">
+						<tbody>
+							<tr>
+								<td colspan="2" class="info">* Campo de preenchimento obrigat&oacute;rio</td>
+							</tr>
+							<tr>
+								<td>Status</td>
+							</tr>
+							<tr>
+								<td>
+									<select class="select" id="statusEdit">
+										<option value="0">Bloqueado</option>
+										<option value="1">Ativo</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Nome *</td>
+							</tr>
+							<tr>
+								<td><input type="text" class="inputText" size="30" id="nomeEdit" /></td>
+							</tr>
+							<tr>
+								<td colspan="2">E-mail *</td>
+							</tr>
+							<tr>
+								<td><input type="text" class="inputText" size="30" id="emailEdit"  /></td>
+							</tr>
+							<tr>
+								<td colspan="2">Senha</td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="password" class="inputText" size="30" id="senhaEdit" /></td>
+							</tr>
+							<tr>
+								<td colspan="2">Confirmar senha</td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="password" class="inputText" size="30" id="confirmaSenhaEdit" /></td>
+							</tr>
+							<tr>
+								<td>
+									<input type="button" id="botaoSalvarEdit" class="inputButton" value="Salvar" />
+									<input type="button" id="botaoCacelarEdit" class="inputButton" value="Cancelar" />
+									<a href="#" style="margin-left: 15px;" id="removeUsuario" >Excluir usuário</a>
+								</td>
+								<td> <img src="imagens/load.gif" id="load" border="0" /> </td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

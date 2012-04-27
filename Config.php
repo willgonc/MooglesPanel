@@ -54,8 +54,7 @@ Class Config
      *  @access public
      *  @name __construct()
      */
-    public function __construct()
-    {
+    public function __construct() {
         /** setando os valores das configurações */
         $this->setUser("root");
         $this->setPass("123456");
@@ -72,8 +71,7 @@ Class Config
      *  @name getUser()
      *  @return string
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
@@ -84,44 +82,40 @@ Class Config
      *  @name getPass()
      *  @return string
      */
-    public function getPass()
-    {
+    public function getPass() {
         return $this->pass;
     }
     
     /**
-     *  Método que retorna o atributo host do banco de dados
+     *  Retorna o host do banco de dados
 	 *
      *  @access public
      *  @name getHost()
      *  @return string
      */
-    public function getHost()
-    {
+    public function getHost() {
         return $this->host;
     }
 
     /**
-     *  Método que retorna o atributo nome da base de dados
+     *  Retorna o nome da base de dados
 	 *
      *  @access public
      *  @name getDataBase()
      *  @return string
      */
-    public function getDataBase()
-    {
+    public function getDataBase() {
         return $this->dataBase;
     }
 
     /**
-     *  Método que retorna o atributo moduloPadrao
+     *  Retorna o moduloPadrao
 	 *
      *  @access public
      *  @name getModuloPadrao()
      *  @return string
      */
-    public function getModuloPadrao()
-    {
+    public function getModuloPadrao() {
         return $this->moduloPadrao;
     }
 
@@ -130,9 +124,9 @@ Class Config
 	 *
      *  @access private
      *  @name setUser()
+	 *	@param string
      */
-    private function setUser($user)
-    {
+    private function setUser($user) {
         $this->user = $user;
     }
 
@@ -141,9 +135,9 @@ Class Config
 	 *
      *  @access private
      *  @name setPass()
+	 *  @param string
      */
-    private function setPass($pass)
-    {
+    private function setPass($pass) {
         $this->pass = $pass;
     }
 
@@ -152,9 +146,9 @@ Class Config
 	 *
      *  @access private
      *  @name setHost()
+	 *	@param string
      */
-    private function setHost($host)
-    {
+    private function setHost($host) {
         $this->host = $host;
     }
 
@@ -163,9 +157,9 @@ Class Config
 	 *
      *  @access private
      *  @name setDatabase()
+	 *	@param string
      */
-    private function setDatabase($dataBase)
-    {
+    private function setDatabase($dataBase) {
         $this->dataBase = $dataBase;
     }
     
@@ -174,9 +168,9 @@ Class Config
 	 *
      *  @access private
      *  @name setModuloPadrao()
+	 *	@param string
      */
-    private function setModuloPadrao($modulo)
-    {
+    private function setModuloPadrao($modulo) {
         $this->moduloPadrao = $modulo;
     }
 }

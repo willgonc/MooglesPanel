@@ -43,7 +43,19 @@ input[type=checkbox], x:default {
 	font-size: 14px;
 }
 
+/*
+ *	Link para edição dos dados da linha do tadatables
+ */
+a.linkDatatables:link,
+a.linkDatatables:active, 
+a.linkDatatables:visited {
+	color: blue;
+	text-decoration: none;
+}
 
+a.linkDatatables:hover {
+	text-decoration: underline;
+}
 
 
 /**
@@ -369,6 +381,20 @@ div.tw-ui-user-logged {
     cursor: default;
 }
 
+.select {
+    border: 1px solid rgb(180,180,180) !important;
+    font-size: 14px !important;
+    padding: 6px 14px !important;
+    color: rgb(100,100,100) !important;
+    background: rgb(230,230,230) !important;
+	margin-bottom: 5px;
+}
+
+.select:hover,
+.select:focus {
+	border: 1px solid #ff6600 !important;
+}
+
 .inputButton[disabled], .inputSubmit[disabled] {
     border: 1px solid rgb(210,210,210) !important;
     font-size: 14px !important;
@@ -398,7 +424,7 @@ div.tw-ui-user-logged {
 .inputText,
 .inputPass {
     border: 1px solid rgb(190,190,190);
-    font-size: 13px;
+    font-size: 14px;
     padding: 7px;
     background: #fff;
     margin-bottom: 10px; 
