@@ -165,7 +165,11 @@ function editaUsuario(id){
 		"status": $('#statusEdit').val() 
 	}, function (data){
 		escreveMensagem(data[0], data[1]);
+		if (data[0]){
+			$('#nomeUsuario').html($('#nomeEdit').val());
+		}
 		$('#senhaEdit, #confirmaSenhaEdit').val('');
+		$('#nomeEdit').focus();
 	});
 	$(this).dialog('close');
 }

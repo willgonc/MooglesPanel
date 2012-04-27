@@ -151,6 +151,16 @@ Class Controle extends ControleGeral {
 					WHERE id=".$this->id);
 
 				if ($update) {
+					session_start();
+        			if ($_SESSION['data']['id'] == $this->id){
+						$_SESSION['data']['nome'] = $this->nome;
+						$_SESSION['data']['email'] = $this->email;
+						if ($this->senha != null){
+							$_SESSION['data']['senha'] = $this->senha;
+						}
+						$_SESSION['data']['status']	= $this->status;
+					}
+
 					$data[0] = True;
 					$data[1] = "O usu&aacute;rio foi editado!";
 				} else {

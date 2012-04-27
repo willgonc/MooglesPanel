@@ -278,6 +278,11 @@ a.linkDatatables:hover {
     border-radius: 5px;
     border: 1px solid gray;
 }
+
+#perfilMenu a:hover {
+	text-decoration: none !important;
+}
+
 .submenu p {
     padding: 5px 0px;
 }
