@@ -105,7 +105,6 @@ Class Controle extends ControleGeral {
 	
     /**
      *  Atualiza os dados de um usuário da base de dados
-
      *  @access public
      *  @name editarUsuario()
 	 *	@return JSON
@@ -142,7 +141,6 @@ Class Controle extends ControleGeral {
 
 			$this->nome = htmlentities($this->nome, ENT_QUOTES, "UTF-8");
 			try {
-				// FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE
 				$update = parent::executeQuery("UPDATE usuarios SET 
 					nome='".$this->nome."', 
 					email='".$this->email."',
@@ -198,7 +196,7 @@ Class Controle extends ControleGeral {
      */
 	private function verificaEmailCadastrado()
     {
-		//Em caso edição o id tambem é verificado
+		// Caso o id seja passado ele é verificado
 		$whereId = $this->id != null ? ' and id<>'.$this->id : '';
         $retorno = Array(True, '');
         try {
@@ -226,7 +224,7 @@ Class Controle extends ControleGeral {
      *  Retorna um array com os dados de todos os usuários cadastrados
      *  @access public
      *  @name pegaTodosUsuarios()
-	 *	@return array
+	 *	@return JSON
      */
 	public function pegaTodosUsuarios(){
         $retorno = Array(True, '');
@@ -258,11 +256,10 @@ Class Controle extends ControleGeral {
 	}
 
 	/**
-     *  Método para retornar os dados de um usuário
-	 *
+     *  Retorna os dados de um usuário
      *  @access public
-     *  @name pegaDadosUsuarioPorId()
-     *  @return array|false
+     *  @name pegaDadosUsuario()
+     *  @return JSON
      */
 	public function pegaDadosUsuario() {
 	 	$this->pegaDados();

@@ -230,11 +230,8 @@ a.linkDatatables:hover {
 	padding: 4px 15px 4px;
 }
 
-.activeMenu {
-	background: rgb(255,255,255);
-}
 .activeMenu a {
-    color: rgb(80,80,80) !important;
+	text-decoration: underline !important;
 }
 
 .rightMenu {

@@ -25,7 +25,7 @@ function init(){
 			$('#perfilUsuario').show();
 	});
 
-	
+	// Salva alteração de um usuário
 	$('#botaoSalvarEdit').click(function (){
 		editaUsuario();
 	});
@@ -142,8 +142,10 @@ function dataTableUsuarios(){
  */
 function removeUsuario(id){
 	ajaxSync( "Controle.php", { "acao": "removerUsuario", "id": id }, function (data){
+		if (data[0])
+			dataTableUsuarios();
+
 		escreveMensagem(data[0], data[1]);
-		dataTableUsuarios();
 	});
 }
 
@@ -155,8 +157,7 @@ function removeUsuario(id){
  *	@param {integer} Id do usuário a ser editado
  */
 function editaUsuario(id){
-	ajaxSync( "Controle.php", { 
-		"acao": "editarUsuario", 
+	ajaxSync( "Controle.php", { "acao": "editarUsuario", 
 		"id": $('#idEdit').val(), 
 		"nome": $('#nomeEdit').val(),
 		"email": $('#emailEdit').val(),
@@ -171,5 +172,4 @@ function editaUsuario(id){
 		$('#senhaEdit, #confirmaSenhaEdit').val('');
 		$('#nomeEdit').focus();
 	});
-	$(this).dialog('close');
 }
