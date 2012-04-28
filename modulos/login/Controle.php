@@ -125,8 +125,7 @@ Class Controle extends ControleGeral {
             try {
                 $result = parent::executeQuery('SELECT * FROM usuarios WHERE 
                     email="'.$this->email.'" and 
-                    senha="'.sha1($this->senha).'" and 
-                    status=1');
+                    senha="'.sha1($this->senha).'"');
             
                 if ($result) {
                     if (parent::getNumRows($result) == 1) {

@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<title>Usu&aacute;rios</title>
+		<title>Arquivos</title>
 
 		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../../plugins/jquery-ui/css/jquery-ui.css" />
@@ -33,40 +33,19 @@
 			</div> 
 			<div id="menuModulo" class="menuModulo">
 				<ul>
-					<li><a class="menuModuloAtivo" call="dataTableUsuarios()" show="listagemUsuarios" href="#">Todos os usu&aacute;rios</a></li>
-					<li><a show="formularioAddUsuario" call="$('#nome').focus()" href="#">Adicionar usu&aacute;rio</a></li>
+					<li><a class="menuModuloAtivo" call="dataTableArquivos()" show="listagemArquivos" href="#">Todos os arquivos</a></li>
+					<li><a show="formularioAddArquivo" href="#">Adicionar arquivo</a></li>
 				</ul> 
 			</div>
 			<div class="conteiner">
-				<div id="formularioAddUsuario" class="formulario conteudo">
+				<div id="formularioAddArquivo" class="formulario conteudo">
 					<table class="formulario">
 						<tbody>
 							<tr>
-								<td colspan="2" class="info">* Campo de preenchimento obrigat&oacute;rio</td>
+								<td colspan="2">Selecione um arquivo</td>
 							</tr>
 							<tr>
-								<td colspan="2">Nome *</td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="text" class="inputText" size="30" id="nome" /></td>
-							</tr>
-							<tr>
-								<td colspan="2">E-mail *</td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="text" class="inputText" size="30" id="email"  /></td>
-							</tr>
-							<tr>
-								<td colspan="2">Senha *</td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="password" class="inputText" size="30" id="senha" /></td>
-							</tr>
-							<tr>
-								<td colspan="2">Confirmar senha *</td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="password" class="inputText" size="30" id="confirmaSenha" /></td>
+								<td><input type="file" class="inputText" size="30" id="arquivo" /></td>
 							</tr>
 							<tr>
 								<td width="70"><input type="button" id="botaoSalvar" class="inputButton" value="Salvar" /></td>
@@ -75,11 +54,11 @@
 						</tbody>
 					</table>
 				</div>
-				<div id="listagemUsuarios" class="conteudo">
-					<div id="datatablesUsuarios">
+				<div id="listagemArquivos" class="conteudo">
+					<div id="datatablesArquivos">
 					</div>
 				</div>
-				<div id="formularioEditarUsuario" class="formulario conteudo">
+				<div id="formularioEditarArquivo" class="formulario conteudo">
 					<input type="hidden" id="idEdit" />
 					<table class="formulario">
 						<tbody>
@@ -91,24 +70,6 @@
 							</tr>
 							<tr>
 								<td><input type="text" class="inputText" size="30" id="nomeEdit" /></td>
-							</tr>
-							<tr>
-								<td colspan="2">E-mail *</td>
-							</tr>
-							<tr>
-								<td><input type="text" class="inputText" size="30" id="emailEdit"  /></td>
-							</tr>
-							<tr>
-								<td colspan="2">Senha</td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="password" class="inputText" size="30" id="senhaEdit" /></td>
-							</tr>
-							<tr>
-								<td colspan="2">Confirmar senha</td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="password" class="inputText" size="30" id="confirmaSenhaEdit" /></td>
 							</tr>
 							<tr>
 								<td>
@@ -125,4 +86,5 @@
 		</div>
 	</body>
 </html> 
+
 

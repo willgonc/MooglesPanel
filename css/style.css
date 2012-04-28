@@ -32,6 +32,14 @@ input[type=checkbox], x:default {
     vertical-align: middle;
 }
 
+.conteudo {
+	display: none;
+}
+
+#load {
+	display: none;
+}
+
 .conteiner {
 	position: absolute;
 	top: 111px;

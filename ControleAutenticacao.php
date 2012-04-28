@@ -31,8 +31,7 @@ Class ControleAutenticacao extends ControleGeral {
 		if ($data) {
 			$sql = 'SELECT * FROM usuarios WHERE 
                 email="'.$data['email'].'" and 
-                senha="'.$data['senha'].'" and 
-                status=1';
+                senha="'.$data['senha'].'"'; 
             
             /**
 			 *	Executa a query

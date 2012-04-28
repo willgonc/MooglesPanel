@@ -111,8 +111,7 @@ try {
         id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         nome TEXT NOT NULL,
         email TEXT NOT NULL,
-        senha TEXT NOT NULL,
-        status TINYINT NOT NULL
+        senha TEXT NOT NULL
     )");
 
     if ($conf) {
@@ -130,7 +129,7 @@ try {
     mysql_query("insert into usuarios (nome, email, senha, status) values ('teste".$i."','teste@gmail".$i.".com','098000980',1)");
 }*/
 try {
-    $ins = mysql_query("insert into usuarios (nome, email, senha, status) values ('Administrador','admin@painel.com','".sha1(123456)."',1)");
+    $ins = mysql_query("insert into usuarios (nome, email, senha) values ('Administrador','admin@painel.com','".sha1(123456)."')");
 
     if ($ins) {
         print "O usu&aacute;rio admin foi criado!<br />";

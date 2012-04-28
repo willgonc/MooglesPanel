@@ -10,10 +10,11 @@ function menuPrincipal(local){
 		'<div class="tw-ui-menu-principal">'	+
 		'	<ul>'+
         '   	<li id="principalMod"><a href="../principal/">Principal</a></li>'+
+        '   	<li id="arquivosMod"><a href="../arquivos/">Arquivos</a></li>'+
         '   	<li id="usuariosMod"><a href="../usuarios/">Usu&aacute;rios</a></li>'+
         '      	<li id="logout" class="rightMenu"><a href="#">Sair</a> </li>'+
         '      	<li id="perfilMenu" class="rightMenu">'+
-		'			<a href="perfil.php">Ol&aacute;, <b id="nomeUsuario"></b></a> '+
+		'			<a href="#">Ol&aacute;, <b id="nomeUsuario"></b></a> '+
 		'		</li>'+
 		'	</ul>'+
         '</div>');

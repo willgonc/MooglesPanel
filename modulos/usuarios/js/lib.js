@@ -1,5 +1,3 @@
-var FLAGTELA = 'listagem';
-
 /**
  *	@description Função de inicialização do módulo usuários
  *	
@@ -19,10 +17,7 @@ function init(){
 	// Cancela a edição
 	$('#botaoCacelarEdit').click(function (){
 		$('.conteudo').hide();
-		if (FLAGTELA == listagem)
-			$('#listagemUsuarios').show();
-		else
-			$('#perfilUsuario').show();
+		$('#listagemUsuarios').show();
 	});
 
 	// Salva alteração de um usuário
@@ -50,7 +45,7 @@ function init(){
  *	@name adicionaUsuario
  */
 function adicionaUsuario(){
-	$('#load').show();
+	$('#formularioAddUsuario .load').show();
 	ajaxSync(
 		"Controle.php", { 
 			"acao": "adicionaUsuario",
@@ -68,7 +63,7 @@ function adicionaUsuario(){
 				escreveMensagem(data[0], data[1]);
 				$('#nome').focus();
 			}
-			$('#load').hide();
+			$('#formularioAddUsuario .load').hide();
 		}
 	);
 }
@@ -90,16 +85,14 @@ function dataTableUsuarios(){
 				var widthTable = "100%";
 				var arrTitulo = [
 					{ "sTitle": "Nome" },
-					{ "sTitle": "E-mail" },
-					{ "sTitle": "Status", "sWidth": "100px" }
+					{ "sTitle": "E-mail" }
 				];
 
 				// montando array de dados
 				for (var i = 0; i < data[1].length; i++){
 					arr[i] = [
 						'<a href="#" title="Editar" idUsuario="'+data[1][i].id+'" class="linkDatatables">'+data[1][i].nome+'</a>',
-						data[1][i].email,
-						data[1][i].status == 1 ? '<span style="color: green">Ativo</span>' : '<span style="color: red">Bloqueado</span>'
+						data[1][i].email
 					];
 				}
 
@@ -114,7 +107,6 @@ function dataTableUsuarios(){
 								$('#idEdit').val(data[1].id);
 								$('#nomeEdit').val(data[1].nome);
 								$('#emailEdit').val(data[1].email);
-								$('#statusEdit').val(data[1].status);
 								$('#senhaEdit').val('');
 								$('#confirmaSenhaEdit').val('');
 							} else {
@@ -157,17 +149,19 @@ function removeUsuario(id){
  *	@param {integer} Id do usuário a ser editado
  */
 function editaUsuario(id){
+	$('#formularioEditarUsuario .load').show();
 	ajaxSync( "Controle.php", { "acao": "editarUsuario", 
 		"id": $('#idEdit').val(), 
 		"nome": $('#nomeEdit').val(),
 		"email": $('#emailEdit').val(),
 		"senha": $('#senhaEdit').val(),
-		"confirmaSenha": $('#confirmaSenhaEdit').val(),
-		"status": $('#statusEdit').val() 
+		"confirmaSenha": $('#confirmaSenhaEdit').val()
 	}, function (data){
+		$('#formularioEditarUsuario .load').hide();
 		escreveMensagem(data[0], data[1]);
 		if (data[0]){
 			$('#nomeUsuario').html($('#nomeEdit').val());
+			verificaAutenticacao();
 		}
 		$('#senhaEdit, #confirmaSenhaEdit').val('');
 		$('#nomeEdit').focus();

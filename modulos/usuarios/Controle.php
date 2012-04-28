@@ -14,7 +14,6 @@ Class Controle extends ControleGeral {
 	private $id;
 	private $nome;
 	private $email;
-	private $status;
 	private $senha;
 	private $confirmaSenha;
 
@@ -65,8 +64,8 @@ Class Controle extends ControleGeral {
 			$this->nome = htmlentities($this->nome, ENT_QUOTES, "UTF-8");
 			try {
 				// FAZ A ATUALIZACAO DA TABELA configuracoes NA BASE
-				$insert = parent::executeQuery("INSERT INTO usuarios (nome, email, senha, status) 
-							VALUES ('".$this->nome."','".$this->email."', '".$this->senha."', 0)");
+				$insert = parent::executeQuery("INSERT INTO usuarios (nome, email, senha) 
+							VALUES ('".$this->nome."','".$this->email."', '".$this->senha."')");
 				
 				if ($insert) {
 					$data[0] = True;
@@ -90,16 +89,22 @@ Class Controle extends ControleGeral {
 	 *	@return JSON
      */
 	public function removerUsuario(){
-		$select = parent::executeQuery("DELETE FROM usuarios WHERE id=".$_GET['id']);
-
-		if ($select) {
-			$retorno[0] = True;
-			$retorno[1] = "O usu&aacute;rio foi removido!";
-		} else {
+		$retorno = Array(True, '');
+		$select = parent::executeQuery('SELECT id FROM usuarios');
+		if (parent::getNumRows($select) == 1){
 			$retorno[0] = False;
-			$retorno[1] = "Erro ao remover usu&aacute;rios!";
-		}
+			$retorno[1] = "Este &eacute; o &uacute;nico usu&aacute;rio do painel, por isso voc&ecirc; n&atilde;o pode exclu&iacute;-lo!";
+		} else {
+			$delete = parent::executeQuery("DELETE FROM usuarios WHERE id=".$_GET['id']);
 
+			if ($delete) {
+				$retorno[0] = True;
+				$retorno[1] = "O usu&aacute;rio foi removido!";
+			} else {
+				$retorno[0] = False;
+				$retorno[1] = "Erro ao remover usu&aacute;rios!";
+			}
+		}
         parent::retornaResultado($retorno);
 	}
 	
@@ -137,15 +142,16 @@ Class Controle extends ControleGeral {
 		}
 
         if ($data[0]) {
+			// caso a senha seja definida é gerado o sha1 da senha
 			$this->senha = parent::strRequire($this->senha) ? sha1($this->senha) : null;
 
+			// gerando as entidades html dos caracteres aplicáveis como os acentos
 			$this->nome = htmlentities($this->nome, ENT_QUOTES, "UTF-8");
 			try {
 				$update = parent::executeQuery("UPDATE usuarios SET 
 					nome='".$this->nome."', 
-					email='".$this->email."',
-					".($this->senha != null ? "senha='".$this->senha."'," : "")."
-					status=".$this->status." 
+					email='".$this->email."'
+					".($this->senha != null ? ", senha='".$this->senha."'" : "")."
 					WHERE id=".$this->id);
 
 				if ($update) {
@@ -156,7 +162,6 @@ Class Controle extends ControleGeral {
 						if ($this->senha != null){
 							$_SESSION['data']['senha'] = $this->senha;
 						}
-						$_SESSION['data']['status']	= $this->status;
 					}
 
 					$data[0] = True;
@@ -183,7 +188,6 @@ Class Controle extends ControleGeral {
 		$this->id = 			isset($_GET['id']) ? $_GET['id'] : null;
 		$this->nome =		 	isset($_GET['nome']) ? $_GET['nome'] : null;
 		$this->email = 			isset($_GET['email']) ? $_GET['email'] : null;
-		$this->status = 		isset($_GET['status']) ? $_GET['status'] : null;
 		$this->senha = 			isset($_GET['senha']) ? $_GET['senha'] : null;
 		$this->confirmaSenha = 	isset($_GET['confirmaSenha']) ? $_GET['confirmaSenha'] : null;
 	}
@@ -238,8 +242,7 @@ Class Controle extends ControleGeral {
 						'id' => $row['id'],
 						'nome' => $row['nome'],
 						'email' => $row['email'],
-						'senha' => $row['senha'],
-						'status' => $row['status']
+						'senha' => $row['senha']
 					);
 				}
 				$retorno[0] = True;
@@ -269,9 +272,8 @@ Class Controle extends ControleGeral {
 				while($row = parent::fetchResults($select)) {
 					$arr = Array(
 						'id' => $row['id'],
-						'nome' => $row['nome'],
+						'nome' => html_entity_decode($row['nome'], ENT_QUOTES, 'UTF-8'),
 						'email' => $row['email'],
-						'status' => $row['status'],
 						'senha' => $row['senha']
 					);
 				}
