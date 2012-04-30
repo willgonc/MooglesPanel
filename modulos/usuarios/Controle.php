@@ -89,11 +89,15 @@ Class Controle extends ControleGeral {
 	 *	@return JSON
      */
 	public function removerUsuario(){
+		session_start();
 		$retorno = Array(True, '');
 		$select = parent::executeQuery('SELECT id FROM usuarios');
 		if (parent::getNumRows($select) == 1){
 			$retorno[0] = False;
 			$retorno[1] = "Este &eacute; o &uacute;nico usu&aacute;rio do painel, por isso voc&ecirc; n&atilde;o pode exclu&iacute;-lo!";
+		} else if ($_GET['id'] == $_SESSION['data']['id']) {
+			$retorno[0] = False;
+			$retorno[1] = "Voc&ecirc; n&atilde;o pode excluir seu pr&oacute;prio usu&aacute;rio!";
 		} else {
 			$delete = parent::executeQuery("DELETE FROM usuarios WHERE id=".$_GET['id']);
 
