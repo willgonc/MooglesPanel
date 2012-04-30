@@ -43,7 +43,7 @@ input[type=checkbox], x:default {
 .conteiner {
 	position: absolute;
 	top: 111px;
-	left: 260px;
+	left: 230px;
 	right: 0px;
 	bottom: 0px;
 	overflow: auto;
@@ -59,11 +59,24 @@ a.linkDatatables:active,
 a.linkDatatables:visited {
 	color: blue;
 	text-decoration: none;
+	padding-left: 21px;
 }
 
 a.linkDatatables:hover {
 	text-decoration: underline;
+	padding-left: 0px;
 }
+
+a.linkDatatables img {
+	display: none;
+	margin-right: 5px;
+	float: left;
+}
+
+a.linkDatatables:hover img {
+	display: block;
+}
+
 
 
 /**
@@ -72,14 +85,12 @@ a.linkDatatables:hover {
 .tituloModulo {
 	border-bottom: 1px solid rgb(220,220,220);
 	height: 70px;
-	margin-left: 260px;
+	margin-left: 230px;
 }
 
 .tituloModulo h3 {
 	padding: 25px 30px;
 }
-
-
 
 
 
@@ -90,7 +101,7 @@ a.linkDatatables:hover {
 	overflow: auto;
 	padding: 15px 30px;
 	float: left;
-	width: 200px;
+	width: 170px;
 	background: url(../imagens/bg.png) repeat top left;
 	border-right: 1px solid rgb(200,200,200);
 }

@@ -1,56 +1,40 @@
 <?php
 /**
- *	Classe responsável pelas configurações
- *	
+ *	Arquivo de configuração
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
  */
 Class Config 
 {
     /**
-     *  Atributo que guarda o nome do usuário do banco de dados
-	 *
+     *  Nome do usuário do banco de dados
      *  @access private
      *  @name $user
      */
     private $user;
 
     /**
-     *  Atributo que guarda a senha do usuário do banco de dados
-	 *
+     *  Senha do usuário do banco de dados
      *  @access private
      *  @name $pass
      */
     private $pass;
 
     /**
-     *  Atributo que guarda o nome do host do banco de dados
-	 *
+     *  Host do banco de dados
      *  @access private
      *  @name $host
      */
     private $host;
 
     /**
-     *  Atributo que guarda o nome da base de dados.
-	 *
+     *  Nome do banco de dados.
      *  @access private
      *  @name $dataBase
      */
     private $dataBase;
 
     /**
-     *  Atributo que guarda o nome do módulo padrão, esse
-	 *	modulo será chamado quando o despachante nao receber
-	 *	a ação.
-	 *
-     *  @access private
-     *  @name $moduloPadrao
-     */
-    private $moduloPadrao;
-
-    /**
      *  Método construtor da classe
-	 *
      *  @access public
      *  @name __construct()
      */
@@ -60,13 +44,10 @@ Class Config
         $this->setPass("123456");
         $this->setHost("localhost");
         $this->setDatabase("tudosobreweb");
-        
-		$this->setModuloPadrao("principal");
     }
 
     /**
-     *  Método que retorna o atributo nome do usuário
-	 *
+     *  Retorna o nome do usuário
      *  @access public
      *  @name getUser()
      *  @return string
@@ -76,8 +57,7 @@ Class Config
     }
 
     /**
-     *  Método que retorna o atributo senha do usuário
-	 *
+     *  Retorna a senha do usuário
      *  @access public
      *  @name getPass()
      *  @return string
@@ -88,7 +68,6 @@ Class Config
     
     /**
      *  Retorna o host do banco de dados
-	 *
      *  @access public
      *  @name getHost()
      *  @return string
@@ -99,7 +78,6 @@ Class Config
 
     /**
      *  Retorna o nome da base de dados
-	 *
      *  @access public
      *  @name getDataBase()
      *  @return string
@@ -109,19 +87,7 @@ Class Config
     }
 
     /**
-     *  Retorna o moduloPadrao
-	 *
-     *  @access public
-     *  @name getModuloPadrao()
-     *  @return string
-     */
-    public function getModuloPadrao() {
-        return $this->moduloPadrao;
-    }
-
-    /**
-     *  Método para adicionar o nome do usuário
-	 *
+     *   nome do usuário
      *  @access private
      *  @name setUser()
 	 *	@param string
@@ -132,7 +98,6 @@ Class Config
 
     /**
      *  Método para adicionar a senha do usuário
-	 *
      *  @access private
      *  @name setPass()
 	 *  @param string
@@ -143,7 +108,6 @@ Class Config
 
     /**
      *  Método para adicionar o host do banco de dados
-	 *
      *  @access private
      *  @name setHost()
 	 *	@param string
@@ -154,24 +118,12 @@ Class Config
 
     /**
      *  Método para adicionar o nome da base de dados
-	 *
      *  @access private
      *  @name setDatabase()
 	 *	@param string
      */
     private function setDatabase($dataBase) {
         $this->dataBase = $dataBase;
-    }
-    
-	/**
-     *  Método para adicionar o nome do módulo padrão
-	 *
-     *  @access private
-     *  @name setModuloPadrao()
-	 *	@param string
-     */
-    private function setModuloPadrao($modulo) {
-        $this->moduloPadrao = $modulo;
     }
 }
 ?>
