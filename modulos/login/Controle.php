@@ -57,7 +57,7 @@ Class Controle extends ControleGeral {
      *  @name autenticaUsuario()
 	 *	@return JSON
      */
-	public function autenticaUsuario(){
+	public function autenticaUsuario() {
         session_start();
 		$this->pegaDados();
 		$data = $this->validaDados();
@@ -78,8 +78,7 @@ Class Controle extends ControleGeral {
      *  @access private
      *  @name pegaDados()
      */
-    private function pegaDados()
-    {
+    private function pegaDados() {
         $this->email = $_GET['email'];
         $this->senha = $_GET['senha'];
     }
@@ -92,8 +91,7 @@ Class Controle extends ControleGeral {
      *  @access private
      *  @name criaSessao()
      */
-    private function criaSessao()
-    {
+    private function criaSessao() {
         $_SESSION['data'] = Array(
 			'id' 	=> $this->id,
 			'nome' 	=> $this->nome,
@@ -108,8 +106,7 @@ Class Controle extends ControleGeral {
      *  @access private
      *  @name destroiSessao()
      */
-    private function destroiSessao()
-    {
+    private function destroiSessao() {
         session_destroy();
     }
 

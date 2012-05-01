@@ -146,7 +146,10 @@ function dataTableUsuarios(){
 function removeUsuario(id){
 	ajaxSync( "Controle.php", { "acao": "removerUsuario", "id": id }, function (data){
 		mostraMensagem(data[1], function (){
-			document.location.reload();
+			if (data[0])
+				document.location.reload();
+			else
+				$('#formularioEditarUsuario').dialog('open');
 		}, data[0]);
 	});
 }

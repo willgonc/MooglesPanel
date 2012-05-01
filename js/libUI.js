@@ -27,8 +27,10 @@ function menuPrincipal(local){
 
 	$('#logout').click(function (){
         ajaxSync(pegaDiretorioHost() + "ControleAutenticacao.php", {'acao': 'fechaSessao'}, function (data){
-			if (data[0] == true)
-				window.location = pegaDiretorioHost();
+			mostraMensagem(data[1], function (){
+				if (data[0])
+					document.location.reload();
+			}, data[0]);
 		});
 	});
 

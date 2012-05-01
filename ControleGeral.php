@@ -85,7 +85,6 @@ Class ControleGeral extends Modelo {
      *  @return array|false
      */
     public function pegaSessao() {
-		session_start();
         return isset($_SESSION['data']) ? $_SESSION['data'] : False;
     }
 }
