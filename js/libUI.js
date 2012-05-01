@@ -45,7 +45,6 @@ function menuPrincipal(local){
  *	@param {array} Matriz de dados
  *	@param {array} Matriz com os títulos das colunas
  */
-
 var oTable;
 function montaTabelaDados(conteiner, idTable, arrDados, arrTitulo, callback){
 	callback = typeof callback == 'function' ? callback : function (){return true};
@@ -78,8 +77,7 @@ function montaTabelaDados(conteiner, idTable, arrDados, arrTitulo, callback){
 }
 
 /**
- *  @description Cria a div de mensagem se ela não existir, escreve a
- *		mensagem e mostra a div de mensagem.
+ *  @description Mostra um dialogo com a mensagem.
  *
  *	@function
  *	@name escreveMensagem
@@ -95,7 +93,7 @@ function mostraMensagem( mensagem, callClose, tipo ){
 	var img = tipo ? 'sucesso' : 'erro';
 	var str = '<span style="color: '+cor+';"><img src="../../imagens/'+img+'.png" border="0" />';
 
-	$('#mensagem').html(str + '<br />' + mensagem + '</span>').dialog({
+	$('#mensagem').dialog('destroy').html(str + '<br />' + mensagem + '</span>').dialog({
 		width: 400,
 		draggable: false,
 		modal: true,
@@ -111,32 +109,36 @@ function mostraMensagem( mensagem, callClose, tipo ){
 }
 
 /**
- *  @description Mostra uma tela de load
+ *  @description Mostra um dialogo de confirmação
+ *
  *	@function
- *	@name mostraLoading
- */
-function mostraLoading(){
-	if ($('#loading').length == 0) {
-		$('body').append('<div id="loading"><img src="../../imagens/load.gif" border="0" /></div>');
-	}
-	$('#loading').show();
-}
-
-/**
- *  @description Esconde a tela de load
- *	@function
- *	@name escondeLoading
- */
-function escondeLoading(){
-	$('#loading').hide();
-}
-
-/**
- *  @description Escreve um texto na barra de título do modulo
- *	@function
- *	@name escreveTitulo
+ *	@name escreveMensagem
  *	@param {string}
+ *	@param {function} Executa esta função quando precionado ok
+ *	@param {function} Executa esta função quando precionado cancelar
  */
-function escreveTitulo(str){
-	$('#tituloModulo h3').html(str);
+function mostraConfirm(mensagem, funcOk, funcCancel){
+	if ($('#confirm').length == 0)
+		$('body').append('<div id="confirm"></div>');
+
+	$('#confirm').dialog('destroy').html(mensagem).dialog({
+		width: 400,
+		draggable: false,
+		modal: true,
+		resizable: false,
+		title: 'Confirma&ccedil;&atilde;o',
+		buttons: {
+			"OK" : function (){
+				$(this).dialog('close');
+				funcOk();
+			}, 
+			"Cancelar" : function (){
+				$(this).dialog('close');
+				funcCancel();
+			}
+		},
+		open : function (){
+			$(this).parent().children('div').children('a.ui-dialog-titlebar-close').hide();
+		}
+	});
 }

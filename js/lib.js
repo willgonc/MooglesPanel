@@ -1,4 +1,25 @@
 /**
+ *  @description Mostra uma tela de load
+ *	@function
+ *	@name mostraLoading
+ */
+function mostraLoading(){
+	if ($('#loading').length == 0) {
+		$('body').append('<div id="loading"><img src="../../imagens/load.gif" border="0" /></div>');
+	}
+	$('#loading').show();
+}
+
+/**
+ *  @description Esconde a tela de load
+ *	@function
+ *	@name escondeLoading
+ */
+function escondeLoading(){
+	$('#loading').hide();
+}
+
+/**
  *	@description Função que verifica a sessão do usuário e redireciona
  *		para o modulo correspondente
  *
@@ -31,11 +52,20 @@ verificaAutenticacao();
  *		de sucesso
  */
 function ajaxSync(url, data, call){
+	mostraLoading();
 	$.ajax({
 	    type: 'GET',
 		url: url,
 		dataType: 'json',
-		success: (call ? call : function (){}),
+		success: function (data){
+			escondeLoading();
+
+			if (call)
+				call(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown){
+			alert("A requisição falhou: " + textStatus);
+		},
 		data: (data ? data : {}),
 		async: false,
 		cache: false

@@ -1,6 +1,5 @@
 /**
  *	@description Função de inicialização do módulo usuários
- *	
  *	@function
  *	@name init
  */
@@ -9,9 +8,9 @@ function init(){
 	
 	dataTableUsuarios();
 	$('#listagemUsuarios').show();
-	escreveTitulo('Usu&aacute;rios');
 	$(':button').button();
 	
+	// Diálogo do formulário de inclusão
 	$('#formularioAddUsuario').dialog({
 		width: 'auto',
 		autoOpen: false,
@@ -30,7 +29,7 @@ function init(){
 		}
 	});
 					
-					
+	// Diálogo do formulário de edição		
 	$('#formularioEditarUsuario').dialog({
 		width: 'auto',
 		autoOpen: false,
@@ -49,24 +48,21 @@ function init(){
 		}
 	});
 
-	// Dialogo para adicionar usuário
+	// Abre o formulario de inclusão
 	$('#botaoAdicionarUsuario').click(function (){
 		resetaCampoTextoFormulario();
 		$('#formularioAddUsuario').dialog('open');
 	});
 
-
-	/*/ Botão de excluir um usuário
+	// Abre o confirm para excluir o usuário
 	$('#removeUsuario').click(function (){
-		if (confirm('Você deseja excluir este usuário?')){
+		$('#formularioEditarUsuario').dialog('close');
+		mostraConfirm('Você deseja excluir este usuário?', function (){
 			removeUsuario($('#idEdit').val());
-			
-			$('.conteudo').hide();
-			escreveTitulo('Todos os usu&aacute;rios');
-			$('#listagemUsuarios').show();
-			dataTableUsuarios();
-		}
-	});*/
+		}, function (){ 
+			$('#formularioEditarUsuario').dialog('open');
+		});
+	});
 }
 
 /**
@@ -75,7 +71,6 @@ function init(){
  *	@name adicionaUsuario
  */
 function adicionaUsuario(){
-	mostraLoading();
 	ajaxSync(
 		"Controle.php", { 
 			"acao": "adicionaUsuario",
@@ -84,18 +79,12 @@ function adicionaUsuario(){
 			"senha": $('#senha').val(), 
 			"confirmaSenha": $('#confirmaSenha').val() 
 		}, function (data){
-			escondeLoading();
-			if (data[0]) {
-				mostraMensagem( 'Sucesso', data[1], function (){
-					resetaCampoTextoFormulario();
-					$('#formularioAddUsuario').dialog('open'); 
-				}, data[0]);
-			} else {
-				mostraMensagem( 'Erro', data[1], function (){
-					$('.formulario input:password').val('');
+			mostraMensagem( data[1], function (){
+				if (data[0])
+					document.location.reload();
+				else
 					$('#formularioAddUsuario').dialog('open');
-				}, data[0]);
-			}
+			}, data[0]);
 		}
 	);
 }
@@ -108,10 +97,6 @@ function adicionaUsuario(){
 function dataTableUsuarios(){
 	ajaxSync( "Controle.php", { "acao": "pegaTodosUsuarios" }, function (data){
 		if (data[0]) {
-			var nomeUsuarioAutenticado;
-			ajaxSync(pegaDiretorioHost() + "api.php", {'acao':'pegaUsuarioAutenticado'}, function(data) {
-				nomeUsuarioAutenticado = data.resposta;
-			});
 			var arr = [];
 			var widthTable = "100%";
 			var arrTitulo = [
@@ -129,7 +114,8 @@ function dataTableUsuarios(){
 			}
 
 			montaTabelaDados('#datatablesUsuarios', 'tabelaUsuarios', arr, arrTitulo, function (){
-				$('.linkDatatables').click(function (){
+				// Registra os eventos para edição dos dados do usuário
+				$('.linkDatatables').live('click', function (){
 					ajaxSync( "Controle.php", { "acao": "pegaDadosUsuario", "id": $(this).attr('idUsuario') }, function (data){
 						if (data[0]){
 							$('#idEdit').val(data[1].id);
@@ -145,7 +131,7 @@ function dataTableUsuarios(){
 				});
 			});
 		} else {
-			escreveMensagem(data[0], data[1]);
+			mostraMensagem( data[0], function (){}, data[1]);
 		}
 	});
 }
@@ -159,10 +145,9 @@ function dataTableUsuarios(){
  */
 function removeUsuario(id){
 	ajaxSync( "Controle.php", { "acao": "removerUsuario", "id": id }, function (data){
-		if (data[0])
-			dataTableUsuarios();
-
-		escreveMensagem(data[0], data[1]);
+		mostraMensagem(data[1], function (){
+			document.location.reload();
+		}, data[0]);
 	});
 }
 
@@ -174,7 +159,6 @@ function removeUsuario(id){
  *	@param {integer} Id do usuário a ser editado
  */
 function editaUsuario(id){
-	mostraLoading();
 	ajaxSync( "Controle.php", { "acao": "editarUsuario", 
 		"id": $('#idEdit').val(), 
 		"nome": $('#nomeEdit').val(),
@@ -182,13 +166,11 @@ function editaUsuario(id){
 		"senha": $('#senhaEdit').val(),
 		"confirmaSenha": $('#confirmaSenhaEdit').val()
 	}, function (data){
-		escondeLoading();
-		if (data[0]){
-			$('#nomeUsuario').html($('#nomeEdit').val());
-			verificaAutenticacao();
-			dataTableUsuarios();
-		}
-		mostraMensagem(data[1], function (){}, data[0]);
-		$('#senhaEdit, #confirmaSenhaEdit').val('');
+		mostraMensagem(data[1], function (){
+			if (data[0])
+				document.location.reload();
+			else
+				$('#formularioEditarUsuario').dialog('open');
+		}, data[0]);
 	});
 }

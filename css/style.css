@@ -60,22 +60,20 @@ a.linkDatatables:active,
 a.linkDatatables:visited {
 	color: blue;
 	text-decoration: none;
-	padding-left: 21px;
+	padding: 5px 15px;
 }
 
 a.linkDatatables:hover {
 	text-decoration: underline;
-	padding-left: 0px;
 }
 
 a.linkDatatables img {
-	display: none;
-	margin-right: 5px;
-	float: left;
+	visibility: hidden;
+	margin-left: 15px;
 }
 
 a.linkDatatables:hover img {
-	display: block;
+	visibility: visible;
 }
 
 
@@ -210,10 +208,18 @@ a.linkDatatables:hover img {
     border-radius: 3px;
 }
 
+#confirm {
+    text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
 #mensagem {
     text-align: center;
 	margin-top: 10px;
 	margin-bottom: 30px;
+	font-weight: bold;
 }
 
 #mensagem img {
