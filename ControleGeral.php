@@ -12,8 +12,6 @@ Class ControleGeral extends Modelo {
 
 	/**
      *  Método construtor da classe
-	 *
-     *  @param object
      *  @access public
      *  @name __construct()
      */
@@ -23,7 +21,6 @@ Class ControleGeral extends Modelo {
 
     /**
      *  Método para pegar a acao que o controle irá executar
-	 *
      *  @access public
      *  @name getAcao()
      *  @return string | False False caso nenhuma ação for requisitada
@@ -34,7 +31,6 @@ Class ControleGeral extends Modelo {
 
     /**
      *  Método que executa uma ação passada por parâmetro
-	 *
      *  @access public
      *  @name executaAcao()
      */
@@ -49,7 +45,6 @@ Class ControleGeral extends Modelo {
 
     /**
      *  Retorna um valor e formato json
-	 *
      *  @access private
      *  @name retornaResultado()
      *  @return json
