@@ -1,15 +1,12 @@
 <?php
 /**
- *	Classe responsável pelas funções de controle geréricas usadas
- *		pela maioria dos módulos
- *	
+ *	Classe responsável pelas funções de controle usadas pela maioria dos módulos
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
  */
 
 require_once "Modelo.php";
 
 Class ControleGeral extends Modelo {
-
 	/**
      *  Método construtor da classe
      *  @access public
@@ -22,10 +19,10 @@ Class ControleGeral extends Modelo {
     /**
      *  Método para pegar a acao que o controle irá executar
      *  @access public
-     *  @name getAcao()
-     *  @return string | False False caso nenhuma ação for requisitada
+     *  @name pegaAcao()
+     *  @return string | False
      */
-	public function getAcao() {
+	public function pegaAcao() {
 		return isset($_GET['acao']) ? $_GET['acao'] : False;
 	}
 
@@ -35,7 +32,7 @@ Class ControleGeral extends Modelo {
      *  @name executaAcao()
      */
 	public function executaAcao(){
-		$acao = $this->getAcao();
+		$acao = $this->pegaAcao();
 
 		if ($acao == null)
 			parent::retornaResultado(Array(False,'A&ccedil;&atilde;o n&atilde;o encontrada'));
@@ -47,7 +44,6 @@ Class ControleGeral extends Modelo {
      *  Retorna um valor e formato json
      *  @access private
      *  @name retornaResultado()
-     *  @return json
      */
 	public function retornaResultado($resultado) {
 		echo json_encode($resultado);
@@ -68,14 +64,13 @@ Class ControleGeral extends Modelo {
     }
 
     /**
-     *  Método que valida uma string, se ela é vazia ou não
+     *  Método que valida uma string requerida
 	 *	@param string $str
      *  @access public
      *  @name strRequire()
      *  @return bool
      */
     public function strRequire($str) {
-        // removendo espaços em branco
         $str = trim($str);
         if (strlen($str) == 0 || empty($str) || $str == '')
             return False;
@@ -83,18 +78,16 @@ Class ControleGeral extends Modelo {
             return True;
     }
     
-
     /**
      *  Método para retornar a sessão aberta caso tenha uma
-	 *
      *  @access public
      *  @name pegaSessao()
      *  @return array|false
      */
     public function pegaSessao() {
+		session_start();
         return isset($_SESSION['data']) ? $_SESSION['data'] : False;
     }
-    
 }
 
 new ControleGeral();

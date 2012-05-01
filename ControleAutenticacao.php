@@ -5,14 +5,12 @@ require_once "ControleGeral.php";
 Class ControleAutenticacao extends ControleGeral {
 	/**
      *  Método construtor da classe
-	 *
      *  @param object
      *  @access public
      *  @name __construct()
      */
     public function __construct() {
 		parent::__construct();
-        session_start();
 		parent::executaAcao();
     }
     
@@ -29,13 +27,8 @@ Class ControleAutenticacao extends ControleGeral {
 		$data = parent::pegaSessao();
 		$resultado = Array(False, 'Nenhuma sess&atilde;o foi encontrada!');
 		if ($data) {
-			$sql = 'SELECT * FROM usuarios WHERE 
-                email="'.$data['email'].'" and 
-                senha="'.$data['senha'].'"'; 
+			$sql = 'SELECT * FROM usuarios WHERE email="'.$data['email'].'" and senha="'.$data['senha'].'"'; 
             
-            /**
-			 *	Executa a query
-			 */
             $result = parent::executeQuery($sql);
 
             if ($result) {
@@ -50,15 +43,12 @@ Class ControleAutenticacao extends ControleGeral {
                 $resultado[0] = False;
 				$resultado[1] = 'Erro ao validar o usu&aacute;rio!';
             }
-			parent::retornaResultado($resultado);
-		} else {
-			parent::retornaResultado($resultado);
 		}
+		parent::retornaResultado($resultado);
     }
 	
 	/**
      *  Método que fecha a sessão aberta pelo usuário
-	 *
      *  @access public
      *  @name fechaSessao()
      *  @return JSON
