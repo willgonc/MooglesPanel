@@ -183,13 +183,10 @@ function requerido(str){
 }
 
 /**
- *  @description Escreve um texto na barra de título do modulo
- *
+ *  @description Limpa os campos de texto de um formulário
  *	@function
- *	@name escreveTitulo
- *	@param {string}
+ *	@name resetaCampoTextoFormulario
  */
-function escreveTitulo(str){
-	$('#tituloModulo h3').html(str);
+function resetaCampoTextoFormulario(){
+	$('.formulario input:text, .formulario textarea, .formulario input:password').val('');
 }
-

@@ -31,12 +31,6 @@
 			<div id="tituloModulo" class="tituloModulo">
 				<h3></h3>
 			</div> 
-			<div id="menuModulo" class="menuModulo">
-				<ul>
-					<li><a class="menuModuloAtivo" call="dataTableUsuarios()" show="listagemUsuarios" href="#">Todos os usu&aacute;rios</a></li>
-					<li><a show="formularioAddUsuario" call="$('#nome').focus()" href="#">Adicionar usu&aacute;rio</a></li>
-				</ul> 
-			</div>
 			<div class="conteiner">
 				<div id="formularioAddUsuario" class="formulario conteudo">
 					<table class="formulario">
@@ -48,35 +42,32 @@
 								<td colspan="2">Nome *</td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="text" class="inputText" size="30" id="nome" /></td>
+								<td colspan="2"><input type="text" class="inputText" size="40" id="nome" /></td>
 							</tr>
 							<tr>
 								<td colspan="2">E-mail *</td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="text" class="inputText" size="30" id="email"  /></td>
+								<td colspan="2"><input type="text" class="inputText" size="40" id="email"  /></td>
 							</tr>
 							<tr>
 								<td colspan="2">Senha *</td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="password" class="inputText" size="30" id="senha" /></td>
+								<td colspan="2"><input type="password" class="inputText" size="40" id="senha" /></td>
 							</tr>
 							<tr>
 								<td colspan="2">Confirmar senha *</td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="password" class="inputText" size="30" id="confirmaSenha" /></td>
-							</tr>
-							<tr>
-								<td width="70"><input type="button" id="botaoSalvar" class="inputButton" value="Salvar" /></td>
-								<td> <img src="imagens/load.gif" class="load" border="0" /> </td>
+								<td colspan="2"><input type="password" class="inputText" size="40" id="confirmaSenha" /></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div id="listagemUsuarios" class="conteudo">
-					<div id="datatablesUsuarios">
+					<input type="button" value="Adicionar usu&aacute;rio" id="botaoAdicionarUsuario" />
+					<div id="datatablesUsuarios" class="conteinerDatatable">
 					</div>
 				</div>
 				<div id="formularioEditarUsuario" class="formulario conteudo">
@@ -90,33 +81,30 @@
 								<td>Nome *</td>
 							</tr>
 							<tr>
-								<td><input type="text" class="inputText" size="30" id="nomeEdit" /></td>
+								<td><input type="text" class="inputText" size="40" id="nomeEdit" /></td>
 							</tr>
 							<tr>
 								<td colspan="2">E-mail *</td>
 							</tr>
 							<tr>
-								<td><input type="text" class="inputText" size="30" id="emailEdit"  /></td>
+								<td><input type="text" class="inputText" size="40" id="emailEdit"  /></td>
 							</tr>
 							<tr>
 								<td colspan="2">Senha</td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="password" class="inputText" size="30" id="senhaEdit" /></td>
+								<td colspan="2"><input type="password" class="inputText" size="40" id="senhaEdit" /></td>
 							</tr>
 							<tr>
 								<td colspan="2">Confirmar senha</td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="password" class="inputText" size="30" id="confirmaSenhaEdit" /></td>
+								<td colspan="2"><input type="password" class="inputText" size="40" id="confirmaSenhaEdit" /></td>
 							</tr>
 							<tr>
 								<td>
-									<input type="button" id="botaoSalvarEdit" class="inputButton" value="Salvar" />
-									<input type="button" id="botaoCacelarEdit" class="inputButton" value="Cancelar" />
-									<a href="#" style="margin-left: 15px;" id="removeUsuario" >Excluir usuário</a>
+									<a href="#" id="removeUsuario" >Excluir usuário</a>
 								</td>
-								<td> <img src="imagens/load.gif" class="load" border="0" /> </td>
 							</tr>
 						</tbody>
 					</table>

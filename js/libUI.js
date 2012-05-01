@@ -36,33 +36,6 @@ function menuPrincipal(local){
 }
 
 /**
- *	@description Define o funcionamento do menu interno
- *	
- *	@function
- *	@name menuModulo
- */
-function menuModulo(){
-	$('#menuModulo ul li a').click(function (){
-		$('#menuModulo ul li a').removeClass('menuModuloAtivo');
-		$(this).addClass('menuModuloAtivo');
-
-		var div = $(this).attr('show');
-		var call = $(this).attr('call');
-		$('.conteudo').hide();
-		escreveTitulo($(this).html());
-		$('#' + div).show();
-		eval(call);
-	});
-
-	var div = $('#menuModulo ul li:first a').attr('show');
-	var call = $('#menuModulo ul li:first a').attr('call');
-	escreveTitulo($('#menuModulo ul li:first a').html());
-	$('.conteudo').hide();
-	$('#' + div).show();
-	eval(call);
-}
-
-/**
  *  @description Monta uma tabela de dados com o datatables
  *
  *	@function
@@ -99,16 +72,10 @@ function montaTabelaDados(conteiner, idTable, arrDados, arrTitulo, callback){
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
 		"aoColumns": arrTitulo,
-		"fnInitComplete": callback
+		"fnInitComplete": callback,
+		"fnUpdate": function ( oSettings, fnCallbackDraw ){alert(1)}
 	});	
 }
-
-/**
- *  @description Variavel global que armazena o timeout da mensagem
- *
- *	@name GLOBALTIMEOUTMSG
- */
-var GLOBALTIMEOUTMSG;
 
 /**
  *  @description Cria a div de mensagem se ela não existir, escreve a
@@ -116,31 +83,60 @@ var GLOBALTIMEOUTMSG;
  *
  *	@function
  *	@name escreveMensagem
- *	@param {bool} Define se a mensagem é de erro ou não
- *	@param {string} Mensagem
+ *	@param {string}
+ *	@param {function}
+ *	@param {bool}
  */
-function escreveMensagem( tipo, str ){
-	$('#mensagem').hide();
+function mostraMensagem( mensagem, callClose, tipo ){
+	if ($('#mensagem').length == 0)
+		$('body').append('<div id="mensagem"></div>');
 
-	if ($('#mensagem').length == 1) {
-		$('#mensagem').html(str);
-		$("#mensagem").removeClass('ok error');
-		$("#mensagem").addClass(tipo == true ? 'ok' : 'error');
-	} else {
-		$('body').append('<div id="mensagem" class="mensagem '+(tipo == true ? 'ok' : 'error')+'" style="display: none;">'+str+'</div>');
-	}
+	var cor = tipo ? 'green' : 'red' ;
+	var img = tipo ? 'sucesso' : 'erro';
+	var str = '<span style="color: '+cor+';"><img src="../../imagens/'+img+'.png" border="0" />';
 
-	$('#mensagem').show();
-	GLOBALTIMEOUTMSG = setTimeout('removeMensagem()', 10000);
+	$('#mensagem').html(str + '<br />' + mensagem + '</span>').dialog({
+		width: 400,
+		draggable: false,
+		modal: true,
+		resizable: false,
+		title: 'Mensagem',
+		buttons: {
+			"Fechar" : function (){
+				$(this).dialog('close');
+			}
+		},
+		close: callClose
+	});
 }
 
 /**
- *  @description Esconde a div de mensagem e limpa o timeout da mensagem
- *
+ *  @description Mostra uma tela de load
  *	@function
- *	@name removeMensagem
+ *	@name mostraLoading
  */
-function removeMensagem(){
-	clearTimeout(GLOBALTIMEOUTMSG);
-	$('#mensagem').hide();
+function mostraLoading(){
+	if ($('#loading').length == 0) {
+		$('body').append('<div id="loading"><img src="../../imagens/load.gif" border="0" /></div>');
+	}
+	$('#loading').show();
+}
+
+/**
+ *  @description Esconde a tela de load
+ *	@function
+ *	@name escondeLoading
+ */
+function escondeLoading(){
+	$('#loading').hide();
+}
+
+/**
+ *  @description Escreve um texto na barra de título do modulo
+ *	@function
+ *	@name escreveTitulo
+ *	@param {string}
+ */
+function escreveTitulo(str){
+	$('#tituloModulo h3').html(str);
 }

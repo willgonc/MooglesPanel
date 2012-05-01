@@ -3,6 +3,7 @@
     padding: 0px;
     outline: none;
     font-family: Arial, Helvetica, Lucida, sans-serif;
+	font-size: 14px;
 }
 
 .botaoAcao {
@@ -43,7 +44,7 @@ input[type=checkbox], x:default {
 .conteiner {
 	position: absolute;
 	top: 111px;
-	left: 230px;
+	left: 0px;
 	right: 0px;
 	bottom: 0px;
 	overflow: auto;
@@ -85,11 +86,11 @@ a.linkDatatables:hover img {
 .tituloModulo {
 	border-bottom: 1px solid rgb(220,220,220);
 	height: 70px;
-	margin-left: 230px;
 }
 
 .tituloModulo h3 {
 	padding: 25px 30px;
+	font-size: 18px;
 }
 
 
@@ -151,12 +152,27 @@ a.linkDatatables:hover img {
 }
 
 
+.conteinerDatatable {
+	margin-top: 15px;
+}
 
 
+#loading {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background: url(../imagens/bg_30.png) repeat;
+}
 
-
-
-
+#loading img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -63px;
+	margin-top: -11px;
+}
 
 
 
@@ -194,15 +210,14 @@ a.linkDatatables:hover img {
     border-radius: 3px;
 }
 
-.mensagem {
-    margin: 0px;
+#mensagem {
     text-align: center;
-    font-size: 13px;
-	 position: absolute;
-	 top: 25px;
-	 width: 400px;
-	 margin-left: -200px;
-	 left: 50%;
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+
+#mensagem img {
+	margin-bottom: 10px;
 }
 
 .mensagemLogin {
