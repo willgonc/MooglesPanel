@@ -1,5 +1,5 @@
 <?php
 
-header("Location: ./modulos/principal/index.html");
+header("Location: ./modulos/principal/");
 
 ?>
