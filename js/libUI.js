@@ -125,6 +125,7 @@ function mostraConfirm(mensagem, funcOk, funcCancel){
 
 	$('#confirm').dialog('destroy').html(mensagem).dialog({
 		width: 400,
+		closeOnEscape: false,
 		draggable: false,
 		modal: true,
 		resizable: false,

@@ -5,8 +5,8 @@
  *	@name init
  */
 function init(){
-	$('#load').hide();
 	$('#email').focus();
+	$(':button').button();
 
 	$('#email, #senha').keypress(function (event){
 		if (event.keyCode == 13){
@@ -32,11 +32,10 @@ function init(){
  */
 function autenticaUsuario(email, senha){
 	ajaxSync("Controle.php",{ "acao": "autenticaUsuario", "email": email, "senha": senha }, function (data){
-		if (data[0]) {
-			window.location = pegaDiretorioHost() + "index.php";
-		} else {
+		if (data[0])
+			window.location = pegaDiretorioHost();
+		else
 			escreveMensagemLogin(data[1]);
-		}
 	});
 }
 
