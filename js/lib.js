@@ -30,7 +30,7 @@ function escondeLoading(){
 function verificaAutenticacao(){
 	ajaxSync(pegaDiretorioHost() + "ControleAutenticacao.php", {"acao":"validaUsuario"}, function(data) {
 		var mod = pegaDiretorioModuloAtual();
-		if (data[0] == true) {
+		if (data[0]) {
 			if (mod == 'login')
 				window.location = pegaDiretorioHost();
 		} else {
