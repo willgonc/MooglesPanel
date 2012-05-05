@@ -191,7 +191,7 @@ Class Controle extends ControleGeral {
 	private function pegaDados(){
 		$this->id = 			isset($_GET['id']) ? $_GET['id'] : null;
 		$this->nome =		 	isset($_GET['nome']) ? $_GET['nome'] : null;
-		$this->email = 			isset($_GET['email']) ? $_GET['email'] : null;
+		$this->email = 			isset($_GET['email']) ? strtolower($_GET['email']) : null;
 		$this->senha = 			isset($_GET['senha']) ? $_GET['senha'] : null;
 		$this->confirmaSenha = 	isset($_GET['confirmaSenha']) ? $_GET['confirmaSenha'] : null;
 	}
