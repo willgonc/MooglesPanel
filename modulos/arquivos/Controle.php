@@ -9,6 +9,7 @@ Class Controle extends ControleGeral {
 	private $dataUpload;
 	private $dimensoesImagem;
 	private $urlArquivo;
+	private $legenda;
 	private $uploadDir = './upload/';
 
 	public function __construct(){
@@ -24,6 +25,7 @@ Class Controle extends ControleGeral {
 		$this->tipoArquivo = $this->arquivo['type'];
 		$this->dataUpload = date("Y-m-d H:i:s");
 		$this->urlArquivo = $_POST['path'].'arquivos/upload/'.$this->nomeArquivo;
+		$this->legenda = preg_replace('/\.(\w+)$/', '', $this->nomeArquivo);
 		
 		$tipo = explode('/', $this->tipoArquivo);
 		if ($tipo[0] == 'image'){
@@ -37,33 +39,46 @@ Class Controle extends ControleGeral {
 		$ponteiro  = opendir($this->uploadDir);
 		// monta os vetores com os itens encontrados na pasta
 		while ($nome_itens = readdir($ponteiro)) {
-			if ($nome_itens == $this->arquivo["name"])
+			if ($nome_itens == $this->arquivo["name"]){
+				$retorno = Array(False, 'J&aacute; existe um arquivo com este nome!');
 				$flag = False;
+			}
 		}
 		
 		if ($flag){
+			$tiposValidos = "/png|jpeg|gif|bmp|vnd\.oasis\.opendocument\.text|".
+				"vnd\.openxmlformats-officedocument\.wordprocessingml\.document|msword|plain|pdf|".
+				"zip|x-rar/";
+
+			if (!preg_match($tiposValidos, $tipo[1])) {
+				$flag = False;
+				$retorno = Array(False, 'Erro ao enviar arquivo!'.$this->tipoArquivo);
+			}
+		}
+			
+
+		if ($flag){
 			$copy = move_uploaded_file($this->arquivo['tmp_name'], $this->uploadDir.$this->arquivo['name']);
 			if ($copy){
-				if ($this->insertData() == True) {
+				if ($this->adicionaArquivo() == True) {
 					$retorno = Array(True, 'O arquivo foi enviado com sucesso!');
 				} else {
-					$this->deletaArquivo();
+					exec('rm '.$this->uploadDir.$this->nomeArquivo);
 					$retorno = Array(False, 'Erro ao enviar o arquivo!');
 				}
 			} else {
 				$retorno = Array(False, 'Erro ao enviar o arquivo!');
 			}
-		} else {
-			$retorno = Array(False, 'J&aacute; existe um arquivo com este nome!');
 		}
 
 		parent::retornaResultado($retorno);
 	}
 
-	private function insertData(){
+	private function adicionaArquivo() {
 		try {
 			$insert = parent::executeQuery('INSERT INTO arquivos (nome, tipo, legenda, data, dimensoes, titulo, textoAlternativo, descricao, url)
-				VALUES ("'.$this->nomeArquivo.'", "'.$this->tipoArquivo.'", "", "'.$this->dataUpload.'", "'.$this->dimensoesImagem.'", "", "", "", "'.$this->urlArquivo.'")');
+				VALUES ("'.$this->nomeArquivo.'", "'.$this->tipoArquivo.'", "'.$this->legenda.'", 
+					"'.$this->dataUpload.'", "'.$this->dimensoesImagem.'", "", "", "", "'.$this->urlArquivo.'")');
 
 			if ($insert)
 				return True;
@@ -73,9 +88,43 @@ Class Controle extends ControleGeral {
 			return False;
 		}
 	}
+    
+	/**
+     *  Retorna um array com os dados de todos os usuários cadastrados
+     *  @access public
+     *  @name pegaTodosUsuarios()
+	 *	@return JSON
+     */
+	public function pegaTodosArquivos(){
+        $retorno = Array(True, '');
+		$valores = Array();
+        try {
+			$select = parent::executeQuery("SELECT * FROM arquivos ORDER BY data DESC");
+            
+            if ($select) {
+				while ($row = parent::fetchResults($select)) {
+					$valores[] = Array(
+						'id' => $row['id'],
+						'nome' => $row['nome'],
+						'tipo' => $row['tipo'],
+						'legenda' => $row['legenda'],
+						'data' => $row['data']
+					);
+				}
+				$retorno[0] = True;
+				$retorno[1] = $valores;
+            } else {
+				$retorno[0] = False;
+				$retorno[1] = "Erro ao buscar arquivos!";
+            }
+        } catch ( Exception $e ){
+			$retorno[0] = False;
+			$retorno[1] = "Erro ao buscar arquivos!";
+        }
+        parent::retornaResultado($retorno);
+	}
 
 	private function deletaArquivo(){
-		exec('rm '.$this->uploadDir.$this->nomeArquivo);
 	}
 
 	private function pegaDados(){

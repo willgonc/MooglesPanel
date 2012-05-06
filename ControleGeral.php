@@ -23,13 +23,12 @@ Class ControleGeral extends Modelo {
      *  @return string | False
      */
 	public function pegaAcao() {
-		if (isset($_GET['acao'])){
+		if (isset($_GET['acao']))
 			return $_GET['acao'];
-		} else if (isset($_POST['acao'])){
+		else if (isset($_POST['acao']))
 			return $_POST['acao'];
-		} else {
+		else
 			return False;
-		}
 	}
 
     /**
@@ -40,10 +39,10 @@ Class ControleGeral extends Modelo {
 	public function executaAcao(){
 		$acao = $this->pegaAcao();
 
-		if ($acao == null)
-			parent::retornaResultado(Array(False,'A&ccedil;&atilde;o n&atilde;o encontrada'));
-		else
+		if ($acao)
 			$this->$acao();
+		else
+			$this->retornaResultado(Array(False,'A&ccedil;&atilde;o n&atilde;o encontrada'));
 	}
 
     /**
