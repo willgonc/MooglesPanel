@@ -76,7 +76,7 @@ function dataTableUsuarios(){
 			for (var i = 0; i < data[1].length; i++){
 				arr[i] = [
 					'<a href="#" title="Editar" idUsuario="'+data[1][i].id+'" class="linkDatatables">'+data[1][i].nome+
-						'<img src="imagens/edit.png" border="0" /></a>',
+						'<img src="../../imagens/edit.png" border="0" /></a>',
 					data[1][i].email
 				];
 			}

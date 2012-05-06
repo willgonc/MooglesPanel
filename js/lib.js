@@ -240,3 +240,11 @@ function requerido(str){
 function resetaCampoTextoFormulario(){
 	$('.formulario input:text, .formulario textarea, .formulario input:password').val('');
 }
+
+
+function formataDataBanco(data){
+	var arr = data.split(' ');
+	var arrData = arr[0].split('-');
+	var novaData = arrData[2] + '/' + arrData[1] + '/' + arrData[0];
+	return novaData + ' <br />&agrave;s<br /> ' + arr[1];
+}

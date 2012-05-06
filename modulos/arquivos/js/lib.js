@@ -7,7 +7,7 @@ function init(){
 		action: 'Controle.php',
 		data: {'acao':'uploadArquivo', 'path': pegaPath()},
 		onSubmit: function (file, ext){
-			var extencoes = /png|jpg|jpe|jpeg|gif|bmp|odt|docx|doc|txt|pdf|zip|rar/;
+			var extencoes = /png|jpg|jpe|jpeg|gif|bmp|odt|docx|doc|xls|ods|txt|pdf|zip|rar/;
 			if (ext.match(extencoes)){
 				mostraLoading();
 			} else {
@@ -28,26 +28,46 @@ function init(){
 	dataTableArquivos();
 }
 
+var ARRTHUMB = {
+	'ODT': 'doc.png',
+	'DOCX': 'doc.png',
+	'DOC': 'doc.png',
+	'TXT': 'txt.png',
+	'XLS': 'planilha.png',
+	'ODS': 'planilha.png',
+	'PDF': 'pdf.png',
+	'ZIP': 'compact.png',
+	'RAR': 'compact.png'
+};
+
 function dataTableArquivos(){
 	ajaxSync( "Controle.php", { "acao": "pegaTodosArquivos" }, function (data){
 		if (data[0]) {
 			var arr = [];
 			var widthTable = "100%";
 			var arrTitulo = [
-				{ "sTitle": "" },
+				{ "sTitle": "", "sWidth": "68px", "sClass": "center", "bSortable": false },
 				{ "sTitle": "Nome do arquivo" },
-				{ "sTitle": "Tipo de arquivo" },
-				{ "sTitle": "Data do upload"}
+				{ "sTitle": "Tipo de arquivo", "sWidth": "150px", "sClass": "center"  },
+				{ "sTitle": "Data do upload", "sWidth": "150px", "sClass": "center"  }
 			];
 
 			// montando array de dados
 			for (var i = 0; i < data[1].length; i++){
+				var thumb;
+				var extencoes = /png|jpg|jpe|jpeg|gif|bmp/;
+
+				if (data[1][i].nome.match(extencoes)){
+					thumb = '<img src="./upload/'+data[1][i].nome+'" width="80" height="80" />';
+				} else {
+					thumb = '<img src="./imagens/'+ARRTHUMB[data[1][i].tipo]+'" />';
+				}
 				arr[i] = [
-					'<img src="./upload/'+data[1][i].nome+'" width="80" height="80" />',
+					thumb,
 					'<a href="#" title="Editar" idArquivo="'+data[1][i].id+'" class="linkDatatables">'+data[1][i].legenda+
-						'<img src="imagens/edit.png" border="0" /></a>',
+						'<img src="../../imagens/edit.png" border="0" /></a>',
 					data[1][i].tipo,
-					data[1][i].data
+					formataDataBanco(data[1][i].data)
 				];
 			}
 

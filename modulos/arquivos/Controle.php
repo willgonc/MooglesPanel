@@ -11,6 +11,7 @@ Class Controle extends ControleGeral {
 	private $urlArquivo;
 	private $legenda;
 	private $uploadDir = './upload/';
+	private $extencaoArquivo;
 
 	public function __construct(){
 		parent::__construct();
@@ -26,6 +27,9 @@ Class Controle extends ControleGeral {
 		$this->dataUpload = date("Y-m-d H:i:s");
 		$this->urlArquivo = $_POST['path'].'arquivos/upload/'.$this->nomeArquivo;
 		$this->legenda = preg_replace('/\.(\w+)$/', '', $this->nomeArquivo);
+
+		$exten = explode('.', $this->nomeArquivo);
+		$this->extencaoArquivo = strtoupper($exten[count($exten)-1]);
 		
 		$tipo = explode('/', $this->tipoArquivo);
 		if ($tipo[0] == 'image'){
@@ -48,7 +52,7 @@ Class Controle extends ControleGeral {
 		if ($flag){
 			$tiposValidos = "/png|jpeg|gif|bmp|vnd\.oasis\.opendocument\.text|".
 				"vnd\.openxmlformats-officedocument\.wordprocessingml\.document|msword|plain|pdf|".
-				"zip|x-rar/";
+				"vnd.ms-excel|vnd.oasis.opendocument.spreadsheet|zip|x-rar/";
 
 			if (!preg_match($tiposValidos, $tipo[1])) {
 				$flag = False;
@@ -77,7 +81,7 @@ Class Controle extends ControleGeral {
 	private function adicionaArquivo() {
 		try {
 			$insert = parent::executeQuery('INSERT INTO arquivos (nome, tipo, legenda, data, dimensoes, titulo, textoAlternativo, descricao, url)
-				VALUES ("'.$this->nomeArquivo.'", "'.$this->tipoArquivo.'", "'.$this->legenda.'", 
+				VALUES ("'.$this->nomeArquivo.'", "'.$this->extencaoArquivo.'", "'.$this->legenda.'", 
 					"'.$this->dataUpload.'", "'.$this->dimensoesImagem.'", "", "", "", "'.$this->urlArquivo.'")');
 
 			if ($insert)
@@ -90,7 +94,7 @@ Class Controle extends ControleGeral {
 	}
     
 	/**
-     *  Retorna um array com os dados de todos os usuários cadastrados
+     *  Retorna um array com os dados de todos os arquivos cadastrados
      *  @access public
      *  @name pegaTodosUsuarios()
 	 *	@return JSON
