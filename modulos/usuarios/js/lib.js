@@ -11,42 +11,10 @@ function init(){
 	$(':button').button();
 	
 	// Diálogo do formulário de inclusão
-	$('#formularioAddUsuario').dialog({
-		width: 'auto',
-		autoOpen: false,
-		draggable: false,
-		modal: true,
-		resizable: false,
-		title: 'Adicionar usu&aacute;rio',
-		buttons: {
-			"Salvar" : function (){
-				$(this).dialog('close');
-				adicionaUsuario();
-			},
-			"Cancelar" : function (){
-				$(this).dialog('close');
-			}
-		}
-	});
+	criaDialogoFormulario('#formularioAddUsuario', 'Adicionar usu&aacute;rio', adicionaUsuario, function (){});
 					
 	// Diálogo do formulário de edição		
-	$('#formularioEditarUsuario').dialog({
-		width: 'auto',
-		autoOpen: false,
-		draggable: false,
-		modal: true,
-		resizable: false,
-		title: 'Editar usu&aacute;rio',
-		buttons: {
-			"Salvar" : function (){
-				$(this).dialog('close');
-				editaUsuario();
-			},
-			"Cancelar" : function (){
-				$(this).dialog('close');
-			}
-		}
-	});
+	criaDialogoFormulario('#formularioEditarUsuario', 'Editar usu&aacute;rio', editaUsuario, function (){});
 
 	// Abre o formulario de inclusão
 	$('#botaoAdicionarUsuario').click(function (){

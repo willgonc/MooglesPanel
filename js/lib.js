@@ -65,10 +65,30 @@ function ajaxSync(url, data, call){
 		},
 		error: function (jqXHR, textStatus, errorThrown){
 			alert("A requisição falhou: " + textStatus);
+			document.location.reload();
 		},
 		data: (data ? data : {}),
 		async: false,
 		cache: false
+	});
+}
+
+/**
+ *	@description Realiza uma chamada ajax síncrona sem cache
+ *
+ *	@function
+ *	@name ajaxSync
+ *	@param {string} url Url da chamada ajax
+ *	@param {array} data Dados a serem passados
+ *	@param {function} call Função de callback que é executada em caso
+ *		de sucesso
+ */
+function ajaxSyncUpload(url, data, call){
+	mostraLoading();
+	$.post(url, data, function (data){
+		escondeLoading();
+		if (call)
+			call(data);
 	});
 }
 
@@ -164,7 +184,7 @@ function pegaDiretorioModulo(modulo){
  *	@return {string}
  */
 function pegaPath(){
-	return pegaNomeProtocolo() + '//' + pegaNomeHost() + pegaDiretorioHost() + '/';
+	return pegaNomeProtocolo() + '//' + pegaNomeHost() + pegaDiretorioHost();
 }
 
 /**

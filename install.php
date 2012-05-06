@@ -125,9 +125,6 @@ try {
     $error = false;
 }
 
-/*for ($i = 0; $i < 100; $i++){
-    mysql_query("insert into usuarios (nome, email, senha, status) values ('teste".$i."','teste@gmail".$i.".com','098000980',1)");
-}*/
 try {
     $ins = mysql_query("insert into usuarios (nome, email, senha) values ('Administrador','admin@painel.com','".sha1(123456)."')");
 
@@ -142,9 +139,34 @@ try {
     $error = false;
 }
 
+/******************************************************************************
+ *
+ *	Cria tabela arquivos
+ *
+ *****************************************************************************/
+try {
+    $conf = mysql_query("CREATE TABLE arquivos (
+        id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        nome TEXT NOT NULL,
+        tipo TEXT NOT NULL,
+		legenda TEXT NOT NULL,
+        data DATETIME NOT NULL,
+        dimensoes TEXT NOT NULL,
+        titulo TEXT NOT NULL,
+        textoAlternativo TEXT NOT NULL,
+		descricao TEXT NOT NULL,
+		url TEXT NOT NULL
+    )");
 
-if ($error)
-    echo '<meta http-equiv="refresh" content="3; url=summary.php">';
+    if ($conf) {
+        print "A tabela arquivos foi criada!<br />";
+    } else {
+        print "Erro ao criar a tabela arquivos Erro: ".mysql_error()."<br />";
+        $error = false;
+    }
+} catch ( Exception $e ){
+    print "Erro ao criar a tabela arquivos Erro: ".$e."<br />";
+    $error = false;
+}
 
-//mysql_close($conexao);
 ?>

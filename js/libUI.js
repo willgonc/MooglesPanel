@@ -145,3 +145,41 @@ function mostraConfirm(mensagem, funcOk, funcCancel){
 		}
 	});
 }
+
+/**
+ *  @description Cria um dialogo do formulario
+ *
+ *	@function
+ *	@name criaDialogoFormulario
+ *	@param {string}
+ *	@param {string}
+ *	@param {function} Executa esta função quando precionado ok
+ *	@param {function} Executa esta função quando precionado cancelar
+ *	@param {function} Executa esta função quando o dialogo é aberto
+ */
+function criaDialogoFormulario(seletor, titulo, funcSalvar, funcCancelar, funcAbrirDialogo){
+	$(seletor).dialog({
+		width: 'auto',
+		autoOpen: false,
+		draggable: false,
+		modal: true,
+		resizable: false,
+		title: titulo,
+		buttons: {
+			"Salvar" : function (){
+				$(this).dialog('close');
+				if (funcSalvar)
+					funcSalvar();
+			},
+			"Cancelar" : function (){
+				$(this).dialog('close');
+				if (funcCancelar)
+					funcCancelar();
+			}
+		},
+		open: function (){
+			if (funcAbrirDialogo)
+				funcAbrirDialogo();
+		}
+	});
+}

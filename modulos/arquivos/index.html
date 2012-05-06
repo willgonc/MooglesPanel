@@ -18,6 +18,7 @@
 		<script type="text/javascript" language="javascript" src="js/lib.js"></script>
 		<script type="text/javascript" language="javascript" src="../../plugins/jquery-ui/js/jquery-ui.js"></script>
 		<script type="text/javascript" language="javascript" src="../../plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" language="javascript" src="../../plugins/ajaxupload/ajaxupload.js"></script>
 
 		<script type="text/javascript" language="javascript">
 			$(document).ready(function (){
@@ -29,58 +30,15 @@
 		<div class="geral">
 			<div id="menu" class="menu"></div>
 			<div id="tituloModulo" class="tituloModulo">
-				<h3></h3>
+				<h3>Arquivos</h3>
 			</div> 
-			<div id="menuModulo" class="menuModulo">
-				<ul>
-					<li><a class="menuModuloAtivo" call="dataTableArquivos()" show="listagemArquivos" href="#">Todos os arquivos</a></li>
-					<li><a show="formularioAddArquivo" href="#">Adicionar arquivo</a></li>
-				</ul> 
-			</div>
 			<div class="conteiner">
-				<div id="formularioAddArquivo" class="formulario conteudo">
-					<table class="formulario">
-						<tbody>
-							<tr>
-								<td colspan="2">Selecione um arquivo</td>
-							</tr>
-							<tr>
-								<td><input type="file" class="inputText" size="30" id="arquivo" /></td>
-							</tr>
-							<tr>
-								<td width="70"><input type="button" id="botaoSalvar" class="inputButton" value="Salvar" /></td>
-								<td> <img src="imagens/load.gif" class="load" border="0" /> </td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
 				<div id="listagemArquivos" class="conteudo">
+					<input type="button" value="Adicionar arquivo" id="botaoAdicionarArquivo" />
 					<div id="datatablesArquivos">
 					</div>
 				</div>
 				<div id="formularioEditarArquivo" class="formulario conteudo">
-					<input type="hidden" id="idEdit" />
-					<table class="formulario">
-						<tbody>
-							<tr>
-								<td colspan="2" class="info">* Campo de preenchimento obrigat&oacute;rio</td>
-							</tr>
-							<tr>
-								<td>Nome *</td>
-							</tr>
-							<tr>
-								<td><input type="text" class="inputText" size="30" id="nomeEdit" /></td>
-							</tr>
-							<tr>
-								<td>
-									<input type="button" id="botaoSalvarEdit" class="inputButton" value="Salvar" />
-									<input type="button" id="botaoCacelarEdit" class="inputButton" value="Cancelar" />
-									<a href="#" style="margin-left: 15px;" id="removeUsuario" >Excluir usuário</a>
-								</td>
-								<td> <img src="imagens/load.gif" class="load" border="0" /> </td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>

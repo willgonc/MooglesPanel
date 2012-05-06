@@ -23,7 +23,13 @@ Class ControleGeral extends Modelo {
      *  @return string | False
      */
 	public function pegaAcao() {
-		return isset($_GET['acao']) ? $_GET['acao'] : False;
+		if (isset($_GET['acao'])){
+			return $_GET['acao'];
+		} else if (isset($_POST['acao'])){
+			return $_POST['acao'];
+		} else {
+			return False;
+		}
 	}
 
     /**
