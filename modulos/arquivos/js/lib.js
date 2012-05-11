@@ -1,9 +1,33 @@
 function init(){
 	menuPrincipal('#menu');
 	$('#listagemArquivos').show();
-	$(':button').button();
+	$(':button, :submit').button();
 
-	new AjaxUpload('botaoAdicionarArquivo', {
+	$('#formularioAddArquivo').dialog({
+		width: 'auto',
+		autoOpen: false,
+		draggable: false,
+		modal: true,
+		resizable: false,
+		title: 'Adicionar arquivo',
+		buttons: {
+			'Enviar arquivo' : function (){
+				$('#formularioAddArquivo').dialog('close');
+				if ($('#arquivo').val())
+					$('#formAddArquivo').submit();
+				else
+					mostraMensagem( 'Selecione um arquivo!', function (){
+						$('#formularioAddArquivo').dialog('open');
+					}, false);
+			}
+		}
+	});
+
+	$('#botaoAddArquivo').click(function (){
+		$('#formularioAddArquivo').dialog('open');
+	});
+	
+	/*new AjaxUpload('botaoAdicionarArquivo', {
 		action: 'Controle.php',
 		data: {'acao':'uploadArquivo', 'path': pegaPath()},
 		onSubmit: function (file, ext){
@@ -23,22 +47,10 @@ function init(){
 					document.location.reload();
 			}, data[0]);
 		}
-	});	
+	});	*/ 
 
 	dataTableArquivos();
 }
-
-var ARRTHUMB = {
-	'ODT': 'doc.png',
-	'DOCX': 'doc.png',
-	'DOC': 'doc.png',
-	'TXT': 'txt.png',
-	'XLS': 'planilha.png',
-	'ODS': 'planilha.png',
-	'PDF': 'pdf.png',
-	'ZIP': 'compact.png',
-	'RAR': 'compact.png'
-};
 
 function dataTableArquivos(){
 	ajaxSync( "Controle.php", { "acao": "pegaTodosArquivos" }, function (data){

@@ -20,18 +20,22 @@ Class Controle extends ControleGeral {
 	
 	public function uploadArquivo(){
 		$retorno = Array(True, '');
-		$this->pegaDados();
+		if (isset($_FILES['arquivo']))
+			$this->arquivo = $_FILES['arquivo'];
+		else
+			echo '<script>alert("O arquivo não foi enviado!");window.location = "./index.html";</script>';
 		
 		$this->nomeArquivo = $this->arquivo['name'];
 		$this->tipoArquivo = $this->arquivo['type'];
 		$this->dataUpload = date("Y-m-d H:i:s");
-		$this->urlArquivo = $_POST['path'].'arquivos/upload/'.$this->nomeArquivo;
+		$this->urlArquivo = $_SERVER["SERVER_NAME"].'/modulos/arquivos/upload/'.$this->nomeArquivo;
 		$this->legenda = preg_replace('/\.(\w+)$/', '', $this->nomeArquivo);
 
 		$exten = explode('.', $this->nomeArquivo);
 		$this->extencaoArquivo = strtoupper($exten[count($exten)-1]);
 		
 		$tipo = explode('/', $this->tipoArquivo);
+
 		if ($tipo[0] == 'image'){
 			$size = getimagesize($this->arquivo["tmp_name"]);
 			$this->dimensoesImagem = $size[0].'x'.$size[1];

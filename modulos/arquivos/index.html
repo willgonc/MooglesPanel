@@ -34,12 +34,18 @@
 			</div> 
 			<div class="conteiner">
 				<div id="listagemArquivos" class="conteudo">
-					<input type="button" value="Adicionar arquivo" id="botaoAdicionarArquivo" />
+					<input type="button" id="botaoAddArquivo" value="Adicionar arquivo" />
 					<div id="datatablesArquivos" class="conteinerDatatable">
 					</div>
 				</div>
 				<div id="formularioEditarArquivo" class="formulario conteudo">
 				</div>
+			</div>
+			<div id="formularioAddArquivo" class="formulario conteudo">
+				<form id="formAddArquivo" action="Controle.php?acao=uploadArquivo" method="post" enctype="multipart/form-data">
+					<br />
+					<input type="file" id="arquivo" name="arquivo" />
+				</form>
 			</div>
 		</div>
 	</body>
