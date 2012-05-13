@@ -15,7 +15,6 @@ Class ControleAutenticacao extends ControleGeral {
 		parent::executaAcao();
     }
     
-    
     /**
      *  Método que valida a sessão do usuário imprimindo a resposta
 	 *	em formato JSON

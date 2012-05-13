@@ -20,10 +20,11 @@ Class Controle extends ControleGeral {
 	
 	public function uploadArquivo(){
 		$retorno = Array(True, '');
+
 		if (isset($_FILES['arquivo']))
 			$this->arquivo = $_FILES['arquivo'];
 		else
-			echo '<script>alert("O arquivo não foi enviado!");window.location = "./index.html";</script>';
+			echo '<script>alert("O arquivo não foi enviado!");window.location = "index.html";</script>';
 		
 		$this->nomeArquivo = $this->arquivo['name'];
 		$this->tipoArquivo = $this->arquivo['type'];

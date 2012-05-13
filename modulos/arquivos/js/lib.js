@@ -3,54 +3,35 @@ function init(){
 	$('#listagemArquivos').show();
 	$(':button, :submit').button();
 
-	$('#formularioAddArquivo').dialog({
-		width: 'auto',
-		autoOpen: false,
-		draggable: false,
-		modal: true,
-		resizable: false,
-		title: 'Adicionar arquivo',
-		buttons: {
-			'Enviar arquivo' : function (){
-				$('#formularioAddArquivo').dialog('close');
-				if ($('#arquivo').val())
-					$('#formAddArquivo').submit();
-				else
-					mostraMensagem( 'Selecione um arquivo!', function (){
-						$('#formularioAddArquivo').dialog('open');
-					}, false);
-			}
+	// Diálogo do formulário de inclusão
+	criaDialogoFormulario('#formularioAddArquivo', 'Adicionar arquivo', function (){
+		if ($('#arquivo').val()) {
+			$('#formAddArquivo').submit();
+		} else {
+			$('#formularioAddArquivo').dialog('close');
+			mostraMensagem( 'Selecione um arquivo!', function (){ $('#formularioAddArquivo').dialog('open'); }, false);
 		}
+	}, function (){}, function (){
+		$('#arquivo').val('');
 	});
 
 	$('#botaoAddArquivo').click(function (){
 		$('#formularioAddArquivo').dialog('open');
 	});
 	
-	/*new AjaxUpload('botaoAdicionarArquivo', {
-		action: 'Controle.php',
-		data: {'acao':'uploadArquivo', 'path': pegaPath()},
-		onSubmit: function (file, ext){
-			var extencoes = /png|jpg|jpe|jpeg|gif|bmp|odt|docx|doc|xls|ods|txt|pdf|zip|rar/;
-			if (ext.match(extencoes)){
-				mostraLoading();
-			} else {
-				mostraMensagem('Arquivo em formato inv&aacute;lido!', function (){}, false);
-				return false;
-			}
-		},
-		onComplete: function (file, response){
-			escondeLoading();
-			data = eval(response);
-			mostraMensagem(data[1], function(){
-				if (data[0])
-					document.location.reload();
-			}, data[0]);
-		}
-	});	*/ 
-
 	dataTableArquivos();
 }
+
+var ARRTHUMB = {
+	'DOC' 	: 'doc.png',
+	'DOCX' 	: 'doc.png',
+	'ODS'	: 'doc.png',
+	'ZIP' 	: 'compact.png',
+	'RAR' 	: 'compact.png',
+	'PDF' 	: 'pdf.png',
+	'XLS' 	: 'planilha.png'
+}
+
 
 function dataTableArquivos(){
 	ajaxSync( "Controle.php", { "acao": "pegaTodosArquivos" }, function (data){

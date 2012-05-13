@@ -20,7 +20,6 @@ Class Modelo extends Config {
      *  @name __construct()
      */
     public function __construct() {
-		// Chamando o construtor da Classe herdada
 		parent::__construct();
 		$this->openConnect();
 		$this->selectDataBase();

@@ -1,3 +1,7 @@
+/*
+ *	Geral
+ */
+
 * {
     margin: 0px;
     padding: 0px;
@@ -9,6 +13,10 @@
 .botaoAcao {
 	margin: 0px 5px;
 	cursor: pointer;
+}
+
+.center {
+	text-align: center;
 }
 
 body {
@@ -35,25 +43,14 @@ p {
     padding: 2px 0px;
 }
 
-input[type=checkbox], x:default {
-    padding: 0px;
-    margin: -4px;
-}
-
+/*
+ *	Layout
+ */
 .geral {
 	min-width: 1000px;
 }
 
-.load {
-    display: none;
-    vertical-align: middle;
-}
-
 .conteudo {
-	display: none;
-}
-
-#load {
 	display: none;
 }
 
@@ -68,9 +65,121 @@ input[type=checkbox], x:default {
 	font-size: 14px;
 }
 
+.tituloModulo {
+	border-bottom: 1px solid rgb(220,220,220);
+	height: 70px;
+}
+
+.tituloModulo h3 {
+	padding: 25px 30px;
+	font-size: 18px;
+}
+
+.formulario .info {
+	padding: 0px 0px 20px;
+	font-style: italic;
+	color: rgb(100,100,100);
+}
+
+.barraAcoes {
+	margin-bottom: 15px;
+}
+
+#mensagem {
+    text-align: center;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	font-weight: bold;
+}
+
+#mensagem img {
+	margin-bottom: 10px;
+}
+
+.mensagemLogin {
+    margin: 10px 0px 0px;
+    text-align: center;
+    font-size: 13px;
+	color: red;
+}
+
+#confirm {
+    text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+/* Div loading */
+#loading {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background: url(../imagens/bg_30.png) repeat;
+}
+
+#loading img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -63px;
+	margin-top: -11px;
+}
+
+/* Menu */
+
+.menuPrincipal {
+    margin: 0px;
+    height: 38px;
+	border-bottom: 1px solid gray;
+	border-top: 1px solid gray;
+/*	background: rgb(130,130,130); */
+}
+
+.menuPrincipal ul {
+	list-style: none;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.menuPrincipal ul li {
+    float: left;
+    margin: 5px;
+	padding: 4px 15px 4px;
+}
+
+.menuPrincipal ul li a {
+    text-decoration: none;
+	 color: #fff;
+    font-size: 14px;
+	font-weight: bold;
+}
+
+.menuPrincipal a:hover {
+    text-decoration: underline;
+}
+
+.activeMenu a {
+	text-decoration: underline !important;
+}
+
+.rightMenu {
+	float: right !important;
+	color: #fff;
+}
+
+
+
 /*
- *	Link para edição dos dados da linha do tadatables
+ *	Datatables
  */
+
+.conteinerDatatable {
+	margin-top: 15px;
+}
+
 a.linkDatatables:link,
 a.linkDatatables:active, 
 a.linkDatatables:visited {
@@ -92,341 +201,9 @@ a.linkDatatables:hover img {
 	visibility: visible;
 }
 
-.center {
-	text-align: center;
-}
-
-
-/**
- *	Titulo da pagina
+/*
+ *	Formulario
  */
-.tituloModulo {
-	border-bottom: 1px solid rgb(220,220,220);
-	height: 70px;
-}
-
-.tituloModulo h3 {
-	padding: 25px 30px;
-	font-size: 18px;
-}
-
-
-
-.menuModulo {
-	position: absolute;
-	top: 40px;
-	bottom: 0px;
-	overflow: auto;
-	padding: 15px 30px;
-	float: left;
-	width: 170px;
-	background: url(../imagens/bg.png) repeat top left;
-	border-right: 1px solid rgb(200,200,200);
-}
-
-.menuModulo ul {
-	list-style: none;
-	margin: 0px;
-	padding: 0px;
-}
-
-.menuModulo ul li {
-	margin: 0px;
-	padding: 10px 0px;
-}
-
-.menuModulo ul li a:link,
-.menuModulo ul li a:active,
-.menuModulo ul li a:visited {
-	margin: 0px;
-	font-size: 14px;
-	color: rgb(80,80,80);
-	text-decoration: none;
-	font-weight: bold;
-}
-
-.menuModulo ul li a:hover {
-	color: #008bc8;
-}
-
-.menuModuloAtivo {
-	color: #008bc8 !important;
-	text-decoration: underline !important;
-}
-
-.formulario .info {
-	padding: 0px 0px 20px;
-	font-style: italic;
-	color: rgb(100,100,100);
-}
-
-
-
-
-
-.barraAcoes {
-	margin-bottom: 15px;
-}
-
-
-.conteinerDatatable {
-	margin-top: 15px;
-}
-
-
-#loading {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-	background: url(../imagens/bg_30.png) repeat;
-}
-
-#loading img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-left: -63px;
-	margin-top: -11px;
-}
-
-
-
-
-
-
-.tw-ui-cabecalho {
-    background: #fff;
-    padding: 11px 30px 12px;
-	 border-bottom: 1px solid rgb(220,220,220);
-    font-size: 22px;
-    color: #ff6600;
-}
-
-.tw-ui-cabecalho img {
-    border: 0px;
-    margin-right: 15px;
-    vertical-align: middle; 
-}
-
-
-.tw-ui-img, img {
-    border: 0px;
-}
-
-.tw-ui-dicas {
-    background: #ffeeaa;
-    width: 300px;
-    border: 1px solid #ffdd55;
-    font-size: 13px;
-    margin-left: 10px;
-    padding: 10px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-}
-
-#confirm {
-    text-align: center;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	font-weight: bold;
-}
-
-#mensagem {
-    text-align: center;
-	margin-top: 10px;
-	margin-bottom: 30px;
-	font-weight: bold;
-}
-
-#mensagem img {
-	margin-bottom: 10px;
-}
-
-.mensagemLogin {
-    margin: 10px 0px 0px;
-    text-align: center;
-    font-size: 13px;
-	color: red;
-}
-
-.error {
-    color: #d40000;
-    background: #ffd5d5;
-    padding: 5px;
-    margin-bottom: 5px;
-    border: 1px solid #ffaaaa;
-}
-
-.ok {
-    color: #225500;
-    background: #ccffaa;
-    margin-bottom: 5px;
-    padding: 5px;
-    border: 1px solid #88ff55;
-}
-
-
-.tw-ui-menu-principal {
-    margin: 0px;
-    height: 38px;
-	border-bottom: 1px solid gray;
-	border-top: 1px solid gray;
-	background: rgb(130,130,130);
-}
-
-.tw-ui-menu-principal ul {
-	list-style: none;
-	margin-left: 15px;
-	margin-right: 15px;
-}
-
-.tw-ui-menu-principal ul li {
-    float: left;
-    margin: 5px;
-	padding: 4px 15px 4px;
-}
-
-.activeMenu a {
-	text-decoration: underline !important;
-}
-
-.rightMenu {
-	float: right !important;
-}
-
-.tw-ui-menu-principal ul li a {
-    text-decoration: none;
-	 color: #fff;
-    font-size: 12px;
-	font-weight: bold;
-}
-
-.tw-ui-menu-principal a:hover {
-    text-decoration: underline;
-}
-
-.tw-ui-submenu {
-    display: none;
-    position: absolute;
-    margin: 0px 0px 0px -15px;
-    min-width: 100px;
-    padding: 0px;
-    background: #fff;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px solid gray;
-}
-
-.submenu-right {
-    display: none;
-    position: absolute;
-    right: 10px;
-    margin: 0px;
-    min-width: 100px;
-    padding: 0px;
-    background: #fff;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px solid gray;
-}
-
-#perfilMenu a:hover {
-	text-decoration: none !important;
-}
-
-.submenu p {
-    padding: 5px 0px;
-}
-.submenu p a {
-    color: #000;
-}
-
-
-div.tw-ui-user-logged {
-    font-size: 13px;
-    float: right;
-    font-family: arial;
-    color: #fff;
-    margin-right: 20px;
-}
-
-.tw-ui-bar-page {
-    background: rgb(230,230,230);
-    height: 50px;
-    border-bottom: 1px solid rgb(200,200,200);
-}
-
-.tw-ui-name-page {
-    padding: 10px 15px;
-    font-family: arial;
-    width: 300px;
-    float: left;
-}
-
-.tw-ui-menu-mod {
-    list-style: none;
-    height: 32px;
-}
-
-.tw-ui-menu-mod a.unico-item {
-    border-left: 1px solid rgb(190,190,190);
-    margin: 0px 0px 0px 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-
-.tw-ui-menu-mod a.first-item {
-    border-left: 1px solid rgb(190,190,190);
-
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-.tw-ui-menu-mod a.last-item {
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-.tw-ui-menu-mod a {
-    float: left;
-    margin: 0px;
-    font-size: 13px;
-    font-family: arial;
-    padding: 7px 15px;
-    background: url(images/bg_menu_mod.png) repeat-x top left;
-    border-top: 1px solid rgb(190,190,190);
-    border-bottom: 1px solid rgb(190,190,190);
-    border-right: 1px solid rgb(190,190,190);
-    text-decoration: none;
-    color: #ff6600;
-    cursor: default;
-}
-
-.tw-ui-menu-mod a:hover,
-.tw-ui-menu-mod a:focus {
-    background: #fff;
-}
-
-.tw-ui-busca {
-    margin-left: 20px;
-    float: left;
-}
-
-.tw-ui-busca form {
-    margin-top: 0px;
-}
 
 .inputImage {
     border: 1px solid rgb(190,190,190);
@@ -463,6 +240,7 @@ div.tw-ui-user-logged {
     color: rgb(150,150,150) !important;
     background: rgb(240,240,240) !important;
 }
+
 .inputButton[disabled]:hover, .inputButton[disabled]:focus,
 .inputSubmit[disabled]:hover, .inputSubmit[disabled]:focus {
     background: rgb(240,240,240) !important;
@@ -475,6 +253,7 @@ div.tw-ui-user-logged {
     color: #ff6600;
     background: rgb(240,240,240);
 }
+
 .inputButton:hover, .inputButton:focus,
 .inputSubmit:hover, .inputSubmit:focus,
 .inputImage:hover, .inputImage:focus {
@@ -496,191 +275,6 @@ div.tw-ui-user-logged {
 	border: 1px solid #ff6600;
 }
 
-.combo-box {
-    padding: 4px;
-    font-size: 13px;
-}
-.tw-ui-content {
-	position: absolute;
-	top: 90px;
-	left: 20px;
-	right: 20px;
-	bottom: 0px;
-	overflow: auto;
-}
-
-.tw-ui-content-mod {
-    padding: 10px;
-}
-.tw-ui-formulario-login {
-    width: 300px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -150px;
-    margin-top: -110px;
-    font-family: arial;
-    color: #000;
-    background: #fff;
-    padding: 15px;
-}
-.tw-ui-formulario-login h1 {
-    padding-bottom: 20px;
-}
-
-.tw-ui-content .tw-ui-formulario {
-    font-size: 13px;
-    font-family: arial;
-}
-
-.tw-ui-formulario-login tr td,
-.tw-ui-content .tw-ui-formulario tr td {
-    font-size: 13px;
-    padding: 0px;
-}
-
-.tw-ui-content .tw-ui-formulario tr td:first-child {
-    padding-right: 25px;
-    font-weight: bold;
-}
-.tw-ui-listagem {
-    border-collapse: collapse;
-    font-family: arial;
-    font-size: 13px;
-    margin: 0px;
-    clear: both;
-}
-
-.tw-ui-listagem tbody tr {
-    border-top: 1px solid rgb(210,210,210);
-    border-bottom: 1px solid rgb(210,210,210);
-    background: rgb(255,255,255);
-}
-
-.tw-ui-listagem thead tr,
-.tw-ui-listagem tfoot tr {
-}
-
-.tw-ui-listagem thead tr th,
-.tw-ui-listagem tfoot tr td {
-    font-size: 13px;
-    background: url(images/bg_menu_principal.png) repeat-x top left;
-    color: #fff;
-    text-align: left;
-    font-weight: normal;
-}
-
-.tw-ui-listagem tr th,
-.tw-ui-listagem tr td {
-    padding: 10px;
-    color: rgb(70,70,70);
-} 
-
-.tw-ui-listagem tr td img {
-    vertical-align: middle;
-    margin-right: 10px;
-
-}
-.tw-ui-listagem tbody tr td {
-/*    vertical-align: top;*/
-}
-
-.tw-ui-listagem .conf-usuario {
-    /*border-left: 1px solid rgb(220,220,220);*/
-}
-
-
-
-/* Paginação */
-
-.paginacao {
-    height: 26px;
-    font-family: arial;
-    text-align: right;
-    font-size: 12px;
-    width: 200px;
-    float: right;
-    margin-top: 8px;
-}
-
-.paginacao span {
-    float: left;
-    margin-top: -5px;
-}
-.paginacao a {
-    background: url(images/bg_menu_mod.png) repeat-x top left;
-    float: none;
-    padding: 7px 14px;
-    color: rgb(50,50,50);
-    cursor: default;
-    border: 1px solid rgb(150,150,150);
-}
-.paginacao a.prev-paginacao {
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    margin-left: 10px;
-}
-.paginacao a.next-paginacao {
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-.paginacao a:hover {
-    color: rgb(50,50,50);
-    background: rgb(235,235,235);
-}
-
-.paginacao a[disabled].prev-paginacao {
-    color: rgb(150,150,150);
-    background: rgb(245,245,245);
-    border: 1px solid rgb(225,225,225);
-}
-
-.paginacao a[disabled].next-paginacao {
-    color: rgb(150,150,150);
-    background: rgb(245,245,245);
-    border: 1px solid rgb(225,225,225);
-}
-
-a.atual {
-    background: #fff;
-    color: #2a7fff;
-    cursor: default;
-}
-
-
-
-
-#texto_wrap {
-    border-collapse: collapse;
-    border: 1px solid rgb(180,180,180) !important;
-}
-
-.texto_tb {
-    background: rgb(240,240,240);
-    border-bottom: 1px solid rgb(180,180,180) !important;
-    padding: 5px !important;
-}
-
-.texto_tb img {
-    height: auto !important;
-    margin: 0px !important;
-    border: 0px;
-}
-.texto_tb select {
-    border: 1px solid rgb(180,180,180) !important;
-    padding: 7px;
-}
-
-
-
 
 .tabelaDados {
 	border-collapse: collapse;
@@ -700,77 +294,4 @@ a.atual {
 			
 .tabelaDados tr td {
 	font-size: 13px;
-}
-			
-			
-/* 
- * The state classes are a little bit complex, because of the doubble class bug in IE6
- * The state class looks like this:
- * 
- * .ui-radio-state[-checked][-disabled][-hover] or .ui-checkbox-state[-checked][-disabled][-hover]
- * 
- * Examples:
- * 
- * .ui-radio-state-checked (simply checked) 
- * .ui-radio-state-checked-hover (checked and hovered/focused)
- * .ui-radio-state-hover (unchecked and hovered/focused)
- * 
- * If you don´t have to deal with the doubble class bug of IE6 you can also use the simple ui-checkbox-checked, ui-checkbox-disabled, ui-checkbox-hover state-classnames (or: ui-radio-checked...)
- * and the ui-radio/ui-checkbox role-classnames.
- * 
- */
-
-.ui-radio-state-disabled,
-.ui-radio-state-checked-disabled,
-.ui-radio-state-disabled-hover,
-.ui-radio-state-checked-disabled-hover {
-	color: #999;
-}
-
-span.ui-checkbox,
-span.ui-radio {
-	display: block;
-	float: left;
-	width: 16px;
-	height: 16px;
-	margin-right: 10px;
-	background: url(../imagens/icon_checkbox.png) 0 -39px no-repeat;
-}
-
-span.ui-helper-hidden {
-	display: none;
-}
-
-label {
-	padding: 2px;
-	
-}
-span.ui-radio-state-hover,
-span.ui-checkbox-state-hover {
-	background-position: 0 -113px;
-}
-
-span.ui-checkbox-state-checked {
-	background-position: 0 0px;
-}
-
-span.ui-checkbox-state-checked-hover {
-	background-position: 0 -74px;
-}
-span.ui-radio-state-checked-disabled-hover,
-span.ui-radio-state-checked-disabled,
-span.ui-radio-state-checked {
-	background-position: 0 -160px;
-}
-
-span.ui-radio-state-checked-hover {
-	background-position: 0 -200px;
-}
-.ui-radio-disabled,
-.ui-checkbox-disabled {
-	opacity: 0.7;
-}
-
-.ui-helper-hidden-accessible {
-	display: none;
 }

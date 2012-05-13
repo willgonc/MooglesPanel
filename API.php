@@ -13,7 +13,7 @@ Class API extends Modelo {
 		echo json_encode(Array("resposta" => $data['nome']));
 	}
 	
-	public function pegaSessao() {
+	private function pegaSessao() {
 		session_start();
 		return isset($_SESSION['data'])?$_SESSION['data']:null;
 	}

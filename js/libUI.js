@@ -7,19 +7,19 @@
  */
 function menuPrincipal(local){
 	$(local).html(
-		'<div class="tw-ui-menu-principal">'	+
+		'<div class="menuPrincipal ui-state-default">'	+
 		'	<ul>'+
         '   	<li id="principalMod"><a href="../principal/">Principal</a></li>'+
         '   	<li id="arquivosMod"><a href="../arquivos/">Arquivos</a></li>'+
         '   	<li id="usuariosMod"><a href="../usuarios/">Usu&aacute;rios</a></li>'+
         '      	<li id="logout" class="rightMenu"><a href="#">Sair</a> </li>'+
         '      	<li id="perfilMenu" class="rightMenu">'+
-		'			<a href="#">Ol&aacute;, <b id="nomeUsuario"></b></a> '+
+		'			Ol&aacute;, <b id="nomeUsuario"></b>'+
 		'		</li>'+
 		'	</ul>'+
         '</div>');
 	
-	ajaxSync(pegaDiretorioHost() + "api.php", {'acao':'pegaUsuarioAutenticado'}, function(data) {
+	ajaxSync(pegaDiretorioHost() + "API.php", {'acao':'pegaUsuarioAutenticado'}, function(data) {
 		$('#nomeUsuario').html(data.resposta);
 	});
 

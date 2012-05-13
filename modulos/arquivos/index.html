@@ -6,6 +6,8 @@
 
 		<title>Arquivos</title>
 
+		<link rel='shortcut icon' href='../../imagens/favicon.ico' type='image/x-icon'/ >
+
 		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../../plugins/jquery-ui/css/jquery-ui.css" />
 		<link rel="stylesheet" type="text/css" href="../../plugins/datatables/css/jquery.dataTables_themeroller.css" />
@@ -43,8 +45,26 @@
 			</div>
 			<div id="formularioAddArquivo" class="formulario conteudo">
 				<form id="formAddArquivo" action="Controle.php?acao=uploadArquivo" method="post" enctype="multipart/form-data">
-					<br />
-					<input type="file" id="arquivo" name="arquivo" />
+					<table>
+						<tbody>
+							<tr>
+								<td>
+									Escolha um arquivo de seu computador
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="file" id="arquivo" name="arquivo" />
+								</td>
+							</tr>
+							<tr>
+								<td class="info">
+									S&atilde;o aceito arquivos nos formatos <br />
+									(png, jpg, jpe, jpeg, gif, bmp, zip, rar, txt, doc, docx, odt, xls, ols, pdf)
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</form>
 			</div>
 		</div>

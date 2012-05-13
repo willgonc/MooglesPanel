@@ -87,7 +87,7 @@ Class Config
     }
 
     /**
-     *   nome do usuário
+     *  Retorna nome do usuário
      *  @access private
      *  @name setUser()
 	 *	@param string
