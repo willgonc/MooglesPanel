@@ -12,14 +12,24 @@ Class Controle extends ControleGeral {
 	private $legenda;
 	private $uploadDir = './upload/';
 	private $extencaoArquivo;
-
+	
+    /**
+     *  Método construtor da classe
+     *  @access public
+     *  @name __construct()
+     */
 	public function __construct(){
 		parent::__construct();
 		parent::executaAcao();
 	}
 	
+	/**
+     *  Faz o upload de um arquivo
+     *  @access puplic
+     *  @name uploadArquivo()
+     */
 	public function uploadArquivo(){
-		$retorno = Array(True, '');
+		$retorno = Array(true, '');
 
 		if (isset($_FILES['arquivo']))
 			$this->arquivo = $_FILES['arquivo'];
@@ -49,19 +59,19 @@ Class Controle extends ControleGeral {
 		// monta os vetores com os itens encontrados na pasta
 		while ($nome_itens = readdir($ponteiro)) {
 			if ($nome_itens == $this->arquivo["name"]){
-				$retorno = Array(False, 'J&aacute; existe um arquivo com este nome!');
+				$retorno = Array('false', 'J&aacute; existe um arquivo com este nome!');
 				$flag = False;
 			}
 		}
 		
-		if ($flag){
+		if ($flag) {
 			$tiposValidos = "/png|jpeg|gif|bmp|vnd\.oasis\.opendocument\.text|".
 				"vnd\.openxmlformats-officedocument\.wordprocessingml\.document|msword|plain|pdf|".
 				"vnd.ms-excel|vnd.oasis.opendocument.spreadsheet|zip|x-rar/";
 
 			if (!preg_match($tiposValidos, $tipo[1])) {
 				$flag = False;
-				$retorno = Array(False, 'Erro ao enviar arquivo!'.$this->tipoArquivo);
+				$retorno = Array('false', 'Erro ao enviar arquivo!');
 			}
 		}
 			
@@ -69,20 +79,52 @@ Class Controle extends ControleGeral {
 		if ($flag){
 			$copy = move_uploaded_file($this->arquivo['tmp_name'], $this->uploadDir.$this->arquivo['name']);
 			if ($copy){
-				if ($this->adicionaArquivo() == True) {
-					$retorno = Array(True, 'O arquivo foi enviado com sucesso!');
+				if ($this->adicionaArquivo() == true) {
+					$retorno = Array(true, 'O arquivo foi enviado com sucesso!');
 				} else {
 					exec('rm '.$this->uploadDir.$this->nomeArquivo);
-					$retorno = Array(False, 'Erro ao enviar o arquivo!');
+					$retorno = Array(false, 'Erro ao enviar o arquivo!');
 				}
 			} else {
-				$retorno = Array(False, 'Erro ao enviar o arquivo!');
+				$retorno = Array(false, 'Erro ao enviar o arquivo!');
 			}
 		}
 
-		parent::retornaResultado($retorno);
+		$this->mostraMensagem($retorno);
 	}
 
+	/**
+     *  Mostra uma mensagem na tela
+     *  @access private
+     *  @name mostraMensagem()
+     */
+	private function mostraMensagem($arr) {
+		echo '
+			<html>
+				<head>
+					<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+					<link rel="stylesheet" type="text/css" href="../../plugins/jquery-ui/css/jquery-ui.css" />
+
+					<script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
+					<script type="text/javascript" language="javascript" src="../../js/libUI.js"></script>
+					<script type="text/javascript" language="javascript" src="../../plugins/jquery-ui/js/jquery-ui.js"></script>
+				</head>
+				<body>
+					<script type="text/javascript">
+						mostraMensagem( "'.$arr[1].'", function (){
+							document.location = "index.html";
+						}, '.$arr[0].');
+					</script>
+				</body>
+			</html>
+		';
+	}
+	
+	/**
+     *  Adiciona os dados do arquivo no banco
+     *  @access private
+     *  @name adicionaArquivo()
+     */
 	private function adicionaArquivo() {
 		try {
 			$insert = parent::executeQuery('INSERT INTO arquivos (nome, tipo, legenda, data, dimensoes, titulo, textoAlternativo, descricao, url)
@@ -143,7 +185,6 @@ Class Controle extends ControleGeral {
 			parent::retornaResultado(Array(False, 'O arquivo n&atilde;o foi enviado!'));
 	}
 }
-
 new Controle();
 
 ?>

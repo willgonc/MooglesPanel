@@ -10,35 +10,13 @@
 require_once "../../ControleGeral.php";
 
 Class Controle extends ControleGeral {
-    /**
-     *  Atributo que guarda o id
-     *  @access private
-     *  @name $id
-     */
+
 	private $id;
-
-    /**
-     *  Atributo que guarda o nome
-     *  @access private
-     *  @name $nome
-     */
 	private $nome;
-
-    /**
-     *  Atributo que guarda o email
-     *  @access private
-     *  @name $email
-     */
     private $email;
-
-    /**
-     *  Atributo que guarda a senha
-     *  @access private
-     *  @name $senha
-     */
     private $senha;
-
-    /**
+    
+	/**
      *  Método construtor da classe
 	 *
      *  @access public

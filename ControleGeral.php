@@ -68,6 +68,11 @@ Class ControleGeral extends Modelo {
             return False;
     }
 
+
+	public function getDirMods(){
+
+	}
+
     /**
      *  Método que valida uma string requerida
 	 *	@param string $str
