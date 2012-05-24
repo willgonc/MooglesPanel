@@ -24,7 +24,7 @@ Class Modelo extends Config {
 		$this->openConnect();
 		$this->selectDataBase();
     }
-    
+
     /**
      *	Abre a conexão com o SGBD e armazena no atributo $link
 	 *	@access private

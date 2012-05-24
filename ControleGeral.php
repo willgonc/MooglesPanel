@@ -1,4 +1,5 @@
 <?php
+
 /**
  *	Classe responsável pelas funções de controle usadas pela maioria dos módulos
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
@@ -70,7 +71,14 @@ Class ControleGeral extends Modelo {
 
 
 	public function getDirMods(){
+		$arrDir = Array();
 
+		$ponteiro  = opendir('../');
+		while ($i = readdir($ponteiro)) {
+			if ($i != 'index.html' && $i != '.' && $i != '..')
+				$arrDir[] = $i;
+		}
+		echo json_encode($arrDir);
 	}
 
     /**

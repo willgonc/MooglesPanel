@@ -4,9 +4,9 @@
  *	@name mostraLoading
  */
 function mostraLoading(){
-	if ($('#loading').length == 0) {
+	if ($('#loading').length == 0)
 		$('body').append('<div id="loading"><img src="../../imagens/load.gif" border="0" /></div>');
-	}
+	
 	$('#loading').show();
 }
 
@@ -70,25 +70,6 @@ function ajaxSync(url, data, call){
 		data: (data ? data : {}),
 		async: false,
 		cache: false
-	});
-}
-
-/**
- *	@description Realiza uma chamada ajax síncrona sem cache
- *
- *	@function
- *	@name ajaxSync
- *	@param {string} url Url da chamada ajax
- *	@param {array} data Dados a serem passados
- *	@param {function} call Função de callback que é executada em caso
- *		de sucesso
- */
-function ajaxSyncUpload(url, data, call){
-	mostraLoading();
-	$.post(url, data, function (data){
-		escondeLoading();
-		if (call)
-			call(data);
 	});
 }
 
