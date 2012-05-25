@@ -2,13 +2,13 @@
  *	Geral
  */
 
-* {
-    margin: 0px;
-    padding: 0px;
-    outline: none;
-    font-family: Arial, Helvetica, Lucida, sans-serif;
-	font-size: 13px;
-}
+* { margin: 0px; padding: 0px; outline: none; font-family: Arial, Helvetica, Lucida, sans-serif; font-size: 13px; }
+body { background: #fff; }
+h1 { font-size: 32px; }
+h2 { font-size: 24px; }
+h3 { font-size: 18px; }
+h4 { font-size: 14px; }
+p { padding: 2px 0px; }
 
 .botaoAcao {
 	margin: 0px 5px;
@@ -19,29 +19,6 @@
 	text-align: center;
 }
 
-body {
-	background: #fff;
-}
-
-h1 {
-	font-size: 32px;
-}
-
-h2 {
-	font-size: 24px;
-}
-
-h3 {
-	font-size: 18px;
-}
-
-h4 {
-	font-size: 14px;
-}
-
-p {
-    padding: 2px 0px;
-}
 
 /*
  *	Layout
