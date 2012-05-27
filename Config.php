@@ -1,129 +1,68 @@
 <?php
-/**
- *	Arquivo de configuração
- *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
- */
-Class Config 
-{
-    /**
-     *  Nome do usuário do banco de dados
-     *  @access private
-     *  @name $user
-     */
-    private $user;
+
+#####################################################################
+#
+#	 Class configuration panel
+#	 @author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+#
+#####################################################################
+
+Class Config {
+	# Your mysql user
+    private $user = "root";
+
+	# Your mysql password
+    private $pass = "123456";
+
+	# Your mysql server host
+    private $host = "localhost";
+
+	# Your mysql database
+    private $database = "tudosobreweb";
 
     /**
-     *  Senha do usuário do banco de dados
-     *  @access private
-     *  @name $pass
-     */
-    private $pass;
-
-    /**
-     *  Host do banco de dados
-     *  @access private
-     *  @name $host
-     */
-    private $host;
-
-    /**
-     *  Nome do banco de dados.
-     *  @access private
-     *  @name $dataBase
-     */
-    private $dataBase;
-
-    /**
-     *  Método construtor da classe
+     *  Return the user mysql
+	 *
      *  @access public
-     *  @name __construct()
-     */
-    public function __construct() {
-        /** setando os valores das configurações */
-        $this->setUser("root");
-        $this->setPass("123456");
-        $this->setHost("localhost");
-        $this->setDatabase("tudosobreweb");
-    }
-
-    /**
-     *  Retorna o nome do usuário
-     *  @access public
-     *  @name getUser()
+     *  @name get_user()
      *  @return string
      */
-    public function getUser() {
+    public function get_user() {
         return $this->user;
     }
 
     /**
-     *  Retorna a senha do usuário
+     *  Return the password mysql
+	 *
      *  @access public
-     *  @name getPass()
+     *  @name get_pass()
      *  @return string
      */
-    public function getPass() {
+    public function get_pass() {
         return $this->pass;
     }
     
     /**
-     *  Retorna o host do banco de dados
+     *  Return the host server mysql
+	 *
      *  @access public
-     *  @name getHost()
+     *  @name get_host()
      *  @return string
      */
-    public function getHost() {
+    public function get_host() {
         return $this->host;
     }
 
     /**
-     *  Retorna o nome da base de dados
+     *  Returns the name of the database
+	 *
      *  @access public
-     *  @name getDataBase()
+     *  @name get_database()
      *  @return string
      */
-    public function getDataBase() {
-        return $this->dataBase;
-    }
-
-    /**
-     *  Retorna nome do usuário
-     *  @access private
-     *  @name setUser()
-	 *	@param string
-     */
-    private function setUser($user) {
-        $this->user = $user;
-    }
-
-    /**
-     *  Método para adicionar a senha do usuário
-     *  @access private
-     *  @name setPass()
-	 *  @param string
-     */
-    private function setPass($pass) {
-        $this->pass = $pass;
-    }
-
-    /**
-     *  Método para adicionar o host do banco de dados
-     *  @access private
-     *  @name setHost()
-	 *	@param string
-     */
-    private function setHost($host) {
-        $this->host = $host;
-    }
-
-    /**
-     *  Método para adicionar o nome da base de dados
-     *  @access private
-     *  @name setDatabase()
-	 *	@param string
-     */
-    private function setDatabase($dataBase) {
-        $this->dataBase = $dataBase;
+    public function get_database() {
+        return $this->database;
     }
 }
+
 ?>
