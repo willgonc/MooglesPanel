@@ -7,9 +7,9 @@
  *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
 
-require_once "../../ControleGeral.php";
+require_once "../../Core.php";
 
-Class Controle extends ControleGeral {
+Class Controle extends Core {
 
 	private $id;
 	private $nome;
@@ -129,6 +129,46 @@ Class Controle extends ControleGeral {
         }
 
 		return $retorno;
+    }
+
+	public function getDirMods(){
+		$arrDir = Array();
+
+		$ponteiro  = opendir('../');
+		while ($i = readdir($ponteiro)) {
+			if ($i != 'index.html' && $i != '.' && $i != '..')
+				$arrDir[] = $i;
+		}
+		echo json_encode($arrDir);
+	}
+    /**
+     *  Método que valida um email
+	 *
+     *  @access publico
+     *  @name validaEmail()
+	 *	@param string $email
+     *  @return bool
+     */
+    public function validaEmail($email) {
+        if(filter_var($email, FILTER_VALIDATE_EMAIL))
+            return True;
+        else
+            return False;
+    }
+
+    /**
+     *  Método que valida uma string requerida
+	 *	@param string $str
+     *  @access public
+     *  @name strRequire()
+     *  @return bool
+     */
+    public function strRequire($str) {
+        $str = trim($str);
+        if (strlen($str) == 0 || empty($str) || $str == '')
+            return False;
+        else 
+            return True;
     }
 }
 
