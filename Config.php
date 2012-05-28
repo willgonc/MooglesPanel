@@ -8,6 +8,7 @@
 #####################################################################
 
 Class Config {
+
 	# Your mysql user
     private $user = "root";
 
