@@ -20,7 +20,7 @@ Class Model extends Config {
 	 *	@access private
 	 *	@name open_connection()
      */
-    private function open_connection() {
+    public function open_connection() {
         $this->link = mysql_connect(parent::get_host(), parent::get_user(), parent::get_pass());
     }
 
@@ -28,9 +28,9 @@ Class Model extends Config {
      *	Select the database
 	 *
 	 *	@access private
-	 *	@name selectDataBase()
+	 *	@name select_database()
      */
-    private function select_database() {
+    public function select_database() {
         mysql_select_db(parent::get_database());
     }
 
@@ -77,11 +77,11 @@ Class Model extends Config {
      *  returns the number of rows from a query
 	 *
 	 *	@access public
-	 *	@name get_numrows()
+	 *	@name get_num_rows()
      *	@param result
      *  @return int
      */
-    public function get_numrows($result) {
+    public function get_num_rows($result) {
         return mysql_num_rows($result);
     }
 }

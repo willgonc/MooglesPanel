@@ -12,7 +12,7 @@ require_once "Model.php";
 Class Core extends Model {
 
     /**
-     *  Get actioni of the request GET or POST
+     *  Get action of the request GET or POST
 	 *
      *  @access private
      *  @name get_action()

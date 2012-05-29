@@ -72,7 +72,7 @@ Class Controle extends Core {
     private function criaSessao() {
         $_SESSION['data'] = Array(
 			'id' 	=> $this->id,
-			'nome' 	=> $this->nome,
+			'name' 	=> $this->name,
 			'email' => $this->email,
 			'senha' => $this->senha,
 		);
@@ -106,7 +106,7 @@ Class Controle extends Core {
                     if (parent::getNumRows($result) == 1) {
 						$arrData = Array();
                         while ($row = parent::fetchResults($result)) {
-                            $this->nome = $row['nome'];
+                            $this->name = $row['nome'];
                             $this->id = $row['id'];
                         }
                         $this->email = $this->email;

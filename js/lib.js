@@ -26,7 +26,6 @@ function escondeLoading(){
  *	@function
  *	@name verificaAutenticacao
  */
-
 function verificaAutenticacao(){
 	ajaxSync(pegaDiretorioHost() + "ControleAutenticacao.php", {"acao":"validaUsuario"}, function(data) {
 		var mod = pegaDiretorioModuloAtual();
