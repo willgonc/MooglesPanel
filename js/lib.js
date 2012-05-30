@@ -1,3 +1,5 @@
+var global_user_data;
+
 /**
  *  @description Mostra uma tela de load
  *	@function
@@ -30,6 +32,7 @@ function verificaAutenticacao(){
 	ajaxSync("../../Authentication.php", {"action":"check_user"}, function(data) {
 		var mod = pegaDiretorioModuloAtual();
 		if (data[0]) {
+			global_user_data = data[1];
 			if (mod == 'login')
 				window.location = pegaDiretorioHost();
 		} else {

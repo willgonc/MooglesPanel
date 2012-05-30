@@ -14,15 +14,11 @@ function menuPrincipal(local){
         '   	<li id="usuariosMod"><a href="../usuarios/">Usu&aacute;rios</a></li>'+
         '      	<li id="logout" class="rightMenu"><a href="#">Sair</a> </li>'+
         '      	<li id="perfilMenu" class="rightMenu">'+
-		'			Ol&aacute;, <b id="nomeUsuario"></b>'+
+		'			Ol&aacute;, <b>'+global_user_data.name+'</b>'+
 		'		</li>'+
 		'	</ul>'+
         '</div>');
 	
-	//ajaxSync(pegaDiretorioHost() + "API.php", {'acao':'pegaUsuarioAutenticado'}, function(data) {
-	//	$('#nomeUsuario').html(data.resposta);
-	//});
-
 	var mod = pegaDiretorioModuloAtual();
 
 	$('#logout').click(function (){

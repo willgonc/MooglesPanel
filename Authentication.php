@@ -38,7 +38,7 @@ Class Authentication extends Core {
             if ($result) {
                 if (parent::get_num_rows($result) == 1){
                     $response[0] = True;
-                    $response[1] = 'Usu&aacute;rio validado!';
+					$response[1] = $data;
                 } else {
                     $response[0] = False;
                     $response[1] = 'E-mail ou Senha incorretos!';
