@@ -51,19 +51,6 @@ Class Core extends Model {
 	public function return_json($result) {
 		echo json_encode($result);
 	}
-
-    /**
-     *  Gets open session
-	 *
-     *  @access public
-     *  @name get_session()
-     *  @return array|false
-     */
-    public function get_session() {
-        return isset($_SESSION['data']) ? $_SESSION['data'] : False;
-    }
 }
-
-new ControleGeral();
 
 ?>
