@@ -289,6 +289,21 @@ Class Controle extends ControleGeral {
 			parent::retornaResultado(Array(False, 'Erro ao buscar dados do usuário!'));
 		}
 	}
+
+    /**
+     *  Método que valida um email
+	 *
+     *  @access publico
+     *  @name validaEmail()
+	 *	@param string $email
+     *  @return bool
+     */
+    public function validaEmail($email) {
+        if(filter_var($email, FILTER_VALIDATE_EMAIL))
+            return True;
+        else
+            return False;
+    }
 }
 
 new Controle();

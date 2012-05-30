@@ -31,11 +31,11 @@ function init(){
  *	@param {string} senha Senha do usuário
  */
 function autenticaUsuario(email, senha){
-	ajaxSync("Controle.php",{ "acao": "autenticaUsuario", "email": email, "senha": senha }, function (data){
+	ajaxSync("Control.php",{ "action": "authenticate_user", "email": email, "password": senha }, function (data){
 		if (data[0])
 			window.location = pegaDiretorioHost();
 		else
-			escreveMensagemLogin(data[1]);
+			mostraMensagem(data[1], function (){}, false);
 	});
 }
 

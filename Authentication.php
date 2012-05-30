@@ -14,7 +14,6 @@ Class Authentication extends Core {
     public function __construct() {
 		parent::open_connection();
 		parent::select_database();
-        session_start();
 		parent::execute_action();
 		parent::close_connection();
     }
@@ -27,11 +26,12 @@ Class Authentication extends Core {
      *  @return JSON
      */
     public function check_user() {
+        session_start();
 		$data = $this->get_session();
 		$response = Array(False, 'Usu&aacute;rio n&atilde;o autenticado!');
 
 		if ($data) {
-			$sql = 'SELECT * FROM user WHERE email="'.$data['email'].'" and password="'.$data['senha'].'"'; 
+			$sql = 'SELECT * FROM user WHERE email="'.$data['email'].'" and password="'.$data['password'].'"'; 
             
             $result = parent::execute_query($sql);
 
@@ -59,6 +59,7 @@ Class Authentication extends Core {
      *  @return JSON
      */
     public function close_session() {
+        session_start();
         session_destroy();
 		parent::return_json(Array(True, 'A sess&atilde;o foi fechada com sucesso!'));
     }

@@ -19,14 +19,14 @@ function menuPrincipal(local){
 		'	</ul>'+
         '</div>');
 	
-	ajaxSync(pegaDiretorioHost() + "API.php", {'acao':'pegaUsuarioAutenticado'}, function(data) {
-		$('#nomeUsuario').html(data.resposta);
-	});
+	//ajaxSync(pegaDiretorioHost() + "API.php", {'acao':'pegaUsuarioAutenticado'}, function(data) {
+	//	$('#nomeUsuario').html(data.resposta);
+	//});
 
 	var mod = pegaDiretorioModuloAtual();
 
 	$('#logout').click(function (){
-        ajaxSync(pegaDiretorioHost() + "ControleAutenticacao.php", {'acao': 'fechaSessao'}, function (data){
+        ajaxSync("../../Authentication.php", {'action': 'close_session'}, function (data){
 			mostraMensagem(data[1], function (){
 				if (data[0])
 					document.location.reload();
