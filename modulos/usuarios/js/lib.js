@@ -40,8 +40,8 @@ function init(){
  */
 function adicionaUsuario(){
 	ajaxSync(
-		"Controle.php", { 
-			"acao": "adicionaUsuario",
+		"Control.php", { 
+			"action": "add_user",
 			"nome": $('#nome').val(), 
 			"email": $('#email').val(), 
 			"senha": $('#senha').val(), 
@@ -63,7 +63,7 @@ function adicionaUsuario(){
  *	@name dataTableUsuarios
  */
 function dataTableUsuarios(){
-	ajaxSync( "Controle.php", { "acao": "pegaTodosUsuarios" }, function (data){
+	ajaxSync( "Control.php", { "action": "get_all_users" }, function (data){
 		if (data[0]) {
 			var arr = [];
 			var widthTable = "100%";
@@ -75,7 +75,7 @@ function dataTableUsuarios(){
 			// montando array de dados
 			for (var i = 0; i < data[1].length; i++){
 				arr[i] = [
-					'<a href="#" title="Editar" idUsuario="'+data[1][i].id+'" class="linkDatatables">'+data[1][i].nome+
+					'<a href="#" title="Editar" idUsuario="'+data[1][i].id+'" class="linkDatatables">'+data[1][i].name+
 						'<img src="../../imagens/edit.png" border="0" /></a>',
 					data[1][i].email
 				];
@@ -84,7 +84,7 @@ function dataTableUsuarios(){
 			montaTabelaDados('#datatablesUsuarios', 'tabelaUsuarios', arr, arrTitulo, function (){
 				// Registra os eventos para edição dos dados do usuário
 				$('.linkDatatables').live('click', function (){
-					ajaxSync( "Controle.php", { "acao": "pegaDadosUsuario", "id": $(this).attr('idUsuario') }, function (data){
+					ajaxSync( "Control.php", { "action": "get_data_user", "id": $(this).attr('idUsuario') }, function (data){
 						if (data[0]){
 							$('#idEdit').val(data[1].id);
 							$('#nomeEdit').val(data[1].nome);
@@ -112,7 +112,7 @@ function dataTableUsuarios(){
  *	@param {integer} Id do usuário a ser removido
  */
 function removeUsuario(id){
-	ajaxSync( "Controle.php", { "acao": "removerUsuario", "id": id }, function (data){
+	ajaxSync( "Control.php", { "action": "rm_user", "id": id }, function (data){
 		mostraMensagem(data[1], function (){
 			if (data[0])
 				document.location.reload();
@@ -130,7 +130,7 @@ function removeUsuario(id){
  *	@param {integer} Id do usuário a ser editado
  */
 function editaUsuario(id){
-	ajaxSync( "Controle.php", { "acao": "editarUsuario", 
+	ajaxSync( "Control.php", { "action": "edit_user", 
 		"id": $('#idEdit').val(), 
 		"nome": $('#nomeEdit').val(),
 		"email": $('#emailEdit').val(),

@@ -66,8 +66,8 @@ function ajaxSync(url, data, call){
 				call(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown){
-			alert("A requisição falhou: " + textStatus);
-			document.location.reload();
+			//alert("A requisição falhou: " + textStatus);
+			//document.location.reload();
 		},
 		data: (data ? data : {}),
 		async: false,
