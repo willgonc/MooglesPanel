@@ -35,19 +35,8 @@ function autenticaUsuario(email, senha){
 		if (data[0])
 			window.location = pegaDiretorioHost();
 		else
-			mostraMensagem(data[1], function (){}, false);
+			mostraMensagem(data[1], function (){
+				$('#email').focus();
+			}, false);
 	});
-}
-
-/**
- *	@description Escreve uma mensagem na tela de login
- *	
- *	@function
- *	@name escreveMensagemLogin
- *	@param {string} 
- */
-function escreveMensagemLogin(msg){
-	$('#load').hide();
-	$('#mensagem').html(msg);
-	$('#email').focus();
 }

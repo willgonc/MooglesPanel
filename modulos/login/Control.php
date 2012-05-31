@@ -2,7 +2,7 @@
 
 #######################################################################
 #
-#	Classe que valida os dados do formulário de login e cria a sessão
+#	Class for user authentication
 #	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
 #
 #######################################################################

@@ -20,9 +20,3 @@
 .formularioLogin input[type=password] {
 	width: 318px;
 }
-
-.formularioLogin #load {
-	margin: 0px 0px 0px 10px;
-	float: left;
-	color: red;
-}
