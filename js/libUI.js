@@ -31,6 +31,12 @@ function menuPrincipal(){
 	$('#'+mod+'Mod').addClass('activeMenu');
 }
 
+$(document).ready(function () {
+	menuPrincipal();
+	init();
+});
+
+
 /**
  *  @description Mounts a list of registered users
  *

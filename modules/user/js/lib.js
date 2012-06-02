@@ -4,25 +4,18 @@
  *	@name init
  */
 function init(){
-	menuPrincipal();
-	
 	usersTable();
 	$('#listagemUsuarios').show();
 	$(':button').button();
 	
-	// Diálogo do formulário de inclusão
 	createDialogForm('#formularioAddUsuario', 'Adicionar usu&aacute;rio', addUser, function (){});
-					
-	// Diálogo do formulário de edição		
 	createDialogForm('#formularioEditarUsuario', 'Editar usu&aacute;rio', editUser, function (){});
 
-	// Abre o formulario de inclusão
 	$('#botaoAdicionarUsuario').click(function (){
 		$('.formulario input:text, .formulario textarea, .formulario input:password').val('');
 		$('#formularioAddUsuario').dialog('open');
 	});
 
-	// Abre o confirm para excluir o usuário
 	$('#removeUsuario').click(function (){
 		$('#formularioEditarUsuario').dialog('close');
 		showConfirm('Você deseja excluir este usuário?', function (){
@@ -81,7 +74,6 @@ function usersTable(){
 			}
 
 			mountDatatable('#datatablesUsuarios', 'tabelaUsuarios', arr, arrTitle, function (){
-				// Registra os eventos para edição dos dados do usuário
 				$('.linkDatatables').live('click', function (){
 					ajaxSync( "Control.php", { "action": "get_data_user", "id": $(this).attr('idUsuario') }, function (data){
 						if (data[0]){
