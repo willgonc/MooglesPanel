@@ -1,16 +1,13 @@
 <?php
 
-###################################################################
-#
-#	Center for general functions
-#	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
-#
-###################################################################
+/**
+ *	Center for general functions
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ */
 
 require_once "Model.php";
 
 Class Core extends Model {
-
     /**
      *  Get action of the request GET or POST
 	 *
@@ -39,18 +36,36 @@ Class Core extends Model {
 		if ($action)
 			$this->$action();
 		else
-			$this->retornaResultado(Array(False,'A a&ccedil;&atilde;o '.$action.' n&atilde;o foi encontrada!'));
+			$this->return_json(Array(False,'A a&ccedil;&atilde;o '.$action.' n&atilde;o foi encontrada!'));
 	}
 
     /**
      *  Return json response
 	 *
      *  @access private
+	 *	@param {array}
      *  @name return_json()
      */
 	public function return_json($result) {
 		echo json_encode($result);
 	}
+
+	public function read_file_menu_module() {
+		$menu = Array();
+
+		$arrMenu = Array();
+		$diretorio = '../'; 
+		$ponteiro  = opendir($diretorio);
+
+		while ($i = readdir($ponteiro)) {
+			if ($i != 'index.html' && $i != '.' && $i != '..'){
+				if (file_exists('../'.$i.'/menu.php'))
+					require_once '../'.$i.'/menu.php';
+			}
+		}
+
+		$this->return_json(Array(True, $menu));
+ 	}
 }
 
 ?>

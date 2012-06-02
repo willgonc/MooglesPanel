@@ -4,7 +4,7 @@
  *	@name init
  */
 function init(){
-	menuPrincipal('#menu');
+	menuPrincipal();
 	
 	usersTable();
 	$('#listagemUsuarios').show();
