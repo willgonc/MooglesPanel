@@ -62,26 +62,26 @@ p { padding: 2px 0px; }
 	margin-bottom: 15px;
 }
 
-#mensagem {
-    text-align: center;
+#message {
+	text-align: center;
 	margin-top: 10px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	font-weight: bold;
 }
 
-#mensagem img {
+#message img {
 	margin-bottom: 10px;
 }
 
 .mensagemLogin {
-    margin: 10px 0px 0px;
-    text-align: center;
-    font-size: 13px;
+	margin: 10px 0px 0px;
+	text-align: center;
+	font-size: 13px;
 	color: red;
 }
 
 #confirm {
-    text-align: center;
+	text-align: center;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	font-weight: bold;
@@ -108,8 +108,8 @@ p { padding: 2px 0px; }
 /* Menu */
 
 .menuPrincipal {
-    margin: 0px;
-    height: 36px;
+	margin: 0px;
+	height: 36px;
 	border-bottom: 1px solid gray;
 	border-top: 1px solid gray;
 /*	background: rgb(130,130,130); */
@@ -122,20 +122,20 @@ p { padding: 2px 0px; }
 }
 
 .menuPrincipal ul li {
-    float: left;
-    margin: 5px;
+	float: left;
+	margin: 5px;
 	padding: 4px 15px 4px;
 }
 
 .menuPrincipal ul li a {
-    text-decoration: none;
+	text-decoration: none;
 	 color: #fff;
-    font-size: 13px;
+	font-size: 13px;
 	font-weight: bold;
 }
 
 .menuPrincipal a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .activeMenu a {
@@ -149,8 +149,8 @@ p { padding: 2px 0px; }
 
 
 
-/*
- *	Datatables
+	/*
+	 *	Datatables
  */
 
 .conteinerDatatable {

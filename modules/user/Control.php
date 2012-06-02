@@ -1,10 +1,8 @@
 <?php
 
 /**
- *	Classe que valida os dados do formulário de login e cria a sessão
- *	
+ *	Class of user control
  *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
- *	@copyright Copyright © 2011, Markus Vinicius da Silva Lima.
  */
 
 require_once "../../Core.php";
@@ -82,7 +80,6 @@ Class Control extends Core {
 	 *
      *  @access public
      *  @name rm_user()
-	 *	@return JSON
      */
 	public function rm_user(){
 		session_start();
@@ -109,10 +106,10 @@ Class Control extends Core {
 	}
 	
     /**
-     *  Atualiza os dados de um usuário da base de dados
+     *  The user updates the data in the database
+	 *
      *  @access public
      *  @name edit_user()
-	 *	@return JSON
      */
 	public function edit_user() {
 		$this->get_data();
@@ -143,7 +140,6 @@ Class Control extends Core {
         if ($response[0]) {
 			$this->password = $this->str_require($this->password) ? sha1($this->password) : null;
 
-			// gerando as entidades html dos caracteres aplicáveis como os acentos
 			$this->name = htmlentities($this->name, ENT_QUOTES, "UTF-8");
 			try {
 				$update = parent::execute_query("UPDATE user SET 
@@ -157,24 +153,24 @@ Class Control extends Core {
         			if ($_SESSION['data']['id'] == $this->id){
 						$_SESSION['data']['name'] = $this->name;
 						$_SESSION['data']['email'] = $this->email;
-						if ($this->senha != null){
+						if ($this->password != null){
 							$_SESSION['data']['password'] = $this->password;
 						}
 					}
 
-					$data[0] = True;
-					$data[1] = "O usu&aacute;rio foi editado!";
+					$response[0] = True;
+					$response[1] = "O usu&aacute;rio foi editado!";
 				} else {
-					$data[0] = False;
-					$data[1] = "Erro ao editar usu&aacute;rio!2";
+					$response[0] = False;
+					$response[1] = "Erro ao editar usu&aacute;rio!2";
 				}
 			} catch ( Exception $e ){
-				$data[0] = False;
-				$data[1] = "Erro ao editar usu&aacute;rio!1";
+				$response[0] = False;
+				$response[1] = "Erro ao editar usu&aacute;rio!1";
 			}
 		}
 
-		parent::return_json($data);
+		parent::return_json($response);
 	}
     
 	/**
@@ -184,11 +180,11 @@ Class Control extends Core {
      *  @name get_data()
      */
 	private function get_data() {
-		$this->id = 			isset($_GET['id']) ? $_GET['id'] : null;
-		$this->name =		 	isset($_GET['nome']) ? $_GET['nome'] : null;
-		$this->email = 			isset($_GET['email']) ? strtolower($_GET['email']) : null;
-		$this->password = 			isset($_GET['senha']) ? $_GET['senha'] : null;
-		$this->confirm_password = 	isset($_GET['confirmaSenha']) ? $_GET['confirmaSenha'] : null;
+		$this->id = 				isset($_GET['id']) ? $_GET['id'] : null;
+		$this->name =		 		isset($_GET['name']) ? $_GET['name'] : null;
+		$this->email = 				isset($_GET['email']) ? strtolower($_GET['email']) : null;
+		$this->password = 			isset($_GET['password']) ? $_GET['password'] : null;
+		$this->confirm_password = 	isset($_GET['confirmPassword']) ? $_GET['confirmPassword'] : null;
 	}
 
 	/**
@@ -239,8 +235,7 @@ Class Control extends Core {
 					$vals[] = Array(
 						'id' => $row['id'],
 						'name' => $row['name'],
-						'email' => $row['email'],
-						'password' => $row['password']
+						'email' => $row['email']
 					);
 				}
 				$response[0] = True;

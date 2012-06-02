@@ -66,8 +66,8 @@ function ajaxSync(url, data, call){
 				call(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown){
-			//alert("A requisição falhou: " + textStatus);
-			//document.location.reload();
+			alert("A requisição falhou: " + textStatus);
+			document.location.reload();
 		},
 		data: (data ? data : {}),
 		async: false,
@@ -139,7 +139,7 @@ function pegaDiretorioHost(){
 	var host = '';
 	if (window.location.pathname){
 		arr = window.location.pathname.split('/');
-		for (var i = 0; arr[i] != 'modulos'; i++)
+		for (var i = 0; arr[i] != 'modules'; i++)
 			if (arr[i] != '')
 				host += '/' + arr[i];
 	}
@@ -156,7 +156,7 @@ function pegaDiretorioHost(){
  *	@return {string}
  */
 function pegaDiretorioModulo(modulo){
-	return pegaDiretorioHost() + "modulos/" + modulo + "/";
+	return pegaDiretorioHost() + "modules/" + modulo + "/";
 }
 
 /**
@@ -214,16 +214,6 @@ function requerido(str){
     else
         return true;
 }
-
-/**
- *  @description Limpa os campos de texto de um formulário
- *	@function
- *	@name resetaCampoTextoFormulario
- */
-function resetaCampoTextoFormulario(){
-	$('.formulario input:text, .formulario textarea, .formulario input:password').val('');
-}
-
 
 function formataDataBanco(data){
 	var arr = data.split(' ');

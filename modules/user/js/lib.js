@@ -6,27 +6,27 @@
 function init(){
 	menuPrincipal('#menu');
 	
-	dataTableUsuarios();
+	usersTable();
 	$('#listagemUsuarios').show();
 	$(':button').button();
 	
 	// Diálogo do formulário de inclusão
-	criaDialogoFormulario('#formularioAddUsuario', 'Adicionar usu&aacute;rio', adicionaUsuario, function (){});
+	createDialogForm('#formularioAddUsuario', 'Adicionar usu&aacute;rio', addUser, function (){});
 					
 	// Diálogo do formulário de edição		
-	criaDialogoFormulario('#formularioEditarUsuario', 'Editar usu&aacute;rio', editaUsuario, function (){});
+	createDialogForm('#formularioEditarUsuario', 'Editar usu&aacute;rio', editUser, function (){});
 
 	// Abre o formulario de inclusão
 	$('#botaoAdicionarUsuario').click(function (){
-		resetaCampoTextoFormulario();
+		$('.formulario input:text, .formulario textarea, .formulario input:password').val('');
 		$('#formularioAddUsuario').dialog('open');
 	});
 
 	// Abre o confirm para excluir o usuário
 	$('#removeUsuario').click(function (){
 		$('#formularioEditarUsuario').dialog('close');
-		mostraConfirm('Você deseja excluir este usuário?', function (){
-			removeUsuario($('#idEdit').val());
+		showConfirm('Você deseja excluir este usuário?', function (){
+			removeUser($('#idEdit').val());
 		}, function (){ 
 			$('#formularioEditarUsuario').dialog('open');
 		});
@@ -34,20 +34,20 @@ function init(){
 }
 
 /**
- *	@description Adiciona um usuário no banco
+ *	@description Add the User Database
  *	@function
- *	@name adicionaUsuario
+ *	@name addUser
  */
-function adicionaUsuario(){
+function addUser(){
 	ajaxSync(
 		"Control.php", { 
 			"action": "add_user",
-			"nome": $('#nome').val(), 
+			"name": $('#nome').val(), 
 			"email": $('#email').val(), 
-			"senha": $('#senha').val(), 
-			"confirmaSenha": $('#confirmaSenha').val() 
+			"password": $('#senha').val(), 
+			"confirmPassword": $('#confirmaSenha').val() 
 		}, function (data){
-			mostraMensagem( data[1], function (){
+			showMessage( data[1], function (){
 				if (data[0])
 					document.location.reload();
 				else
@@ -58,21 +58,20 @@ function adicionaUsuario(){
 }
 
 /**
- *	@description Monta a tadela de dados da lista de usuários
+ *	@description mounts the data table of users
  *	@function
- *	@name dataTableUsuarios
+ *	@name usersTable
  */
-function dataTableUsuarios(){
+function usersTable(){
 	ajaxSync( "Control.php", { "action": "get_all_users" }, function (data){
 		if (data[0]) {
 			var arr = [];
 			var widthTable = "100%";
-			var arrTitulo = [
+			var arrTitle = [
 				{ "sTitle": "Nome" },
 				{ "sTitle": "E-mail" }
 			];
 
-			// montando array de dados
 			for (var i = 0; i < data[1].length; i++){
 				arr[i] = [
 					'<a href="#" title="Editar" idUsuario="'+data[1][i].id+'" class="linkDatatables">'+data[1][i].name+
@@ -81,7 +80,7 @@ function dataTableUsuarios(){
 				];
 			}
 
-			montaTabelaDados('#datatablesUsuarios', 'tabelaUsuarios', arr, arrTitulo, function (){
+			mountDatatable('#datatablesUsuarios', 'tabelaUsuarios', arr, arrTitle, function (){
 				// Registra os eventos para edição dos dados do usuário
 				$('.linkDatatables').live('click', function (){
 					ajaxSync( "Control.php", { "action": "get_data_user", "id": $(this).attr('idUsuario') }, function (data){
@@ -93,27 +92,27 @@ function dataTableUsuarios(){
 							$('#confirmaSenhaEdit').val('');
 							$('#formularioEditarUsuario').dialog('open');
 						} else {
-							mostraMensagem( 'Erro ao buscar dados do usu&aacute;rio!', function (){}, data[0]);
+							showMessage( 'Erro ao buscar dados do usu&aacute;rio!', function (){}, data[0]);
 						}
 					});
 				});
 			});
 		} else {
-			mostraMensagem( data[0], function (){}, data[1]);
+			showMessage( data[0], function (){}, data[1]);
 		}
 	});
 }
 
 /**
- *	@description Remove um usuário do banco de dados
+ *	@description Removes a User Database
  *
  *	@function
- *	@name removeUsuario
- *	@param {integer} Id do usuário a ser removido
+ *	@name removeUser
+ *	@param {integer}
  */
-function removeUsuario(id){
+function removeUser(id){
 	ajaxSync( "Control.php", { "action": "rm_user", "id": id }, function (data){
-		mostraMensagem(data[1], function (){
+		showMessage(data[1], function (){
 			if (data[0])
 				document.location.reload();
 			else
@@ -123,21 +122,21 @@ function removeUsuario(id){
 }
 
 /**
- *	@description Edita um usuário na base de dados
+ *	@description Edit the User Database
  *
  *	@function
- *	@name editaUsuario
- *	@param {integer} Id do usuário a ser editado
+ *	@name editUser
+ *	@param {integer}
  */
-function editaUsuario(id){
+function editUser(id){
 	ajaxSync( "Control.php", { "action": "edit_user", 
 		"id": $('#idEdit').val(), 
-		"nome": $('#nomeEdit').val(),
+		"name": $('#nomeEdit').val(),
 		"email": $('#emailEdit').val(),
-		"senha": $('#senhaEdit').val(),
-		"confirmaSenha": $('#confirmaSenhaEdit').val()
+		"password": $('#senhaEdit').val(),
+		"confirmPassword": $('#confirmaSenhaEdit').val()
 	}, function (data){
-		mostraMensagem(data[1], function (){
+		showMessage(data[1], function (){
 			if (data[0])
 				document.location.reload();
 			else

@@ -9,9 +9,7 @@ function menuPrincipal(local){
 	$(local).html(
 		'<div class="menuPrincipal ui-state-default">'	+
 		'	<ul>'+
-        '   	<li id="principalMod"><a href="../principal/">Principal</a></li>'+
-        '   	<li id="arquivosMod"><a href="../arquivos/">Arquivos</a></li>'+
-        '   	<li id="usuariosMod"><a href="../usuarios/">Usu&aacute;rios</a></li>'+
+        '   	<li id="usuariosMod"><a href="../user/">Usu&aacute;rios</a></li>'+
         '      	<li id="logout" class="rightMenu"><a href="#">Sair</a> </li>'+
         '      	<li id="perfilMenu" class="rightMenu">'+
 		'			Ol&aacute;, <b>'+global_user_data.name+'</b>'+
@@ -23,7 +21,7 @@ function menuPrincipal(local){
 
 	$('#logout').click(function (){
         ajaxSync("../../Authentication.php", {'action': 'close_session'}, function (data){
-			mostraMensagem(data[1], function (){
+			showMessage(data[1], function (){
 				if (data[0])
 					document.location.reload();
 			}, data[0]);
@@ -34,21 +32,22 @@ function menuPrincipal(local){
 }
 
 /**
- *  @description Monta uma tabela de dados com o datatables
+ *  @description Mounts a list of registered users
  *
  *	@function
- *	@name montaTabelaDados
- *	@param {string} Seletor do conteiner da tabela
- *	@param {string} Id da tabela
- *	@param {array} Matriz de dados
- *	@param {array} Matriz com os títulos das colunas
+ *	@name mountDatatable
+ *	@param {string}
+ *	@param {string}
+ *	@param {array}
+ *	@param {array}
+ *	@param {function}
  */
 var oTable;
-function montaTabelaDados(conteiner, idTable, arrDados, arrTitulo, callback){
+function mountDatatable(conteiner, idTable, arrData, arrTitle, callback){
 	callback = typeof callback == 'function' ? callback : function (){return true};
 	$(conteiner).html( '<table cellpadding="0" cellspacing="0" border="0" width="100%" class="display" id="'+idTable+'"></table>' );
 	oTable = $('#' + idTable).dataTable({
-		"aaData": arrDados,
+		"aaData": arrData,
 		"oLanguage": {
 			"sProcessing":   "Processando...",
 			"sLengthMenu":   "Mostrar _MENU_ registros",
@@ -68,30 +67,29 @@ function montaTabelaDados(conteiner, idTable, arrDados, arrTitulo, callback){
 		},
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
-		"aoColumns": arrTitulo,
-		"fnInitComplete": callback,
-		"fnUpdate": function ( oSettings, fnCallbackDraw ){alert(1)}
+		"aoColumns": arrTitle,
+		"fnInitComplete": callback
 	});	
 }
 
 /**
- *  @description Mostra um dialogo com a mensagem.
+ *  @description Show the message dialog
  *
  *	@function
- *	@name escreveMensagem
+ *	@name showMessage
  *	@param {string}
  *	@param {function}
  *	@param {bool}
  */
-function mostraMensagem( mensagem, callClose, tipo ){
-	if ($('#mensagem').length == 0)
-		$('body').append('<div id="mensagem"></div>');
+function showMessage( message, closeFunction, typeMessage ){
+	if ($('#message').length == 0)
+		$('body').append('<div id="message"></div>');
 
-	var cor = tipo ? 'green' : 'red' ;
-	var img = tipo ? 'sucesso' : 'erro';
-	var str = '<span style="color: '+cor+';"><img src="../../imagens/'+img+'.png" border="0" />';
+	var color = typeMessage ? 'green' : 'red' ;
+	var img = typeMessage ? 'sucesso' : 'erro';
+	var str = '<span style="color: '+color+';"><img src="../../imagens/'+img+'.png" border="0" />';
 
-	$('#mensagem').dialog('destroy').html(str + '<br />' + mensagem + '</span>').dialog({
+	$('#message').dialog('destroy').html(str + '<br />' + message + '</span>').dialog({
 		width: 400,
 		draggable: false,
 		modal: true,
@@ -102,24 +100,27 @@ function mostraMensagem( mensagem, callClose, tipo ){
 				$(this).dialog('close');
 			}
 		},
-		close: callClose
+		close: function (){
+			if (closeFunction)
+				closeFunction();
+		}
 	});
 }
 
 /**
- *  @description Mostra um dialogo de confirmação
+ *  @description shows the confirmation dialog
  *
  *	@function
- *	@name escreveMensagem
+ *	@name showConfirm
  *	@param {string}
- *	@param {function} Executa esta função quando precionado ok
- *	@param {function} Executa esta função quando precionado cancelar
+ *	@param {function}
+ *	@param {function}
  */
-function mostraConfirm(mensagem, funcOk, funcCancel){
+function showConfirm(message, okFunction, cancelFunction){
 	if ($('#confirm').length == 0)
 		$('body').append('<div id="confirm"></div>');
 
-	$('#confirm').dialog('destroy').html(mensagem).dialog({
+	$('#confirm').dialog('destroy').html(message).dialog({
 		width: 400,
 		closeOnEscape: false,
 		draggable: false,
@@ -129,53 +130,56 @@ function mostraConfirm(mensagem, funcOk, funcCancel){
 		buttons: {
 			"OK" : function (){
 				$(this).dialog('close');
-				funcOk();
+				if (okFunction)
+					okFunction();
 			}, 
 			"Cancelar" : function (){
 				$(this).dialog('close');
-				funcCancel();
+				if (cancelFunction)
+					cancelFunction();
 			}
 		},
 		open : function (){
+			// remove close button jquery ui dialog
 			$(this).parent().children('div').children('a.ui-dialog-titlebar-close').hide();
 		}
 	});
 }
 
 /**
- *  @description Cria um dialogo do formulario
+ *  @description Creates a dialog for a form. With the save button and cancel.
  *
  *	@function
- *	@name criaDialogoFormulario
+ *	@name createDialogForm
  *	@param {string}
  *	@param {string}
- *	@param {function} Executa esta função quando precionado ok
- *	@param {function} Executa esta função quando precionado cancelar
- *	@param {function} Executa esta função quando o dialogo é aberto
+ *	@param {function}
+ *	@param {function}
+ *	@param {function}
  */
-function criaDialogoFormulario(seletor, titulo, funcSalvar, funcCancelar, funcAbrirDialogo){
-	$(seletor).dialog({
+function createDialogForm(selector, title, saveFunction, cancelFunction, callback){
+	$(selector).dialog({
 		width: 'auto',
 		autoOpen: false,
 		draggable: false,
 		modal: true,
 		resizable: false,
-		title: titulo,
+		title: title,
 		buttons: {
 			"Salvar" : function (){
 				$(this).dialog('close');
-				if (funcSalvar)
-					funcSalvar();
+				if (saveFunction)
+					saveFunction();
 			},
 			"Cancelar" : function (){
 				$(this).dialog('close');
-				if (funcCancelar)
-					funcCancelar();
+				if (cancelFunction)
+					cancelFunction();
 			}
 		},
 		open: function (){
-			if (funcAbrirDialogo)
-				funcAbrirDialogo();
+			if (callback)
+				callback();
 		}
 	});
 }
