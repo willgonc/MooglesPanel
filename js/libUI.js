@@ -8,7 +8,7 @@ function menuPrincipal(){
 	ajaxSync("Control.php", {'action': 'read_file_menu_module'}, function (data){
 		var strMenu = '<div class="menuPrincipal ui-state-default"><ul>';
 		for (var i = 0; i < data[1].length; i++) {
-			strMenu += '<li id="'+data[1][i][0]+'"><a href="../'+data[1][i][0]+'/">'+data[1][i][1]+'</a></li>';
+			strMenu += '<li id="'+data[1][i][0]+'Mod"><a href="../'+data[1][i][0]+'/">'+data[1][i][1]+'</a></li>';
 		}
         strMenu += '<li id="logout" class="rightMenu"><a href="#">Sair</a> </li>'+
         	'      	<li id="perfilMenu" class="rightMenu">'+
