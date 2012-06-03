@@ -36,6 +36,7 @@ function verificaAutenticacao(){
 			if (mod == 'login')
 				window.location = pegaDiretorioHost();
 		} else {
+			global_user_data = '';
 			if (mod != 'login')
 				window.location = pegaDiretorioModulo("login");
 		}
