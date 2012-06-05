@@ -33,7 +33,8 @@ function menuPrincipal(){
 
 $(document).ready(function () {
 	menuPrincipal();
-	init();
+	if (typeof(init) != 'undefined')
+		init();
 });
 
 

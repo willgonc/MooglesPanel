@@ -53,7 +53,6 @@ Class Core extends Model {
 	public function read_file_menu_module() {
 		$menu = Array();
 
-		$arrMenu = Array();
 		$diretorio = '../'; 
 		$ponteiro  = opendir($diretorio);
 

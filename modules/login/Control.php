@@ -81,7 +81,7 @@ Class Control extends Core {
      */
     private function validate_data() {
 		$arr = Array(False, 'Preencha todos os campos!');
-        if ($this->str_require($this->email) || $this->str_require($this->password)) {
+        if ($this->str_require($this->email) && $this->str_require($this->password)) {
 
 			$sql = 'SELECT * FROM user WHERE email="'.$this->email.'" and password="'.sha1($this->senha).'"';
 			$result = parent::execute_query($sql);
