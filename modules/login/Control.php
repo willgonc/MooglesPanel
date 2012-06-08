@@ -34,7 +34,7 @@ Class Control extends Core {
 	public function authenticate_user() {
 		session_start();
         $this->email = $_GET['email'];
-        $this->senha = $_GET['password'];
+        $this->password = $_GET['password'];
 		$data = $this->validate_data();
 
 		if ($data[0] == True) {
@@ -82,30 +82,33 @@ Class Control extends Core {
     private function validate_data() {
 		$arr = Array(False, 'Preencha todos os campos!');
         if ($this->str_require($this->email) && $this->str_require($this->password)) {
+			if ($this->validate_email($this->email)) {
+				$sql = 'SELECT * FROM user WHERE email="'.$this->email.'" and password="'.sha1($this->password).'"';
+				$result = parent::execute_query($sql);
+			
+				if ($result) {
+					if (parent::get_num_rows($result) == 1) {
 
-			$sql = 'SELECT * FROM user WHERE email="'.$this->email.'" and password="'.sha1($this->senha).'"';
-			$result = parent::execute_query($sql);
-		
-			if ($result) {
-				if (parent::get_num_rows($result) == 1) {
+						$arrData = Array();
+						while ($row = parent::fetch_results($result)) {
+							$this->id = $row['id'];
+							$this->name = $row['name'];
+							$this->email = $row['email'];
+							$this->password = $row['password'];
+						}
 
-					$arrData = Array();
-					while ($row = parent::fetch_results($result)) {
-						$this->id = $row['id'];
-						$this->name = $row['name'];
-						$this->email = $row['email'];
-						$this->password = $row['password'];
+						$arr[0] = True;
+						$arr[1] = 'Usu&aacute;rio autenticado!';
+					} else {
+						$arr[0] = False;
+						$arr[1] = 'Usu&aacute;rio ou senha incorretos!';
 					}
-
-					$arr[0] = True;
-					$arr[1] = 'Usu&aacute;rio autenticado!';
 				} else {
 					$arr[0] = False;
-					$arr[1] = 'Usu&aacute;rio ou senha incorretos!';
+					$arr[1] = 'Erro ao validar os dados!';
 				}
 			} else {
-				$arr[0] = False;
-				$arr[1] = 'Erro ao validar os dados!';
+				$arr[1] = 'Este e-mail n&atilde;o &eacute; v&aacute;lido!';
 			}
         }
 		return $arr;
@@ -125,6 +128,21 @@ Class Control extends Core {
             return False;
         else 
             return True;
+    }
+    
+	/**
+     *  Valid email
+	 *
+     *  @access private
+     *  @name validate_email()
+	 *	@param string
+     *  @return bool
+     */
+    private function validate_email($email) {
+        if(filter_var($email, FILTER_VALIDATE_EMAIL))
+            return True;
+        else
+            return False;
     }
 }
 

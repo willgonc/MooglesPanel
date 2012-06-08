@@ -35,12 +35,12 @@ Class Install extends Model {
 
 		$result = parent::execute_query($sql);
 
-		# Search for user admin
 		if ($result)
 			print "<b>user:</b> Table was created successfully!<br />";
 		else
 			print "Error: <span style='color: red'>".mysql_error()."</span>";
 
+		# Search for user admin
 		$sql_user = "SELECT * FROM user WHERE email='admin@painel.com'";
 		$r_user = parent::execute_query($sql_user);
 		
@@ -59,6 +59,42 @@ Class Install extends Model {
 				print "Erro: ".mysql_error()."<br />";
 		} else {
 			print "<span style='color: red'>The Administrator user has been created!</span><br />";
+		}
+
+
+		$sql = "CREATE TABLE IF NOT EXISTS config (
+			id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			title_site 				VARCHAR(255) NOT NULL,
+			email_notification 		VARCHAR(255) NOT NULL,
+			protocol 				VARCHAR(5) NOT NULL)";
+
+		$result = parent::execute_query($sql);
+
+		# Search for user admin
+		if ($result)
+			print "<b>config:</b> Table was created successfully!<br />";
+		else
+			print "Error: <span style='color: red'>".mysql_error()."</span>";
+
+		# Search for configuration
+		$sql_config = "SELECT * FROM config";
+		$r_config = parent::execute_query($sql_config);
+		
+		# The configuration has been created
+		if (parent::get_num_rows($r_config) == 0) {
+			# Insert default configuration
+			$sql2 = "INSERT INTO config
+				(title_site, email_notification, protocol) VALUES 
+				('My site','admin@painel.com', 'http')";
+			
+			$result2 = parent::execute_query($sql2);
+			
+			if ($result2)
+				print "The configuration was created successfully!<br />";
+			else
+				print "Erro: ".mysql_error()."<br />";
+		} else {
+			print "<span style='color: red'>The conguration has been created!</span><br />";
 		}
 	}
 }
