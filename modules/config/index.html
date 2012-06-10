@@ -10,6 +10,7 @@
 
 		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../../js/plugins/jquery-ui/css/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 
 
 		<script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
@@ -25,53 +26,72 @@
 				<h3>Configura&ccedil;&otilde;es</h3>
 			</div> 
 			<div class="conteiner">
-				<div id="tab">
-					<ul>
-						<li><a href="#confGlobal">Geral</a></li>
-						<!--li><a href="#confUser">Usu&aacute;rios</a></li-->
-					</ul>
-					<div id="confGlobal">
-						<table class="formulario">
-							<tbody>
-								<tr>
-									<td> T&iacute;tulo do site</td>
-								</tr>
-								<tr>
-									<td> <input type="text" class="inputText" id="titleSite" size="40" /> </td>
-								</tr>
-								<tr>
-									<td> Email para notifica&ccedil;&otilde;es</td>
-								</tr>
-								<tr>
-									<td> <input type="text" class="inputText" id="notificationEmail" size="40" /> </td>
-								</tr>
-								<tr>
-									<td> Protocolo de conex&atilde;o</td>
-								</tr>
-								<tr>
-									<td> 
-										<select id="protocol"> 
-											<option value="http">HTTP</option>
-											<option value="https">HTTPS</option>
-										</select> 
-									</td>
-								</tr>
-								<tr>
-									<td> <input type="button" value="Salvar" id="btnSaveGeneral" /></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!--div id="confUser">
-						<input type="button" id="removeUsuario" value="Adicionar tipo de usu&aacute;rio" />
-
-						
-
-
-						<h3>Tipos de usu&aacute;rios cadastrados</h3>
-						<div>ttt</div>
-					</div-->
-				</div>
+				<h3>Geral</h3>
+				<table class="formulario">
+					<tbody>
+						<tr>
+							<td> T&iacute;tulo do site</td>
+						</tr>
+						<tr>
+							<td> <input type="text" class="inputText" id="titleSite" size="40" /> </td>
+						</tr>
+						<tr>
+							<td> Descri&ccedil;&atilde;o do site</td>
+						</tr>
+						<tr>
+							<td> <input type="text" class="inputText" id="descriptionSite" size="40" /> </td>
+						</tr>
+						<tr>
+							<td> Email para notifica&ccedil;&otilde;es</td>
+						</tr>
+						<tr>
+							<td> <input type="text" class="inputText" id="notificationEmail" size="40" /> </td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<h3>M&iacute;dia Social</h3>
+				<table class="formulario">
+					<tbody>
+						<tr>
+							<td>Facebook</td>
+						</tr>
+						<tr>
+							<td> <input type="text" class="inputText" id="facebookPage" size="40" /> </td>
+						</tr>
+						<tr>
+							<td>Google +</td>
+						</tr>
+						<tr>
+							<td> <input type="text" class="inputText" id="googlePlusPage" size="40" /> </td>
+						</tr>
+						<tr>
+							<td>Twitter</td>
+						</tr>
+						<tr>
+							<td> <input type="text" class="inputText" id="twitterPage" size="40" /> </td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<h3>Seguran&ccedil;a</h3>
+				<table class="formulario">
+					<tbody>
+						<tr>
+							<td> Protocolo de conex&atilde;o</td>
+						</tr>
+						<tr>
+							<td> 
+								<select class="select" id="protocol"> 
+									<option value="http">HTTP</option>
+									<option value="https">HTTPS</option>
+								</select> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<input type="button" value="Salvar" id="btnSave" />
 			</div>
 		</div>
 	</body>

@@ -65,7 +65,11 @@ Class Install extends Model {
 		$sql = "CREATE TABLE IF NOT EXISTS config (
 			id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			title_site 				VARCHAR(255) NOT NULL,
+			description_site		VARCHAR(255) NOT NULL,
 			email_notification 		VARCHAR(255) NOT NULL,
+			facebook_page 			VARCHAR(255) NOT NULL,
+			google_plus_page 		VARCHAR(255) NOT NULL,
+			twitter_page 			VARCHAR(255) NOT NULL,
 			protocol 				VARCHAR(5) NOT NULL)";
 
 		$result = parent::execute_query($sql);
@@ -84,8 +88,8 @@ Class Install extends Model {
 		if (parent::get_num_rows($r_config) == 0) {
 			# Insert default configuration
 			$sql2 = "INSERT INTO config
-				(title_site, email_notification, protocol) VALUES 
-				('My site','admin@painel.com', 'http')";
+				(title_site, description_site, email_notification, facebook_page, google_plus_page, twitter_page, protocol) VALUES 
+				('My site', 'Description' ,'admin@painel.com', '', '', '', 'http')";
 			
 			$result2 = parent::execute_query($sql2);
 			

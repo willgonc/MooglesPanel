@@ -1,17 +1,20 @@
-var t;
 function init() {
 	$('#tab').tabs();
 	$(':button').button();
 
-	getConfigGeneral();
+	getConfig();
 
-	$('#btnSaveGeneral').click(function () {
+	$('#btnSave').click(function () {
 		ajaxSync(
 			"Control.php", { 
-				"action": "save_general",
-				"titleSite": $('#titleSite').val(), 
-				"notificationEmail": $('#notificationEmail').val(), 
-				"protocol": $('#protocol').val()
+				"action": "save_config",
+				"titleSite": 			$('#titleSite').val(), 
+				"notificationEmail": 	$('#notificationEmail').val(), 
+				"descriptionSite": 		$('#descriptionSite').val(), 
+				"facebookPage": 		$('#facebookPage').val(), 
+				"googlePlusPage": 		$('#googlePlusPage').val(), 
+				"twitterPage": 			$('#twitterPage').val(), 
+				"protocol": 			$('#protocol').val()
 			}, function (data){
 				showMessage( data[1], function (){
 					document.location.reload();
@@ -21,15 +24,18 @@ function init() {
 	});
 }
 
-function getConfigGeneral () {
+function getConfig () {
 	ajaxSync(
 		"Control.php", { 
-			"action": "get_general"
+			"action": "get_config"
 		}, function (data){
-				t = data;
 			if (data[0]) {
 				$('#titleSite').val(data[1].title);
 				$('#notificationEmail').val(data[1].email);
+				$('#descriptionSite').val(data[1].description), 
+				$('#facebookPage').val(data[1].facebook), 
+				$('#googlePlusPage').val(data[1].google_plus), 
+				$('#twitterPage').val(data[1].twitter), 
 				$('#protocol').val(data[1].protocol);
 			} else {
 				showMessage( data[1], function (){}, data[0]);
