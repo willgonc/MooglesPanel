@@ -1,25 +1,23 @@
 <?php
 
-#####################################################################
-#
-#	 Class configuration panel
-#	 @author Markus Vinicius da Silva Lima <markusslima@gmail.com>
-#
-#####################################################################
+/**
+ *	 Class configuration panel
+ *	 @author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ */
 
 Class Config {
 
 	# Your mysql user
-    private $user = "root";
+    private $user = "you_user";
 
 	# Your mysql password
-    private $pass = "123456";
+    private $pass = "you_password";
 
 	# Your mysql server host
-    private $host = "localhost";
+    private $host = "you_host_server";
 
 	# Your mysql database
-    private $database = "tudosobreweb";
+    private $database = "you_database";
 
     /**
      *  Return the user mysql

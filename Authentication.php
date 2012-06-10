@@ -1,11 +1,9 @@
 <?php
 
-###################################################################
-#
-#	User authentication
-#	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
-#
-###################################################################
+/**
+ *	User authentication
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ */
 
 require_once "Core.php";
 

@@ -1,11 +1,9 @@
 <?php
 
-####################################################################
-#
-#	Class with functions for database manipulation
-#	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
-#
-####################################################################
+/**
+ *  Class with functions for database manipulation
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
+ */
 
 require_once "Config.php";
 
@@ -15,13 +13,16 @@ Class Model extends Config {
     private $link;
 	
     /**
-     *	Open the connection to the database
+     *	Open the connection to the database and setting charset
 	 *
 	 *	@access private
 	 *	@name open_connection()
      */
     public function open_connection() {
         $this->link = mysql_connect(parent::get_host(), parent::get_user(), parent::get_pass());
+
+        # setting charset mysql 
+        mysql_set_charset('utf8', $this->link);
     }
 
     /**
