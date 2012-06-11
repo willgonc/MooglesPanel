@@ -8,7 +8,7 @@ function init(){
 	$('#email').focus();
 	$(':button').button();
 
-	$('#email, #senha').keypress(function (event){
+	$('#senha').keypress(function (event){
 		if (event.keyCode == 13){
 			$('#load').show();
 			authenticateUser($('#email').val(), $('#senha').val());
