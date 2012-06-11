@@ -1,3 +1,8 @@
+
+/**
+ *  @description Data user
+ *	@name global_user_data
+ */
 var global_user_data;
 
 /**
@@ -125,7 +130,7 @@ function pegaNomeProtocolo(){
 	if (window.location.protocol)
 		return window.location.protocol;
 	else
-		return 'http:'
+		return 'http:';
 }
 
 /**
