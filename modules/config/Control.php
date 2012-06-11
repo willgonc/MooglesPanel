@@ -63,9 +63,9 @@ Class Control extends Core {
 		$update = parent::execute_query($sql);
 
 		if ($update)
-			return Array(True, 'As configura&ccedil;&otilde;es gerais foram salvas!');
+			return Array(True, 'As configura&ccedil;&otilde;es foram salvas!');
 		else
-			return Array(True, 'Erro ao salvar as configura&ccedil;&otilde;es gerais!');
+			return Array(True, 'Erro ao salvar as configura&ccedil;&otilde;es!');
 	}
 
 	public function get_config () {
@@ -87,7 +87,7 @@ Class Control extends Core {
 			}
 			parent::return_json(Array(True, $vals));
 		} else {
-			parent::return_json(Array(True, 'Erro ao consultar as configura&ccedil;&otilde;es gerais!'));
+			parent::return_json(Array(True, 'Erro ao consultar as configura&ccedil;&otilde;es!'));
 		}
 	}
 

@@ -12,7 +12,7 @@ Class Authentication extends Core {
     public function __construct() {
 		parent::open_connection();
 		parent::select_database();
-		parent::execute_action();
+		parent::execute_action(True);
 		parent::close_connection();
     }
     

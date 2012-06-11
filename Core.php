@@ -16,12 +16,12 @@ Class Core extends Model {
      *  @return string | False
      */
 	private function get_action() {
-		if (isset($_GET['action']))
-			return $_GET['action'];
-		else if (isset($_POST['action']))
-			return $_POST['action'];
-		else
-			return False;
+        if (isset($_GET['action']))
+            return $_GET['action'];
+        else if (isset($_POST['action']))
+            return $_POST['action'];
+        else
+            return False;
 	}
 
     /**
@@ -29,14 +29,20 @@ Class Core extends Model {
 	 *
      *  @access public
      *  @name execute_action()
+     *  @param {bool}
      */
-	public function execute_action(){
+	public function execute_action($no_check_session){
 		$action = $this->get_action();
 
-		if ($action)
-			$this->$action();
-		else
-			$this->return_json(Array(False,'A a&ccedil;&atilde;o '.$action.' n&atilde;o foi encontrada!'));
+        if ($no_check_session) {
+            $this->$action();
+        } else {
+            session_start();
+            if (isset($_SESSION['data']))
+                $this->$action();
+            else
+                $this->return_json(Array(null,'A sess&atilde; n&atilde;o foi encontrada!'));
+        }
 	}
 
     /**

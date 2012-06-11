@@ -66,10 +66,15 @@ function ajaxSync(url, data, call){
 		url: url,
 		dataType: 'json',
 		success: function (data){
-			escondeLoading();
-
-			if (call)
-				call(data);
+            if (data[0] == null) {
+                showMessage('A sess&atilde;o expirou!', function (){
+                    document.location.reload();
+                }, false);
+			} else {
+                escondeLoading();
+			    if (call)
+				    call(data);
+            }
 		},
 		error: function (jqXHR, textStatus, errorThrown){
 			alert("A requisição falhou: " + textStatus);
