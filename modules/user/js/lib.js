@@ -42,7 +42,7 @@ function addUser(){
 		}, function (data){
 			showMessage( data[1], function (){
 				if (data[0])
-					document.location.reload();
+                    usersTable();
 				else
 					$('#formularioAddUsuario').dialog('open');
 			}, data[0]);
@@ -106,7 +106,7 @@ function removeUser(id){
 	ajaxSync( "Control.php", { "action": "rm_user", "id": id }, function (data){
 		showMessage(data[1], function (){
 			if (data[0])
-				document.location.reload();
+                usersTable();
 			else
 				$('#formularioEditarUsuario').dialog('open');
 		}, data[0]);
@@ -130,7 +130,7 @@ function editUser(id){
 	}, function (data){
 		showMessage(data[1], function (){
 			if (data[0])
-				document.location.reload();
+                usersTable();
 			else
 				$('#formularioEditarUsuario').dialog('open');
 		}, data[0]);

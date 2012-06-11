@@ -16,9 +16,7 @@ function init() {
 				"twitterPage": 			$('#twitterPage').val(), 
 				"protocol": 			$('#protocol').val()
 			}, function (data){
-				showMessage( data[1], function (){
-					document.location.reload();
-				}, data[0]);
+				showMessage( data[1], function (){ }, data[0]);
 			}
 		);
 	});
