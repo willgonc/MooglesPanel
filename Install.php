@@ -2,6 +2,7 @@
 
 /**
  *	Instalation file
+ *	@author Markus Vinicius da Silva Lima <markusslima@gmail.com>
  */
 
 require_once "Model.php";
@@ -13,7 +14,7 @@ Class Install extends Model {
 		parent::select_database();
 		
 		# Create tables
-		$this->createTables();
+		$this->create_tables();
 		
 		# Close connection
 		parent::close_connection();
@@ -23,9 +24,9 @@ Class Install extends Model {
 	 *	Create tables
 	 *
 	 *	@access private
-	 *	@name createTables()
+	 *	@name create_tables()
 	 */
-	private function createTables() {
+	private function create_tables() {
 		$sql = "CREATE TABLE IF NOT EXISTS user (
 			id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			name 		VARCHAR(255) NOT NULL,

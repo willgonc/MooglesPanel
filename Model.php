@@ -15,7 +15,7 @@ Class Model extends Config {
     /**
      *	Open the connection to the database and setting charset
 	 *
-	 *	@access private
+	 *	@access public
 	 *	@name open_connection()
      */
     public function open_connection() {
@@ -28,7 +28,7 @@ Class Model extends Config {
     /**
      *	Select the database
 	 *
-	 *	@access private
+	 *	@access public
 	 *	@name select_database()
      */
     public function select_database() {

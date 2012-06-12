@@ -29,7 +29,7 @@ Class Core extends Model {
 	 *
      *  @access public
      *  @name execute_action()
-     *  @param {bool}
+     *  @param bool
      */
 	public function execute_action($no_check_session){
 		$action = $this->get_action();
@@ -48,14 +48,20 @@ Class Core extends Model {
     /**
      *  Return json response
 	 *
-     *  @access private
-	 *	@param {array}
+     *  @access public
+	 *	@param array
      *  @name return_json()
      */
 	public function return_json($result) {
 		echo json_encode($result);
 	}
 
+    /**
+     *  Reads files menu of modules
+	 *
+     *  @access public
+     *  @name read_file_menu_module()
+     */
 	public function read_file_menu_module() {
 		$menu = Array();
 

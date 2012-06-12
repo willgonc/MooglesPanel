@@ -21,7 +21,6 @@ Class Authentication extends Core {
 	 *
      *  @access public
      *  @name check_user()
-     *  @return JSON
      */
     public function check_user() {
         session_start();
@@ -54,7 +53,6 @@ Class Authentication extends Core {
 	 *
      *  @access public
      *  @name close_session()
-     *  @return JSON
      */
     public function close_session() {
         session_start();
