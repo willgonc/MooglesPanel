@@ -13,8 +13,7 @@ function init() {
 				"descriptionSite": 		$('#descriptionSite').val(), 
 				"facebookPage": 		$('#facebookPage').val(), 
 				"googlePlusPage": 		$('#googlePlusPage').val(), 
-				"twitterPage": 			$('#twitterPage').val(), 
-				"protocol": 			$('#protocol').val()
+				"twitterPage": 			$('#twitterPage').val()
 			}, function (data){
 				showMessage( data[1], function (){ }, data[0]);
 			}
@@ -33,8 +32,7 @@ function getConfig () {
 				$('#descriptionSite').val(data[1].description), 
 				$('#facebookPage').val(data[1].facebook), 
 				$('#googlePlusPage').val(data[1].google_plus), 
-				$('#twitterPage').val(data[1].twitter), 
-				$('#protocol').val(data[1].protocol);
+				$('#twitterPage').val(data[1].twitter)
 			} else {
 				showMessage( data[1], function (){}, data[0]);
 			};

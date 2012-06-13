@@ -19,7 +19,6 @@ Class Control extends Core {
 		$facebook = 	isset($_GET['facebookPage']) ? $_GET['facebookPage'] : null;
 		$google_plus = 	isset($_GET['googlePlusPage']) ? $_GET['googlePlusPage'] : null;
 		$twitter = 		isset($_GET['twitterPage']) ? $_GET['twitterPage'] : null;
-		$protocol = 	isset($_GET['protocol']) ? $_GET['protocol'] : null;
 
 		if ($this->str_require($title))
 			$title = htmlentities($title, ENT_QUOTES, 'UTF-8');
@@ -39,26 +38,23 @@ Class Control extends Core {
 		if ($response[0] && !$this->is_valid_url($twitter) && $this->str_require($twitter))
 			$response = Array(False,'A url do Twitter n&atilde;o &eacuute; v&aacute;lida!');
 
-		if ($response[0] && $protocol != 'http' && $protocol != 'https')
-			$response = Array(False,'Os protocolos v&aacute;lidos s&atilde;o http ou https!');
 
 		if ($response[0]) {
-			$response = $this->update_config($title, $description, $email, $facebook, $google_plus, $twitter, $protocol);
+			$response = $this->update_config($title, $description, $email, $facebook, $google_plus, $twitter);
 			parent::return_json($response);
 		} else {
 			parent::return_json($response);
 		}
 	}
     
-	private function update_config ($title, $description, $email, $facebook, $google_plus, $twitter, $protocol) {
+	private function update_config ($title, $description, $email, $facebook, $google_plus, $twitter) {
 		$sql = 'UPDATE config SET
 			title_site="'.$title.'",
 			email_notification="'.$email.'",
 			description_site="'.$description.'",
 			facebook_page="'.$facebook.'",
 			google_plus_page="'.$google_plus.'",
-			twitter_page="'.$twitter.'",
-			protocol="'.$protocol.'"';
+			twitter_page="'.$twitter.'"';
 
 		$update = parent::execute_query($sql);
 
@@ -81,8 +77,7 @@ Class Control extends Core {
 					'facebook' => $row['facebook_page'],
 					'google_plus' => $row['google_plus_page'],
 					'twitter' => $row['twitter_page'],
-					'email' => $row['email_notification'],
-					'protocol' => $row['protocol']
+					'email' => $row['email_notification']
 				);
 			}
 			parent::return_json(Array(True, $vals));
