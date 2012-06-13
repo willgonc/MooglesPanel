@@ -8,16 +8,16 @@
 Class Config {
 
 	# Your mysql user
-    private $user = "you_user";
+    private $user = "root";
 
 	# Your mysql password
-    private $pass = "you_password";
+    private $pass = "123456";
 
 	# Your mysql server host
-    private $host = "you_host";
+    private $host = "localhost";
 
 	# Your mysql database
-    private $database = "you_database";
+    private $database = "tudosobreweb";
 
     /**
      *  Return the user mysql

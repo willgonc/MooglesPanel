@@ -31,8 +31,11 @@ Class Core extends Model {
      *  @name execute_action()
      *  @param bool
      */
-	public function execute_action($no_check_session){
+	public function execute_action(){
 		$action = $this->get_action();
+
+        if (func_num_args() == 1)
+            $no_check_session = func_get_arg(0);
 
         if ($no_check_session) {
             $this->$action();
